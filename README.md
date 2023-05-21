@@ -16,7 +16,13 @@ Experimental features:
 -Recognizes Switch version saves (set Steam ID field to 0)
 -Can transfer saves to other people by editing the Steam ID
 
+Known Issues:
+
+-Trying to save with less than 30 chips in your folder generates an Index Out of Range error. I'll be adding a more user-friendly warning box that explains this better.
+-It is possible to edit your HP to 1000, then obtain an HP Memory in game to increase your HP past the base limit. Doing so will disable your ability to PvP Netbattle. The editor already takes this into account, so if you find yourself in this situation, save your game, load your file in the editor, and simply save again. The editor automatically tries to make sure you are able to PvP Netbattle.
+
 Future features and additions:
+
 -Support for the entire MMBNLC line of games!
 -Style Selector (BN2+)
 -NaviCust Editor (BN3+)
