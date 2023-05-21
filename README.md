@@ -30,4 +30,4 @@ Future features and additions:
 
 Special thanks to MegaRockEXE, Prof. 9, Weenie, LuckyTyphlosion, and the rest of the TREZ community for your support!
 
-* NOTICE: NaviDoctor LC does not enable the downloading or transfer of Switch version saves to PC nor is it a function I intend to pursue.
+*NOTICE: NaviDoctor LC does not enable the downloading or transfer of Switch version saves to PC nor is it a function I intend to pursue.
