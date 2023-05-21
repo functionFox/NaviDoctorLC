@@ -1,0 +1,371 @@
+[Attack, Rapid, Charge, Equipped Armor, Curr HP1, Curr HP2, Max HP1, Max HP2, Zenny1, Zenny2,
+Zenny3, Time1, Time2, Time3, Time4, Checksum1, Checksum2, Checksum3, Checksum4, SteamID1,
+SteamID2, SteamID3, SteamID4, HP Ups, Has HeatArmr?, Has AquaArmr?, Has WoodArmr?, 
+FolderChip1ID, FolderChip1Code, ... , FolderChip30ID, FolderChip30Code, # of CanonA in Pack,
+... , # of BarrierS in Pack, # of PharoManP in Pack, ... , # of chipEF in Pack, 
+Library Data 1, ... , Library Data 24]
+
+0014: Attack Power (00 - 04)
+0015: Rapid Power (00 - 04)
+0016: Charge Power (00 - 04)
+0017: Equipped Armor 00(Armor) 02(HeatArmr) 03(AquaArmr) 04(WoodArmr)
+(Note: Changing just this does not give you the armor in inventory. Once unequipped, you no
+longer have it. 01 is just a normal Armor??)
+001C - 001D: Current HP (Max in a normal playthrough is 1000)
+001E - 001F: Maximum HP (Max in a normal playthrough is 1000)
+
+0074 - 0076: Zenny
+0098 - 009B: Time
+
+00A0 - 00A3: Checksum
+
+Checksum = ((Checksum-32 of the whole file (except checksum address at 00A0)) - (The sum 
+of the Steam User ID at 00BC))
+
+(Note: Switch save files do not make use of Checksum and Steam ID! These values will always
+be set to 0).
+
+00BC - 00BF: Steam User ID
+
+0100: Number of times HP Up was applied; Max in a normal playthrough is 2D
+(Note: If you change HP values, change all of them, not just one! For every +20 HP
+	you put into 001C-001F, increase 0100 by +1. WARNING: Collecting an HP Memory
+	after editing HP can cause the player to exceed the intended maximum of 1000 HP!)
+0104: Have HeatArmr
+0105: Have AquaArmr
+0106: Have WoodArmr
+
+0120 - 015B: Folder Data
+
+Each entry is split into two byte chunks. First byte is chip ID. Second byte is chip code.
+
+ChID: 00 = Canon, C7 = Bass
+Code: 00 = A, 22 = W
+
+01 Cannon   A(0170) B(0171) C(0172) D(0173) E(0174)
+02 HiCannon F(0180) G(0181) H(0182) I(0183) J(0184)
+03 M-Cannon K(0190) L(0191) M(0192) N(0193) O(0194)
+04 Sword    B(01A0) K(01A1) L(01A2) P(01A3) S(01A4)
+05 WideSwrd C(01B0) K(01B1) M(01B2) N(01B3) S(01B4)
+06 LongSwrd D(01C0) E(01C1) N(01C2) O(01C3) S(01C4)
+07 LilBomb  B(01D0) D(01D1) G(01D2) O(01D3) T(01D4)
+08 CrosBomb B(01E0) D(01E1) H(01E2) J(01E3) L(01E4)
+09 BigBomb  B(01F0) G(01F1) O(01F2) S(01F3) T(01F4)
+0A Spreader H(0200) I(0201) J(0202) K(0203) L(0204)
+0B Bubbler  A(0210) K(0211) L(0212) P(0213) S(0214)
+0C Heater   C(0220) F(0221) G(0222) K(0223) O(0224)
+0D MiniBomb C(0230) E(0231) J(0232) L(0233) P(0234)
+0E Shotgun  K(0240) M(0241) N(0242) Q(0243) R(0244)
+0F Crossgun C(0250) E(0251) F(0252) J(0253) K(0254)
+10 ShokWave C(0260) K(0261) L(0262) N(0263) P(0264)
+11 SoniWave C(0270) D(0271) J(0272) M(0273) S(0274)
+12 DynaWave C(0280) E(0281) M(0282) R(0283) S(0284)
+13 FireTowr E(0290) F(0291) L(0292) M(0293) T(0294)
+14 AquaTowr A(02A0) C(02A1) G(02A2) H(02A3) R(02A4)
+15 WoodTowr B(02B0) C(02B1) H(02B2) K(02B3) N(02B4)
+16 Quake1   A(02C0) E(02C1) H(02C2) K(02C3) Q(02C4)
+17 Quake2   B(02D0) C(02D1) I(02D2) K(02D3) Q(02D4)
+18 Quake3   C(02E0) D(02E1) H(02E2) M(02E3) Q(02E4)
+19 FireSwrd B(02F0) F(02F1) G(02F2) N(02F3) P(02F4)
+1A ElecSwrd E(0300) G(0301) L(0302) O(0303) S(0304)
+1B AquaSwrd A(0310) M(0311) N(0312) O(0313) P(0314)
+1C GutsPnch B(0320) H(0321) M(0322) N(0323) T(0324)
+1D IcePunch B(0330) H(0331) M(0332) N(0333) T(0334)
+1E FtrSwrd  B(0340) K(0341) L(0342) P(0343) S(0344)
+1F Dash     B(0350) D(0351) G(0352) L(0353) O(0354)
+20 KngtSwrd B(0360) C(0361) E(0362) G(0363) H(0364)
+21 HeroSwrd B(0370) D(0371) F(0372) I(0373) J(0374)
+22 MetGuard A(0380) C(0381) E(0382) G(0383) L(0384)
+23 UNREGISTERRED 039X DO NOT USE
+24 UNREGISTERRED 03AX DO NOT USE
+25 TriArrow A(03B0) B(03B1) C(03B2) D(03B3) E(03B4)
+26 TriSpear F(03C0) G(03C1) H(03C2) I(03C3) J(03C4)
+27 TriLance K(03D0) L(03D1) M(03D2) N(03D3) O(03D4)
+28 Typhoon  A(03E0) B(03E1) D(03E2) E(03E3) G(03E4)
+29 Huricane G(03F0) I(03F1) J(03F2) K(03F3) L(03F4)
+2A Cyclone  E(0400) F(0401) G(0402) H(0403) I(0404)
+2B Howitzer A(0410) C(0411) G(0412) H(0413) O(0414)
+2C Thunder1 A(0420) E(0421) G(0422) H(0423) S(0424)
+2D Thunder2 B(0430) C(0431) F(0432) I(0433) L(0434)
+2E Thunder3 D(0440) F(0441) G(0442) K(0443) N(0444)
+2F UNREGISTERRED 045X DO NOT USE
+30 UNREGISTERRED 046X DO NOT USE
+31 Snakegg1 B(0470) E(0471) G(0472) M(0473) N(0474)
+32 Snakegg2 C(0480) E(0481) H(0482) N(0483) P(0484)
+33 Snakegg3 A(0490) C(0491) F(0492) L(0493) S(0494)
+34 Hammer   A(04A0) F(04A1) I(04A2) M(04A3) Q(04A4)
+35 UNREGISTERRED 04BX DO NOT USE
+36 UNREGISTERRED 04CX DO NOT USE
+37 BodyBurn E(04D0) F(04D1) K(04D2) M(04D3) N(04D4)
+38 UNREGISTERRED 04EX DO NOT USE
+39 UNREGISTERRED 04FX DO NOT USE
+3A Ratton1  A(0500) B(0501) C(0502) D(0503) E(0504)
+3B Ratton2  F(0510) G(0511) H(0512) I(0513) J(0514)
+3C Ratton3  K(0520) L(0521) M(0522) N(0523) O(0524)
+3D Lockon1  C(0530) D(0531) H(0352) I(0533) L(0534)
+3E Lockon2  B(0540) E(0541) G(0542) H(0543) M(0544)
+3F Lockon3  A(0550) D(0551) K(0552) N(0553) O(0554)
+40 X-Panel1 B(0560) D(0561) G(0562) L(0563) S(0564)
+41 X-Panel3 B(0570) D(0571) G(0572) L(0573) S(0574)
+42 UNREGISTERRED 058X DO NOT USE
+43 Recov10  A(0590) C(0591) E(0592) G(0593) L(0594)
+44 Recov30  A(05A0) C(05A1) E(05A2) G(05A3) L(05A4)
+45 Recov50  A(05B0) C(05B1) E(05B2) G(05B3) L(05B4)
+46 Recov80  A(05C0) C(05C1) E(05C2) G(05C3) L(05C4)
+47 Recov120 A(05D0) C(05D1) E(05D2) G(05D3) L(05D4)
+48 Recov150 A(05E0) C(05E1) E(05E2) G(05E3) L(05E4)
+49 Recov200 A(05F0) C(05F1) E(05F2) G(05F3) L(05F4)
+4A Recov300 A(0600) C(0601) E(0602) G(0603) L(0604)
+4B UNREGISTERRED 061X DO NOT USE
+4C Steal    A(0620) E(0621) L(0622) P(0623) S(0624)
+4D UNREGISTERRED 063X DO NOT USE
+4E UNREGISTERRED 064X DO NOT USE
+4F Geddon1  F(0650) H(0651) J(0652) L(0653) N(0654)
+50 Geddon2  A(0660) B(0661) E(0662) I(0663) K(0664)
+51 UNREGISTERRED 067X DO NOT USE
+52 Escape   F(0680) H(0681) J(0682) L(0683) N(0684)
+53 Interupt F(0690) H(0691) J(0692) L(0693) N(0694)
+54 LifeAura A(06A0) H(06A1) K(06A2) M(06A3) P(06A4)
+55 AquaAura D(06B0) E(06B1) L(06B2) R(06B3) S(06B4)
+56 FireAura B(06C0) G(06C1) I(06C2) N(06C3) T(06C4)
+57 WoodAura C(06D0) F(06D1) J(06D2) O(06D3) Q(06D4)
+58 Repair   A(06E0) G(06E1) H(06E2) K(06E3) S(06E4)
+59 UNREGISTERRED 06FX DO NOT USE
+5A UNREGISTERRED 070X DO NOT USE
+5B Cloud    B(0710) G(0711) H(0712) O(0713) R(0714)
+5C Cloudier A(0720) D(0721) I(0722) M(0723) P(0724)
+5D Cloudest C(0730) F(0731) J(0732) K(0733) O(0734)
+5E IceCube  A(0740) C(0741) I(0742) L(0743) M(0744)
+5F RockCube B(0750) E(0751) G(0752) M(0753) O(0754)
+60 UNREGISTERRED 076X DO NOT USE
+61 TimeBom1 E(0770) G(0771) J(0772) L(0773) Q(0774)
+62 TimeBom2 C(0780) F(0781) J(0782) L(0783) S(0784)
+63 TimeBom3 A(0790) B(0791) G(0792) O(0793) P(0794)
+64 Invis1   I(07A0) J(07A1) L(07A2) O(07A3) Q(07A4)
+65 Invis2   A(07B0) C(07B1) F(07B2) J(07B3) M(07B4)
+66 Invis3   B(07C0) D(07C1) H(07C2) K(07C3) N(07C4)
+67 IronBody C(07D0) D(07D1) L(07D2) Q(07D3) R(07D4)
+68 UNREGISTERRED 07EX DO NOT USE
+69 Remobit1 A(07F0) C(07F1) F(07F2) N(07F3) O(07F4)
+6A Remobit2 B(0800) D(0801) E(0802) H(0803) I(0804)
+6B Remobit3 G(0810) J(0811) K(0812) P(0813) Q(0814)
+6C BstrGard A(0820) G(0821) K(0822) N(0823) R(0824)
+6D BstrBomb D(0830) H(0831) J(0832) O(0833) T(0834)
+6E BstrSwrd B(0840) E(0841) L(0842) P(0843) S(0844)
+6F BstrPnch C(0850) F(0851) I(0852) M(0853) Q(0854)
+70 RingZap1 G(0860) H(0861) M(0862) N(0863) P(0864)
+71 RingZap2 C(0870) E(0871) G(0872) J(0873) L(0874)
+72 RingZap3 A(0880) B(0881) O(0882) R(0883) T(0884)
+73 Candle1  C(0890) F(0891) I(0892) P(0893) S(0894)
+74 Candle2  B(08A0) E(08A1) G(08A2) J(08A3) L(08A4)
+75 Candle3  A(08B0) D(08B1) H(08B2) K(08B3) M(08B4)
+76 SloGauge H(08C0) K(08C1) N(08C2) O(08C3) Q(08C4)
+77 FstGauge A(08D0) C(08D1) E(08D2) L(08D3) N(08D4)
+78 UNREGISTERRED 08EX DO NOT USE
+79 Drain1   A(08F0) B(08F1) D(08F2) K(08F3) O(08F4)
+7A Drain2   A(0900) C(0901) H(0902) N(0903) T(0904)
+7B Drain3   A(0910) E(0911) F(0912) L(0913) Q(0914)
+7C Mine1    G(0920) H(0921) M(0922) N(0923) P(0924)
+7D Mine2    C(0930) E(0931) G(0932) J(0933) L(0934)
+7E Mine3    A(0940) B(0941) O(0942) R(0943) T(0944)
+7F Gaia1    C(0950) D(0951) L(0952) O(0953) T(0954)
+80 Gaia2    C(0960) F(0961) K(0962) P(0963) S(0964)
+81 Gaia3    C(0970) G(0971) M(0972) N(0973) T(0974)
+82 BblWrap1 C(0980) E(0981) G(0982) I(0983) M(0984)
+83 BblWrap2 D(0990) F(0991) H(0992) K(0993) N(0994)
+84 BblWrap3 A(09A0) B(09A1) L(09A2) Q(09A3) R(09A4)
+85 Wave     A(09B0) D(09B1) I(09B2) L(09B3) M(09B4)
+86 RedWave  B(09C0) E(09C1) J(09C2) N(09C3) P(09C4)
+87 BigWave  C(09D0) H(09D1) K(0D92) L(09D3) Q(09D4)
+88 Muramasa C(09E0) E(09E1) G(09E2) J(09E3) K(09E4)
+89 Dropdown A(09F0) B(09F1) O(09F2) R(09F3) T(09F4)
+8A Popup    C(0A00) D(0A01) H(0A02) K(0A03) N(0A04)
+8B Dynamyt1 B(0A10) G(0A11) O(0A12) Q(0A13) S(0A14)
+8C Dynamyt2 A(0A20) C(0A21) K(0A22) M(0A23) N(0A24)
+8D Dynamyt3 G(0A30) K(0A31) M(0A32) O(0A33) P(0A34)
+8E Anubis   C(0A40) L(0A41) N(0A42) Q(0A43) T(0A44)
+8F UNREGISTERRED 0A5X DO NOT USE
+90 UNREGISTERRED 0A6X DO NOT USE
+91 IronShld A(0A70) B(0A71) O(0A72) R(0A73) T(0A74)
+92 LeafShld C(0A80) D(0A81) F(0A82) K(0A83) Q(0A84)
+93 Barrier  D(0A90) F(0A91) M(0A92) R(0A93) S(0A94)
+94 PharoMan P(0AA0)
+95 PharoMn2 P(0AB0)
+96 PharoMn3 P(0AC0)
+97 ShadoMan S(0AD0)
+98 ShadoMn2 S(0AE0)
+99 ShadoMn3 S(0AF0)
+9A UNREGISTERRED 0B0X DO NOT USE
+9B UNREGISTERRED 0B1X DO NOT USE
+9C UNREGISTERRED 0B2X DO NOT USE
+9D MagicMan M(0B30)
+9E MagicMn2 M(0B40)
+9F MagicMn3 M(0B50)
+A0 Roll     R(0B60)
+A1 Roll2    R(0B70)
+A2 Roll3    R(0B80)
+A3 GutsMan  G(0B90)
+A4 GutsMan2 G(0BA0)
+A5 GutsMan3 G(0BB0)
+A6 ProtoMan B(0BC0)
+A7 ProtoMn2 B(0BD0)
+A8 ProtoMn3 B(0BE0)
+A9 WoodMan  W(0BF0)
+AA WoodMan2 W(0C00)
+AB WoodMan3 W(0C10)
+AC FireMan  F(0C20)
+AD FireMan2 F(0C30)
+AE FireMan3 F(0C40)
+AF NumbrMan N(0C50)
+B0 NumbrMn2 N(0C60)
+B1 NumbrMn3 N(0C70)
+B2 StoneMan S(0C80)
+B3 StoneMn2 S(0C90)
+B4 StoneMn3 S(0CA0)
+B5 IceMan   I(0CB0)
+B6 IceMan2  I(0CC0)
+B7 IceMan3  I(0CD0)
+B8 SkullMan S(0CE0)
+B9 SkullMn2 S(0CF0)
+BA SkullMn3 S(0D00)
+BB ColorMan C(0D10)
+BC ColorMn2 C(0D20)
+BD ColorMn3 C(0D30)
+BE BombMan  B(0D40)
+BF BombMan2 B(0D50)
+C0 BombMan3 B(0D60)
+C1 SharkMan S(0D70)
+C2 SharkMn2 S(0D80)
+C3 SharkMn3 S(0D90)
+C4 ElecMan  E(0DA0)
+C5 ElecMan2 E(0DB0)
+C6 ElecMan3 E(0DC0)
+C7 Bass     F(0DD0)
+C8 UNREGISTERRED 0DEX DO NOT USE
+C9 UNREGISTERRED 0DFX DO NOT USE
+CA Z-Canon1 (0E00)
+CB Z-Canon2 (0E10)
+CC Z-Canon3 (0E20)
+CD Z-Spread (0E30)
+CE Z-Raton1 (0E40)
+CF Z-Raton2 (0E50)
+D0 Z-Raton3 (0E60)
+D1 Z-Arrow  (0E70)
+D2 Z-Spear  (0E80)
+D3 Z-Lance  (0E90)
+D4 O-Canon1 (0EA0)
+D5 O-Canon2 (0EB0)
+D6 O-Canon3 (0EC0)
+D7 O-Spread (0ED0)
+D8 O-Raton1 (0EE0)
+D9 O-Raton2 (0EF0)
+DA O-Raton3 (0F00)
+DB O-Arrow  (0F10)
+DC O-Spear  (0F20)
+DD O-Lance  (0F30)
+DE B-Bomb   (0F40)
+DF B-Sword  (0F50)
+E0 B-Wave   (0F60)
+E1 B-Quake  (0F70)
+E2 S-Bomb   (0F80)
+E3 S-Sword  (0F90)
+E4 S-Wave   (0FA0)
+E5 S-Quake  (0FB0)
+E6 PwrCanon (0FC0)
+E7 HvyStamp (0FD0)
+E8 BgStrait (0FE0)
+E9 BloodSuk (0FF0)
+EA Storm    (1000)
+EB GtsShoot (1010)
+EC LifeSavr (1020)
+ED 2xHero   (1030)
+EE UNREGISTERRED 104X DO NOT USE
+EF UNREGISTERRED 105X DO NOT USE
+
+Binary Library Map (This is what a brand new game's library looks like):
+
+1080) 16 -> 01001100 <-1D
+1081) 1E -> 00000111 <-25
+1082) 26 -> 00000000 <-2D
+1083) 2E -> 00000000 <-35
+1084) 36 -> 00000000 <-3D
+1085) 3E -> 00000000 <-45
+1086) 46 -> 00000000 <-4D
+1087) 4E -> 00000000 <-55
+1088) 56 -> 10010000 <-5D
+1089) 5E -> 00001000 <-65
+108A) 66 -> 00100000 <-6D
+108B) 6E -> 00000000 <-75
+108C) 76 -> 00000000 <-7D
+108D) 7E -> 00000000 <-85
+108E) 86 -> 00000000 <-8D
+108F) 8E -> 00000000 <-95
+1090) 96 -> 00000000 <-9D
+1091) 9E -> 00000000 <-A5
+1092) A6 -> 00000000 <-AD
+1093) AE -> 00000000 <-B5
+1094) B6 -> 00000000 <-BD
+1095) BE -> 00000000 <-C5
+1096) C6 -> 00000000 <-CD
+1097) CE -> 00000000 <-D5
+1098) D6 -> 00000001 <-DD
+
+Notes: Binary map begins on the 7th digit in 0x1080, corresponding to the chip located at
+address 0x0170 (Cannon), and ends on the 1st digit in 1098, corresponding to the chip located
+at address 0x0DD0 (Bass). It is fundamentally backwards, but visually correct, so w/e I guess.
+Library seems to follow the save file's chip order. The following is the map with unused
+sections marked as X (these should always be set to 0):
+
+1080) 16 -> X1001100 <-1D
+1081) 1E -> 00000111 <-25
+1082) 26 -> 00000000 <-2D
+1083) 2E -> 00000000 <-35
+1084) 36 -> 000XX000 <-3D
+1085) 3E -> 0000000X <-45
+1086) 46 -> X0000XX0 <-4D
+1087) 4E -> XX000000 <-55
+1088) 56 -> 10X10000 <-5D
+1089) 5E -> 000X1XX0 <-65
+108A) 66 -> 0X100000 <-6D
+108B) 6E -> 0XX00000 <-75
+108C) 76 -> X0000000 <-7D
+108D) 7E -> X0000000 <-85
+108E) 86 -> 00000000 <-8D
+108F) 8E -> X0000000 <-95
+1090) 96 -> 00000000 <-9D
+1091) 9E -> 0000000X <-A5
+1092) A6 -> X0000000 <-AD
+1093) AE -> 00XXX000 <-B5
+1094) B6 -> 00000000 <-BD
+1095) BE -> 00000000 <-C5
+1096) C6 -> 00000000 <-CD
+1097) CE -> 00000000 <-D5
+1098) D6 -> 00000001 <-DD
+
+A fully completed library should look like this:
+
+1080) 16 -> 01111111 <-1D [7F]
+1081) 1E -> 11111111 <-25 [FF]
+1082) 26 -> 11111111 <-2D [FF]
+1083) 2E -> 11111111 <-35 [FF]
+1084) 36 -> 11100111 <-3D [E7]
+1085) 3E -> 11111110 <-45 [FE]
+1086) 46 -> 01111001 <-4D [79]
+1087) 4E -> 00111111 <-55 [3F]
+1088) 56 -> 11011111 <-5D [DF]
+1089) 5E -> 11101001 <-65 [E9]
+108A) 66 -> 10111111 <-6D [BF]
+108B) 6E -> 10011111 <-75 [9F]
+108C) 76 -> 01111111 <-7D [7F]
+108D) 7E -> 01111111 <-85 [7F}
+108E) 86 -> 11111111 <-8D [FF]
+108F) 8E -> 01111111 <-95 [7F}
+1090) 96 -> 11111111 <-9D [FF]
+1091) 9E -> 11111110 <-A5 [FE]
+1092) A6 -> 01111111 <-AD [7F]
+1093) AE -> 11000111 <-B5 [C7]
+1094) B6 -> 11111111 <-BD [FF]
+1095) BE -> 11111111 <-C5 [FF]
+1096) C6 -> 11111111 <-CD [FF]
+1097) CE -> 11111111 <-D5 [FF]
+1098) D6 -> 11111111 <-DD [FF]
