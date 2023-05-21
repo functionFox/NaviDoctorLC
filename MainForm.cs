@@ -357,7 +357,8 @@ namespace NaviDoctor
 
             SaveFileDialog saveFile = new SaveFileDialog();
             saveFile.Title = "Save MMBN Save File...";
-            saveFile.InitialDirectory = $@"C:\Program Files (x86)\Steam\userdata\{bn1SaveData.SteamID}\1798010\remote";
+            saveFile.InitialDirectory = $@"C:\Program Files (x86)\Steam\userdata\{bn1SaveData.SteamID}\1798010\remote\";
+            saveFile.FileName = "exe1_save_0.bin";
             saveFile.Filter = "MMBN1 Save File|exe1_save_0.bin|AllFiles|*.*";
             saveFile.RestoreDirectory = true;
             if (saveFile.ShowDialog() == DialogResult.OK)
@@ -401,7 +402,7 @@ namespace NaviDoctor
                     {
                         bn1SaveData.EqArmor = 0;
                     }
-
+                    PackageChips();
                     bn1SaveParse.UpdateSaveData(bn1SaveData);
                     bn1SaveParse.SaveChanges();
 
@@ -413,6 +414,50 @@ namespace NaviDoctor
                 }
             }
         }
+        private void PackageChips()
+        {
+            List<byte> newBattleChips = new List<byte>(Enumerable.Repeat((byte)0, 147 * 5));
+            List<byte> newNaviChips = new List<byte>(Enumerable.Repeat((byte)0, 239));
+
+            dataGridView1.Sort(dataGridView1.Columns[0], ListSortDirection.Ascending); // Sort by ID column in ascending order
+
+            int codeSeries = 0;
+
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                if (row.Cells["ID"].Value != null && row.Cells["Quantity"].Value != null)
+                {
+                    int chipID = (int)row.Cells["ID"].Value;
+                    int quantity = (int)row.Cells["Quantity"].Value;
+
+                    if (quantity > 99)
+                        quantity = 99;
+
+                    if (quantity < 0)
+                        quantity = 0;
+
+                    if (chipID >= 1 && chipID <= 147)
+                    {
+                        int index = ((chipID - 1) * 5) + codeSeries;
+                            newBattleChips[index] = (byte)quantity;
+                        codeSeries++;
+                        if (codeSeries > 4)
+                        {
+                            codeSeries = 0;
+                        }
+                    }
+                    else if (chipID >= 148 && chipID <= 239)
+                    {
+                        newNaviChips[chipID - 148] = (byte)quantity;
+                    }
+                }
+            }
+
+            bn1SaveData.BattleChips = newBattleChips;
+            bn1SaveData.NaviChips = newNaviChips;
+        }
+
+
 
         private void steamID_Enter(object sender, EventArgs e)
         {

@@ -132,7 +132,7 @@ namespace NaviDoctor
             
                     
             int index = 0;
-            for (int i = 0x0170; i < 0x0A45; i++)
+            for (int i = 0x0170; i < 0x0A95; i++)
             {
                 if ((i % 0x10) <= 0x4)  // Check if i is within the range 0 to 4 for every group of 10 elements
                 {
