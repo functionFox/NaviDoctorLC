@@ -28,6 +28,6 @@ Future features and additions:
 - NaviCust Editor (BN3+)
 - Probably more, I literally just started this project about a week ago.
 
-Special thanks to MegaRockEXE, Prof. 9, Weenie, LuckyTyphlosion, and the rest of the TREZ community for your support!
+Special thanks to MegaRockEXE, Prof. 9, Weenie, luckytyphlosion, and the rest of the TREZ community for your support!
 
 *NOTICE: NaviDoctor LC does not enable the downloading or transfer of Switch version saves to PC nor is it a function I intend to pursue.
