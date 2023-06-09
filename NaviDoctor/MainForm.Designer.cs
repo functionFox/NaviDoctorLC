@@ -63,8 +63,6 @@ namespace NaviDoctor
             this.steamID = new System.Windows.Forms.NumericUpDown();
             this.btnShowLibrary = new System.Windows.Forms.Button();
             this.btnSaveGame = new System.Windows.Forms.Button();
-            this.bN1SaveParseBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.bN1SaveParseBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.attackStat)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rapidStat)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chargeStat)).BeginInit();
@@ -73,8 +71,6 @@ namespace NaviDoctor
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.maxHPStat)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.steamID)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bN1SaveParseBindingSource1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bN1SaveParseBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // btnLoadFile
@@ -460,14 +456,6 @@ namespace NaviDoctor
             this.btnSaveGame.UseVisualStyleBackColor = true;
             this.btnSaveGame.Click += new System.EventHandler(this.btnSaveFile_Click);
             // 
-            // bN1SaveParseBindingSource1
-            // 
-            this.bN1SaveParseBindingSource1.DataSource = typeof(NaviDoctor.BN1SaveParse);
-            // 
-            // bN1SaveParseBindingSource
-            // 
-            this.bN1SaveParseBindingSource.DataSource = typeof(NaviDoctor.BN1SaveParse);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(17F, 33F);
@@ -516,8 +504,6 @@ namespace NaviDoctor
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.maxHPStat)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.steamID)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bN1SaveParseBindingSource1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bN1SaveParseBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -543,8 +529,6 @@ namespace NaviDoctor
         private System.Windows.Forms.NumericUpDown zennyBox;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.BindingSource bN1SaveParseBindingSource;
-        private System.Windows.Forms.BindingSource bN1SaveParseBindingSource1;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.Label label6;

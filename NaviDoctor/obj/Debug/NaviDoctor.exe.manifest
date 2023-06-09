@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="NaviDoctor.exe" size="57800">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="NaviDoctor.exe" size="61896">
       <assemblyIdentity name="NaviDoctor" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>5UPXm2HuQCA4zORk1dHaRl9x2ORrxvEJ1bdW6T6+rNg=</dsig:DigestValue>
+        <dsig:DigestValue>MSsb4dYPmBPxan6MHljYHJZtutNOowhr34PqcjVQLw4=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

@@ -19,10 +19,30 @@ namespace NaviDoctor
         public int CheckSum { get; set; }
         public int SteamID { get; set; }
         public byte HPUp { get; set; }
-        public int BugFrags { get; set; }
+        public int RegMem { get; set; }      // Not used in BN1
+        public int RegChip1 { get; set; }
+        public int RegChip2 { get; set; }
+        public int RegChip3 { get; set; }
+        public int SubChipMax { get; set; }  // Not used in BN1
+        public int SubMiniEnrg { get; set; } // Not used in BN1
+        public int SubFullEnrg { get; set; } // Not used in BN1
+        public int SubSneakRun { get; set; } // Not used in BN1
+        public int SubUntrap { get; set; }   // Not used in BN1
+        public int SubLocEnemy { get; set; } // Not used in BN1
+        public int SubUnlocker { get; set; } // Not used in BN1
+        public int BugFrags { get; set; }    // Not used in BN1
+        public byte EqStyle { get; set; } // Not used in BN4+
+        public byte Style1 { get; set; }  // Not used in BN4+
+        public byte Style2 { get; set; }  // Not used in BN4+
+        public byte Style3 { get; set; }  // Not used in BN4+
+        public byte Folders { get; set; } // Not used in BN1. Designates how many folders the player has unlocked.
         public List<Tuple<byte, byte>> FolderData { get; set; } = new List<Tuple<byte, byte>>();
+        public List<Tuple<byte, byte>> Folder2Data { get; set; } = new List<Tuple<byte, byte>>(); // Not used in BN1
+        public List<Tuple<byte, byte>> Folder3Data { get; set; } = new List<Tuple<byte, byte>>(); // Not used in BN1
         public List<byte> BattleChips { get; set; } = new List<byte>();
         public List<byte> NaviChips { get; set; } = new List<byte>();
+        public List<byte> SecretChips { get; set; } = new List<byte>(); // Not used in BN1
         public List<byte> LibraryData { get; set; } = new List<byte>();
+        public List<byte> PALibraryData { get; set; } = new List<byte>(); // Not used in BN1
     }
 }

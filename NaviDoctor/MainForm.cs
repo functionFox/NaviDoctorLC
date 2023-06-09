@@ -13,7 +13,7 @@ namespace NaviDoctor
 {
     public partial class MainForm : Form
     {
-        private BN1SaveDataObject bn1SaveData;
+        private SaveDataObject saveData;
         public MainForm()
         {
             InitializeComponent();
@@ -63,20 +63,20 @@ namespace NaviDoctor
                     }
                 }
             }
-            public void GenerateConfirmButton(BN1SaveDataObject bn1SaveData)
+            public void GenerateConfirmButton(SaveDataObject saveData)
             {
                 confirmButton = new Button();
                 confirmButton.Text = "Confirm";
                 confirmButton.Anchor = AnchorStyles.None;
                 confirmButton.Top = flowLayoutPanel.Bottom + 10;
                 confirmButton.Left = ((form.Width - confirmButton.Width) / 2) + 50;
-                confirmButton.Click += (sender, e) => ConfirmButton_Click(sender, e, bn1SaveData);
+                confirmButton.Click += (sender, e) => ConfirmButton_Click(sender, e, saveData);
 
                 form.Controls.Add(confirmButton);
             }
-            private void ConfirmButton_Click(object sender, EventArgs e, BN1SaveDataObject bn1SaveData)
+            private void ConfirmButton_Click(object sender, EventArgs e, SaveDataObject saveData)
             {
-                UpdateLibraryData(bn1SaveData);
+                UpdateLibraryData(saveData);
                 form.Close();
             }
             private void UpdateLibraryData(SaveDataObject saveData)
@@ -86,7 +86,7 @@ namespace NaviDoctor
                     if (control is CheckBox checkBox)
                     {
                         string chipName = checkBox.Text;
-                        int chipIndex = BN1BattleChipData.GetChipIDByName(chipName);
+                        int chipIndex = BattleChipData.GetChipIDByName(chipName);
 
                         if (chipIndex != -1)
                         {
@@ -113,26 +113,26 @@ namespace NaviDoctor
                 form.ShowDialog();
             }
         }
-        private void GenerateLibraryWindow(BN1SaveDataObject bn1SaveData)
+        private void GenerateLibraryWindow(SaveDataObject saveData)
         {
             LibraryWindow libraryWindow = new LibraryWindow();
 
             for (int i = 1; i <= 199; i++)
             {
-                string chipName = BN1BattleChipData.GetChipNameByID(i);
+                string chipName = BattleChipData.GetChipNameByID(i);
 
                 if (chipName.Length < 3)
                     continue;
 
                 int libraryIndex = (i) / 8;
                 int bitIndex = 7 - ((i) % 8);
-                bool isChecked = (bn1SaveData.LibraryData[libraryIndex] & (1 << bitIndex)) != 0;
+                bool isChecked = (saveData.LibraryData[libraryIndex] & (1 << bitIndex)) != 0;
 
                 libraryWindow.AddChip(chipName, isChecked);
             }
 
             libraryWindow.GenerateCheckAllButton();
-            libraryWindow.GenerateConfirmButton(bn1SaveData);
+            libraryWindow.GenerateConfirmButton(saveData);
             libraryWindow.ShowDialog();
         }
         private string GetAlphabeticalCode(byte chipCode)
@@ -140,10 +140,10 @@ namespace NaviDoctor
             char chipCodeLetter = (char)(chipCode + 0x41);
             return chipCodeLetter.ToString();
         }
-        private void PopulateDataGridView(BN1BattleChipData battleChipData, BN1SaveDataObject bn1SaveData)
+        private void PopulateDataGridView(BattleChipData battleChipData, SaveDataObject saveData)
         {
-            List<BN1BattleChipData> entries = battleChipData.GenerateChipEntries();
-            List<byte> packChips = bn1SaveData.BattleChips.Concat(bn1SaveData.NaviChips).ToList();
+            List<BattleChipData> entries = battleChipData.GenerateChipEntries();
+            List<byte> packChips = saveData.BattleChips.Concat(saveData.NaviChips).ToList();
 
             for (int i = 0; i < entries.Count; i++)
             {
@@ -173,19 +173,19 @@ namespace NaviDoctor
 
             dataGridView1.AutoResizeColumns();
         }
-        private void LoadFolderData(BN1SaveDataObject bn1SaveData)
+        private void LoadFolderData(SaveDataObject saveData)
         {
             DataTable folderDataTable = new DataTable();
             folderDataTable.Columns.Add("ID", typeof(int));
             folderDataTable.Columns.Add("Name", typeof(string));
             folderDataTable.Columns.Add("Code", typeof(string));
 
-            foreach (var folderData in bn1SaveData.FolderData)
+            foreach (var folderData in saveData.FolderData)
             {
                 byte chipID = folderData.Item1;
                 byte chipCode = folderData.Item2;
 
-                string chipName = BN1BattleChipData.GetChipNameByID(chipID);
+                string chipName = BattleChipData.GetChipNameByID(chipID);
                 string chipCodeLetter = GetAlphabeticalCode(chipCode);
 
                 folderDataTable.Rows.Add(chipID, chipName, chipCodeLetter);
@@ -226,12 +226,12 @@ namespace NaviDoctor
                 int chipInt = chipCode[0] - 'A';
 
                 // Find the first occurrence of the chip in the FolderData list
-                var chipToRemove = bn1SaveData.FolderData.FirstOrDefault(data => data.Item1 == chipID && data.Item2 == chipInt);
+                var chipToRemove = saveData.FolderData.FirstOrDefault(data => data.Item1 == chipID && data.Item2 == chipInt);
 
                 // Remove the chip if found
                 if (chipToRemove != null)
                 {
-                    bn1SaveData.FolderData.Remove(chipToRemove);
+                    saveData.FolderData.Remove(chipToRemove);
                 }
                 else
                 {
@@ -239,7 +239,7 @@ namespace NaviDoctor
                 }
 
                 // Refresh the Folder DataGridView
-                LoadFolderData(bn1SaveData);
+                LoadFolderData(saveData);
             }
             else
             {
@@ -250,7 +250,7 @@ namespace NaviDoctor
         private int GetChipQuantityInFolder(int chipID, string chipCode)
         {
             byte codeValue = (byte)(chipCode[0] - 'A');
-            return bn1SaveData.FolderData.Count(data => data.Item1 == chipID && data.Item2 == codeValue);
+            return saveData.FolderData.Count(data => data.Item1 == chipID && data.Item2 == codeValue);
         }
         private void btnAddChip_Click(object sender, EventArgs e)
         {
@@ -262,8 +262,8 @@ namespace NaviDoctor
                 string chipCode = dataGridView1.SelectedRows[0].Cells["Code"].Value.ToString();
 
                 // Check if the Folder has reached the maximum number of copies for the selected chip ID
-                int currentChipCopies = bn1SaveData.FolderData.Count(data => data.Item1 == chipID);
-                int currentNaviChips = bn1SaveData.FolderData.Count(data => data.Item1 >= 148 && data.Item1 <= 239);
+                int currentChipCopies = saveData.FolderData.Count(data => data.Item1 == chipID);
+                int currentNaviChips = saveData.FolderData.Count(data => data.Item1 >= 148 && data.Item1 <= 239);
 
                 bool isBattleChip = chipID >= 1 && chipID <= 147;
                 bool isNaviChip = chipID >= 148 && chipID <= 239;
@@ -274,14 +274,14 @@ namespace NaviDoctor
 
                 if (isBattleChip && currentChipCopies >= maxBattleChipCopies)
                 {
-                    string chipName = BN1BattleChipData.GetChipNameByID(chipID);
+                    string chipName = BattleChipData.GetChipNameByID(chipID);
                     MessageBox.Show($"The limit for {chipName} cannot exceed {maxBattleChipCopies}.");
                 }
                 else if (isNaviChip && currentNaviChips >= maxNaviChips)
                 {
                     MessageBox.Show($"The limit for Navi Chips cannot exceed {maxNaviChips}.");
                 }
-                else if (bn1SaveData.FolderData.Count >= maxTotalChipsInFolder)
+                else if (saveData.FolderData.Count >= maxTotalChipsInFolder)
                 {
                     MessageBox.Show($"The number of chips in the folder cannot exceed {maxTotalChipsInFolder}.");
                 }
@@ -298,10 +298,10 @@ namespace NaviDoctor
                     }
 
                     // Add the chip to the FolderData list with the selected chip code
-                    bn1SaveData.FolderData.Add(new Tuple<byte, byte>((byte)chipID, (byte)(chipCode[0] - 'A')));
+                    saveData.FolderData.Add(new Tuple<byte, byte>((byte)chipID, (byte)(chipCode[0] - 'A')));
 
                     // Refresh the Folder DataGridView
-                    LoadFolderData(bn1SaveData);
+                    LoadFolderData(saveData);
                 }
             }
             else
@@ -320,24 +320,24 @@ namespace NaviDoctor
             {
                 try
                 {
-                    BN1SaveParse bn1SaveParse = new BN1SaveParse(openFile.FileName);
-                    bn1SaveData = bn1SaveParse.ExtractSaveData();
-                    BN1BattleChipData battleChipData = new BN1BattleChipData();
-                    List<BN1BattleChipData> bChips = battleChipData.GenerateChipEntries();
-                    PopulateDataGridView(battleChipData, bn1SaveData);
-                    LoadFolderData(bn1SaveData);
-                    maxHPStat.Value = bn1SaveData.MaxHP;
-                    attackStat.Value = bn1SaveData.AttackPower + 1;
-                    rapidStat.Value = bn1SaveData.RapidPower + 1;
-                    chargeStat.Value = bn1SaveData.ChargePower + 1;
-                    zennyBox.Value = bn1SaveData.Zenny;
-                    steamID.Value = bn1SaveData.SteamID;
-                    haveAquaArmor.Checked = bn1SaveData.HaveAquaArmr == 1;
-                    haveFireArmor.Checked = bn1SaveData.HaveHeatArmr == 1;
-                    haveWoodArmor.Checked = bn1SaveData.HaveWoodArmr == 1;
-                    fireArmorRadio.Checked = bn1SaveData.EqArmor == 02;
-                    aquaArmorRadio.Checked = bn1SaveData.EqArmor == 03;
-                    woodArmorRadio.Checked = bn1SaveData.EqArmor == 04;
+                    SaveParse saveParse = new SaveParse(openFile.FileName);
+                    saveData = saveParse.ExtractSaveData();
+                    BattleChipData battleChipData = new BattleChipData();
+                    List<BattleChipData> bChips = battleChipData.GenerateChipEntries();
+                    PopulateDataGridView(battleChipData, saveData);
+                    LoadFolderData(saveData);
+                    maxHPStat.Value = saveData.MaxHP;
+                    attackStat.Value = saveData.AttackPower + 1;
+                    rapidStat.Value = saveData.RapidPower + 1;
+                    chargeStat.Value = saveData.ChargePower + 1;
+                    zennyBox.Value = saveData.Zenny;
+                    steamID.Value = saveData.SteamID;
+                    haveFireArmor.Checked = saveData.Style1 == 1;
+                    haveAquaArmor.Checked = saveData.Style2 == 1;
+                    haveWoodArmor.Checked = saveData.Style3 == 1;
+                    fireArmorRadio.Checked = saveData.EqStyle == 02;
+                    aquaArmorRadio.Checked = saveData.EqStyle == 03;
+                    woodArmorRadio.Checked = saveData.EqStyle == 04;
                     normalArmorRadio.Checked = !(fireArmorRadio.Checked || aquaArmorRadio.Checked || woodArmorRadio.Checked);
                 }
                 catch (Exception ex)
@@ -349,7 +349,7 @@ namespace NaviDoctor
         private void btnSaveFile_Click(object sender, EventArgs e)
         {
             // Check if a save file has been loaded
-            if (bn1SaveData == null)
+            if (saveData == null)
             {
                 MessageBox.Show("Please load a save file first.");
                 return; // Exit the event handler
@@ -357,7 +357,7 @@ namespace NaviDoctor
 
             SaveFileDialog saveFile = new SaveFileDialog();
             saveFile.Title = "Save MMBN Save File...";
-            saveFile.InitialDirectory = $@"C:\Program Files (x86)\Steam\userdata\{bn1SaveData.SteamID}\1798010\remote\";
+            saveFile.InitialDirectory = $@"C:\Program Files (x86)\Steam\userdata\{saveData.SteamID}\1798010\remote\";
             saveFile.FileName = "exe1_save_0.bin";
             saveFile.Filter = "MMBN1 Save File|exe1_save_0.bin|AllFiles|*.*";
             saveFile.RestoreDirectory = true;
@@ -365,45 +365,45 @@ namespace NaviDoctor
             {
                 try
                 {
-                    BN1SaveParse bn1SaveParse = new BN1SaveParse(saveFile.FileName);
+                    SaveParse bn1SaveParse = new SaveParse(saveFile.FileName);
 
-                    bn1SaveData.MaxHP = (short)maxHPStat.Value;
-                    bn1SaveData.CurrHP = (short)maxHPStat.Value;
-                    bn1SaveData.AttackPower = (byte)(attackStat.Value - 1);
-                    bn1SaveData.RapidPower = (byte)(rapidStat.Value - 1);
-                    bn1SaveData.ChargePower = (byte)(chargeStat.Value - 1);
-                    bn1SaveData.Zenny = (int)zennyBox.Value;
-                    bn1SaveData.SteamID = (int)steamID.Value;
+                    saveData.MaxHP = (short)maxHPStat.Value;
+                    saveData.CurrHP = (short)maxHPStat.Value;
+                    saveData.AttackPower = (byte)(attackStat.Value - 1);
+                    saveData.RapidPower = (byte)(rapidStat.Value - 1);
+                    saveData.ChargePower = (byte)(chargeStat.Value - 1);
+                    saveData.Zenny = (int)zennyBox.Value;
+                    saveData.SteamID = (int)steamID.Value;
                     if (haveAquaArmor.Checked)
-                    { bn1SaveData.HaveAquaArmr = 1; }
+                    { saveData.Style2 = 1; }
                     else 
-                    { bn1SaveData.HaveAquaArmr = 0; }
+                    { saveData.Style2 = 0; }
                     if (haveFireArmor.Checked)
-                    { bn1SaveData.HaveHeatArmr = 1; }
+                    { saveData.Style1 = 1; }
                     else 
-                    { bn1SaveData.HaveHeatArmr = 0; }
+                    { saveData.Style1 = 0; }
                     if (haveWoodArmor.Checked)
-                    { bn1SaveData.HaveWoodArmr = 1; }
+                    { saveData.Style3 = 1; }
                     else
-                    { bn1SaveData.HaveWoodArmr = 0; }
+                    { saveData.Style3 = 0; }
                     if (fireArmorRadio.Checked)
                     {
-                        bn1SaveData.EqArmor = 2;
+                        saveData.EqStyle = 2;
                     }
                     else if (aquaArmorRadio.Checked)
                     {
-                        bn1SaveData.EqArmor = 3;
+                        saveData.EqStyle = 3;
                     }
                     else if (woodArmorRadio.Checked)
                     {
-                        bn1SaveData.EqArmor = 4;
+                        saveData.EqStyle = 4;
                     }
                     else
                     {
-                        bn1SaveData.EqArmor = 0;
+                        saveData.EqStyle = 0;
                     }
                     PackageChips();
-                    bn1SaveParse.UpdateSaveData(bn1SaveData);
+                    bn1SaveParse.UpdateSaveData(saveData);
                     bn1SaveParse.SaveChanges();
 
                     MessageBox.Show("Save data successfully updated!");
@@ -445,8 +445,8 @@ namespace NaviDoctor
                 }
             }
 
-            bn1SaveData.BattleChips = newBattleChips;
-            bn1SaveData.NaviChips = newNaviChips;
+            saveData.BattleChips = newBattleChips;
+            saveData.NaviChips = newNaviChips;
         }
 
 
@@ -463,17 +463,14 @@ namespace NaviDoctor
         private void btnShowLibrary_Click(object sender, EventArgs e)
         {
             // Check if a save file has been loaded
-            if (bn1SaveData == null)
+            if (saveData == null)
             {
                 MessageBox.Show("Please load a save file first.");
                 return; // Exit the event handler
             }
 
-            // Create an instance of BN1BattleChipData
-            BN1BattleChipData battleChipData = new BN1BattleChipData();
-
             // Call the GenerateLibraryWindow method to display the library data
-            GenerateLibraryWindow(bn1SaveData);
+            GenerateLibraryWindow(saveData);
         }
 
     }
