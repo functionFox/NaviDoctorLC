@@ -163,15 +163,15 @@ namespace NaviDoctor
 
             dataTable.DefaultView.RowFilter = "Code <> 'None'";
 
-            dataGridView1.DataSource = dataTable;
+            dgvPack.DataSource = dataTable;
 
-            dataGridView1.Columns["ID"].Visible = false;
-            dataGridView1.Columns["Name"].ReadOnly = true;
-            dataGridView1.Columns["Name"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridView1.Columns["Code"].ReadOnly = true;
-            dataGridView1.Columns["Quantity"].ReadOnly = false;
+            dgvPack.Columns["ID"].Visible = false;
+            dgvPack.Columns["Name"].ReadOnly = true;
+            dgvPack.Columns["Name"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dgvPack.Columns["Code"].ReadOnly = true;
+            dgvPack.Columns["Quantity"].ReadOnly = false;
 
-            dataGridView1.AutoResizeColumns();
+            dgvPack.AutoResizeColumns();
         }
         private void LoadFolderData(SaveDataObject saveData)
         {
@@ -194,35 +194,35 @@ namespace NaviDoctor
             int selectedRowIndex = -1;
             int firstDisplayedScrollingRowIndex = -1;
 
-            if (dataGridView2.SelectedRows.Count > 0)
-                selectedRowIndex = dataGridView2.SelectedRows[0].Index;
+            if (dgvFolder1.SelectedRows.Count > 0)
+                selectedRowIndex = dgvFolder1.SelectedRows[0].Index;
 
-            if (dataGridView2.FirstDisplayedScrollingRowIndex >= 0)
-                firstDisplayedScrollingRowIndex = dataGridView2.FirstDisplayedScrollingRowIndex;
+            if (dgvFolder1.FirstDisplayedScrollingRowIndex >= 0)
+                firstDisplayedScrollingRowIndex = dgvFolder1.FirstDisplayedScrollingRowIndex;
 
-            dataGridView2.DataSource = null;
-            dataGridView2.Rows.Clear();
+            dgvFolder1.DataSource = null;
+            dgvFolder1.Rows.Clear();
 
-            dataGridView2.DataSource = folderDataTable;
-            dataGridView2.Columns["ID"].Visible = false;
+            dgvFolder1.DataSource = folderDataTable;
+            dgvFolder1.Columns["ID"].Visible = false;
 
             // Restore the previous selection and scroll position
-            if (selectedRowIndex >= 0 && selectedRowIndex < dataGridView2.Rows.Count)
-                dataGridView2.Rows[selectedRowIndex].Selected = true;
+            if (selectedRowIndex >= 0 && selectedRowIndex < dgvFolder1.Rows.Count)
+                dgvFolder1.Rows[selectedRowIndex].Selected = true;
 
-            if (firstDisplayedScrollingRowIndex >= 0 && firstDisplayedScrollingRowIndex < dataGridView2.Rows.Count)
-                dataGridView2.FirstDisplayedScrollingRowIndex = firstDisplayedScrollingRowIndex;
+            if (firstDisplayedScrollingRowIndex >= 0 && firstDisplayedScrollingRowIndex < dgvFolder1.Rows.Count)
+                dgvFolder1.FirstDisplayedScrollingRowIndex = firstDisplayedScrollingRowIndex;
 
-            dataGridView2.Columns["Name"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dgvFolder1.Columns["Name"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
         }
         private void btnRemoveChip_Click(object sender, EventArgs e)
         {
             // Check if there is a selected row in the Folder DataGridView
-            if (dataGridView2.SelectedRows.Count > 0)
+            if (dgvFolder1.SelectedRows.Count > 0)
             {
                 // Get the selected chip ID
-                int chipID = (int)dataGridView2.SelectedRows[0].Cells["ID"].Value;
-                string chipCode = (string)dataGridView2.SelectedRows[0].Cells["Code"].Value;
+                int chipID = (int)dgvFolder1.SelectedRows[0].Cells["ID"].Value;
+                string chipCode = (string)dgvFolder1.SelectedRows[0].Cells["Code"].Value;
                 int chipInt = chipCode[0] - 'A';
 
                 // Find the first occurrence of the chip in the FolderData list
@@ -255,11 +255,11 @@ namespace NaviDoctor
         private void btnAddChip_Click(object sender, EventArgs e)
         {
             // Check if there is a selected row in the Pack DataGridView
-            if (dataGridView1.SelectedRows.Count > 0)
+            if (dgvPack.SelectedRows.Count > 0)
             {
                 // Get the selected chip ID and code from the Pack
-                int chipID = (int)dataGridView1.SelectedRows[0].Cells["ID"].Value;
-                string chipCode = dataGridView1.SelectedRows[0].Cells["Code"].Value.ToString();
+                int chipID = (int)dgvPack.SelectedRows[0].Cells["ID"].Value;
+                string chipCode = dgvPack.SelectedRows[0].Cells["Code"].Value.ToString();
 
                 // Check if the Folder has reached the maximum number of copies for the selected chip ID
                 int currentChipCopies = saveData.FolderData.Count(data => data.Item1 == chipID);
@@ -291,10 +291,10 @@ namespace NaviDoctor
                     int folderChipQuantity = GetChipQuantityInFolder(chipID, chipCode);
 
                     // Increment the quantity in the Pack if the quantity in the Folder is less than or equal to the quantity in the Pack
-                    int packChipQuantity = (int)dataGridView1.SelectedRows[0].Cells["Quantity"].Value;
+                    int packChipQuantity = (int)dgvPack.SelectedRows[0].Cells["Quantity"].Value;
                     if (folderChipQuantity >= packChipQuantity)
                     {
-                        dataGridView1.SelectedRows[0].Cells["Quantity"].Value = folderChipQuantity + 1;
+                        dgvPack.SelectedRows[0].Cells["Quantity"].Value = folderChipQuantity + 1;
                     }
 
                     // Add the chip to the FolderData list with the selected chip code
@@ -311,119 +311,22 @@ namespace NaviDoctor
         }
         private void btnLoadFile_Click(object sender, EventArgs e)
         {
-            OpenFileDialog openFile = new OpenFileDialog();
-            openFile.Title = "Open MMBN Save File...";
-            openFile.InitialDirectory = @"C:\Program Files (x86)\Steam\userdata";
-            openFile.Filter = "MMBN1 Save File|exe1_save_0.bin|All Files|*.*";
-            openFile.RestoreDirectory = true;
-            if (openFile.ShowDialog() == DialogResult.OK)
-            {
-                try
-                {
-                    SaveParse saveParse = new SaveParse(openFile.FileName);
-                    saveData = saveParse.ExtractSaveData();
-                    BattleChipData battleChipData = new BattleChipData();
-                    List<BattleChipData> bChips = battleChipData.GenerateChipEntries();
-                    PopulateDataGridView(battleChipData, saveData);
-                    LoadFolderData(saveData);
-                    maxHPStat.Value = saveData.MaxHP;
-                    attackStat.Value = saveData.AttackPower + 1;
-                    rapidStat.Value = saveData.RapidPower + 1;
-                    chargeStat.Value = saveData.ChargePower + 1;
-                    zennyBox.Value = saveData.Zenny;
-                    steamID.Value = saveData.SteamID;
-                    haveFireArmor.Checked = saveData.Style1 == 1;
-                    haveAquaArmor.Checked = saveData.Style2 == 1;
-                    haveWoodArmor.Checked = saveData.Style3 == 1;
-                    fireArmorRadio.Checked = saveData.EqStyle == 02;
-                    aquaArmorRadio.Checked = saveData.EqStyle == 03;
-                    woodArmorRadio.Checked = saveData.EqStyle == 04;
-                    normalArmorRadio.Checked = !(fireArmorRadio.Checked || aquaArmorRadio.Checked || woodArmorRadio.Checked);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"An error occurred: {ex}");
-                }
-            }
+            
         }
         private void btnSaveFile_Click(object sender, EventArgs e)
         {
-            // Check if a save file has been loaded
-            if (saveData == null)
-            {
-                MessageBox.Show("Please load a save file first.");
-                return; // Exit the event handler
-            }
-
-            SaveFileDialog saveFile = new SaveFileDialog();
-            saveFile.Title = "Save MMBN Save File...";
-            saveFile.InitialDirectory = $@"C:\Program Files (x86)\Steam\userdata\{saveData.SteamID}\1798010\remote\";
-            saveFile.FileName = "exe1_save_0.bin";
-            saveFile.Filter = "MMBN1 Save File|exe1_save_0.bin|AllFiles|*.*";
-            saveFile.RestoreDirectory = true;
-            if (saveFile.ShowDialog() == DialogResult.OK)
-            {
-                try
-                {
-                    SaveParse bn1SaveParse = new SaveParse(saveFile.FileName);
-
-                    saveData.MaxHP = (short)maxHPStat.Value;
-                    saveData.CurrHP = (short)maxHPStat.Value;
-                    saveData.AttackPower = (byte)(attackStat.Value - 1);
-                    saveData.RapidPower = (byte)(rapidStat.Value - 1);
-                    saveData.ChargePower = (byte)(chargeStat.Value - 1);
-                    saveData.Zenny = (int)zennyBox.Value;
-                    saveData.SteamID = (int)steamID.Value;
-                    if (haveAquaArmor.Checked)
-                    { saveData.Style2 = 1; }
-                    else 
-                    { saveData.Style2 = 0; }
-                    if (haveFireArmor.Checked)
-                    { saveData.Style1 = 1; }
-                    else 
-                    { saveData.Style1 = 0; }
-                    if (haveWoodArmor.Checked)
-                    { saveData.Style3 = 1; }
-                    else
-                    { saveData.Style3 = 0; }
-                    if (fireArmorRadio.Checked)
-                    {
-                        saveData.EqStyle = 2;
-                    }
-                    else if (aquaArmorRadio.Checked)
-                    {
-                        saveData.EqStyle = 3;
-                    }
-                    else if (woodArmorRadio.Checked)
-                    {
-                        saveData.EqStyle = 4;
-                    }
-                    else
-                    {
-                        saveData.EqStyle = 0;
-                    }
-                    PackageChips();
-                    bn1SaveParse.UpdateSaveData(saveData);
-                    bn1SaveParse.SaveChanges();
-
-                    MessageBox.Show("Save data successfully updated!");
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"An error occurred while saving the file: {ex.Message}");
-                }
-            }
+            
         }
         private void PackageChips()
         {
             List<byte> newBattleChips = new List<byte>(Enumerable.Repeat((byte)0, 147 * 5));
             List<byte> newNaviChips = new List<byte>(Enumerable.Repeat((byte)0, 239));
 
-            dataGridView1.Sort(dataGridView1.Columns[0], ListSortDirection.Ascending); // Sort by ID column in ascending order
+            dgvPack.Sort(dgvPack.Columns[0], ListSortDirection.Ascending); // Sort by ID column in ascending order
 
             int codeSeries = 0;
 
-            foreach (DataGridViewRow row in dataGridView1.Rows)
+            foreach (DataGridViewRow row in dgvPack.Rows)
             {
                 if (row.Cells["ID"].Value != null && row.Cells["Quantity"].Value != null)
                 {
@@ -473,5 +376,111 @@ namespace NaviDoctor
             GenerateLibraryWindow(saveData);
         }
 
+        private void loadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFile = new OpenFileDialog();
+            openFile.Title = "Open MMBN Save File...";
+            openFile.InitialDirectory = @"C:\Program Files (x86)\Steam\userdata";
+            openFile.Filter = "MMBN1 Save File|exe1_save_0.bin|All Files|*.*";
+            openFile.RestoreDirectory = true;
+            if (openFile.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    SaveParse saveParse = new SaveParse(openFile.FileName);
+                    saveData = saveParse.ExtractSaveData();
+                    BattleChipData battleChipData = new BattleChipData();
+                    List<BattleChipData> bChips = battleChipData.GenerateChipEntries();
+                    PopulateDataGridView(battleChipData, saveData);
+                    LoadFolderData(saveData);
+                    maxHPStat.Value = saveData.MaxHP;
+                    attackStat.Value = saveData.AttackPower + 1;
+                    rapidStat.Value = saveData.RapidPower + 1;
+                    chargeStat.Value = saveData.ChargePower + 1;
+                    zennyBox.Value = saveData.Zenny;
+                    steamID.Value = saveData.SteamID;
+                    haveFireArmor.Checked = saveData.Style1 == 1;
+                    haveAquaArmor.Checked = saveData.Style2 == 1;
+                    haveWoodArmor.Checked = saveData.Style3 == 1;
+                    fireArmorRadio.Checked = saveData.EqStyle == 02;
+                    aquaArmorRadio.Checked = saveData.EqStyle == 03;
+                    woodArmorRadio.Checked = saveData.EqStyle == 04;
+                    normalArmorRadio.Checked = !(fireArmorRadio.Checked || aquaArmorRadio.Checked || woodArmorRadio.Checked);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"An error occurred: {ex}");
+                }
+            }
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Check if a save file has been loaded
+            if (saveData == null)
+            {
+                MessageBox.Show("Please load a save file first.");
+                return; // Exit the event handler
+            }
+
+            SaveFileDialog saveFile = new SaveFileDialog();
+            saveFile.Title = "Save MMBN Save File...";
+            saveFile.InitialDirectory = $@"C:\Program Files (x86)\Steam\userdata\{saveData.SteamID}\1798010\remote\";
+            saveFile.FileName = "exe1_save_0.bin";
+            saveFile.Filter = "MMBN1 Save File|exe1_save_0.bin|AllFiles|*.*";
+            saveFile.RestoreDirectory = true;
+            if (saveFile.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    SaveParse bn1SaveParse = new SaveParse(saveFile.FileName);
+
+                    saveData.MaxHP = (short)maxHPStat.Value;
+                    saveData.CurrHP = (short)maxHPStat.Value;
+                    saveData.AttackPower = (byte)(attackStat.Value - 1);
+                    saveData.RapidPower = (byte)(rapidStat.Value - 1);
+                    saveData.ChargePower = (byte)(chargeStat.Value - 1);
+                    saveData.Zenny = (int)zennyBox.Value;
+                    saveData.SteamID = (int)steamID.Value;
+                    if (haveAquaArmor.Checked)
+                    { saveData.Style2 = 1; }
+                    else
+                    { saveData.Style2 = 0; }
+                    if (haveFireArmor.Checked)
+                    { saveData.Style1 = 1; }
+                    else
+                    { saveData.Style1 = 0; }
+                    if (haveWoodArmor.Checked)
+                    { saveData.Style3 = 1; }
+                    else
+                    { saveData.Style3 = 0; }
+                    if (fireArmorRadio.Checked)
+                    {
+                        saveData.EqStyle = 2;
+                    }
+                    else if (aquaArmorRadio.Checked)
+                    {
+                        saveData.EqStyle = 3;
+                    }
+                    else if (woodArmorRadio.Checked)
+                    {
+                        saveData.EqStyle = 4;
+                    }
+                    else
+                    {
+                        saveData.EqStyle = 0;
+                    }
+                    PackageChips();
+                    bn1SaveParse.UpdateSaveData(saveData);
+                    bn1SaveParse.SaveChanges();
+
+                    MessageBox.Show("Save data successfully updated!");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"An error occurred while saving the file: {ex.Message}");
+                }
+            }
+        }
     }
 }
