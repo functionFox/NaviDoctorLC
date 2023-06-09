@@ -90,7 +90,7 @@ namespace NaviDoctor
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(216, 33);
+            this.label1.Size = new System.Drawing.Size(145, 24);
             this.label1.TabIndex = 1;
             this.label1.Text = "Mega Man.EXE";
             // 
@@ -100,7 +100,7 @@ namespace NaviDoctor
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(13, 99);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(67, 25);
+            this.label2.Size = new System.Drawing.Size(47, 17);
             this.label2.TabIndex = 2;
             this.label2.Text = "Attack";
             // 
@@ -110,7 +110,7 @@ namespace NaviDoctor
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(12, 137);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(62, 25);
+            this.label3.Size = new System.Drawing.Size(45, 17);
             this.label3.TabIndex = 2;
             this.label3.Text = "Rapid";
             // 
@@ -120,7 +120,7 @@ namespace NaviDoctor
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(12, 176);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(77, 25);
+            this.label4.Size = new System.Drawing.Size(54, 17);
             this.label4.TabIndex = 2;
             this.label4.Text = "Charge";
             // 
@@ -139,7 +139,7 @@ namespace NaviDoctor
             0,
             0});
             this.attackStat.Name = "attackStat";
-            this.attackStat.Size = new System.Drawing.Size(54, 30);
+            this.attackStat.Size = new System.Drawing.Size(54, 23);
             this.attackStat.TabIndex = 3;
             this.attackStat.Value = new decimal(new int[] {
             1,
@@ -162,7 +162,7 @@ namespace NaviDoctor
             0,
             0});
             this.rapidStat.Name = "rapidStat";
-            this.rapidStat.Size = new System.Drawing.Size(54, 30);
+            this.rapidStat.Size = new System.Drawing.Size(54, 23);
             this.rapidStat.TabIndex = 3;
             this.rapidStat.Value = new decimal(new int[] {
             1,
@@ -185,7 +185,7 @@ namespace NaviDoctor
             0,
             0});
             this.chargeStat.Name = "chargeStat";
-            this.chargeStat.Size = new System.Drawing.Size(54, 30);
+            this.chargeStat.Size = new System.Drawing.Size(54, 23);
             this.chargeStat.TabIndex = 3;
             this.chargeStat.Value = new decimal(new int[] {
             1,
@@ -200,7 +200,7 @@ namespace NaviDoctor
             this.normalArmorRadio.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.normalArmorRadio.Location = new System.Drawing.Point(89, 210);
             this.normalArmorRadio.Name = "normalArmorRadio";
-            this.normalArmorRadio.Size = new System.Drawing.Size(157, 29);
+            this.normalArmorRadio.Size = new System.Drawing.Size(113, 21);
             this.normalArmorRadio.TabIndex = 4;
             this.normalArmorRadio.TabStop = true;
             this.normalArmorRadio.Text = "Normal Armor";
@@ -212,7 +212,7 @@ namespace NaviDoctor
             this.fireArmorRadio.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.fireArmorRadio.Location = new System.Drawing.Point(89, 245);
             this.fireArmorRadio.Name = "fireArmorRadio";
-            this.fireArmorRadio.Size = new System.Drawing.Size(136, 29);
+            this.fireArmorRadio.Size = new System.Drawing.Size(98, 21);
             this.fireArmorRadio.TabIndex = 4;
             this.fireArmorRadio.Text = "Heat Armor";
             this.fireArmorRadio.UseVisualStyleBackColor = true;
@@ -223,7 +223,7 @@ namespace NaviDoctor
             this.aquaArmorRadio.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.aquaArmorRadio.Location = new System.Drawing.Point(89, 280);
             this.aquaArmorRadio.Name = "aquaArmorRadio";
-            this.aquaArmorRadio.Size = new System.Drawing.Size(142, 29);
+            this.aquaArmorRadio.Size = new System.Drawing.Size(101, 21);
             this.aquaArmorRadio.TabIndex = 4;
             this.aquaArmorRadio.Text = "Aqua Armor";
             this.aquaArmorRadio.UseVisualStyleBackColor = true;
@@ -234,7 +234,7 @@ namespace NaviDoctor
             this.woodArmorRadio.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.woodArmorRadio.Location = new System.Drawing.Point(89, 312);
             this.woodArmorRadio.Name = "woodArmorRadio";
-            this.woodArmorRadio.Size = new System.Drawing.Size(148, 29);
+            this.woodArmorRadio.Size = new System.Drawing.Size(105, 21);
             this.woodArmorRadio.TabIndex = 4;
             this.woodArmorRadio.Text = "Wood Armor";
             this.woodArmorRadio.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -246,7 +246,7 @@ namespace NaviDoctor
             this.haveFireArmor.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.haveFireArmor.Location = new System.Drawing.Point(58, 250);
             this.haveFireArmor.Name = "haveFireArmor";
-            this.haveFireArmor.Size = new System.Drawing.Size(22, 21);
+            this.haveFireArmor.Size = new System.Drawing.Size(15, 14);
             this.haveFireArmor.TabIndex = 5;
             this.haveFireArmor.UseVisualStyleBackColor = true;
             // 
@@ -256,7 +256,7 @@ namespace NaviDoctor
             this.haveAquaArmor.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.haveAquaArmor.Location = new System.Drawing.Point(58, 285);
             this.haveAquaArmor.Name = "haveAquaArmor";
-            this.haveAquaArmor.Size = new System.Drawing.Size(22, 21);
+            this.haveAquaArmor.Size = new System.Drawing.Size(15, 14);
             this.haveAquaArmor.TabIndex = 5;
             this.haveAquaArmor.UseVisualStyleBackColor = true;
             // 
@@ -266,7 +266,7 @@ namespace NaviDoctor
             this.haveWoodArmor.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.haveWoodArmor.Location = new System.Drawing.Point(58, 317);
             this.haveWoodArmor.Name = "haveWoodArmor";
-            this.haveWoodArmor.Size = new System.Drawing.Size(22, 21);
+            this.haveWoodArmor.Size = new System.Drawing.Size(15, 14);
             this.haveWoodArmor.TabIndex = 5;
             this.haveWoodArmor.UseVisualStyleBackColor = true;
             // 
@@ -280,7 +280,7 @@ namespace NaviDoctor
             0,
             0});
             this.zennyBox.Name = "zennyBox";
-            this.zennyBox.Size = new System.Drawing.Size(120, 30);
+            this.zennyBox.Size = new System.Drawing.Size(120, 23);
             this.zennyBox.TabIndex = 6;
             // 
             // label5
@@ -289,7 +289,7 @@ namespace NaviDoctor
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(12, 347);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(67, 25);
+            this.label5.Size = new System.Drawing.Size(48, 17);
             this.label5.TabIndex = 7;
             this.label5.Text = "Zenny";
             // 
@@ -304,7 +304,7 @@ namespace NaviDoctor
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.Location = new System.Drawing.Point(13, 383);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(93, 25);
+            this.label9.Size = new System.Drawing.Size(65, 17);
             this.label9.TabIndex = 15;
             this.label9.Text = "Steam ID";
             this.toolTip1.SetToolTip(this.label9, resources.GetString("label9.ToolTip"));
@@ -358,7 +358,7 @@ namespace NaviDoctor
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(656, 17);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(80, 33);
+            this.label6.Size = new System.Drawing.Size(51, 24);
             this.label6.TabIndex = 9;
             this.label6.Text = "Pack";
             // 
@@ -368,7 +368,7 @@ namespace NaviDoctor
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(302, 17);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(98, 33);
+            this.label7.Size = new System.Drawing.Size(65, 24);
             this.label7.TabIndex = 10;
             this.label7.Text = "Folder";
             // 
@@ -400,7 +400,7 @@ namespace NaviDoctor
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.Location = new System.Drawing.Point(12, 63);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(82, 25);
+            this.label8.Size = new System.Drawing.Size(56, 17);
             this.label8.TabIndex = 12;
             this.label8.Text = "Max HP";
             // 
@@ -414,7 +414,7 @@ namespace NaviDoctor
             0,
             0});
             this.maxHPStat.Name = "maxHPStat";
-            this.maxHPStat.Size = new System.Drawing.Size(100, 30);
+            this.maxHPStat.Size = new System.Drawing.Size(100, 23);
             this.maxHPStat.TabIndex = 13;
             // 
             // steamID
@@ -428,7 +428,7 @@ namespace NaviDoctor
             0,
             0});
             this.steamID.Name = "steamID";
-            this.steamID.Size = new System.Drawing.Size(120, 30);
+            this.steamID.Size = new System.Drawing.Size(120, 23);
             this.steamID.TabIndex = 14;
             this.steamID.Enter += new System.EventHandler(this.steamID_Enter);
             this.steamID.Leave += new System.EventHandler(this.steamID_Leave);
@@ -458,7 +458,7 @@ namespace NaviDoctor
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(17F, 33F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1048, 540);
             this.Controls.Add(this.btnShowLibrary);
@@ -492,6 +492,7 @@ namespace NaviDoctor
             this.Controls.Add(this.btnLoadFile);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(6);
             this.MaximizeBox = false;
             this.Name = "MainForm";
