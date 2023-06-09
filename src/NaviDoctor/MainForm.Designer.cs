@@ -67,6 +67,7 @@ namespace NaviDoctor
             this.tabPage_Folder2 = new System.Windows.Forms.TabPage();
             this.tabPage_Folder3 = new System.Windows.Forms.TabPage();
             this.dgvFolder1 = new System.Windows.Forms.DataGridView();
+            this.lblFolderCount = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.attackStat)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rapidStat)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chargeStat)).BeginInit();
@@ -509,11 +510,21 @@ namespace NaviDoctor
             this.dgvFolder1.Size = new System.Drawing.Size(300, 401);
             this.dgvFolder1.TabIndex = 11;
             // 
+            // lblFolderCount
+            // 
+            this.lblFolderCount.AutoSize = true;
+            this.lblFolderCount.Location = new System.Drawing.Point(282, 473);
+            this.lblFolderCount.Name = "lblFolderCount";
+            this.lblFolderCount.Size = new System.Drawing.Size(140, 24);
+            this.lblFolderCount.TabIndex = 20;
+            this.lblFolderCount.Text = "Folder Count: 0";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1048, 540);
+            this.Controls.Add(this.lblFolderCount);
             this.Controls.Add(this.tabsFolders);
             this.Controls.Add(this.btnSetPackQuantity);
             this.Controls.Add(this.btnShowLibrary);
@@ -603,6 +614,7 @@ namespace NaviDoctor
         private System.Windows.Forms.DataGridView dgvFolder1;
         private System.Windows.Forms.TabPage tabPage_Folder2;
         private System.Windows.Forms.TabPage tabPage_Folder3;
+        private System.Windows.Forms.Label lblFolderCount;
     }
 }
 

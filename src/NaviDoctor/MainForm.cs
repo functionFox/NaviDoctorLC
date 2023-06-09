@@ -214,6 +214,8 @@ namespace NaviDoctor
                 dgvFolder1.FirstDisplayedScrollingRowIndex = firstDisplayedScrollingRowIndex;
 
             dgvFolder1.Columns["Name"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+
+            lblFolderCount.Text = $"Folder Count: {dgvFolder1.RowCount}";
         }
         private void btnRemoveChip_Click(object sender, EventArgs e)
         {
@@ -309,14 +311,7 @@ namespace NaviDoctor
                 MessageBox.Show("Please select a chip in the Pack view.");
             }
         }
-        private void btnLoadFile_Click(object sender, EventArgs e)
-        {
-            
-        }
-        private void btnSaveFile_Click(object sender, EventArgs e)
-        {
-            
-        }
+
         private void PackageChips()
         {
             List<byte> newBattleChips = new List<byte>(Enumerable.Repeat((byte)0, 147 * 5));
