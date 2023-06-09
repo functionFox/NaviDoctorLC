@@ -1,0 +1,14 @@
+C:\Users\power\source\repos\NaviDoctor\NaviDoctor\obj\Debug\NaviDoctor.csproj.AssemblyReference.cache
+C:\Users\power\source\repos\NaviDoctor\NaviDoctor\obj\Debug\NaviDoctor.Properties.Resources.resources
+C:\Users\power\source\repos\NaviDoctor\NaviDoctor\obj\Debug\NaviDoctor.csproj.GenerateResource.cache
+C:\Users\power\source\repos\NaviDoctor\NaviDoctor\obj\Debug\NaviDoctor.csproj.CoreCompileInputs.cache
+C:\Users\power\source\repos\NaviDoctor\NaviDoctor\bin\Debug\NaviDoctor.exe.config
+C:\Users\power\source\repos\NaviDoctor\NaviDoctor\bin\Debug\NaviDoctor.exe
+C:\Users\power\source\repos\NaviDoctor\NaviDoctor\bin\Debug\NaviDoctor.pdb
+C:\Users\power\source\repos\NaviDoctor\NaviDoctor\obj\Debug\NaviDoctor.exe
+C:\Users\power\source\repos\NaviDoctor\NaviDoctor\obj\Debug\NaviDoctor.pdb
+C:\Users\power\source\repos\NaviDoctor\NaviDoctor\obj\Debug\NaviDoctor.MainForm.resources
+C:\Users\power\source\repos\NaviDoctor\NaviDoctor\bin\Debug\NaviDoctor.exe.manifest
+C:\Users\power\source\repos\NaviDoctor\NaviDoctor\bin\Debug\NaviDoctor.application
+C:\Users\power\source\repos\NaviDoctor\NaviDoctor\obj\Debug\NaviDoctor.exe.manifest
+C:\Users\power\source\repos\NaviDoctor\NaviDoctor\obj\Debug\NaviDoctor.application
