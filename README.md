@@ -24,10 +24,10 @@ Known Issues:
 Future features and additions:
 
 - Support for the entire MMBNLC line of games!
-- Style Selector (BN2+)
+- Style Selector (BN2/3)
 - NaviCust Editor (BN3+)
 - Probably more, I literally just started this project about a week ago.
 
-Special thanks to MegaRockEXE, Prof. 9, Weenie, luckytyphlosion, and the rest of the TREZ community for your support!
+Special thanks to MegaRockEXE, Prof. 9, Weenie, luckytyphlosion, GreigaMaster, and the rest of the TREZ community for your support!
 
 *NOTICE: NaviDoctor LC does not enable the downloading or transfer of Switch version saves to PC nor is it a function I intend to pursue.
