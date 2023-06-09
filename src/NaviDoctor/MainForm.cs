@@ -477,5 +477,18 @@ namespace NaviDoctor
                 }
             }
         }
+
+        private void btnSetPackQuantity_Click(object sender, EventArgs e)
+        {
+            int packQuantity = (int)nudPackQuantity.Value;
+
+            foreach(DataGridViewRow chip in dgvPack.Rows)
+            {
+                if ((int)chip.Cells[3].Value < packQuantity)
+                {
+                    chip.Cells[3].Value = packQuantity;
+                }
+            }
+        }
     }
 }

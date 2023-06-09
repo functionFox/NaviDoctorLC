@@ -68,6 +68,7 @@ namespace NaviDoctor
             this.tabPage_Folder3 = new System.Windows.Forms.TabPage();
             this.dgvFolder1 = new System.Windows.Forms.DataGridView();
             this.lblFolderCount = new System.Windows.Forms.Label();
+            this.nudPackQuantity = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.attackStat)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rapidStat)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chargeStat)).BeginInit();
@@ -79,6 +80,7 @@ namespace NaviDoctor
             this.tabsFolders.SuspendLayout();
             this.tabPage_Folder1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFolder1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPackQuantity)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -325,7 +327,7 @@ namespace NaviDoctor
             // 
             this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(656, 26);
+            this.label6.Location = new System.Drawing.Point(658, 33);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(51, 24);
             this.label6.TabIndex = 9;
@@ -397,7 +399,7 @@ namespace NaviDoctor
             this.btnShowLibrary.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnShowLibrary.Location = new System.Drawing.Point(662, 490);
             this.btnShowLibrary.Name = "btnShowLibrary";
-            this.btnShowLibrary.Size = new System.Drawing.Size(126, 38);
+            this.btnShowLibrary.Size = new System.Drawing.Size(81, 38);
             this.btnShowLibrary.TabIndex = 16;
             this.btnShowLibrary.Text = "Library";
             this.btnShowLibrary.UseVisualStyleBackColor = true;
@@ -406,12 +408,13 @@ namespace NaviDoctor
             // btnSetPackQuantity
             // 
             this.btnSetPackQuantity.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSetPackQuantity.Location = new System.Drawing.Point(904, 490);
+            this.btnSetPackQuantity.Location = new System.Drawing.Point(844, 490);
             this.btnSetPackQuantity.Name = "btnSetPackQuantity";
             this.btnSetPackQuantity.Size = new System.Drawing.Size(132, 38);
             this.btnSetPackQuantity.TabIndex = 17;
             this.btnSetPackQuantity.Text = "Set Pack Quantity";
             this.btnSetPackQuantity.UseVisualStyleBackColor = true;
+            this.btnSetPackQuantity.Click += new System.EventHandler(this.btnSetPackQuantity_Click);
             // 
             // menuStrip
             // 
@@ -519,11 +522,35 @@ namespace NaviDoctor
             this.lblFolderCount.TabIndex = 20;
             this.lblFolderCount.Text = "Folder Count: 0";
             // 
+            // nudPackQuantity
+            // 
+            this.nudPackQuantity.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nudPackQuantity.Location = new System.Drawing.Point(982, 499);
+            this.nudPackQuantity.Maximum = new decimal(new int[] {
+            99,
+            0,
+            0,
+            0});
+            this.nudPackQuantity.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudPackQuantity.Name = "nudPackQuantity";
+            this.nudPackQuantity.Size = new System.Drawing.Size(54, 23);
+            this.nudPackQuantity.TabIndex = 21;
+            this.nudPackQuantity.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1048, 540);
+            this.Controls.Add(this.nudPackQuantity);
             this.Controls.Add(this.lblFolderCount);
             this.Controls.Add(this.tabsFolders);
             this.Controls.Add(this.btnSetPackQuantity);
@@ -573,6 +600,7 @@ namespace NaviDoctor
             this.tabsFolders.ResumeLayout(false);
             this.tabPage_Folder1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvFolder1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPackQuantity)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -615,6 +643,7 @@ namespace NaviDoctor
         private System.Windows.Forms.TabPage tabPage_Folder2;
         private System.Windows.Forms.TabPage tabPage_Folder3;
         private System.Windows.Forms.Label lblFolderCount;
+        private System.Windows.Forms.NumericUpDown nudPackQuantity;
     }
 }
 
