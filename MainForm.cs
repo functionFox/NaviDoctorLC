@@ -430,21 +430,13 @@ namespace NaviDoctor
                     int chipID = (int)row.Cells["ID"].Value;
                     int quantity = (int)row.Cells["Quantity"].Value;
 
-                    if (quantity > 99)
-                        quantity = 99;
-
-                    if (quantity < 0)
-                        quantity = 0;
+                    quantity = Math.Max(0, Math.Min(quantity, 99));
 
                     if (chipID >= 1 && chipID <= 147)
                     {
                         int index = ((chipID - 1) * 5) + codeSeries;
                             newBattleChips[index] = (byte)quantity;
-                        codeSeries++;
-                        if (codeSeries > 4)
-                        {
-                            codeSeries = 0;
-                        }
+                        codeSeries = (codeSeries + 1) % 5;
                     }
                     else if (chipID >= 148 && chipID <= 239)
                     {

@@ -9,10 +9,7 @@ namespace NaviDoctor
     {
         private const int SaveDataSize = 8909;
         private const int ChecksumStartOffset = 0x00A0;
-        private const int ChecksumEndOffset = 0x00A3;
-
         private const int SteamIDStartOffset = 0x00BC;
-
         private string saveFilePath;
         private byte[] saveData;
 
@@ -42,6 +39,8 @@ namespace NaviDoctor
         {
             BN1SaveDataObject saveDataObject = new BN1SaveDataObject();
 
+            saveDataObject.GameName = "Mega Man Battle Network";
+
             saveDataObject.AttackPower = saveData[0x0014];
             saveDataObject.RapidPower = saveData[0x0015];
             saveDataObject.ChargePower = saveData[0x0016];
@@ -58,9 +57,12 @@ namespace NaviDoctor
             saveDataObject.SteamID = BitConverter.ToInt32(saveData, 0x00BC);
 
             saveDataObject.HPUp = saveData[0x0100];
+
             saveDataObject.HaveHeatArmr = saveData[0x0104];
             saveDataObject.HaveAquaArmr = saveData[0x0105];
             saveDataObject.HaveWoodArmr = saveData[0x0106];
+
+            saveDataObject.BugFrags = 0; // BN1 is the only game without BugFrags, just set it to 0.
 
             for (int i = 0x0120; i <= 0x015B; i += 2)
             {
@@ -162,7 +164,7 @@ namespace NaviDoctor
         private void CalculateAndWriteChecksum()
         {
             uint checksum = 0x0;
-            uint offset = 0x0;
+            uint steamsum = 0x0;
             Buffer.BlockCopy(BitConverter.GetBytes(checksum), 0, saveData, ChecksumStartOffset, 4); // erase the current checksum
             if (BitConverter.ToUInt32(saveData, SteamIDStartOffset) == 0) // Switch doesn't use checksum or Steam ID, so no need to go further
             {
@@ -172,17 +174,16 @@ namespace NaviDoctor
             {
                 for (int i = SteamIDStartOffset; i <= SteamIDStartOffset+3; i++)
                 {
-                    offset += saveData[i];
+                    steamsum += saveData[i];
                 }    
                 foreach (byte dataByte in saveData)
                 {
                     checksum += dataByte; // Calculate the checksum
                 }
             }
-            checksum -= offset; // Subtract the Steam ID from the checksum
+            checksum -= steamsum; // Subtract the Steam ID from the checksum
             Buffer.BlockCopy(BitConverter.GetBytes(checksum), 0, saveData, ChecksumStartOffset, 4);
         }
-
 
         public void SaveChanges()
         {
@@ -198,25 +199,11 @@ namespace NaviDoctor
         }
     }
 
-    public class BN1SaveDataObject
+    public class BN1SaveDataObject : SaveDataObject
     {
-        public byte AttackPower { get; set; }
-        public byte RapidPower { get; set; }
-        public byte ChargePower { get; set; }
         public byte EqArmor { get; set; }
-        public short CurrHP { get; set; }
-        public short MaxHP { get; set; }
-        public int Zenny { get; set; }
-        public int PlayTime { get; set; }
-        public int CheckSum { get; set; }
-        public int SteamID { get; set; }
-        public byte HPUp { get; set; }
         public byte HaveHeatArmr { get; set; }
         public byte HaveAquaArmr { get; set; }
         public byte HaveWoodArmr { get; set; }
-        public List<Tuple<byte, byte>> FolderData { get; set; } = new List<Tuple<byte, byte>>();
-        public List<byte> BattleChips { get; set; } = new List<byte>();
-        public List<byte> NaviChips { get; set; } = new List<byte>();
-        public List<byte> LibraryData { get; set; } = new List<byte>();
     }
 }
