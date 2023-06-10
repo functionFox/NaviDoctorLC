@@ -8,53 +8,34 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using NaviDoctor.customControls;
+using NaviDoctor.models;
 
 namespace NaviDoctor
 {
     public partial class StyleLoader : Form
     {
-        private GameTitle.Title _gameTitle;
-        private string _currentEquipStyle;
+        private Style.Value _currentEquipStyle;
+        public List<Style> _styles;
 
         public StyleLoader()
         {
             InitializeComponent();
         }
 
-        public StyleLoader(GameTitle.Title gameTitle)
+        public StyleLoader( List<Style> styles)
         {
             InitializeComponent();
-            _gameTitle = gameTitle;
-            LoadStyles();
+            _styles = styles;
+            PopulateStyles();
         }
 
-
-        private void LoadStyles()
+        private void PopulateStyles()
         {
-
-            switch (_gameTitle)
+            foreach(var style in _styles)
             {
-                case GameTitle.Title.MegaManBattleNetwork:
-                    PopulateStyles(Style.BN1);
-                    break;
-                case GameTitle.Title.MegaManBattleNetwork2:
-                    PopulateStyles(Style.BN2);
-                    break;
-                case GameTitle.Title.MegaManBattleNetwork3White:
-                case GameTitle.Title.MegaManBattleNetwork3Blue:
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        private void PopulateStyles(List<Style> styles)
-        {
-            foreach(var style in styles)
-            {
-                var fullStyleName = $"{style.Name}{style.Type}";
-                var styleSelect = new StyleSelect(fullStyleName);
-                if(fullStyleName == "Normal") { styleSelect.EquipStyle = true; }
+                var styleSelect = new StyleSelect(style.Name);
+                styleSelect.EquipStyle = _styles.FirstOrDefault(x => x.Name == style.Name).Equip.GetValueOrDefault();
+                styleSelect.AddStyle = _styles.FirstOrDefault(x => x.Name == style.Name).Add.GetValueOrDefault();
                 styleSelect.EquipStyleChecked += (s, e) => EquipCheck(styleSelect);
                 //Most likely will need to also add an AddStyleCheck since we won't allow users to add all styles for BN2
                 flpStyleChange.Controls.Add(styleSelect);
@@ -64,18 +45,32 @@ namespace NaviDoctor
         {
             if (styleSelect.EquipStyle)
             {
-                _currentEquipStyle = styleSelect.StyleName;
+                _currentEquipStyle = styleSelect.StyleValue;
             }
 
             foreach (StyleSelect style in flpStyleChange.Controls)
             {
-                if(style.StyleName != _currentEquipStyle)
+                if(style.StyleValue != _currentEquipStyle)
                 {
                     style.EquipStyle = false;
                 }
             }
         }
 
+        private void GetStyles()
+        {
+            foreach (StyleSelect style in flpStyleChange.Controls)
+            {
+                _styles.FirstOrDefault(x => x.Name == style.StyleValue).Equip = style.EquipStyle;
+                _styles.FirstOrDefault(x => x.Name == style.StyleValue).Add = style.AddStyle;
+            }
+        }
 
+        private void btnDone_Click(object sender, EventArgs e)
+        {
+            GetStyles();
+            DialogResult = DialogResult.OK;
+            Close();
+        }
     }
 }

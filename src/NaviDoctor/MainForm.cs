@@ -8,12 +8,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using NaviDoctor.extensions;
+using NaviDoctor.models;
 
 namespace NaviDoctor
 {
     public partial class MainForm : Form
     {
         private SaveDataObject saveData;
+        private List<Style> _styles;
+
         public MainForm()
         {
             InitializeComponent();
@@ -384,16 +388,10 @@ namespace NaviDoctor
                     chargeStat.Value = saveData.ChargePower + 1;
                     zennyBox.Value = saveData.Zenny;
                     steamID.Value = saveData.SteamID;
-                    /*haveFireArmor.Checked = saveData.Style1 == 1;
-                    haveAquaArmor.Checked = saveData.Style2 == 1;
-                    haveWoodArmor.Checked = saveData.Style3 == 1;
-                    fireArmorRadio.Checked = saveData.EqStyle == 02;
-                    aquaArmorRadio.Checked = saveData.EqStyle == 03;
-                    woodArmorRadio.Checked = saveData.EqStyle == 04;
-                    normalArmorRadio.Checked = !(fireArmorRadio.Checked || aquaArmorRadio.Checked || woodArmorRadio.Checked);*/
-
+                    LoadStyles(saveData);
+                    
                     //Show the current game loaded
-                    lblGameVersion.Text = $"Loaded: {saveData.GameName.GetGameTitle()}";
+                    lblGameVersion.Text = $"Loaded: {saveData.GameName.GetString()}";
                     DisplayModulesBasedOnGame();
                 }
                 catch (Exception ex)
@@ -431,35 +429,7 @@ namespace NaviDoctor
                     saveData.ChargePower = (byte)(chargeStat.Value - 1);
                     saveData.Zenny = (int)zennyBox.Value;
                     saveData.SteamID = (int)steamID.Value;
-                    //TODO: send style information here
-                    /*if (haveAquaArmor.Checked)
-                    { saveData.Style2 = 1; }
-                    else
-                    { saveData.Style2 = 0; }
-                    if (haveFireArmor.Checked)
-                    { saveData.Style1 = 1; }
-                    else
-                    { saveData.Style1 = 0; }
-                    if (haveWoodArmor.Checked)
-                    { saveData.Style3 = 1; }
-                    else
-                    { saveData.Style3 = 0; }
-                    if (fireArmorRadio.Checked)
-                    {
-                        saveData.EqStyle = 2;
-                    }
-                    else if (aquaArmorRadio.Checked)
-                    {
-                        saveData.EqStyle = 3;
-                    }
-                    else if (woodArmorRadio.Checked)
-                    {
-                        saveData.EqStyle = 4;
-                    }
-                    else
-                    {
-                        saveData.EqStyle = 0;
-                    }*/
+                    UpdateStyles(saveData);
                     PackageChips();
                     bn1SaveParse.UpdateSaveData(saveData);
                     bn1SaveParse.SaveChanges();
@@ -470,6 +440,114 @@ namespace NaviDoctor
                 {
                     MessageBox.Show($"An error occurred while saving the file: {ex.Message}");
                 }
+            }
+        }
+
+        private void LoadStyles(SaveDataObject saveData)
+        {
+            List<Style> _tempStyles;
+
+            switch (saveData.GameName)
+            {
+                case GameTitle.Title.MegaManBattleNetwork:
+                    {
+                        _tempStyles = Style.BN1;
+
+                        if (saveData.Style1 == 1)
+                        {
+                            _tempStyles.FirstOrDefault(x => x.Name == Style.Value.Heat).Add = true;
+                        }
+                        if (saveData.Style2 == 1)
+                        {
+                            _tempStyles.FirstOrDefault(x => x.Name == Style.Value.Aqua).Add = true;
+                        }
+                        if (saveData.Style3 == 1)
+                        {
+                            _tempStyles.FirstOrDefault(x => x.Name == Style.Value.Wood).Add = true;
+                        }
+
+                        if (saveData.EqStyle == 02)
+                        {
+                            _tempStyles.FirstOrDefault(x => x.Name == Style.Value.Heat).Equip = true;
+                        }
+                        else if (saveData.EqStyle == 03)
+                        {
+                            _tempStyles.FirstOrDefault(x => x.Name == Style.Value.Aqua).Equip = true;
+                        }
+                        else if (saveData.EqStyle == 04)
+                        {
+                            _tempStyles.FirstOrDefault(x => x.Name == Style.Value.Wood).Equip = true;
+                        }
+                        else
+                        {
+                            _tempStyles.FirstOrDefault(x => x.Name == Style.Value.Normal).Equip = true;
+                        }
+
+                        _styles = _tempStyles;
+                        break;
+                    }
+                default:
+                    break;
+            }
+                        
+        }
+
+        private void UpdateStyles(SaveDataObject saveData)
+        {
+            switch (saveData.GameName)
+            {
+                case GameTitle.Title.MegaManBattleNetwork:
+                    {
+                        foreach (var style in _styles)
+                        {
+                            switch (style.Name)
+                            {
+                                case Style.Value.Normal:
+                                    {
+                                        if (style.Equip.Value)
+                                        {
+                                            saveData.EqStyle = 0;
+                                        }
+                                        break;
+                                    }
+                                case Style.Value.Heat:
+                                    {
+                                        if (style.Equip.Value)
+                                        {
+                                            saveData.EqStyle = 2;
+                                        }
+
+                                        saveData.Style1 = style.Add.ToByte();
+                                        break;
+                                    }
+                                case Style.Value.Aqua:
+                                    {
+                                        if (style.Equip.Value)
+                                        {
+                                            saveData.EqStyle = 3;
+                                        }
+
+                                        saveData.Style2 = style.Add.ToByte();
+                                        break;
+                                    }
+                                case Style.Value.Wood:
+                                    {
+                                        if (style.Equip.Value)
+                                        {
+                                            saveData.EqStyle = 4;
+                                        }
+
+                                        saveData.Style3 = style.Add.ToByte();
+                                        break;
+                                    }
+                                default:
+                                    break;
+
+                            }
+                        }
+                        break;
+                    }
+                default: break;
             }
         }
 
@@ -522,11 +600,10 @@ namespace NaviDoctor
 
         private void btnSelectStyles_Click(object sender, EventArgs e)
         {
-            var styleLoader = new StyleLoader(saveData.GameName);
+            var styleLoader = new StyleLoader(_styles);
             if (styleLoader.ShowDialog() == DialogResult.OK)
             {
-                //TODO: Retrieve selected values from styleLoader here 
-                pbxStylesLoaded.Visible = true;
+                _styles = styleLoader._styles;
             }
         }
     }

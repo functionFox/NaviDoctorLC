@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NaviDoctor
+namespace NaviDoctor.models
 {
     public static class GameTitle
     {
@@ -32,18 +32,6 @@ namespace NaviDoctor
             MegaManBattleNetwork6CybeastGregar,
             [StringValue("Mega Man Battle Network 6: Cybeast Falzar")]
             MegaManBattleNetwork6CybeastFalzar
-        }
-
-        public static string GetGameTitle(this Enum value)
-        {
-            Type type = value.GetType();
-
-            FieldInfo fieldInfo = type.GetField(value.ToString());
-
-            StringValueAttribute[] attribs = fieldInfo.GetCustomAttributes(
-                typeof(StringValueAttribute), false) as StringValueAttribute[];
-
-            return attribs.Length > 0 ? attribs[0].StringValue : null;
         }
     }
 

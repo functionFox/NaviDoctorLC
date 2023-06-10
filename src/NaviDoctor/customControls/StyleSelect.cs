@@ -7,12 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using NaviDoctor.extensions;
+using NaviDoctor.models;
 
 namespace NaviDoctor.customControls
 {
     public partial class StyleSelect : UserControl
     {
         public event EventHandler EquipStyleChecked;
+        public Style.Value StyleValue {get; set;}
 
         public bool AddStyle
         {
@@ -37,10 +40,11 @@ namespace NaviDoctor.customControls
             InitializeComponent();
         }
 
-        public StyleSelect(string styleName)
+        public StyleSelect(Style.Value styleName)
         {
             InitializeComponent();
-            StyleName = styleName;
+            StyleValue = styleName;
+            StyleName = styleName.GetString();
             radEquipStyle.CheckedChanged += (s, e) => EquipStyleChecked?.Invoke(this, e);
         }
     }
