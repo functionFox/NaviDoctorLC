@@ -394,6 +394,7 @@ namespace NaviDoctor
 
                     //Show the current game loaded
                     lblGameVersion.Text = $"Loaded: {saveData.GameName.GetGameTitle()}";
+                    DisplayModulesBasedOnGame();
                 }
                 catch (Exception ex)
                 {
@@ -487,6 +488,33 @@ namespace NaviDoctor
         private void cbx_EditSteamID_CheckedChanged(object sender, EventArgs e)
         {
             steamID.Enabled = cbx_EditSteamID.Checked;
+        }
+
+        private void DisplayModulesBasedOnGame()
+        {
+            switch (saveData.GameName)
+            {
+                case GameTitle.Title.MegaManBattleNetwork:
+                    tabsFolders.TabPages.Remove(tabPage_Folder2);
+                    tabsFolders.TabPages.Remove(tabPage_Folder3);
+                    break;
+                case GameTitle.Title.MegaManBattleNetwork2:
+                    tabsFolders.TabPages.Insert(1,tabPage_Folder2);
+                    tabsFolders.TabPages.Insert(2,tabPage_Folder3);
+                    break;
+                case GameTitle.Title.MegaManBattleNetwork3White:
+                case GameTitle.Title.MegaManBattleNetwork3Blue:
+                    break;
+                case GameTitle.Title.MegaManBattleNetwork4RedSun:
+                case GameTitle.Title.MegaManBattleNetwork4BlueMoon:
+                    break;
+                case GameTitle.Title.MegaManBattleNetwork5TeamProtoman:
+                case GameTitle.Title.MegaManBattleNetwork5TeamColonel:
+                    break;
+                case GameTitle.Title.MegaManBattleNetwork6CybeastGregar:
+                case GameTitle.Title.MegaManBattleNetwork6CybeastFalzar:
+                    break;
+            }
         }
     }
 }

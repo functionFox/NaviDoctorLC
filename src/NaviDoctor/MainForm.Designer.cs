@@ -31,6 +31,8 @@ namespace NaviDoctor
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -79,6 +81,8 @@ namespace NaviDoctor
             this.pnl_MainFill = new System.Windows.Forms.Panel();
             this.pnl_PackQuantity = new System.Windows.Forms.Panel();
             this.pnl_MainFooter = new System.Windows.Forms.Panel();
+            this.dgvFolder2 = new System.Windows.Forms.DataGridView();
+            this.dgvFolder3 = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.attackStat)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rapidStat)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chargeStat)).BeginInit();
@@ -90,6 +94,8 @@ namespace NaviDoctor
             this.tabsFolders.SuspendLayout();
             this.tabPage_Folder1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFolder1)).BeginInit();
+            this.tabPage_Folder2.SuspendLayout();
+            this.tabPage_Folder3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudPackQuantity)).BeginInit();
             this.pnl_MainLeft.SuspendLayout();
             this.panel_MegamanZennyAndSteamID.SuspendLayout();
@@ -99,6 +105,8 @@ namespace NaviDoctor
             this.pnl_MainFill.SuspendLayout();
             this.pnl_PackQuantity.SuspendLayout();
             this.pnl_MainFooter.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvFolder2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvFolder3)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -510,6 +518,7 @@ namespace NaviDoctor
             // 
             // tabPage_Folder2
             // 
+            this.tabPage_Folder2.Controls.Add(this.dgvFolder2);
             this.tabPage_Folder2.Location = new System.Drawing.Point(4, 33);
             this.tabPage_Folder2.Name = "tabPage_Folder2";
             this.tabPage_Folder2.Padding = new System.Windows.Forms.Padding(3);
@@ -520,8 +529,10 @@ namespace NaviDoctor
             // 
             // tabPage_Folder3
             // 
+            this.tabPage_Folder3.Controls.Add(this.dgvFolder3);
             this.tabPage_Folder3.Location = new System.Drawing.Point(4, 33);
             this.tabPage_Folder3.Name = "tabPage_Folder3";
+            this.tabPage_Folder3.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage_Folder3.Size = new System.Drawing.Size(306, 407);
             this.tabPage_Folder3.TabIndex = 2;
             this.tabPage_Folder3.Text = "Folder3";
@@ -684,6 +695,52 @@ namespace NaviDoctor
             this.pnl_MainFooter.Size = new System.Drawing.Size(1015, 37);
             this.pnl_MainFooter.TabIndex = 25;
             // 
+            // dgvFolder2
+            // 
+            this.dgvFolder2.AllowUserToAddRows = false;
+            this.dgvFolder2.AllowUserToDeleteRows = false;
+            this.dgvFolder2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvFolder2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvFolder2.DefaultCellStyle = dataGridViewCellStyle3;
+            this.dgvFolder2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvFolder2.Location = new System.Drawing.Point(3, 3);
+            this.dgvFolder2.Name = "dgvFolder2";
+            this.dgvFolder2.ReadOnly = true;
+            this.dgvFolder2.RowHeadersWidth = 62;
+            this.dgvFolder2.RowTemplate.Height = 28;
+            this.dgvFolder2.Size = new System.Drawing.Size(300, 401);
+            this.dgvFolder2.TabIndex = 12;
+            // 
+            // dgvFolder3
+            // 
+            this.dgvFolder3.AllowUserToAddRows = false;
+            this.dgvFolder3.AllowUserToDeleteRows = false;
+            this.dgvFolder3.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvFolder3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvFolder3.DefaultCellStyle = dataGridViewCellStyle4;
+            this.dgvFolder3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvFolder3.Location = new System.Drawing.Point(3, 3);
+            this.dgvFolder3.Name = "dgvFolder3";
+            this.dgvFolder3.ReadOnly = true;
+            this.dgvFolder3.RowHeadersWidth = 62;
+            this.dgvFolder3.RowTemplate.Height = 28;
+            this.dgvFolder3.Size = new System.Drawing.Size(300, 401);
+            this.dgvFolder3.TabIndex = 12;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
@@ -713,6 +770,8 @@ namespace NaviDoctor
             this.tabsFolders.ResumeLayout(false);
             this.tabPage_Folder1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvFolder1)).EndInit();
+            this.tabPage_Folder2.ResumeLayout(false);
+            this.tabPage_Folder3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.nudPackQuantity)).EndInit();
             this.pnl_MainLeft.ResumeLayout(false);
             this.panel_MegamanZennyAndSteamID.ResumeLayout(false);
@@ -728,6 +787,8 @@ namespace NaviDoctor
             this.pnl_PackQuantity.ResumeLayout(false);
             this.pnl_MainFooter.ResumeLayout(false);
             this.pnl_MainFooter.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvFolder2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvFolder3)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -781,6 +842,8 @@ namespace NaviDoctor
         private System.Windows.Forms.Panel pnl_MainFill;
         private System.Windows.Forms.Panel pnl_PackQuantity;
         private System.Windows.Forms.Panel pnl_MainFooter;
+        private System.Windows.Forms.DataGridView dgvFolder2;
+        private System.Windows.Forms.DataGridView dgvFolder3;
     }
 }
 
