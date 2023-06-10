@@ -8,12 +8,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using NaviDoctor.extensions;
+using NaviDoctor.models;
 
 namespace NaviDoctor
 {
     public partial class MainForm : Form
     {
         private SaveDataObject saveData;
+        private List<Style> _styles;
+
         public MainForm()
         {
             InitializeComponent();
@@ -348,16 +352,6 @@ namespace NaviDoctor
         }
 
 
-
-        private void steamID_Enter(object sender, EventArgs e)
-        {
-            steamID.BackColor = Color.White;
-        }
-
-        private void steamID_Leave(object sender, EventArgs e)
-        {
-            steamID.BackColor = Color.Black;
-        }
         private void btnShowLibrary_Click(object sender, EventArgs e)
         {
             // Check if a save file has been loaded
@@ -394,13 +388,11 @@ namespace NaviDoctor
                     chargeStat.Value = saveData.ChargePower + 1;
                     zennyBox.Value = saveData.Zenny;
                     steamID.Value = saveData.SteamID;
-                    haveFireArmor.Checked = saveData.Style1 == 1;
-                    haveAquaArmor.Checked = saveData.Style2 == 1;
-                    haveWoodArmor.Checked = saveData.Style3 == 1;
-                    fireArmorRadio.Checked = saveData.EqStyle == 02;
-                    aquaArmorRadio.Checked = saveData.EqStyle == 03;
-                    woodArmorRadio.Checked = saveData.EqStyle == 04;
-                    normalArmorRadio.Checked = !(fireArmorRadio.Checked || aquaArmorRadio.Checked || woodArmorRadio.Checked);
+                    LoadStyles(saveData);
+                    
+                    //Show the current game loaded
+                    lblGameVersion.Text = $"Loaded: {saveData.GameName.GetString()}";
+                    DisplayModulesBasedOnGame();
                 }
                 catch (Exception ex)
                 {
@@ -437,34 +429,7 @@ namespace NaviDoctor
                     saveData.ChargePower = (byte)(chargeStat.Value - 1);
                     saveData.Zenny = (int)zennyBox.Value;
                     saveData.SteamID = (int)steamID.Value;
-                    if (haveAquaArmor.Checked)
-                    { saveData.Style2 = 1; }
-                    else
-                    { saveData.Style2 = 0; }
-                    if (haveFireArmor.Checked)
-                    { saveData.Style1 = 1; }
-                    else
-                    { saveData.Style1 = 0; }
-                    if (haveWoodArmor.Checked)
-                    { saveData.Style3 = 1; }
-                    else
-                    { saveData.Style3 = 0; }
-                    if (fireArmorRadio.Checked)
-                    {
-                        saveData.EqStyle = 2;
-                    }
-                    else if (aquaArmorRadio.Checked)
-                    {
-                        saveData.EqStyle = 3;
-                    }
-                    else if (woodArmorRadio.Checked)
-                    {
-                        saveData.EqStyle = 4;
-                    }
-                    else
-                    {
-                        saveData.EqStyle = 0;
-                    }
+                    UpdateStyles(saveData);
                     PackageChips();
                     bn1SaveParse.UpdateSaveData(saveData);
                     bn1SaveParse.SaveChanges();
@@ -478,6 +443,114 @@ namespace NaviDoctor
             }
         }
 
+        private void LoadStyles(SaveDataObject saveData)
+        {
+            List<Style> _tempStyles;
+
+            switch (saveData.GameName)
+            {
+                case GameTitle.Title.MegaManBattleNetwork:
+                    {
+                        _tempStyles = Style.BN1;
+
+                        if (saveData.Style1 == 1)
+                        {
+                            _tempStyles.FirstOrDefault(x => x.Name == Style.Value.Heat).Add = true;
+                        }
+                        if (saveData.Style2 == 1)
+                        {
+                            _tempStyles.FirstOrDefault(x => x.Name == Style.Value.Aqua).Add = true;
+                        }
+                        if (saveData.Style3 == 1)
+                        {
+                            _tempStyles.FirstOrDefault(x => x.Name == Style.Value.Wood).Add = true;
+                        }
+
+                        if (saveData.EqStyle == 02)
+                        {
+                            _tempStyles.FirstOrDefault(x => x.Name == Style.Value.Heat).Equip = true;
+                        }
+                        else if (saveData.EqStyle == 03)
+                        {
+                            _tempStyles.FirstOrDefault(x => x.Name == Style.Value.Aqua).Equip = true;
+                        }
+                        else if (saveData.EqStyle == 04)
+                        {
+                            _tempStyles.FirstOrDefault(x => x.Name == Style.Value.Wood).Equip = true;
+                        }
+                        else
+                        {
+                            _tempStyles.FirstOrDefault(x => x.Name == Style.Value.Normal).Equip = true;
+                        }
+
+                        _styles = _tempStyles;
+                        break;
+                    }
+                default:
+                    break;
+            }
+                        
+        }
+
+        private void UpdateStyles(SaveDataObject saveData)
+        {
+            switch (saveData.GameName)
+            {
+                case GameTitle.Title.MegaManBattleNetwork:
+                    {
+                        foreach (var style in _styles)
+                        {
+                            switch (style.Name)
+                            {
+                                case Style.Value.Normal:
+                                    {
+                                        if (style.Equip.Value)
+                                        {
+                                            saveData.EqStyle = 0;
+                                        }
+                                        break;
+                                    }
+                                case Style.Value.Heat:
+                                    {
+                                        if (style.Equip.Value)
+                                        {
+                                            saveData.EqStyle = 2;
+                                        }
+
+                                        saveData.Style1 = style.Add.ToByte();
+                                        break;
+                                    }
+                                case Style.Value.Aqua:
+                                    {
+                                        if (style.Equip.Value)
+                                        {
+                                            saveData.EqStyle = 3;
+                                        }
+
+                                        saveData.Style2 = style.Add.ToByte();
+                                        break;
+                                    }
+                                case Style.Value.Wood:
+                                    {
+                                        if (style.Equip.Value)
+                                        {
+                                            saveData.EqStyle = 4;
+                                        }
+
+                                        saveData.Style3 = style.Add.ToByte();
+                                        break;
+                                    }
+                                default:
+                                    break;
+
+                            }
+                        }
+                        break;
+                    }
+                default: break;
+            }
+        }
+
         private void btnSetPackQuantity_Click(object sender, EventArgs e)
         {
             int packQuantity = (int)nudPackQuantity.Value;
@@ -488,6 +561,49 @@ namespace NaviDoctor
                 {
                     chip.Cells[3].Value = packQuantity;
                 }
+            }
+        }
+
+        private void cbx_EditSteamID_CheckedChanged(object sender, EventArgs e)
+        {
+            steamID.Enabled = cbx_EditSteamID.Checked;
+        }
+
+        private void DisplayModulesBasedOnGame()
+        {
+            switch (saveData.GameName)
+            {
+                case GameTitle.Title.MegaManBattleNetwork:
+                    tabsFolders.TabPages.Remove(tabPage_Folder2);
+                    tabsFolders.TabPages.Remove(tabPage_Folder3);
+                    btnSelectStyles.Enabled = true;
+                    break;
+                case GameTitle.Title.MegaManBattleNetwork2:
+                    tabsFolders.TabPages.Insert(1,tabPage_Folder2);
+                    tabsFolders.TabPages.Insert(2,tabPage_Folder3);
+                    btnSelectStyles.Enabled = true;
+                    break;
+                case GameTitle.Title.MegaManBattleNetwork3White:
+                case GameTitle.Title.MegaManBattleNetwork3Blue:
+                    break;
+                case GameTitle.Title.MegaManBattleNetwork4RedSun:
+                case GameTitle.Title.MegaManBattleNetwork4BlueMoon:
+                    break;
+                case GameTitle.Title.MegaManBattleNetwork5TeamProtoman:
+                case GameTitle.Title.MegaManBattleNetwork5TeamColonel:
+                    break;
+                case GameTitle.Title.MegaManBattleNetwork6CybeastGregar:
+                case GameTitle.Title.MegaManBattleNetwork6CybeastFalzar:
+                    break;
+            }
+        }
+
+        private void btnSelectStyles_Click(object sender, EventArgs e)
+        {
+            var styleLoader = new StyleLoader(_styles);
+            if (styleLoader.ShowDialog() == DialogResult.OK)
+            {
+                _styles = styleLoader._styles;
             }
         }
     }
