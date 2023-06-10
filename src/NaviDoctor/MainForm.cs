@@ -348,16 +348,6 @@ namespace NaviDoctor
         }
 
 
-
-        private void steamID_Enter(object sender, EventArgs e)
-        {
-            steamID.BackColor = Color.White;
-        }
-
-        private void steamID_Leave(object sender, EventArgs e)
-        {
-            steamID.BackColor = Color.Black;
-        }
         private void btnShowLibrary_Click(object sender, EventArgs e)
         {
             // Check if a save file has been loaded
@@ -401,6 +391,9 @@ namespace NaviDoctor
                     aquaArmorRadio.Checked = saveData.EqStyle == 03;
                     woodArmorRadio.Checked = saveData.EqStyle == 04;
                     normalArmorRadio.Checked = !(fireArmorRadio.Checked || aquaArmorRadio.Checked || woodArmorRadio.Checked);
+
+                    //Show the current game loaded
+                    lblGameVersion.Text = $"Loaded: {saveData.GameName.GetGameTitle()}";
                 }
                 catch (Exception ex)
                 {
@@ -489,6 +482,11 @@ namespace NaviDoctor
                     chip.Cells[3].Value = packQuantity;
                 }
             }
+        }
+
+        private void cbx_EditSteamID_CheckedChanged(object sender, EventArgs e)
+        {
+            steamID.Enabled = cbx_EditSteamID.Checked;
         }
     }
 }

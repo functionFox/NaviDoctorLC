@@ -7,7 +7,7 @@ namespace NaviDoctor
 {
     public class SaveParse
     {
-        private string GameName;
+        private GameTitle.Title GameName;
         private int ChecksumOffset;
         private int SteamOffset;
         private int AttackOffset;
@@ -65,7 +65,7 @@ namespace NaviDoctor
                 saveData = File.ReadAllBytes(saveFilePath);
                 if (saveData.Length == 8909)
                 {
-                    GameName = "Mega Man Battle Network";
+                    GameName = GameTitle.Title.MegaManBattleNetwork;
                     AttackOffset =       0x0014;
                     RapidOffset =        0x0015;
                     ChargeOffset =       0x0016;
@@ -89,7 +89,7 @@ namespace NaviDoctor
     }
                 else if (saveData.Length == 14976)
                 {
-                    GameName = "Mega Man Battle Network 2";
+                    GameName = GameTitle.Title.MegaManBattleNetwork2;
                     EqStyleOffset =      0x0001;
                     RegMemOffset =       0x0017;
                     RegChip1Offset =     0x001D;
@@ -169,7 +169,7 @@ namespace NaviDoctor
 
             switch(saveDataObject.GameName)
             {
-                case "Mega Man Battle Network":
+                case GameTitle.Title.MegaManBattleNetwork:
                     saveDataObject.Style1 = saveData[StyleOffset]; // For BN1, this is HeatArmr. For BN2, this is a range of addresses.
                     saveDataObject.Style2 = saveData[StyleOffset + 0x1]; // For BN1, this is AquaArmr
                     saveDataObject.Style3 = saveData[StyleOffset + 0x2]; // For BN1, this is not ElecArmr
@@ -200,7 +200,7 @@ namespace NaviDoctor
                     }
                     break;
 
-                case "Mega Man Battle Network 2":
+                case GameTitle.Title.MegaManBattleNetwork2:
                     int stylesFound = 0;       // Style parse system for BN2. It'll change a bit for BN3 but hopefully it'll be mostly the same.
                     saveDataObject.Style1 = 0; // Initialize these to 0. No null values!
                     saveDataObject.Style2 = 0;

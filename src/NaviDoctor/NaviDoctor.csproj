@@ -78,6 +78,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BattleChipData.cs" />
+    <Compile Include="extensions\StringValueAttribute.cs" />
+    <Compile Include="GameTitle.cs" />
     <Compile Include="SaveParse.cs" />
     <Compile Include="SaveDataObject.cs" />
     <Compile Include="MainForm.cs">

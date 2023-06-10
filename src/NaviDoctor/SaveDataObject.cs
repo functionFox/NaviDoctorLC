@@ -8,7 +8,7 @@ namespace NaviDoctor
 {
     public class SaveDataObject
     {
-        public string GameName { get; set; }
+        public GameTitle.Title GameName { get; set; }
         public short CurrHP { get; set; }
         public short MaxHP { get; set; }
         public byte AttackPower { get; set; }
