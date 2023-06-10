@@ -525,7 +525,8 @@ namespace NaviDoctor
             var styleLoader = new StyleLoader(saveData.GameName);
             if (styleLoader.ShowDialog() == DialogResult.OK)
             {
-                // Retrieve selected values from frmB here (while frmB is still not disposed)
+                //TODO: Retrieve selected values from styleLoader here 
+                pbxStylesLoaded.Visible = true;
             }
         }
     }

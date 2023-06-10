@@ -54,7 +54,9 @@ namespace NaviDoctor
             {
                 var fullStyleName = $"{style.Name}{style.Type}";
                 var styleSelect = new StyleSelect(fullStyleName);
+                if(fullStyleName == "Normal") { styleSelect.EquipStyle = true; }
                 styleSelect.EquipStyleChecked += (s, e) => EquipCheck(styleSelect);
+                //Most likely will need to also add an AddStyleCheck since we won't allow users to add all styles for BN2
                 flpStyleChange.Controls.Add(styleSelect);
             }
         }
