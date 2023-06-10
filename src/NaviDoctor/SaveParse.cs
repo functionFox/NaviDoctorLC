@@ -90,47 +90,47 @@ namespace NaviDoctor
                 else if (saveData.Length == 14976)
                 {
                     GameName = "Mega Man Battle Network 2";
-                    EqStyleOffset = 0x0001;
-                    RegMemOffset = 0x0017;
-                    RegChip1Offset = 0x001D;
-                    RegChip2Offset = 0x001E;
-                    RegChip3Offset = 0x001F;
-                    CurrHPOffset = 0x0020;
-                    MaxHPOffset = 0x0022;
-                    ZennyOffset = 0x0074;
-                    FoldersOffset = 0x0082;
-                    AttackOffset = 0x0084;
-                    RapidOffset = 0x0085;
-                    ChargeOffset = 0x0086;
-                    TimeOffset = 0x00A0;
-                    ChecksumOffset = 0x00A8;
-                    SteamOffset = 0x0104;
-                    BugfragOffset = 0x0155;
-                    HPUpOffset = 0x0170;
-                    SubMaxOffset = 0x0175;
-                    SubMiniOffset = 0x0180;
-                    SubFullOffset = 0x0181;
-                    SubSneakOffset = 0x0182;
-                    SubUntrapOffset = 0x0183;
-                    SubLocEnOffset = 0x0184;
-                    SubUnlockerOffset = 0x0185;
-                    StyleOffset = 0x0190;
-                    FolderOffsetStart = 0x01B0;
-                    FolderOffsetEnd = 0x0227;
+                    EqStyleOffset =      0x0001;
+                    RegMemOffset =       0x0017;
+                    RegChip1Offset =     0x001D;
+                    RegChip2Offset =     0x001E;
+                    RegChip3Offset =     0x001F;
+                    CurrHPOffset =       0x0020;
+                    MaxHPOffset =        0x0022;
+                    ZennyOffset =        0x0074;
+                    FoldersOffset =      0x0082;
+                    AttackOffset =       0x0084;
+                    RapidOffset =        0x0085;
+                    ChargeOffset =       0x0086;
+                    TimeOffset =         0x00A0;
+                    ChecksumOffset =     0x00A8;
+                    SteamOffset =        0x0104;
+                    BugfragOffset =      0x0155;
+                    HPUpOffset =         0x0170;
+                    SubMaxOffset =       0x0175;
+                    SubMiniOffset =      0x0180;
+                    SubFullOffset =      0x0181;
+                    SubSneakOffset =     0x0182;
+                    SubUntrapOffset =    0x0183;
+                    SubLocEnOffset =     0x0184;
+                    SubUnlockerOffset =  0x0185;
+                    StyleOffset =        0x0190;
+                    FolderOffsetStart =  0x01B0;
+                    FolderOffsetEnd =    0x0227;
                     Folder2OffsetStart = 0x0228;
-                    Folder2OffsetEnd = 0x029F;
+                    Folder2OffsetEnd =   0x029F;
                     Folder3OffsetStart = 0x02A0;
-                    Folder3OffsetEnd = 0x0317;
-                    BattleOffsetStart = 0x032A;
-                    BattleOffsetEnd = 0x10AF;
-                    NaviOffsetStart = 0x10BC;
-                    NaviOffsetEnd = 0x14B1;
-                    SecretOffsetStart = 0x14BE;
-                    SecretOffsetEnd = 0x162B;
+                    Folder3OffsetEnd =   0x0317;
+                    BattleOffsetStart =  0x032A;
+                    BattleOffsetEnd =    0x10AF;
+                    NaviOffsetStart =    0x10BC;
+                    NaviOffsetEnd =      0x14B1;
+                    SecretOffsetStart =  0x14BE;
+                    SecretOffsetEnd =    0x162B;
                     LibraryOffsetStart = 0x1690;
-                    LibraryOffsetEnd = 0x16B1;
-                    PALibStart = 0x16CC;
-                    PALibEnd = 0x16CF;
+                    LibraryOffsetEnd =   0x16B1;
+                    PALibStart =         0x16CC;
+                    PALibEnd =           0x16CF;
                 }
                 else
                 {
@@ -150,70 +150,111 @@ namespace NaviDoctor
             saveDataObject.GameName = GameName;
 
             saveDataObject.AttackPower = saveData[AttackOffset];
-            saveDataObject.RapidPower = saveData[RapidOffset];
+            saveDataObject.RapidPower =  saveData[RapidOffset];
             saveDataObject.ChargePower = saveData[ChargeOffset];
-            saveDataObject.EqStyle = saveData[EqStyleOffset]; // I know this is armor for BN1, not styles but it's close enough and you store 3.
+            saveDataObject.EqStyle = saveData[EqStyleOffset]; // I know this is armor for BN1, not styles but it's close enough.
 
-            saveDataObject.CurrHP = BitConverter.ToInt16(saveData, CurrHPOffset);
-            saveDataObject.MaxHP = BitConverter.ToInt16(saveData, MaxHPOffset);
+            saveDataObject.CurrHP =   BitConverter.ToInt16(saveData, CurrHPOffset);
+            saveDataObject.MaxHP =    BitConverter.ToInt16(saveData, MaxHPOffset);
 
-            saveDataObject.Zenny = BitConverter.ToInt32(saveData, ZennyOffset);
+            saveDataObject.Zenny =    BitConverter.ToInt32(saveData, ZennyOffset);
 
             saveDataObject.PlayTime = BitConverter.ToInt32(saveData, TimeOffset);
 
             saveDataObject.CheckSum = BitConverter.ToInt32(saveData, ChecksumOffset);
-            saveDataObject.SteamID = BitConverter.ToInt32(saveData, SteamOffset);
+            saveDataObject.SteamID =  BitConverter.ToInt32(saveData, SteamOffset);
 
             saveDataObject.HPUp = saveData[HPUpOffset];
+            saveDataObject.Folders = 1; // BN1 only has one folder. Just set it by default.
 
-
-            if (saveDataObject.GameName == "Mega Man Battle Network")
+            switch(saveDataObject.GameName)
             {
-                saveDataObject.Style1 = saveData[StyleOffset]; // For BN1, this is HeatArmr. For BN2, this is a range of addresses.
-                saveDataObject.Style2 = saveData[StyleOffset + 0x1]; // For BN1, this is AquaArmr
-                saveDataObject.Style3 = saveData[StyleOffset + 0x2]; // For BN1, this is not ElecArmr
+                case "Mega Man Battle Network":
+                    saveDataObject.Style1 = saveData[StyleOffset]; // For BN1, this is HeatArmr. For BN2, this is a range of addresses.
+                    saveDataObject.Style2 = saveData[StyleOffset + 0x1]; // For BN1, this is AquaArmr
+                    saveDataObject.Style3 = saveData[StyleOffset + 0x2]; // For BN1, this is not ElecArmr
+                    for (int i = FolderOffsetStart; i <= FolderOffsetEnd; i += 2) // Will have to adjust the algorithms for BN2
+                    {
+                        byte chipID = saveData[i];
+                        byte chipCode = saveData[i + 1];
+                        saveDataObject.FolderData.Add(new Tuple<int, int>(chipID, chipCode));
+                    }
+
+                    for (int i = BattleOffsetStart; i <= BattleOffsetEnd; i++) // Will have to adjust the algorithms for BN2
+                    {
+                        if (i % 0x10 <= 0x4)
+                        {
+                            saveDataObject.BattleChips.Add(saveData[i]);
+                        }
+                    }
+
+                    for (int i = NaviOffsetStart; i <= NaviOffsetEnd; i += 0x10) // Will have to adjust the algorithms for BN2
+                    {
+                        saveDataObject.NaviChips.Add(saveData[i]);
+                    }
+
+
+                    for (int i = LibraryOffsetStart; i <= LibraryOffsetEnd; i++)
+                    {
+                        saveDataObject.LibraryData.Add(saveData[i]);
+                    }
+                    break;
+
+                case "Mega Man Battle Network 2":
+                    int stylesFound = 0;       // Style parse system for BN2. It'll change a bit for BN3 but hopefully it'll be mostly the same.
+                    saveDataObject.Style1 = 0; // Initialize these to 0. No null values!
+                    saveDataObject.Style2 = 0;
+                    saveDataObject.Style3 = 0;
+                    saveDataObject.StyleTypes.Add(StyleOffset); // Normal Style is always present.
+                    for (int i = StyleOffset + 0x6; i <= StyleOffset + 0x19; i++) // We know where Normal Style starts, so skip to the good part.
+                    {
+                        if (i == 0x19A || i == 0x19F || i == 0x1A4)
+                        {
+                            continue; // We know there's nothing at these addresses. Skip them.
+                        }
+                        if (saveData[i] != 0) // Style found!
+                        {
+                            stylesFound++;
+                            switch (stylesFound)
+                            {
+                                case 1:
+                                    saveDataObject.Style1 = saveData[i];
+                                    saveDataObject.StyleTypes.Add(StyleOffset);
+                                    break;
+
+                                case 2:
+                                    saveDataObject.Style2 = saveData[i];
+                                    saveDataObject.StyleTypes.Add(StyleOffset);
+                                    break;
+
+                                case 3:
+                                    saveDataObject.Style3 = saveData[i];
+                                    saveDataObject.StyleTypes.Add(StyleOffset);
+                                    break;
+                            }
+                        }
+                        if (stylesFound >= 3) break;
+                    }
+                    for (int i = saveDataObject.StyleTypes.Count; i < 4; i++)
+                    {
+                        saveDataObject.StyleTypes.Add(0); // NormStyl + 3 Styles = 4. If there's less than that, pad the rest
+                    }
+
+                    saveDataObject.RegMem = saveData[RegMemOffset];
+                    saveDataObject.RegChip1 = saveData[RegChip1Offset];
+                    saveDataObject.RegChip2 = saveData[RegChip2Offset];
+                    saveDataObject.RegChip3 = saveData[RegChip3Offset];
+                    saveDataObject.SubChipMax = saveData[SubMaxOffset];
+                    saveDataObject.SubFullEnrg = saveData[SubFullOffset];
+                    saveDataObject.SubLocEnemy = saveData[SubLocEnOffset];
+                    saveDataObject.SubMiniEnrg = saveData[SubMiniOffset];
+                    saveDataObject.SubSneakRun = saveData[SubSneakOffset];
+                    saveDataObject.SubUnlocker = saveData[SubUnlockerOffset];
+                    saveDataObject.SubUntrap = saveData[SubUntrapOffset];
+                    saveDataObject.BugFrags = saveData[BugfragOffset];
+                    saveDataObject.Folders = saveData[FoldersOffset];
+                    break;
             }
-            else
-            {
-                // ADD A PARSE HERE FOR THE RANGE OF ADDRESSES IN BN2
-
-                saveDataObject.RegMem = 0; // BN1 doesn't use these. Just skip these unless the game is BN2+.
-                saveDataObject.SubChipMax = 0;
-                saveDataObject.SubFullEnrg = 0;
-                saveDataObject.SubLocEnemy = 0;
-                saveDataObject.SubMiniEnrg = 0;
-                saveDataObject.SubSneakRun = 0;
-                saveDataObject.SubUnlocker = 0;
-                saveDataObject.SubUntrap = 0;
-                saveDataObject.BugFrags = 0;
-            }
-
-            for (int i = FolderOffsetStart; i <= FolderOffsetEnd; i += 2) // Will have to adjust the algorithms for BN2
-            {
-                byte chipID = saveData[i];
-                byte chipCode = saveData[i + 1];
-                saveDataObject.FolderData.Add(new Tuple<byte, byte>(chipID, chipCode));
-            }
-
-            for (int i = BattleOffsetStart; i <= BattleOffsetEnd; i++) // Will have to adjust the algorithms for BN2
-            {
-                if (i % 0x10 <= 0x4)
-                {
-                    saveDataObject.BattleChips.Add(saveData[i]);
-                }
-            }
-
-            for (int i = NaviOffsetStart; i <= NaviOffsetEnd; i += 0x10) // Will have to adjust the algorithms for BN2
-            {
-                saveDataObject.NaviChips.Add(saveData[i]);
-            }
-
-
-            for (int i = LibraryOffsetStart; i <= LibraryOffsetEnd; i++)
-            {
-                saveDataObject.LibraryData.Add(saveData[i]);
-            }
-
             return saveDataObject;
         }
 
@@ -251,11 +292,10 @@ namespace NaviDoctor
 
             for (int i = FolderOffsetStart; i <= FolderOffsetEnd; i += 2) // Obviously, need to adjust the algo for BN2
             {
-                Tuple<byte, byte> value = saveDataObject.FolderData[(i - FolderOffsetStart) / 2];
-                saveData[i] = value.Item1;
-                saveData[i + 1] = value.Item2;
+                Tuple<int, int> value = saveDataObject.FolderData[(i - FolderOffsetStart) / 2];
+                saveData[i] = (byte)value.Item1;     // These are fine for BN1, but we'll have to do a BitConverter for BN2
+                saveData[i + 1] = (byte)value.Item2;
             }
-
 
             int index = 0;
             for (int i = BattleOffsetStart; i < BattleOffsetEnd; i++)

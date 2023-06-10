@@ -35,10 +35,11 @@ namespace NaviDoctor
         public byte Style1 { get; set; }  // Not used in BN4+
         public byte Style2 { get; set; }  // Not used in BN4+
         public byte Style3 { get; set; }  // Not used in BN4+
+        public List<int> StyleTypes { get; set; } = new List<int>();
         public byte Folders { get; set; } // Not used in BN1. Designates how many folders the player has unlocked.
-        public List<Tuple<byte, byte>> FolderData { get; set; } = new List<Tuple<byte, byte>>();
-        public List<Tuple<byte, byte>> Folder2Data { get; set; } = new List<Tuple<byte, byte>>(); // Not used in BN1
-        public List<Tuple<byte, byte>> Folder3Data { get; set; } = new List<Tuple<byte, byte>>(); // Not used in BN1
+        public List<Tuple<int, int>> FolderData { get; set; } = new List<Tuple<int, int>>();
+        public List<Tuple<int, int>> Folder2Data { get; set; } = new List<Tuple<int, int>>(); // Not used in BN1
+        public List<Tuple<int, int>> Folder3Data { get; set; } = new List<Tuple<int, int>>(); // Not used in BN1
         public List<byte> BattleChips { get; set; } = new List<byte>();
         public List<byte> NaviChips { get; set; } = new List<byte>();
         public List<byte> SecretChips { get; set; } = new List<byte>(); // Not used in BN1

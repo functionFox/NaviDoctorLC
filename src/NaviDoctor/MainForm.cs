@@ -135,7 +135,7 @@ namespace NaviDoctor
             libraryWindow.GenerateConfirmButton(saveData);
             libraryWindow.ShowDialog();
         }
-        private string GetAlphabeticalCode(byte chipCode)
+        private string GetAlphabeticalCode(int chipCode)
         {
             char chipCodeLetter = (char)(chipCode + 0x41);
             return chipCodeLetter.ToString();
@@ -182,8 +182,8 @@ namespace NaviDoctor
 
             foreach (var folderData in saveData.FolderData)
             {
-                byte chipID = folderData.Item1;
-                byte chipCode = folderData.Item2;
+                int chipID = folderData.Item1;
+                int chipCode = folderData.Item2;
 
                 string chipName = BattleChipData.GetChipNameByID(chipID);
                 string chipCodeLetter = GetAlphabeticalCode(chipCode);
@@ -300,7 +300,7 @@ namespace NaviDoctor
                     }
 
                     // Add the chip to the FolderData list with the selected chip code
-                    saveData.FolderData.Add(new Tuple<byte, byte>((byte)chipID, (byte)(chipCode[0] - 'A')));
+                    saveData.FolderData.Add(new Tuple<int, int>(chipID, (chipCode[0] - 'A')));
 
                     // Refresh the Folder DataGridView
                     LoadFolderData(saveData);
