@@ -384,13 +384,13 @@ namespace NaviDoctor
                     chargeStat.Value = saveData.ChargePower + 1;
                     zennyBox.Value = saveData.Zenny;
                     steamID.Value = saveData.SteamID;
-                    haveFireArmor.Checked = saveData.Style1 == 1;
+                    /*haveFireArmor.Checked = saveData.Style1 == 1;
                     haveAquaArmor.Checked = saveData.Style2 == 1;
                     haveWoodArmor.Checked = saveData.Style3 == 1;
                     fireArmorRadio.Checked = saveData.EqStyle == 02;
                     aquaArmorRadio.Checked = saveData.EqStyle == 03;
                     woodArmorRadio.Checked = saveData.EqStyle == 04;
-                    normalArmorRadio.Checked = !(fireArmorRadio.Checked || aquaArmorRadio.Checked || woodArmorRadio.Checked);
+                    normalArmorRadio.Checked = !(fireArmorRadio.Checked || aquaArmorRadio.Checked || woodArmorRadio.Checked);*/
 
                     //Show the current game loaded
                     lblGameVersion.Text = $"Loaded: {saveData.GameName.GetGameTitle()}";
@@ -431,7 +431,8 @@ namespace NaviDoctor
                     saveData.ChargePower = (byte)(chargeStat.Value - 1);
                     saveData.Zenny = (int)zennyBox.Value;
                     saveData.SteamID = (int)steamID.Value;
-                    if (haveAquaArmor.Checked)
+                    //TODO: send style information here
+                    /*if (haveAquaArmor.Checked)
                     { saveData.Style2 = 1; }
                     else
                     { saveData.Style2 = 0; }
@@ -458,7 +459,7 @@ namespace NaviDoctor
                     else
                     {
                         saveData.EqStyle = 0;
-                    }
+                    }*/
                     PackageChips();
                     bn1SaveParse.UpdateSaveData(saveData);
                     bn1SaveParse.SaveChanges();
@@ -497,10 +498,12 @@ namespace NaviDoctor
                 case GameTitle.Title.MegaManBattleNetwork:
                     tabsFolders.TabPages.Remove(tabPage_Folder2);
                     tabsFolders.TabPages.Remove(tabPage_Folder3);
+                    btnSelectStyles.Enabled = true;
                     break;
                 case GameTitle.Title.MegaManBattleNetwork2:
                     tabsFolders.TabPages.Insert(1,tabPage_Folder2);
                     tabsFolders.TabPages.Insert(2,tabPage_Folder3);
+                    btnSelectStyles.Enabled = true;
                     break;
                 case GameTitle.Title.MegaManBattleNetwork3White:
                 case GameTitle.Title.MegaManBattleNetwork3Blue:
@@ -514,6 +517,15 @@ namespace NaviDoctor
                 case GameTitle.Title.MegaManBattleNetwork6CybeastGregar:
                 case GameTitle.Title.MegaManBattleNetwork6CybeastFalzar:
                     break;
+            }
+        }
+
+        private void btnSelectStyles_Click(object sender, EventArgs e)
+        {
+            var styleLoader = new StyleLoader(saveData.GameName);
+            if (styleLoader.ShowDialog() == DialogResult.OK)
+            {
+                // Retrieve selected values from frmB here (while frmB is still not disposed)
             }
         }
     }
