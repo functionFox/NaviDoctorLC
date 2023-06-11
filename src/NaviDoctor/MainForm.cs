@@ -90,7 +90,7 @@ namespace NaviDoctor
                     if (control is CheckBox checkBox)
                     {
                         string chipName = checkBox.Text;
-                        int chipIndex = BattleChipData.GetChipIDByName(chipName);
+                        int chipIndex = BattleChipData.GetChipIDByName(BattleChipData.BN1ChipNameMap, chipName);
 
                         if (chipIndex != -1)
                         {
@@ -123,7 +123,7 @@ namespace NaviDoctor
 
             for (int i = 1; i <= 199; i++)
             {
-                string chipName = BattleChipData.GetChipNameByID(i);
+                string chipName = BattleChipData.GetChipNameByID(BattleChipData.BN1ChipNameMap, i).Name;
 
                 if (chipName.Length < 3)
                     continue;
@@ -189,7 +189,7 @@ namespace NaviDoctor
                 int chipID = folderData.Item1;
                 int chipCode = folderData.Item2;
 
-                string chipName = BattleChipData.GetChipNameByID(chipID);
+                string chipName = BattleChipData.GetChipNameByID(BattleChipData.BN1ChipNameMap, chipID).Name;
                 string chipCodeLetter = GetAlphabeticalCode(chipCode);
 
                 folderDataTable.Rows.Add(chipID, chipName, chipCodeLetter);
@@ -280,7 +280,7 @@ namespace NaviDoctor
 
                 if (isBattleChip && currentChipCopies >= maxBattleChipCopies)
                 {
-                    string chipName = BattleChipData.GetChipNameByID(chipID);
+                    string chipName = BattleChipData.GetChipNameByID(BattleChipData.BN1ChipNameMap, chipID).Name;
                     MessageBox.Show($"The limit for {chipName} cannot exceed {maxBattleChipCopies}.");
                 }
                 else if (isNaviChip && currentNaviChips >= maxNaviChips)

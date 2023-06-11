@@ -168,7 +168,20 @@ namespace NaviDoctor
             saveDataObject.HPUp = saveData[HPUpOffset];
             saveDataObject.Folders = 1; // BN1 only has one folder. Just set it by default.
 
-            switch(saveDataObject.GameName)
+            for (int i = LibraryOffsetStart; i <= LibraryOffsetEnd; i++)
+            {
+                saveDataObject.LibraryData.Add(saveData[i]);
+            }
+            
+            if (saveDataObject.GameName != GameTitle.Title.MegaManBattleNetwork) // BN1 is the only game without a PA Library.
+            {
+                for (int i = PALibStart; i <= PALibEnd; i++)
+                {
+                    saveDataObject.LibraryData.Add(saveData[i]);
+                }
+            }
+
+            switch (saveDataObject.GameName)
             {
                 case GameTitle.Title.MegaManBattleNetwork:
                     saveDataObject.Style1 = saveData[StyleOffset]; // For BN1, this is HeatArmr. For BN2, this is a range of addresses.
@@ -194,11 +207,6 @@ namespace NaviDoctor
                         saveDataObject.NaviChips.Add(saveData[i]);
                     }
 
-
-                    for (int i = LibraryOffsetStart; i <= LibraryOffsetEnd; i++)
-                    {
-                        saveDataObject.LibraryData.Add(saveData[i]);
-                    }
                     break;
 
                 case GameTitle.Title.MegaManBattleNetwork2:
@@ -254,6 +262,47 @@ namespace NaviDoctor
                     saveDataObject.SubUntrap = saveData[SubUntrapOffset];
                     saveDataObject.BugFrags = saveData[BugfragOffset];
                     saveDataObject.Folders = saveData[FoldersOffset];
+
+                    for (int i = FolderOffsetStart; i <= Folder3OffsetEnd; i += 4) // BN2 has 3 Folders
+                    {
+                        int chipID = BitConverter.ToInt16(saveData, i);
+                        int chipCode = BitConverter.ToInt16(saveData, i + 2);
+                        if (i >= FolderOffsetStart && i <= FolderOffsetEnd)
+                        {
+                            saveDataObject.FolderData.Add(new Tuple<int, int>(chipID, chipCode));
+                        } else if ( i >= Folder2OffsetStart && i <= Folder2OffsetEnd) // These values should all be 0 if not unlocked
+                        {
+                            saveDataObject.Folder2Data.Add(new Tuple<int, int>(chipID, chipCode)); 
+                        } else if ( i >= Folder3OffsetStart && i <= Folder3OffsetEnd) // These values should all be 0 if not unlocked
+                        {
+                            saveDataObject.Folder3Data.Add(new Tuple<int, int>(chipID, chipCode));
+                        }
+                    }
+
+                    for (int i = BattleOffsetStart; i <= BattleOffsetEnd; i += 0x12) // Starts at 0x32A and ends at 0x10AF
+                    {
+                        for (int j = 0; j < 6; j++) // Since most have 6 codes, just read all six.
+                        {
+                            saveDataObject.BattleChips.Add(saveData[i+j]);
+                        }
+                    }
+
+                    for (int i = NaviOffsetStart; i <= NaviOffsetEnd; i += 0x12) // Will have to adjust the algorithms for BN2
+                    {
+                        for (int j = 0; j < 6; j+=5) // We'll only need the first and last byte of each block.
+                        {
+                            saveDataObject.NaviChips.Add(saveData[i]);
+                        }
+                    }
+
+                    for (int i = SecretOffsetStart; i <= SecretOffsetEnd; i+=0x12)
+                    {
+                        for (int j = 0; j < 6; j++) // Some act as Navi chips, some act as regular chips, just get them all.
+                        {
+                            saveDataObject.SecretChips.Add(saveData[i]);
+                        }
+                    }
+
                     break;
             }
             return saveDataObject;
