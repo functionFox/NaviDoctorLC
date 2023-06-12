@@ -184,17 +184,17 @@ namespace NaviDoctor
             switch (saveDataObject.GameName)
             {
                 case GameTitle.Title.MegaManBattleNetwork:
-                    saveDataObject.Style1 = saveData[StyleOffset]; // For BN1, this is HeatArmr. For BN2, this is a range of addresses.
+                    saveDataObject.Style1 = saveData[StyleOffset]; // For BN1, this is HeatArmr.
                     saveDataObject.Style2 = saveData[StyleOffset + 0x1]; // For BN1, this is AquaArmr
                     saveDataObject.Style3 = saveData[StyleOffset + 0x2]; // For BN1, this is not ElecArmr
-                    for (int i = FolderOffsetStart; i <= FolderOffsetEnd; i += 2) // Will have to adjust the algorithms for BN2
+                    for (int i = FolderOffsetStart; i <= FolderOffsetEnd; i += 2)
                     {
                         byte chipID = saveData[i];
                         byte chipCode = saveData[i + 1];
                         saveDataObject.FolderData.Add(new Tuple<int, int>(chipID, chipCode));
                     }
 
-                    for (int i = BattleOffsetStart; i <= BattleOffsetEnd; i++) // Will have to adjust the algorithms for BN2
+                    for (int i = BattleOffsetStart; i <= BattleOffsetEnd; i++)
                     {
                         if (i % 0x10 <= 0x4)
                         {
@@ -202,7 +202,7 @@ namespace NaviDoctor
                         }
                     }
 
-                    for (int i = NaviOffsetStart; i <= NaviOffsetEnd; i += 0x10) // Will have to adjust the algorithms for BN2
+                    for (int i = NaviOffsetStart; i <= NaviOffsetEnd; i += 0x10)
                     {
                         saveDataObject.NaviChips.Add(saveData[i]);
                     }
@@ -228,17 +228,17 @@ namespace NaviDoctor
                             {
                                 case 1:
                                     saveDataObject.Style1 = saveData[i];
-                                    saveDataObject.StyleTypes.Add(StyleOffset);
+                                    saveDataObject.StyleTypes.Add(i);
                                     break;
 
                                 case 2:
                                     saveDataObject.Style2 = saveData[i];
-                                    saveDataObject.StyleTypes.Add(StyleOffset);
+                                    saveDataObject.StyleTypes.Add(i);
                                     break;
 
                                 case 3:
                                     saveDataObject.Style3 = saveData[i];
-                                    saveDataObject.StyleTypes.Add(StyleOffset);
+                                    saveDataObject.StyleTypes.Add(i);
                                     break;
                             }
                         }
@@ -279,7 +279,7 @@ namespace NaviDoctor
                         }
                     }
 
-                    for (int i = BattleOffsetStart; i <= BattleOffsetEnd; i += 0x12) // Starts at 0x32A and ends at 0x10AF
+                    for (int i = BattleOffsetStart; i <= BattleOffsetEnd; i += 0x12)
                     {
                         for (int j = 0; j < 6; j++) // Since most have 6 codes, just read all six.
                         {
@@ -287,7 +287,7 @@ namespace NaviDoctor
                         }
                     }
 
-                    for (int i = NaviOffsetStart; i <= NaviOffsetEnd; i += 0x12) // Will have to adjust the algorithms for BN2
+                    for (int i = NaviOffsetStart; i <= NaviOffsetEnd; i += 0x12)
                     {
                         for (int j = 0; j < 6; j+=5) // We'll only need the first and last byte of each block.
                         {
@@ -310,7 +310,7 @@ namespace NaviDoctor
 
         public void UpdateSaveData(SaveDataObject saveDataObject)
         {
-
+            // Let's write all of the data common to all games first
             saveData[AttackOffset] = saveDataObject.AttackPower;
             saveData[RapidOffset] = saveDataObject.RapidPower;
             saveData[ChargeOffset] = saveDataObject.ChargePower;
@@ -331,48 +331,130 @@ namespace NaviDoctor
 
             Buffer.BlockCopy(BitConverter.GetBytes(saveDataObject.Zenny), 0, saveData, ZennyOffset, 4);
 
-            Buffer.BlockCopy(BitConverter.GetBytes(saveDataObject.PlayTime), 0, saveData, TimeOffset, 4);
-
             Buffer.BlockCopy(BitConverter.GetBytes(saveDataObject.SteamID), 0, saveData, SteamOffset, 4);
 
             saveData[HPUpOffset] = (byte)((saveDataObject.MaxHP - 100) / 20);
-            saveData[StyleOffset] = saveDataObject.Style1;
-            saveData[StyleOffset + 0x1] = saveDataObject.Style2;
-            saveData[StyleOffset + 0x2] = saveDataObject.Style3;
 
-            for (int i = FolderOffsetStart; i <= FolderOffsetEnd; i += 2) // Obviously, need to adjust the algo for BN2
-            {
-                Tuple<int, int> value = saveDataObject.FolderData[(i - FolderOffsetStart) / 2];
-                saveData[i] = (byte)value.Item1;     // These are fine for BN1, but we'll have to do a BitConverter for BN2
-                saveData[i + 1] = (byte)value.Item2;
-            }
-
-            int index = 0;
-            for (int i = BattleOffsetStart; i < BattleOffsetEnd; i++)
-            {
-                if ((i % 0x10) <= 0x4)  // Check if i is within the range 0 to 4 for every group of 10 elements
-                {
-                    saveData[i] = saveDataObject.BattleChips[index];
-                    index++;
-                }
-            }
-
-            index = 0;
-            for (int i = NaviOffsetStart; i <= NaviOffsetEnd; i += 0x10)
-            {
-                saveData[i] = saveDataObject.NaviChips[index];
-                index++;
-            }
-
-            index = 0;
             for (int i = LibraryOffsetStart; i <= LibraryOffsetEnd; i++)
             {
-                saveData[i] = saveDataObject.LibraryData[index];
-                index++;
+                saveData[i] = saveDataObject.LibraryData[i - LibraryOffsetStart];
+            }
+            
+            var index = 0; // This is a secret tool we'll use later!
+
+            switch (saveDataObject.GameName)
+            {
+                case GameTitle.Title.MegaManBattleNetwork:
+                    saveData[StyleOffset] = saveDataObject.Style1;       // Save the Armors
+                    saveData[StyleOffset + 0x1] = saveDataObject.Style2;
+                    saveData[StyleOffset + 0x2] = saveDataObject.Style3;
+
+                    for (int i = FolderOffsetStart; i <= FolderOffsetEnd; i += 2) // Only one folder to save for BN1
+                    {
+                        CopyFolderData(saveDataObject.FolderData, i);
+                    }
+
+                    for (int i = BattleOffsetStart; i < BattleOffsetEnd; i++)
+                    {
+                        if ((i % 0x10) <= 0x4)  // Check if i is within the range 0 to 4 for every group of 10 elements
+                        {
+                            saveData[i] = saveDataObject.BattleChips[index];
+                            index++;
+                        }
+                    }
+
+                    index = 0;
+                    for (int i = NaviOffsetStart; i <= NaviOffsetEnd; i += 0x10)
+                    {
+                        saveData[i] = saveDataObject.NaviChips[index];
+                        index++;
+                    }
+                    break;
+
+                case GameTitle.Title.MegaManBattleNetwork2:
+                    for (int i = 1; i <= 3; i++) // Let's save some styles.
+                    {
+                        if (saveDataObject.StyleTypes[i] == 0)
+                        {
+                            break; // If the user has no Style, kick 'em out.
+                        }
+                        switch(i)
+                        {
+                            case 1:
+                                saveData[saveDataObject.StyleTypes[i]] = saveDataObject.Style1;
+                                break;
+                            case 2:
+                                saveData[saveDataObject.StyleTypes[i]] = saveDataObject.Style2;
+                                break;
+                            case 3:
+                                saveData[saveDataObject.StyleTypes[i]] = saveDataObject.Style3;
+                                break;
+                        } 
+                    }
+
+                    for (int i = FolderOffsetStart; i <= Folder3OffsetEnd; i += 4)
+                    {
+                        if (i >= FolderOffsetStart && i <= FolderOffsetEnd)
+                        {
+                            CopyFolderData(saveDataObject.FolderData, i, 2);
+                        }
+                        if (i >= Folder2OffsetStart && i <= Folder2OffsetEnd && saveDataObject.Folders >= 2)
+                        {
+                            CopyFolderData(saveDataObject.Folder2Data, i, 2);
+                        }
+                        if (i >= Folder3OffsetStart && i <= Folder3OffsetEnd && saveDataObject.Folders >= 3)
+                        {
+                            CopyFolderData(saveDataObject.Folder3Data, i, 2);
+                        }
+                    }
+
+                    index = 0;
+                    for (int i = BattleOffsetStart; i < BattleOffsetEnd; i += 0x12)
+                    {
+                        for (int j = 0; j < 6; j++)
+                        {
+                            saveData[(i + j)] = saveDataObject.BattleChips[index];
+                            index++;
+                        }
+                    }
+
+                    index = 0;
+                    for (int i = NaviOffsetStart; i <= NaviOffsetEnd; i += 0x12)
+                    {
+                        for (int j = 0; j < 6; j += 5)
+                        {
+                            saveData[(i + j)] = saveDataObject.NaviChips[index];
+                            index++;
+                        }
+                    }
+
+                    index = 0;
+                    for (int i = SecretOffsetStart; i < SecretOffsetEnd; i += 0x12)
+                    {
+                        for (int j = 0; j < 6; j++)
+                        {
+                            saveData[(i + j)] = saveDataObject.SecretChips[index];
+                            index++;
+                        }
+                    }
+
+                    for (int i = PALibStart; i <= PALibEnd; i++)
+                    {
+                            saveData[i] = saveDataObject.LibraryData[(i - PALibStart)];
+                    }
+
+                    break;
             }
 
             CalculateAndWriteChecksum();
 
+        }
+
+        private void CopyFolderData(List<Tuple<int, int>> folderData, int index, int bitMulti = 1)
+        {
+            Tuple<int, int> value = folderData[(index - FolderOffsetStart) / (2 * bitMulti)];
+            Buffer.BlockCopy(BitConverter.GetBytes(value.Item1), 0, saveData, index, bitMulti);
+            Buffer.BlockCopy(BitConverter.GetBytes(value.Item2), 0, saveData, index + bitMulti, bitMulti);  
         }
 
         private void CalculateAndWriteChecksum()

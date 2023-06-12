@@ -438,7 +438,7 @@ namespace NaviDoctor
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"An error occurred while saving the file: {ex.Message}");
+                    MessageBox.Show($"An error occurred while saving the file: {ex.Message} {ex.StackTrace}");
                 }
             }
         }
