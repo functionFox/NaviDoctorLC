@@ -504,7 +504,7 @@ namespace NaviDoctor
                             {
                                 case Style.Value.Normal:
                                     {
-                                        if (style.Equip.Value)
+                                        if (style.Equip.GetValueOrDefault(false))
                                         {
                                             saveData.EqStyle = 0;
                                         }
@@ -512,7 +512,7 @@ namespace NaviDoctor
                                     }
                                 case Style.Value.Heat:
                                     {
-                                        if (style.Equip.Value)
+                                        if (style.Equip.GetValueOrDefault(false))
                                         {
                                             saveData.EqStyle = 2;
                                         }
@@ -522,7 +522,7 @@ namespace NaviDoctor
                                     }
                                 case Style.Value.Aqua:
                                     {
-                                        if (style.Equip.Value)
+                                        if (style.Equip.GetValueOrDefault(false))
                                         {
                                             saveData.EqStyle = 3;
                                         }
@@ -532,7 +532,7 @@ namespace NaviDoctor
                                     }
                                 case Style.Value.Wood:
                                     {
-                                        if (style.Equip.Value)
+                                        if (style.Equip.GetValueOrDefault(false))
                                         {
                                             saveData.EqStyle = 4;
                                         }
