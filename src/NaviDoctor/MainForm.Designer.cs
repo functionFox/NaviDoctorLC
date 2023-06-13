@@ -68,6 +68,13 @@ namespace NaviDoctor
             this.nudPackQuantity = new System.Windows.Forms.NumericUpDown();
             this.lblGameVersion = new System.Windows.Forms.Label();
             this.pnl_MainLeft = new System.Windows.Forms.Panel();
+            this.panelBugFragRegMem = new System.Windows.Forms.Panel();
+            this.label10 = new System.Windows.Forms.Label();
+            this.nudBugFrag = new System.Windows.Forms.NumericUpDown();
+            this.label7 = new System.Windows.Forms.Label();
+            this.nudRegMem = new System.Windows.Forms.NumericUpDown();
+            this.panelSubChips = new System.Windows.Forms.Panel();
+            this.btnSubChips = new System.Windows.Forms.Button();
             this.panel_MegamanZennyAndSteamID = new System.Windows.Forms.Panel();
             this.cbx_EditSteamID = new System.Windows.Forms.CheckBox();
             this.pnl_MegamanStyle = new System.Windows.Forms.Panel();
@@ -77,13 +84,6 @@ namespace NaviDoctor
             this.pnl_MainFill = new System.Windows.Forms.Panel();
             this.pnl_PackQuantity = new System.Windows.Forms.Panel();
             this.pnl_MainFooter = new System.Windows.Forms.Panel();
-            this.panelSubChips = new System.Windows.Forms.Panel();
-            this.btnSubChips = new System.Windows.Forms.Button();
-            this.panelBugFragRegMem = new System.Windows.Forms.Panel();
-            this.label7 = new System.Windows.Forms.Label();
-            this.nudRegMem = new System.Windows.Forms.NumericUpDown();
-            this.label10 = new System.Windows.Forms.Label();
-            this.nudBugFrag = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.attackStat)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rapidStat)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chargeStat)).BeginInit();
@@ -101,6 +101,10 @@ namespace NaviDoctor
             ((System.ComponentModel.ISupportInitialize)(this.dgvFolder3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPackQuantity)).BeginInit();
             this.pnl_MainLeft.SuspendLayout();
+            this.panelBugFragRegMem.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBugFrag)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudRegMem)).BeginInit();
+            this.panelSubChips.SuspendLayout();
             this.panel_MegamanZennyAndSteamID.SuspendLayout();
             this.pnl_MegamanStyle.SuspendLayout();
             this.panel_MegamanStats.SuspendLayout();
@@ -108,10 +112,6 @@ namespace NaviDoctor
             this.pnl_MainFill.SuspendLayout();
             this.pnl_PackQuantity.SuspendLayout();
             this.pnl_MainFooter.SuspendLayout();
-            this.panelSubChips.SuspendLayout();
-            this.panelBugFragRegMem.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudRegMem)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudBugFrag)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -119,7 +119,7 @@ namespace NaviDoctor
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(3, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(145, 24);
+            this.label1.Size = new System.Drawing.Size(216, 33);
             this.label1.TabIndex = 1;
             this.label1.Text = "Mega Man.EXE";
             // 
@@ -129,7 +129,7 @@ namespace NaviDoctor
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(4, 5);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(47, 17);
+            this.label2.Size = new System.Drawing.Size(67, 25);
             this.label2.TabIndex = 2;
             this.label2.Text = "Attack";
             // 
@@ -139,7 +139,7 @@ namespace NaviDoctor
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(4, 38);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(45, 17);
+            this.label3.Size = new System.Drawing.Size(62, 25);
             this.label3.TabIndex = 2;
             this.label3.Text = "Rapid";
             // 
@@ -149,7 +149,7 @@ namespace NaviDoctor
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(3, 69);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(54, 17);
+            this.label4.Size = new System.Drawing.Size(77, 25);
             this.label4.TabIndex = 2;
             this.label4.Text = "Charge";
             // 
@@ -168,7 +168,7 @@ namespace NaviDoctor
             0,
             0});
             this.attackStat.Name = "attackStat";
-            this.attackStat.Size = new System.Drawing.Size(54, 23);
+            this.attackStat.Size = new System.Drawing.Size(54, 30);
             this.attackStat.TabIndex = 3;
             this.attackStat.Value = new decimal(new int[] {
             1,
@@ -191,7 +191,7 @@ namespace NaviDoctor
             0,
             0});
             this.rapidStat.Name = "rapidStat";
-            this.rapidStat.Size = new System.Drawing.Size(54, 23);
+            this.rapidStat.Size = new System.Drawing.Size(54, 30);
             this.rapidStat.TabIndex = 3;
             this.rapidStat.Value = new decimal(new int[] {
             1,
@@ -214,7 +214,7 @@ namespace NaviDoctor
             0,
             0});
             this.chargeStat.Name = "chargeStat";
-            this.chargeStat.Size = new System.Drawing.Size(54, 23);
+            this.chargeStat.Size = new System.Drawing.Size(54, 30);
             this.chargeStat.TabIndex = 3;
             this.chargeStat.Value = new decimal(new int[] {
             1,
@@ -232,7 +232,7 @@ namespace NaviDoctor
             0,
             0});
             this.zennyBox.Name = "zennyBox";
-            this.zennyBox.Size = new System.Drawing.Size(120, 23);
+            this.zennyBox.Size = new System.Drawing.Size(120, 30);
             this.zennyBox.TabIndex = 6;
             // 
             // label5
@@ -241,7 +241,7 @@ namespace NaviDoctor
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(5, 19);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(48, 17);
+            this.label5.Size = new System.Drawing.Size(67, 25);
             this.label5.TabIndex = 7;
             this.label5.Text = "Zenny";
             // 
@@ -251,7 +251,7 @@ namespace NaviDoctor
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.Location = new System.Drawing.Point(5, 48);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(65, 17);
+            this.label9.Size = new System.Drawing.Size(93, 25);
             this.label9.TabIndex = 15;
             this.label9.Text = "Steam ID";
             // 
@@ -281,7 +281,7 @@ namespace NaviDoctor
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(369, 28);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(51, 24);
+            this.label6.Size = new System.Drawing.Size(80, 33);
             this.label6.TabIndex = 9;
             this.label6.Text = "Pack";
             // 
@@ -311,7 +311,7 @@ namespace NaviDoctor
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.Location = new System.Drawing.Point(3, 35);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(56, 17);
+            this.label8.Size = new System.Drawing.Size(82, 25);
             this.label8.TabIndex = 12;
             this.label8.Text = "Max HP";
             // 
@@ -325,7 +325,7 @@ namespace NaviDoctor
             0,
             0});
             this.maxHPStat.Name = "maxHPStat";
-            this.maxHPStat.Size = new System.Drawing.Size(100, 23);
+            this.maxHPStat.Size = new System.Drawing.Size(100, 30);
             this.maxHPStat.TabIndex = 13;
             // 
             // steamID
@@ -340,7 +340,7 @@ namespace NaviDoctor
             0,
             0});
             this.steamID.Name = "steamID";
-            this.steamID.Size = new System.Drawing.Size(120, 23);
+            this.steamID.Size = new System.Drawing.Size(120, 30);
             this.steamID.TabIndex = 14;
             // 
             // btnShowLibrary
@@ -368,12 +368,13 @@ namespace NaviDoctor
             // 
             // menuStrip
             // 
+            this.menuStrip.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.menuStrip.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(1015, 24);
+            this.menuStrip.Size = new System.Drawing.Size(1015, 33);
             this.menuStrip.TabIndex = 18;
             this.menuStrip.Text = "menuStrip1";
             // 
@@ -383,20 +384,20 @@ namespace NaviDoctor
             this.loadToolStripMenuItem,
             this.saveToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(54, 29);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // loadToolStripMenuItem
             // 
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(153, 34);
             this.loadToolStripMenuItem.Text = "Load";
             this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(153, 34);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
@@ -414,10 +415,10 @@ namespace NaviDoctor
             // tabPage_Folder1
             // 
             this.tabPage_Folder1.Controls.Add(this.dgvFolder1);
-            this.tabPage_Folder1.Location = new System.Drawing.Point(4, 33);
+            this.tabPage_Folder1.Location = new System.Drawing.Point(4, 42);
             this.tabPage_Folder1.Name = "tabPage_Folder1";
             this.tabPage_Folder1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_Folder1.Size = new System.Drawing.Size(306, 407);
+            this.tabPage_Folder1.Size = new System.Drawing.Size(306, 398);
             this.tabPage_Folder1.TabIndex = 0;
             this.tabPage_Folder1.Text = "Folder1";
             this.tabPage_Folder1.UseVisualStyleBackColor = true;
@@ -442,16 +443,16 @@ namespace NaviDoctor
             this.dgvFolder1.ReadOnly = true;
             this.dgvFolder1.RowHeadersWidth = 62;
             this.dgvFolder1.RowTemplate.Height = 28;
-            this.dgvFolder1.Size = new System.Drawing.Size(300, 401);
+            this.dgvFolder1.Size = new System.Drawing.Size(300, 392);
             this.dgvFolder1.TabIndex = 11;
             // 
             // tabPage_Folder2
             // 
             this.tabPage_Folder2.Controls.Add(this.dgvFolder2);
-            this.tabPage_Folder2.Location = new System.Drawing.Point(4, 33);
+            this.tabPage_Folder2.Location = new System.Drawing.Point(4, 42);
             this.tabPage_Folder2.Name = "tabPage_Folder2";
             this.tabPage_Folder2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_Folder2.Size = new System.Drawing.Size(306, 407);
+            this.tabPage_Folder2.Size = new System.Drawing.Size(306, 398);
             this.tabPage_Folder2.TabIndex = 1;
             this.tabPage_Folder2.Text = "Folder2";
             this.tabPage_Folder2.UseVisualStyleBackColor = true;
@@ -476,16 +477,16 @@ namespace NaviDoctor
             this.dgvFolder2.ReadOnly = true;
             this.dgvFolder2.RowHeadersWidth = 62;
             this.dgvFolder2.RowTemplate.Height = 28;
-            this.dgvFolder2.Size = new System.Drawing.Size(300, 401);
+            this.dgvFolder2.Size = new System.Drawing.Size(300, 392);
             this.dgvFolder2.TabIndex = 12;
             // 
             // tabPage_Folder3
             // 
             this.tabPage_Folder3.Controls.Add(this.dgvFolder3);
-            this.tabPage_Folder3.Location = new System.Drawing.Point(4, 33);
+            this.tabPage_Folder3.Location = new System.Drawing.Point(4, 42);
             this.tabPage_Folder3.Name = "tabPage_Folder3";
             this.tabPage_Folder3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_Folder3.Size = new System.Drawing.Size(306, 407);
+            this.tabPage_Folder3.Size = new System.Drawing.Size(306, 398);
             this.tabPage_Folder3.TabIndex = 2;
             this.tabPage_Folder3.Text = "Folder3";
             this.tabPage_Folder3.UseVisualStyleBackColor = true;
@@ -510,7 +511,7 @@ namespace NaviDoctor
             this.dgvFolder3.ReadOnly = true;
             this.dgvFolder3.RowHeadersWidth = 62;
             this.dgvFolder3.RowTemplate.Height = 28;
-            this.dgvFolder3.Size = new System.Drawing.Size(300, 401);
+            this.dgvFolder3.Size = new System.Drawing.Size(300, 392);
             this.dgvFolder3.TabIndex = 12;
             // 
             // lblFolderCount
@@ -518,7 +519,7 @@ namespace NaviDoctor
             this.lblFolderCount.AutoSize = true;
             this.lblFolderCount.Location = new System.Drawing.Point(9, 467);
             this.lblFolderCount.Name = "lblFolderCount";
-            this.lblFolderCount.Size = new System.Drawing.Size(140, 24);
+            this.lblFolderCount.Size = new System.Drawing.Size(215, 33);
             this.lblFolderCount.TabIndex = 20;
             this.lblFolderCount.Text = "Folder Count: 0";
             // 
@@ -538,7 +539,7 @@ namespace NaviDoctor
             0,
             0});
             this.nudPackQuantity.Name = "nudPackQuantity";
-            this.nudPackQuantity.Size = new System.Drawing.Size(54, 23);
+            this.nudPackQuantity.Size = new System.Drawing.Size(54, 30);
             this.nudPackQuantity.TabIndex = 21;
             this.nudPackQuantity.Value = new decimal(new int[] {
             1,
@@ -552,10 +553,10 @@ namespace NaviDoctor
             this.lblGameVersion.Dock = System.Windows.Forms.DockStyle.Right;
             this.lblGameVersion.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblGameVersion.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lblGameVersion.Location = new System.Drawing.Point(763, 0);
+            this.lblGameVersion.Location = new System.Drawing.Point(642, 0);
             this.lblGameVersion.Name = "lblGameVersion";
             this.lblGameVersion.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
-            this.lblGameVersion.Size = new System.Drawing.Size(252, 34);
+            this.lblGameVersion.Size = new System.Drawing.Size(373, 43);
             this.lblGameVersion.TabIndex = 22;
             this.lblGameVersion.Text = "No Game Version Loaded";
             // 
@@ -568,10 +569,88 @@ namespace NaviDoctor
             this.pnl_MainLeft.Controls.Add(this.panel_MegamanStats);
             this.pnl_MainLeft.Controls.Add(this.pnl_MegamanHealth);
             this.pnl_MainLeft.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnl_MainLeft.Location = new System.Drawing.Point(0, 24);
+            this.pnl_MainLeft.Location = new System.Drawing.Point(0, 33);
             this.pnl_MainLeft.Name = "pnl_MainLeft";
-            this.pnl_MainLeft.Size = new System.Drawing.Size(258, 528);
+            this.pnl_MainLeft.Size = new System.Drawing.Size(258, 519);
             this.pnl_MainLeft.TabIndex = 23;
+            // 
+            // panelBugFragRegMem
+            // 
+            this.panelBugFragRegMem.Controls.Add(this.label10);
+            this.panelBugFragRegMem.Controls.Add(this.nudBugFrag);
+            this.panelBugFragRegMem.Controls.Add(this.label7);
+            this.panelBugFragRegMem.Controls.Add(this.nudRegMem);
+            this.panelBugFragRegMem.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelBugFragRegMem.Location = new System.Drawing.Point(0, 236);
+            this.panelBugFragRegMem.Name = "panelBugFragRegMem";
+            this.panelBugFragRegMem.Size = new System.Drawing.Size(258, 73);
+            this.panelBugFragRegMem.TabIndex = 21;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(4, 40);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(102, 25);
+            this.label10.TabIndex = 9;
+            this.label10.Text = "Bug Frags";
+            // 
+            // nudBugFrag
+            // 
+            this.nudBugFrag.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nudBugFrag.Location = new System.Drawing.Point(83, 38);
+            this.nudBugFrag.Maximum = new decimal(new int[] {
+            99,
+            0,
+            0,
+            0});
+            this.nudBugFrag.Name = "nudBugFrag";
+            this.nudBugFrag.Size = new System.Drawing.Size(60, 30);
+            this.nudBugFrag.TabIndex = 8;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(4, 8);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(91, 25);
+            this.label7.TabIndex = 7;
+            this.label7.Text = "RegMem";
+            // 
+            // nudRegMem
+            // 
+            this.nudRegMem.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nudRegMem.Location = new System.Drawing.Point(83, 6);
+            this.nudRegMem.Maximum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.nudRegMem.Name = "nudRegMem";
+            this.nudRegMem.Size = new System.Drawing.Size(60, 30);
+            this.nudRegMem.TabIndex = 6;
+            // 
+            // panelSubChips
+            // 
+            this.panelSubChips.Controls.Add(this.btnSubChips);
+            this.panelSubChips.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelSubChips.Location = new System.Drawing.Point(0, 200);
+            this.panelSubChips.Name = "panelSubChips";
+            this.panelSubChips.Size = new System.Drawing.Size(258, 36);
+            this.panelSubChips.TabIndex = 20;
+            // 
+            // btnSubChips
+            // 
+            this.btnSubChips.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnSubChips.Enabled = false;
+            this.btnSubChips.Location = new System.Drawing.Point(0, 0);
+            this.btnSubChips.Name = "btnSubChips";
+            this.btnSubChips.Size = new System.Drawing.Size(214, 36);
+            this.btnSubChips.TabIndex = 0;
+            this.btnSubChips.Text = "Sub Chips";
+            this.btnSubChips.UseVisualStyleBackColor = true;
             // 
             // panel_MegamanZennyAndSteamID
             // 
@@ -581,7 +660,7 @@ namespace NaviDoctor
             this.panel_MegamanZennyAndSteamID.Controls.Add(this.steamID);
             this.panel_MegamanZennyAndSteamID.Controls.Add(this.label9);
             this.panel_MegamanZennyAndSteamID.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel_MegamanZennyAndSteamID.Location = new System.Drawing.Point(0, 428);
+            this.panel_MegamanZennyAndSteamID.Location = new System.Drawing.Point(0, 419);
             this.panel_MegamanZennyAndSteamID.Name = "panel_MegamanZennyAndSteamID";
             this.panel_MegamanZennyAndSteamID.Size = new System.Drawing.Size(258, 100);
             this.panel_MegamanZennyAndSteamID.TabIndex = 19;
@@ -592,7 +671,7 @@ namespace NaviDoctor
             this.cbx_EditSteamID.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbx_EditSteamID.Location = new System.Drawing.Point(8, 74);
             this.cbx_EditSteamID.Name = "cbx_EditSteamID";
-            this.cbx_EditSteamID.Size = new System.Drawing.Size(131, 20);
+            this.cbx_EditSteamID.Size = new System.Drawing.Size(194, 29);
             this.cbx_EditSteamID.TabIndex = 16;
             this.cbx_EditSteamID.Text = "Change Steam ID";
             this.cbx_EditSteamID.UseVisualStyleBackColor = true;
@@ -655,9 +734,9 @@ namespace NaviDoctor
             this.pnl_MainFill.Controls.Add(this.lblFolderCount);
             this.pnl_MainFill.Controls.Add(this.btnRemoveChip);
             this.pnl_MainFill.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnl_MainFill.Location = new System.Drawing.Point(258, 24);
+            this.pnl_MainFill.Location = new System.Drawing.Point(258, 33);
             this.pnl_MainFill.Name = "pnl_MainFill";
-            this.pnl_MainFill.Size = new System.Drawing.Size(757, 528);
+            this.pnl_MainFill.Size = new System.Drawing.Size(757, 519);
             this.pnl_MainFill.TabIndex = 24;
             // 
             // pnl_PackQuantity
@@ -678,87 +757,9 @@ namespace NaviDoctor
             this.pnl_MainFooter.Size = new System.Drawing.Size(1015, 37);
             this.pnl_MainFooter.TabIndex = 25;
             // 
-            // panelSubChips
-            // 
-            this.panelSubChips.Controls.Add(this.btnSubChips);
-            this.panelSubChips.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelSubChips.Location = new System.Drawing.Point(0, 200);
-            this.panelSubChips.Name = "panelSubChips";
-            this.panelSubChips.Size = new System.Drawing.Size(258, 36);
-            this.panelSubChips.TabIndex = 20;
-            // 
-            // btnSubChips
-            // 
-            this.btnSubChips.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnSubChips.Enabled = false;
-            this.btnSubChips.Location = new System.Drawing.Point(0, 0);
-            this.btnSubChips.Name = "btnSubChips";
-            this.btnSubChips.Size = new System.Drawing.Size(214, 36);
-            this.btnSubChips.TabIndex = 0;
-            this.btnSubChips.Text = "Sub Chips";
-            this.btnSubChips.UseVisualStyleBackColor = true;
-            // 
-            // panelBugFragRegMem
-            // 
-            this.panelBugFragRegMem.Controls.Add(this.label10);
-            this.panelBugFragRegMem.Controls.Add(this.nudBugFrag);
-            this.panelBugFragRegMem.Controls.Add(this.label7);
-            this.panelBugFragRegMem.Controls.Add(this.nudRegMem);
-            this.panelBugFragRegMem.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelBugFragRegMem.Location = new System.Drawing.Point(0, 236);
-            this.panelBugFragRegMem.Name = "panelBugFragRegMem";
-            this.panelBugFragRegMem.Size = new System.Drawing.Size(258, 73);
-            this.panelBugFragRegMem.TabIndex = 21;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(4, 8);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(64, 17);
-            this.label7.TabIndex = 7;
-            this.label7.Text = "RegMem";
-            // 
-            // nudRegMem
-            // 
-            this.nudRegMem.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nudRegMem.Location = new System.Drawing.Point(83, 6);
-            this.nudRegMem.Maximum = new decimal(new int[] {
-            50,
-            0,
-            0,
-            0});
-            this.nudRegMem.Name = "nudRegMem";
-            this.nudRegMem.Size = new System.Drawing.Size(60, 23);
-            this.nudRegMem.TabIndex = 6;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(4, 40);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(73, 17);
-            this.label10.TabIndex = 9;
-            this.label10.Text = "Bug Frags";
-            // 
-            // nudBugFrag
-            // 
-            this.nudBugFrag.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nudBugFrag.Location = new System.Drawing.Point(83, 38);
-            this.nudBugFrag.Maximum = new decimal(new int[] {
-            99,
-            0,
-            0,
-            0});
-            this.nudBugFrag.Name = "nudBugFrag";
-            this.nudBugFrag.Size = new System.Drawing.Size(60, 23);
-            this.nudBugFrag.TabIndex = 8;
-            // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(17F, 33F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1015, 589);
             this.Controls.Add(this.pnl_MainFill);
@@ -791,6 +792,11 @@ namespace NaviDoctor
             ((System.ComponentModel.ISupportInitialize)(this.dgvFolder3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPackQuantity)).EndInit();
             this.pnl_MainLeft.ResumeLayout(false);
+            this.panelBugFragRegMem.ResumeLayout(false);
+            this.panelBugFragRegMem.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBugFrag)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudRegMem)).EndInit();
+            this.panelSubChips.ResumeLayout(false);
             this.panel_MegamanZennyAndSteamID.ResumeLayout(false);
             this.panel_MegamanZennyAndSteamID.PerformLayout();
             this.pnl_MegamanStyle.ResumeLayout(false);
@@ -803,11 +809,6 @@ namespace NaviDoctor
             this.pnl_PackQuantity.ResumeLayout(false);
             this.pnl_MainFooter.ResumeLayout(false);
             this.pnl_MainFooter.PerformLayout();
-            this.panelSubChips.ResumeLayout(false);
-            this.panelBugFragRegMem.ResumeLayout(false);
-            this.panelBugFragRegMem.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudRegMem)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudBugFrag)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

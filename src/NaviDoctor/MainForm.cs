@@ -34,6 +34,8 @@ namespace NaviDoctor
                 form = new Form();
                 flowLayoutPanel = new FlowLayoutPanel();
 
+                form.Text = "Library Viewer";
+
                 form.Width = 860;
                 form.Height = 500;
                 form.FormBorderStyle = FormBorderStyle.FixedSingle; // Disable resizing
@@ -121,9 +123,26 @@ namespace NaviDoctor
         {
             LibraryWindow libraryWindow = new LibraryWindow();
 
-            for (int i = 1; i <= 199; i++) // We need to update the max value on these for BN2
+            int standardStopID;
+            List<BattleChipData> chipNameMap;
+
+            switch (saveData.GameName)
             {
-                string chipName = BattleChipData.GetChipNameByID(BattleChipData.BN1ChipNameMap, i).Name;
+                case GameTitle.Title.MegaManBattleNetwork:
+                    standardStopID = 199;
+                    chipNameMap = BattleChipData.BN1ChipNameMap;
+                    break;
+                case GameTitle.Title.MegaManBattleNetwork2:
+                    standardStopID = 0x10F;
+                    chipNameMap = BattleChipData.BN2ChipNameMap;
+                    break;
+                default:
+                    return;
+            }
+
+            for (int i = 1; i <= standardStopID; i++)
+            {
+                string chipName = BattleChipData.GetChipNameByID(chipNameMap, i).Name;
 
                 if (chipName.Length < 4)
                     continue;
