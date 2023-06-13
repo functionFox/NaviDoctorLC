@@ -17,6 +17,8 @@ namespace NaviDoctor
         private int EqStyleOffset;
         private int CurrHPOffset;
         private int MaxHPOffset;
+        private int HPRedundancy1;
+        private int HPRedundancy2;
         private int ZennyOffset;
         private int BugfragOffset;
         private int SubMaxOffset;
@@ -98,6 +100,8 @@ namespace NaviDoctor
                     RegChip3Offset =     0x001F;
                     CurrHPOffset =       0x0020;
                     MaxHPOffset =        0x0022;
+                    HPRedundancy1 =      0x008C; // BN2 has two HP redundancies.
+                    HPRedundancy2 =      0x008E;
                     ZennyOffset =        0x0074;
                     FoldersOffset =      0x0082;
                     AttackOffset =       0x0084;
@@ -367,6 +371,9 @@ namespace NaviDoctor
                     break;
 
                 case GameTitle.Title.MegaManBattleNetwork2:
+                    Buffer.BlockCopy(BitConverter.GetBytes(saveDataObject.CurrHP), 0, saveData, HPRedundancy1, 2);
+                    Buffer.BlockCopy(BitConverter.GetBytes(saveDataObject.MaxHP), 0, saveData, HPRedundancy2, 2);
+
                     for (int i = StyleOffset + 0x1; i <= StyleOffset + 0x19; i++) // Erase the currently saved styles
                     {
                         saveData[i] = 0;

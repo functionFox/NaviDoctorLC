@@ -156,7 +156,7 @@ namespace NaviDoctor
             {
                 string chipName = BattleChipData.GetChipNameByID(chipNameMap, i).Name;
 
-                if (chipName.Length < 4)
+                if (chipName.Length < 3)
                     continue;
 
                 int libraryIndex = (i) / 8;
@@ -550,6 +550,8 @@ namespace NaviDoctor
             {
                 case GameTitle.Title.MegaManBattleNetwork:
                     LoadStyles(saveData); // This is loaded by all Vol.1 games, but not Vol.2 games.
+                    nudBugFrag.Value = 0; // It bothered me seeing my BugFrags and RegMem from BN2 when I loaded BN1 over it.
+                    nudRegMem.Value = 0;  // So they're 0 now.
                     break;
 
                 case GameTitle.Title.MegaManBattleNetwork2:
@@ -603,14 +605,11 @@ namespace NaviDoctor
                 try
                 {
                     SaveParse saveParse = new SaveParse(saveFile.FileName);
-
                     SaveFile(saveParse);
-
-                    MessageBox.Show("Save data successfully updated!");
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"An error occurred while saving the file: {ex.Message} {ex.StackTrace}");
+                    MessageBox.Show($"An error occurred while saving the file:\n{ex.Message}\n{ex.StackTrace}");
                 }
             }
         }
@@ -645,9 +644,14 @@ namespace NaviDoctor
                     saveData.SubUntrap = (byte)subUntrap.Value; */
                     break;
             }
-
+            if (dgvFolder1.Rows.Count < 30 || (saveData.Folders == 2 && dgvFolder2.Rows.Count < 30) || (saveData.Folders == 3 && dgvFolder3.Rows.Count < 30))
+            {
+                MessageBox.Show("An error occured while saving the file:\nFolder has less than 30 chips.");
+                return;
+            }
             saveParse.UpdateSaveData(saveData);
             saveParse.SaveChanges();
+            MessageBox.Show("Save data successfully updated!");
         }
 
         private void LoadStyles(SaveDataObject saveData)
@@ -791,8 +795,12 @@ namespace NaviDoctor
                     if (tabsFolders.TabPages.Contains(tabPage_Folder2)) tabsFolders.TabPages.Remove(tabPage_Folder2);
                     if (tabsFolders.TabPages.Contains(tabPage_Folder3)) tabsFolders.TabPages.Remove(tabPage_Folder3);
                     btnSelectStyles.Enabled = true;
+                    nudBugFrag.Enabled = false;
+                    nudRegMem.Enabled = false;
                     break;
                 case GameTitle.Title.MegaManBattleNetwork2:
+                    nudBugFrag.Enabled = true;
+                    nudRegMem.Enabled = true;
                     switch (saveData.Folders)
                     {
                         case 1:
