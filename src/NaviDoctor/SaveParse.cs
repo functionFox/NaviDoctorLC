@@ -372,6 +372,11 @@ namespace NaviDoctor
                     break;
 
                 case GameTitle.Title.MegaManBattleNetwork2:
+                    for (int i = StyleOffset + 0x1; i <= StyleOffset + 0x19; i++) // Erase the currently saved styles
+                    {
+                        saveData[i] = 0;
+                    }
+
                     for (int i = 1; i <= 3; i++) // Let's save some styles.
                     {
                         if (saveDataObject.StyleTypes[i] == 0)

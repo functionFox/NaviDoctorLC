@@ -30,6 +30,8 @@
         {
             this.cbxAddStyle = new System.Windows.Forms.CheckBox();
             this.radEquipStyle = new System.Windows.Forms.RadioButton();
+            this.nudVersion = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.nudVersion)).BeginInit();
             this.SuspendLayout();
             // 
             // cbxAddStyle
@@ -53,14 +55,38 @@
             this.radEquipStyle.Text = "Style Name";
             this.radEquipStyle.UseVisualStyleBackColor = true;
             // 
+            // nudVersion
+            // 
+            this.nudVersion.Location = new System.Drawing.Point(223, 3);
+            this.nudVersion.Maximum = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            this.nudVersion.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudVersion.Name = "nudVersion";
+            this.nudVersion.Size = new System.Drawing.Size(37, 20);
+            this.nudVersion.TabIndex = 2;
+            this.nudVersion.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
             // StyleSelect
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.nudVersion);
             this.Controls.Add(this.radEquipStyle);
             this.Controls.Add(this.cbxAddStyle);
             this.Name = "StyleSelect";
-            this.Size = new System.Drawing.Size(206, 25);
+            this.Size = new System.Drawing.Size(260, 25);
+            ((System.ComponentModel.ISupportInitialize)(this.nudVersion)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -70,5 +96,6 @@
 
         private System.Windows.Forms.CheckBox cbxAddStyle;
         private System.Windows.Forms.RadioButton radEquipStyle;
+        private System.Windows.Forms.NumericUpDown nudVersion;
     }
 }

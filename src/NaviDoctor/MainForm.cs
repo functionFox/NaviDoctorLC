@@ -515,9 +515,9 @@ namespace NaviDoctor
 
                 case GameTitle.Title.MegaManBattleNetwork2:
                     LoadStyles(saveData);
-                    /* bugFrags.Value = saveData.BugFrags; // Uncomment when these fields exist.
-                    regMem.Value = saveData.RegMem;
-                    subChipMax.Value = saveData.SubChipMax;
+                    nudBugFrag.Value = saveData.BugFrags;
+                    nudRegMem.Value = saveData.RegMem;
+                    /* subChipMax.Value = saveData.SubChipMax;
                     subMini.Value = saveData.SubMiniEnrg;
                     subFull.Value = saveData.SubFullEnrg;
                     subLoc.Value = saveData.SubLocEnemy;
@@ -654,6 +654,13 @@ namespace NaviDoctor
                         _styles = _tempStyles;
                         break;
                     }
+                case GameTitle.Title.MegaManBattleNetwork2:
+                    {
+                        _tempStyles = Style.BN2;
+                        //TODO: Add mapping for styles here
+                        _styles = _tempStyles;
+                        break;
+                    }
                 default:
                     break;
             }
@@ -783,7 +790,7 @@ namespace NaviDoctor
 
         private void btnSelectStyles_Click(object sender, EventArgs e)
         {
-            var styleLoader = new StyleLoader(_styles);
+            var styleLoader = new StyleLoader(_styles, saveData.GameName);
             if (styleLoader.ShowDialog() == DialogResult.OK)
             {
                 _styles = styleLoader._styles;

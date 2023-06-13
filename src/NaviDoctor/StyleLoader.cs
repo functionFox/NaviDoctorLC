@@ -14,6 +14,8 @@ namespace NaviDoctor
 {
     public partial class StyleLoader : Form
     {
+        private const int MAX_STYLE_BN2 = 3;
+        private int currentAddCount = 0;
         private Style.Value _currentEquipStyle;
         public List<Style> _styles;
 
@@ -22,22 +24,23 @@ namespace NaviDoctor
             InitializeComponent();
         }
 
-        public StyleLoader( List<Style> styles)
+        public StyleLoader(List<Style> styles, GameTitle.Title title)
         {
             InitializeComponent();
             _styles = styles;
-            PopulateStyles();
+            if (title == GameTitle.Title.MegaManBattleNetwork) label3.Visible = false;
+            PopulateStyles(title);
         }
 
-        private void PopulateStyles()
+        private void PopulateStyles(GameTitle.Title title)
         {
             foreach(var style in _styles)
             {
-                var styleSelect = new StyleSelect(style.Name);
+                var styleSelect = new StyleSelect(style, title);
                 styleSelect.EquipStyle = _styles.FirstOrDefault(x => x.Name == style.Name).Equip.GetValueOrDefault();
                 styleSelect.AddStyle = _styles.FirstOrDefault(x => x.Name == style.Name).Add.GetValueOrDefault();
                 styleSelect.EquipStyleChecked += (s, e) => EquipCheck(styleSelect);
-                //Most likely will need to also add an AddStyleCheck since we won't allow users to add all styles for BN2
+                styleSelect.AddStyleChecked += (s, e) => AddCheck(title);
                 flpStyleChange.Controls.Add(styleSelect);
             }
         }
@@ -53,6 +56,25 @@ namespace NaviDoctor
                 if(style.StyleValue != _currentEquipStyle)
                 {
                     style.EquipStyle = false;
+                }
+            }
+        }
+
+        private void AddCheck(GameTitle.Title title)
+        {
+            currentAddCount = 0;
+            foreach (StyleSelect style in flpStyleChange.Controls)
+            {
+                if (style.AddStyle) currentAddCount++;
+
+                if (title == GameTitle.Title.MegaManBattleNetwork2)
+                {
+                    if (currentAddCount > MAX_STYLE_BN2)
+                    {
+                        MessageBox.Show("You can only select 3 styles to add.", "Error", MessageBoxButtons.OK);
+                        style.AddStyle = false;
+                        return;
+                    } 
                 }
             }
         }
