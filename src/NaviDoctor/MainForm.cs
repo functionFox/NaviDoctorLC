@@ -87,12 +87,24 @@ namespace NaviDoctor
             }
             private void UpdateLibraryData(SaveDataObject saveData)
             {
+                List<BattleChipData> chipNameMap;
+                switch (saveData.GameName)
+                {
+                    case GameTitle.Title.MegaManBattleNetwork:
+                        chipNameMap = BattleChipData.BN1ChipNameMap;
+                        break;
+                    case GameTitle.Title.MegaManBattleNetwork2:
+                        chipNameMap = BattleChipData.BN2ChipNameMap;
+                        break;
+                    default:
+                        return;
+                }
                 foreach (Control control in flowLayoutPanel.Controls)
                 {
                     if (control is CheckBox checkBox)
                     {
                         string chipName = checkBox.Text;
-                        int chipIndex = BattleChipData.GetChipIDByName(BattleChipData.BN1ChipNameMap, chipName);
+                        int chipIndex = BattleChipData.GetChipIDByName(chipNameMap, chipName);
 
                         if (chipIndex != -1)
                         {
