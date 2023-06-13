@@ -333,6 +333,8 @@ namespace NaviDoctor
             int maxBattleChipCopies;
             int maxNaviChips;
             int maxTotalChipsInFolder = 30;
+            bool isBattleChip;
+            bool isNaviChip;
             List<BattleChipData> chipNameMap;
             switch (tabsFolders.SelectedIndex) // Check which folder is currently selected
             {
@@ -382,16 +384,22 @@ namespace NaviDoctor
 
                 // Check if the Folder has reached the maximum number of copies for the selected chip ID
                 int currentChipCopies = folderData.Count(data => data.Item1 == chipID);
-                int currentNaviChips = folderData.Count(data => data.Item1 >= naviIDLow && data.Item1 <= naviIDHigh);
+                int currentNaviChips;
 
-                bool isBattleChip = chipID >= 1 && chipID <= battleIDHigh;
-                bool isNaviChip = chipID >= naviIDLow && chipID <= naviIDHigh;
-
-                if (saveData.GameName == GameTitle.Title.MegaManBattleNetwork2)
+                switch (saveData.GameName)
                 {
-                    isBattleChip = chipID >= secretIDLow && chipID <= 260; // Secret NetBattle reward chips
-                    isNaviChip = chipID >= 261 && chipID <= 265; // Event Navis
-                    isBattleChip = chipID >= 266 && chipID <= secretIDHigh; // Snctuary
+                    case GameTitle.Title.MegaManBattleNetwork:
+                        currentNaviChips = folderData.Count(data => data.Item1 >= naviIDLow && data.Item1 <= naviIDHigh);
+                        isBattleChip = chipID >= 1 && chipID <= battleIDHigh;
+                        isNaviChip = chipID >= naviIDLow && chipID <= naviIDHigh;
+                        break;
+                    case GameTitle.Title.MegaManBattleNetwork2:
+                        currentNaviChips = folderData.Count(data => (data.Item1 >= naviIDLow && data.Item1 <= naviIDHigh) || (data.Item1 >= 261 && data.Item1 <= 265));
+                        isBattleChip = (chipID >= 1 && chipID <= battleIDHigh) || (chipID >= secretIDLow && chipID <= 260) || (chipID >= 266 && chipID <= secretIDHigh); // Secret NetBattle reward chips
+                        isNaviChip = (chipID >= naviIDLow && chipID <= naviIDHigh) || (chipID >= 261 && chipID <= 265); // Event Navis
+                        break;
+                    default:
+                        return;
                 }
 
                 if (isBattleChip && currentChipCopies >= maxBattleChipCopies)
