@@ -943,7 +943,7 @@ namespace NaviDoctor
             { "BrnzFist", new List<string> { "B", "N", "O", "R", "S", "None" } },
             { "SilvFist", new List<string> { "E", "I", "L", "S", "V", "None" } },
             { "GoldFist", new List<string> { "D", "G", "L", "O", "Z", "None" } },
-            { "VarSwrd", new List<string> { "B", "L", "N", "T", "Z" } },
+            { "VarSwrd", new List<string> { "B", "L", "N", "T", "Z", "None" } },
             { "Recov10", new List<string> { "A", "C", "E", "G", "L", "*" } },
             { "Recov30", new List<string> { "B", "D", "F", "H", "M", "*" } },
             { "Recov50", new List<string> { "C", "E", "G", "I", "N", "*" } },
