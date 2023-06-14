@@ -229,26 +229,50 @@ namespace NaviDoctor
         }
         private void LoadFolderData(SaveDataObject saveData)
         {
+            switch(saveData.GameName)
+            {
+                case GameTitle.Title.MegaManBattleNetwork:
+                    {
+                        PopulateFolderDataGridView(dgvFolder1, saveData.FolderData);
+                        break;
+                    }
+                case GameTitle.Title.MegaManBattleNetwork2:
+                    {
+                        for (var i = 1; i <= saveData.Folders; i++)
+                        {
+                            switch (i)
+                            {
+                                case 1:
+                                    {
+                                        PopulateFolderDataGridView(dgvFolder1, saveData.FolderData);
+                                        break;
+                                    }
+                                case 2:
+                                    {
+                                        PopulateFolderDataGridView(dgvFolder2, saveData.Folder2Data);
+                                        break;
+                                    }
+                                case 3:
+                                    {
+                                        PopulateFolderDataGridView(dgvFolder3, saveData.Folder3Data);
+                                        break;
+                                    }
+                                default:
+                                    break;
+                            }
+                        }
+                        break;
+                    }
+            }
+        }
+        
+        private void PopulateFolderDataGridView(DataGridView dgvFolder, List<Tuple<int, int>> folderSaveData)
+        {
             DataTable folderDataTable = new DataTable();
             folderDataTable.Columns.Add("ID", typeof(int));
             folderDataTable.Columns.Add("Name", typeof(string));
             folderDataTable.Columns.Add("Code", typeof(string));
-            List<Tuple<int, int>> folderSaveData;
             List<BattleChipData> chipNameMap;
-
-            switch (tabsFolders.SelectedIndex) // Check which folder is currently selected
-            {
-                case 1:
-                    folderSaveData = saveData.Folder2Data;
-                    break;
-                case 2:
-                    folderSaveData = saveData.Folder3Data;
-                    break;
-                default:
-                    folderSaveData = saveData.FolderData;
-                    break;
-            }
-
             switch (saveData.GameName)
             {
                 case GameTitle.Title.MegaManBattleNetwork:
@@ -275,29 +299,28 @@ namespace NaviDoctor
             int selectedRowIndex = -1;
             int firstDisplayedScrollingRowIndex = -1;
 
-            if (dgvFolder1.SelectedRows.Count > 0)
-                selectedRowIndex = dgvFolder1.SelectedRows[0].Index;
+            if (dgvFolder.SelectedRows.Count > 0)
+                selectedRowIndex = dgvFolder.SelectedRows[0].Index;
 
-            if (dgvFolder1.FirstDisplayedScrollingRowIndex >= 0)
-                firstDisplayedScrollingRowIndex = dgvFolder1.FirstDisplayedScrollingRowIndex;
+            if (dgvFolder.FirstDisplayedScrollingRowIndex >= 0)
+                firstDisplayedScrollingRowIndex = dgvFolder.FirstDisplayedScrollingRowIndex;
 
-            dgvFolder1.DataSource = null;
-            dgvFolder1.Rows.Clear();
+            dgvFolder.DataSource = null;
+            dgvFolder.Rows.Clear();
 
-            dgvFolder1.DataSource = folderDataTable;
-            dgvFolder1.Columns["ID"].Visible = false;
+            dgvFolder.DataSource = folderDataTable;
+            dgvFolder.Columns["ID"].Visible = false;
 
             // Restore the previous selection and scroll position
-            if (selectedRowIndex >= 0 && selectedRowIndex < dgvFolder1.Rows.Count)
-                dgvFolder1.Rows[selectedRowIndex].Selected = true;
+            if (selectedRowIndex >= 0 && selectedRowIndex < dgvFolder.Rows.Count)
+                dgvFolder.Rows[selectedRowIndex].Selected = true;
 
-            if (firstDisplayedScrollingRowIndex >= 0 && firstDisplayedScrollingRowIndex < dgvFolder1.Rows.Count)
-                dgvFolder1.FirstDisplayedScrollingRowIndex = firstDisplayedScrollingRowIndex;
+            if (firstDisplayedScrollingRowIndex >= 0 && firstDisplayedScrollingRowIndex < dgvFolder.Rows.Count)
+                dgvFolder.FirstDisplayedScrollingRowIndex = firstDisplayedScrollingRowIndex;
 
-            dgvFolder1.Columns["Name"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-
-            lblFolderCount.Text = $"Folder Count: {dgvFolder1.RowCount}";
+            dgvFolder.Columns["Name"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
         }
+
         private void btnRemoveChip_Click(object sender, EventArgs e)
         {
             // Check if there is a selected row in the Folder DataGridView
@@ -2001,6 +2024,25 @@ namespace NaviDoctor
             if (styleLoader.ShowDialog() == DialogResult.OK)
             {
                 _styles = styleLoader._styles;
+            }
+        }
+
+        private void tabsFolders_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch(tabsFolders.SelectedIndex)
+            {
+                case 0:
+                    lblFolderCount.Text = $"Folder1 Count: {dgvFolder1.RowCount}";
+                    break;
+                case 1:
+                    lblFolderCount.Text = $"Folder2 Count: {dgvFolder2.RowCount}";
+                    break;
+                case 2:
+                    lblFolderCount.Text = $"Folder3 Count: {dgvFolder3.RowCount}";
+                    break;
+                default:
+                    lblFolderCount.Text = "";
+                    break;
             }
         }
     }
