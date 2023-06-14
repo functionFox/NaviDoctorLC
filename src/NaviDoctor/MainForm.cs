@@ -757,7 +757,7 @@ namespace NaviDoctor
                     saveData.SubUntrap = (byte)nudUntrap.Value;
                     break;
             }
-            if (dgvFolder1.Rows.Count < 30 || (saveData.Folders == 2 && dgvFolder2.Rows.Count < 30) || (saveData.Folders == 3 && dgvFolder3.Rows.Count < 30))
+            if (dgvFolder1.Rows.Count < 30 || (saveData.Folders >= 2 && dgvFolder2.Rows.Count < 30) || (saveData.Folders == 3 && dgvFolder3.Rows.Count < 30))
             {
                 MessageBox.Show("An error occured while saving the file:\nFolder has less than 30 chips.");
                 return;
