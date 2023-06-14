@@ -202,20 +202,21 @@ namespace NaviDoctor
                 entries[i].Quantity = packChips[i];
             }
 
-            DataTable dataTable = new DataTable();
-            dataTable.Columns.Add("ID", typeof(int));
-            dataTable.Columns.Add("Name", typeof(string));
-            dataTable.Columns.Add("Code", typeof(string));
-            dataTable.Columns.Add("Quantity", typeof(int));
+            DataView dataView = new DataView();
+            dataView.Table = new DataTable("Pack");
+            dataView.Table.Columns.Add("ID", typeof(int));
+            dataView.Table.Columns.Add("Name", typeof(string));
+            dataView.Table.Columns.Add("Code", typeof(string));
+            dataView.Table.Columns.Add("Quantity", typeof(int));
 
             foreach (var entry in entries)
             {
-                dataTable.Rows.Add(entry.ID, entry.Name, entry.Code, entry.Quantity);
+                dataView.Table.Rows.Add(entry.ID, entry.Name, entry.Code, entry.Quantity);
             }
 
-            dataTable.DefaultView.RowFilter = "Code <> 'None'";
+            dataView.RowFilter = "Code <> 'None'";
 
-            dgvPack.DataSource = dataTable;
+            dgvPack.DataSource = dataView;
 
             dgvPack.Columns["ID"].Visible = false;
             dgvPack.Columns["Name"].ReadOnly = true;
@@ -700,7 +701,222 @@ namespace NaviDoctor
                 case GameTitle.Title.MegaManBattleNetwork2:
                     {
                         _tempStyles = Style.BN2;
-                        //TODO: Add mapping for styles here
+                        var index = 0;
+
+                        foreach(var style in saveData.StyleTypes)
+                        {
+                            var hex = Convert.ToString(style, 16).ToUpper();
+                            switch (hex)
+                            {
+                                case "190": //Normal
+                                    break;
+                                case "196": //ElecGuts
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecGuts).Add = true;
+                                    switch(index)
+                                    {
+                                        case 1:
+                                            _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecGuts).Version = saveData.Style1;
+                                            break;
+                                        case 2:
+                                            _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecGuts).Version = saveData.Style2;
+                                            break;
+                                    }
+                                    break;
+                                case "197": //HeatGuts
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatGuts).Add = true;
+                                    switch (index)
+                                    {
+                                        case 1:
+                                            _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatGuts).Version = saveData.Style1;
+                                            break;
+                                        case 2:
+                                            _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatGuts).Version = saveData.Style2;
+                                            break;
+                                    }
+                                    break;
+                                case "198": //AquaGuts
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaGuts).Add = true;
+                                    switch (index)
+                                    {
+                                        case 1:
+                                            _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaGuts).Version = saveData.Style1;
+                                            break;
+                                        case 2:
+                                            _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaGuts).Version = saveData.Style2;
+                                            break;
+                                    }
+                                    break;
+                                case "199": //WoodGuts
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodGuts).Add = true;
+                                    switch (index)
+                                    {
+                                        case 1:
+                                            _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodGuts).Version = saveData.Style1;
+                                            break;
+                                        case 2:
+                                            _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodGuts).Version = saveData.Style2;
+                                            break;
+                                    }
+                                    break;
+                                case "19B": //ElecCust
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecCust).Add = true;
+                                    switch (index)
+                                    {
+                                        case 1:
+                                            _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecCust).Version = saveData.Style1;
+                                            break;
+                                        case 2:
+                                            _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecCust).Version = saveData.Style2;
+                                            break;
+                                    }
+                                    break;
+                                case "19C": //HeatCust
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatCust).Add = true;
+                                    switch (index)
+                                    {
+                                        case 1:
+                                            _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatCust).Version = saveData.Style1;
+                                            break;
+                                        case 2:
+                                            _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatCust).Version = saveData.Style2;
+                                            break;
+                                    }
+                                    break;
+                                case "19D": //AquaCust
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaCust).Add = true;
+                                    switch (index)
+                                    {
+                                        case 1:
+                                            _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaCust).Version = saveData.Style1;
+                                            break;
+                                        case 2:
+                                            _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaCust).Version = saveData.Style2;
+                                            break;
+                                    }
+                                    break;
+                                case "19E": //WoodCust
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodCust).Add = true;
+                                    switch (index)
+                                    {
+                                        case 1:
+                                            _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodCust).Version = saveData.Style1;
+                                            break;
+                                        case 2:
+                                            _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodCust).Version = saveData.Style2;
+                                            break;
+                                    }
+                                    break;
+                                case "1A0": //ElecTeam
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecTeam).Add = true;
+                                    switch (index)
+                                    {
+                                        case 1:
+                                            _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecTeam).Version = saveData.Style1;
+                                            break;
+                                        case 2:
+                                            _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecTeam).Version = saveData.Style2;
+                                            break;
+                                    }
+                                    break;
+                                case "1A1": //HeatTeam
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatTeam).Add = true;
+                                    switch (index)
+                                    {
+                                        case 1:
+                                            _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatTeam).Version = saveData.Style1;
+                                            break;
+                                        case 2:
+                                            _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatTeam).Version = saveData.Style2;
+                                            break;
+                                    }
+                                    break;
+                                case "1A2": //AquaTeam
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaTeam).Add = true;
+                                    switch (index)
+                                    {
+                                        case 1:
+                                            _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaTeam).Version = saveData.Style1;
+                                            break;
+                                        case 2:
+                                            _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaTeam).Version = saveData.Style2;
+                                            break;
+                                    }
+                                    break;
+                                case "1A3": //WoodTeam
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodTeam).Add = true;
+                                    switch (index)
+                                    {
+                                        case 1:
+                                            _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodTeam).Version = saveData.Style1;
+                                            break;
+                                        case 2:
+                                            _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodTeam).Version = saveData.Style2;
+                                            break;
+                                    }
+                                    break;
+                                case "1A5": //ElecShld
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecShield).Add = true;
+                                    switch (index)
+                                    {
+                                        case 1:
+                                            _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecShield).Version = saveData.Style1;
+                                            break;
+                                        case 2:
+                                            _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecShield).Version = saveData.Style2;
+                                            break;
+                                    }
+                                    break;
+                                case "1A6": //HeatShld
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatShield).Add = true;
+                                    switch (index)
+                                    {
+                                        case 1:
+                                            _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatShield).Version = saveData.Style1;
+                                            break;
+                                        case 2:
+                                            _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatShield).Version = saveData.Style2;
+                                            break;
+                                    }
+                                    break;
+                                case "1A7": //AquaShld
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaShield).Add = true;
+                                    switch (index)
+                                    {
+                                        case 1:
+                                            _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaShield).Version = saveData.Style1;
+                                            break;
+                                        case 2:
+                                            _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaShield).Version = saveData.Style2;
+                                            break;
+                                    }
+                                    break;
+                                case "1A8": //WoodShld
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodShield).Add = true;
+                                    switch (index)
+                                    {
+                                        case 1:
+                                            _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodShield).Version = saveData.Style1;
+                                            break;
+                                        case 2:
+                                            _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodShield).Version = saveData.Style2;
+                                            break;
+                                    }
+                                    break;
+                                case "1A9": //Hub
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.Hub).Add = true;
+                                    switch (index)
+                                    {
+                                        case 1:
+                                            _tempStyles.FirstOrDefault(x => x.Name == Style.Value.Hub).Version = saveData.Style1;
+                                            break;
+                                        case 2:
+                                            _tempStyles.FirstOrDefault(x => x.Name == Style.Value.Hub).Version = saveData.Style2;
+                                            break;
+                                    }
+                                    break;
+                            }
+                            index++;
+                        }
                         _styles = _tempStyles;
                         break;
                     }
@@ -762,6 +978,14 @@ namespace NaviDoctor
                                     break;
 
                             }
+                        }
+                        break;
+                    }
+                case GameTitle.Title.MegaManBattleNetwork2:
+                    {
+                        foreach(var style in _styles)
+                        {
+
                         }
                         break;
                     }

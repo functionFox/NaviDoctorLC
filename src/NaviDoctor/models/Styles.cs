@@ -88,6 +88,7 @@ namespace NaviDoctor.models
             new Style{Name = Value.ElecShield, Version = 1},
             new Style{Name = Value.Hub, Version = 1}
         };
+   
     }
 
 }

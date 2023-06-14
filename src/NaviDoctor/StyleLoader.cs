@@ -14,8 +14,9 @@ namespace NaviDoctor
 {
     public partial class StyleLoader : Form
     {
-        private const int MAX_STYLE_BN2 = 3;
+        private const int MAX_STYLE_BN2 = 2;
         private int currentAddCount = 0;
+        private GameTitle.Title _currentGame;
         private Style.Value _currentEquipStyle;
         public List<Style> _styles;
 
@@ -28,19 +29,24 @@ namespace NaviDoctor
         {
             InitializeComponent();
             _styles = styles;
-            if (title == GameTitle.Title.MegaManBattleNetwork) label3.Visible = false;
-            PopulateStyles(title);
+            _currentGame = title;
+            if (_currentGame == GameTitle.Title.MegaManBattleNetwork) label3.Visible = false;
+            PopulateStyles();
         }
 
-        private void PopulateStyles(GameTitle.Title title)
+        private void PopulateStyles()
         {
             foreach(var style in _styles)
             {
-                var styleSelect = new StyleSelect(style, title);
+                var styleSelect = new StyleSelect(style, _currentGame);
                 styleSelect.EquipStyle = _styles.FirstOrDefault(x => x.Name == style.Name).Equip.GetValueOrDefault();
                 styleSelect.AddStyle = _styles.FirstOrDefault(x => x.Name == style.Name).Add.GetValueOrDefault();
+                if (_currentGame == GameTitle.Title.MegaManBattleNetwork2 && style.Name != Style.Value.Normal)
+                {
+                    styleSelect.Version = _styles.FirstOrDefault(x => x.Name == style.Name).Version.GetValueOrDefault();
+                }
                 styleSelect.EquipStyleChecked += (s, e) => EquipCheck(styleSelect);
-                styleSelect.AddStyleChecked += (s, e) => AddCheck(title);
+                styleSelect.AddStyleChecked += (s, e) => AddCheck();
                 flpStyleChange.Controls.Add(styleSelect);
             }
         }
@@ -60,18 +66,18 @@ namespace NaviDoctor
             }
         }
 
-        private void AddCheck(GameTitle.Title title)
+        private void AddCheck()
         {
             currentAddCount = 0;
             foreach (StyleSelect style in flpStyleChange.Controls)
             {
                 if (style.AddStyle) currentAddCount++;
 
-                if (title == GameTitle.Title.MegaManBattleNetwork2)
+                if (_currentGame == GameTitle.Title.MegaManBattleNetwork2)
                 {
                     if (currentAddCount > MAX_STYLE_BN2)
                     {
-                        MessageBox.Show("You can only select 3 styles to add.", "Error", MessageBoxButtons.OK);
+                        MessageBox.Show($"You can only select {MAX_STYLE_BN2} styles to add.", "Error", MessageBoxButtons.OK);
                         style.AddStyle = false;
                         return;
                     } 
@@ -85,6 +91,7 @@ namespace NaviDoctor
             {
                 _styles.FirstOrDefault(x => x.Name == style.StyleValue).Equip = style.EquipStyle;
                 _styles.FirstOrDefault(x => x.Name == style.StyleValue).Add = style.AddStyle;
+                if (_currentGame == GameTitle.Title.MegaManBattleNetwork2) { _styles.FirstOrDefault(x => x.Name == style.StyleValue).Version = style.Version; }
             }
         }
 
