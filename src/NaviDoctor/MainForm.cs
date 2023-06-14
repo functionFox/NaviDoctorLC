@@ -1342,9 +1342,586 @@ namespace NaviDoctor
                     }
                 case GameTitle.Title.MegaManBattleNetwork2:
                     {
-                        foreach(var style in _styles)
+                        saveData.StyleTypes = new List<int>(); //resetting the list
+                        saveData.StyleTypes.Add(Convert.ToInt32("190", 16)); //Add Normal back into the list
+                        var index = 1;
+                        foreach (var style in _styles)
                         {
+                            switch(style.Name)
+                            {
+                                case Style.Value.Normal:
+                                    {
+                                        if(style.Equip.GetValueOrDefault(false))
+                                        {
+                                            saveData.EqStyle = Convert.ToByte("00", 16);
+                                        }
+                                        break;
+                                    }
+                                case Style.Value.AquaGuts:
+                                    {
+                                        if (style.Equip.GetValueOrDefault(false))
+                                        {
+                                            switch(style.Version.GetValueOrDefault(1))
+                                            {
+                                                case 1:
+                                                    saveData.EqStyle = Convert.ToByte("0B", 16);
+                                                    break;
+                                                case 2:
+                                                    saveData.EqStyle = Convert.ToByte("4B", 16);
+                                                    break;
+                                                case 3:
+                                                    saveData.EqStyle = Convert.ToByte("8B", 16);
+                                                    break;
+                                            }
+                                        }
+                                        else if (style.Add.GetValueOrDefault(false))
+                                        {
+                                            saveData.StyleTypes.Add(Convert.ToInt32("198", 16));
+                                            switch(index)
+                                            {
+                                                case 1:
+                                                    saveData.Style1 = (byte)style.Version.GetValueOrDefault(1);
+                                                    index++;
+                                                    break;
+                                                case 2:
+                                                    saveData.Style2 = (byte)style.Version.GetValueOrDefault(1);
+                                                    break;
+                                            }
+                                        }
+                                        break;
+                                    }
+                                case Style.Value.WoodGuts:
+                                    {
+                                        if (style.Equip.GetValueOrDefault(false))
+                                        {
+                                            switch (style.Version.GetValueOrDefault(1))
+                                            {
+                                                case 1:
+                                                    saveData.EqStyle = Convert.ToByte("0C", 16);
+                                                    break;
+                                                case 2:
+                                                    saveData.EqStyle = Convert.ToByte("4C", 16);
+                                                    break;
+                                                case 3:
+                                                    saveData.EqStyle = Convert.ToByte("8C", 16);
+                                                    break;
+                                            }
+                                        }
+                                        else if (style.Add.GetValueOrDefault(false))
+                                        {
+                                            saveData.StyleTypes.Add(Convert.ToInt32("199", 16));
+                                            switch (index)
+                                            {
+                                                case 1:
+                                                    saveData.Style1 = (byte)style.Version.GetValueOrDefault(1);
+                                                    index++;
+                                                    break;
+                                                case 2:
+                                                    saveData.Style2 = (byte)style.Version.GetValueOrDefault(1);
+                                                    break;
+                                            }
+                                        }
+                                        break;
+                                    }
+                                case Style.Value.HeatGuts:
+                                    {
+                                        if (style.Equip.GetValueOrDefault(false))
+                                        {
+                                            switch (style.Version.GetValueOrDefault(1))
+                                            {
+                                                case 1:
+                                                    saveData.EqStyle = Convert.ToByte("0A", 16);
+                                                    break;
+                                                case 2:
+                                                    saveData.EqStyle = Convert.ToByte("4A", 16);
+                                                    break;
+                                                case 3:
+                                                    saveData.EqStyle = Convert.ToByte("8A", 16);
+                                                    break;
+                                            }
+                                        }
+                                        else if (style.Add.GetValueOrDefault(false))
+                                        {
+                                            saveData.StyleTypes.Add(Convert.ToInt32("197", 16));
+                                            switch (index)
+                                            {
+                                                case 1:
+                                                    saveData.Style1 = (byte)style.Version.GetValueOrDefault(1);
+                                                    index++;
+                                                    break;
+                                                case 2:
+                                                    saveData.Style2 = (byte)style.Version.GetValueOrDefault(1);
+                                                    break;
+                                            }
+                                        }
+                                        break;
+                                    }
+                                case Style.Value.ElecGuts:
+                                    {
+                                        if (style.Equip.GetValueOrDefault(false))
+                                        {
+                                            switch (style.Version.GetValueOrDefault(1))
+                                            {
+                                                case 1:
+                                                    saveData.EqStyle = Convert.ToByte("09", 16);
+                                                    break;
+                                                case 2:
+                                                    saveData.EqStyle = Convert.ToByte("49", 16);
+                                                    break;
+                                                case 3:
+                                                    saveData.EqStyle = Convert.ToByte("89", 16);
+                                                    break;
+                                            }
+                                        }
+                                        else if (style.Add.GetValueOrDefault(false))
+                                        {
+                                            saveData.StyleTypes.Add(Convert.ToInt32("196", 16));
+                                            switch (index)
+                                            {
+                                                case 1:
+                                                    saveData.Style1 = (byte)style.Version.GetValueOrDefault(1);
+                                                    index++;
+                                                    break;
+                                                case 2:
+                                                    saveData.Style2 = (byte)style.Version.GetValueOrDefault(1);
+                                                    break;
+                                            }
+                                        }
+                                        break;
+                                    }
+                                case Style.Value.AquaCust:
+                                    {
+                                        if (style.Equip.GetValueOrDefault(false))
+                                        {
+                                            switch (style.Version.GetValueOrDefault(1))
+                                            {
+                                                case 1:
+                                                    saveData.EqStyle = Convert.ToByte("13", 16);
+                                                    break;
+                                                case 2:
+                                                    saveData.EqStyle = Convert.ToByte("53", 16);
+                                                    break;
+                                                case 3:
+                                                    saveData.EqStyle = Convert.ToByte("93", 16);
+                                                    break;
+                                            }
+                                        }
+                                        else if (style.Add.GetValueOrDefault(false))
+                                        {
+                                            saveData.StyleTypes.Add(Convert.ToInt32("19D", 16));
+                                            switch (index)
+                                            {
+                                                case 1:
+                                                    saveData.Style1 = (byte)style.Version.GetValueOrDefault(1);
+                                                    index++;
+                                                    break;
+                                                case 2:
+                                                    saveData.Style2 = (byte)style.Version.GetValueOrDefault(1);
+                                                    break;
+                                            }
+                                        }
+                                        break;
+                                    }
+                                case Style.Value.WoodCust:
+                                    {
+                                        if (style.Equip.GetValueOrDefault(false))
+                                        {
+                                            switch (style.Version.GetValueOrDefault(1))
+                                            {
+                                                case 1:
+                                                    saveData.EqStyle = Convert.ToByte("14", 16);
+                                                    break;
+                                                case 2:
+                                                    saveData.EqStyle = Convert.ToByte("54", 16);
+                                                    break;
+                                                case 3:
+                                                    saveData.EqStyle = Convert.ToByte("94", 16);
+                                                    break;
+                                            }
+                                        }
+                                        else if (style.Add.GetValueOrDefault(false))
+                                        {
+                                            saveData.StyleTypes.Add(Convert.ToInt32("19E", 16));
+                                            switch (index)
+                                            {
+                                                case 1:
+                                                    saveData.Style1 = (byte)style.Version.GetValueOrDefault(1);
+                                                    index++;
+                                                    break;
+                                                case 2:
+                                                    saveData.Style2 = (byte)style.Version.GetValueOrDefault(1);
+                                                    break;
+                                            }
+                                        }
+                                        break;
+                                    }
+                                case Style.Value.HeatCust:
+                                    {
+                                        if (style.Equip.GetValueOrDefault(false))
+                                        {
+                                            switch (style.Version.GetValueOrDefault(1))
+                                            {
+                                                case 1:
+                                                    saveData.EqStyle = Convert.ToByte("12", 16);
+                                                    break;
+                                                case 2:
+                                                    saveData.EqStyle = Convert.ToByte("52", 16);
+                                                    break;
+                                                case 3:
+                                                    saveData.EqStyle = Convert.ToByte("92", 16);
+                                                    break;
+                                            }
+                                        }
+                                        else if (style.Add.GetValueOrDefault(false))
+                                        {
+                                            saveData.StyleTypes.Add(Convert.ToInt32("19C", 16));
+                                            switch (index)
+                                            {
+                                                case 1:
+                                                    saveData.Style1 = (byte)style.Version.GetValueOrDefault(1);
+                                                    index++;
+                                                    break;
+                                                case 2:
+                                                    saveData.Style2 = (byte)style.Version.GetValueOrDefault(1);
+                                                    break;
+                                            }
+                                        }
+                                        break;
+                                    }
+                                case Style.Value.ElecCust:
+                                    {
+                                        if (style.Equip.GetValueOrDefault(false))
+                                        {
+                                            switch (style.Version.GetValueOrDefault(1))
+                                            {
+                                                case 1:
+                                                    saveData.EqStyle = Convert.ToByte("11", 16);
+                                                    break;
+                                                case 2:
+                                                    saveData.EqStyle = Convert.ToByte("51", 16);
+                                                    break;
+                                                case 3:
+                                                    saveData.EqStyle = Convert.ToByte("91", 16);
+                                                    break;
+                                            }
+                                        }
+                                        else if (style.Add.GetValueOrDefault(false))
+                                        {
+                                            saveData.StyleTypes.Add(Convert.ToInt32("19B", 16));
+                                            switch (index)
+                                            {
+                                                case 1:
+                                                    saveData.Style1 = (byte)style.Version.GetValueOrDefault(1);
+                                                    index++;
+                                                    break;
+                                                case 2:
+                                                    saveData.Style2 = (byte)style.Version.GetValueOrDefault(1);
+                                                    break;
+                                            }
+                                        }
+                                        break;
+                                    }
+                                case Style.Value.AquaTeam:
+                                    {
+                                        if (style.Equip.GetValueOrDefault(false))
+                                        {
+                                            switch (style.Version.GetValueOrDefault(1))
+                                            {
+                                                case 1:
+                                                    saveData.EqStyle = Convert.ToByte("1B", 16);
+                                                    break;
+                                                case 2:
+                                                    saveData.EqStyle = Convert.ToByte("5B", 16);
+                                                    break;
+                                                case 3:
+                                                    saveData.EqStyle = Convert.ToByte("9B", 16);
+                                                    break;
+                                            }
+                                        }
+                                        else if (style.Add.GetValueOrDefault(false))
+                                        {
+                                            saveData.StyleTypes.Add(Convert.ToInt32("1A2", 16));
+                                            switch (index)
+                                            {
+                                                case 1:
+                                                    saveData.Style1 = (byte)style.Version.GetValueOrDefault(1);
+                                                    index++;
+                                                    break;
+                                                case 2:
+                                                    saveData.Style2 = (byte)style.Version.GetValueOrDefault(1);
+                                                    break;
+                                            }
+                                        }
+                                        break;
+                                    }
+                                case Style.Value.WoodTeam:
+                                    {
+                                        if (style.Equip.GetValueOrDefault(false))
+                                        {
+                                            switch (style.Version.GetValueOrDefault(1))
+                                            {
+                                                case 1:
+                                                    saveData.EqStyle = Convert.ToByte("1C", 16);
+                                                    break;
+                                                case 2:
+                                                    saveData.EqStyle = Convert.ToByte("5C", 16);
+                                                    break;
+                                                case 3:
+                                                    saveData.EqStyle = Convert.ToByte("9C", 16);
+                                                    break;
+                                            }
+                                        }
+                                        else if (style.Add.GetValueOrDefault(false))
+                                        {
+                                            saveData.StyleTypes.Add(Convert.ToInt32("1A3", 16));
+                                            switch (index)
+                                            {
+                                                case 1:
+                                                    saveData.Style1 = (byte)style.Version.GetValueOrDefault(1);
+                                                    index++;
+                                                    break;
+                                                case 2:
+                                                    saveData.Style2 = (byte)style.Version.GetValueOrDefault(1);
+                                                    break;
+                                            }
+                                        }
+                                        break;
+                                    }
+                                case Style.Value.HeatTeam:
+                                    {
+                                        if (style.Equip.GetValueOrDefault(false))
+                                        {
+                                            switch (style.Version.GetValueOrDefault(1))
+                                            {
+                                                case 1:
+                                                    saveData.EqStyle = Convert.ToByte("1A", 16);
+                                                    break;
+                                                case 2:
+                                                    saveData.EqStyle = Convert.ToByte("5A", 16);
+                                                    break;
+                                                case 3:
+                                                    saveData.EqStyle = Convert.ToByte("9A", 16);
+                                                    break;
+                                            }
+                                        }
+                                        else if (style.Add.GetValueOrDefault(false))
+                                        {
+                                            saveData.StyleTypes.Add(Convert.ToInt32("1A1", 16));
+                                            switch (index)
+                                            {
+                                                case 1:
+                                                    saveData.Style1 = (byte)style.Version.GetValueOrDefault(1);
+                                                    index++;
+                                                    break;
+                                                case 2:
+                                                    saveData.Style2 = (byte)style.Version.GetValueOrDefault(1);
+                                                    break;
+                                            }
+                                        }
+                                        break;
+                                    }
+                                case Style.Value.ElecTeam:
+                                    {
+                                        if (style.Equip.GetValueOrDefault(false))
+                                        {
+                                            switch (style.Version.GetValueOrDefault(1))
+                                            {
+                                                case 1:
+                                                    saveData.EqStyle = Convert.ToByte("19", 16);
+                                                    break;
+                                                case 2:
+                                                    saveData.EqStyle = Convert.ToByte("59", 16);
+                                                    break;
+                                                case 3:
+                                                    saveData.EqStyle = Convert.ToByte("99", 16);
+                                                    break;
+                                            }
+                                        }
+                                        else if (style.Add.GetValueOrDefault(false))
+                                        {
+                                            saveData.StyleTypes.Add(Convert.ToInt32("1A0", 16));
+                                            switch (index)
+                                            {
+                                                case 1:
+                                                    saveData.Style1 = (byte)style.Version.GetValueOrDefault(1);
+                                                    index++;
+                                                    break;
+                                                case 2:
+                                                    saveData.Style2 = (byte)style.Version.GetValueOrDefault(1);
+                                                    break;
+                                            }
+                                        }
+                                        break;
+                                    }
+                                case Style.Value.AquaShield:
+                                    {
+                                        if (style.Equip.GetValueOrDefault(false))
+                                        {
+                                            switch (style.Version.GetValueOrDefault(1))
+                                            {
+                                                case 1:
+                                                    saveData.EqStyle = Convert.ToByte("23", 16);
+                                                    break;
+                                                case 2:
+                                                    saveData.EqStyle = Convert.ToByte("63", 16);
+                                                    break;
+                                                case 3:
+                                                    saveData.EqStyle = Convert.ToByte("A3", 16);
+                                                    break;
+                                            }
+                                        }
+                                        else if (style.Add.GetValueOrDefault(false))
+                                        {
+                                            saveData.StyleTypes.Add(Convert.ToInt32("1A7", 16));
+                                            switch (index)
+                                            {
+                                                case 1:
+                                                    saveData.Style1 = (byte)style.Version.GetValueOrDefault(1);
+                                                    index++;
+                                                    break;
+                                                case 2:
+                                                    saveData.Style2 = (byte)style.Version.GetValueOrDefault(1);
+                                                    break;
+                                            }
+                                        }
+                                        break;
+                                    }
+                                case Style.Value.WoodShield:
+                                    {
+                                        if (style.Equip.GetValueOrDefault(false))
+                                        {
+                                            switch (style.Version.GetValueOrDefault(1))
+                                            {
+                                                case 1:
+                                                    saveData.EqStyle = Convert.ToByte("24", 16);
+                                                    break;
+                                                case 2:
+                                                    saveData.EqStyle = Convert.ToByte("64", 16);
+                                                    break;
+                                                case 3:
+                                                    saveData.EqStyle = Convert.ToByte("A4", 16);
+                                                    break;
+                                            }
+                                        }
+                                        else if (style.Add.GetValueOrDefault(false))
+                                        {
+                                            saveData.StyleTypes.Add(Convert.ToInt32("1A8", 16));
+                                            switch (index)
+                                            {
+                                                case 1:
+                                                    saveData.Style1 = (byte)style.Version.GetValueOrDefault(1);
+                                                    index++;
+                                                    break;
+                                                case 2:
+                                                    saveData.Style2 = (byte)style.Version.GetValueOrDefault(1);
+                                                    break;
+                                            }
+                                        }
+                                        break;
+                                    }
+                                case Style.Value.HeatShield:
+                                    {
+                                        if (style.Equip.GetValueOrDefault(false))
+                                        {
+                                            switch (style.Version.GetValueOrDefault(1))
+                                            {
+                                                case 1:
+                                                    saveData.EqStyle = Convert.ToByte("22", 16);
+                                                    break;
+                                                case 2:
+                                                    saveData.EqStyle = Convert.ToByte("62", 16);
+                                                    break;
+                                                case 3:
+                                                    saveData.EqStyle = Convert.ToByte("A2", 16);
+                                                    break;
+                                            }
+                                        }
+                                        else if (style.Add.GetValueOrDefault(false))
+                                        {
+                                            saveData.StyleTypes.Add(Convert.ToInt32("1A6", 16));
+                                            switch (index)
+                                            {
+                                                case 1:
+                                                    saveData.Style1 = (byte)style.Version.GetValueOrDefault(1);
+                                                    index++;
+                                                    break;
+                                                case 2:
+                                                    saveData.Style2 = (byte)style.Version.GetValueOrDefault(1);
+                                                    break;
+                                            }
+                                        }
+                                        break;
+                                    }
+                                case Style.Value.ElecShield:
+                                    {
+                                        if (style.Equip.GetValueOrDefault(false))
+                                        {
+                                            switch (style.Version.GetValueOrDefault(1))
+                                            {
+                                                case 1:
+                                                    saveData.EqStyle = Convert.ToByte("21", 16);
+                                                    break;
+                                                case 2:
+                                                    saveData.EqStyle = Convert.ToByte("61", 16);
+                                                    break;
+                                                case 3:
+                                                    saveData.EqStyle = Convert.ToByte("A1", 16);
+                                                    break;
+                                            }
+                                        }
+                                        else if (style.Add.GetValueOrDefault(false))
+                                        {
+                                            saveData.StyleTypes.Add(Convert.ToInt32("1A5", 16));
+                                            switch (index)
+                                            {
+                                                case 1:
+                                                    saveData.Style1 = (byte)style.Version.GetValueOrDefault(1);
+                                                    index++;
+                                                    break;
+                                                case 2:
+                                                    saveData.Style2 = (byte)style.Version.GetValueOrDefault(1);
+                                                    break;
+                                            }
+                                        }
+                                        break;
+                                    }
+                                case Style.Value.Hub:
+                                    {
+                                        if (style.Equip.GetValueOrDefault(false))
+                                        {
+                                            switch (style.Version.GetValueOrDefault(1))
+                                            {
+                                                case 1:
+                                                    saveData.EqStyle = Convert.ToByte("28", 16);
+                                                    break;
+                                                case 2:
+                                                    saveData.EqStyle = Convert.ToByte("68", 16);
+                                                    break;
+                                                case 3:
+                                                    saveData.EqStyle = Convert.ToByte("A8", 16);
+                                                    break;
+                                            }
+                                        }
+                                        else if (style.Add.GetValueOrDefault(false))
+                                        {
+                                            saveData.StyleTypes.Add(Convert.ToInt32("1A9", 16));
+                                            switch (index)
+                                            {
+                                                case 1:
+                                                    saveData.Style1 = (byte)style.Version.GetValueOrDefault(1);
+                                                    index++;
+                                                    break;
+                                                case 2:
+                                                    saveData.Style2 = (byte)style.Version.GetValueOrDefault(1);
+                                                    break;
+                                            }
+                                        }
+                                        break;
+                                    }
+                                default:
+                                    break;
 
+                            }
                         }
                         break;
                     }
