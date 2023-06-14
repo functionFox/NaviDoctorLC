@@ -563,6 +563,7 @@ namespace NaviDoctor
         {
             saveData = saveParse.ExtractSaveData();
 
+            DisplayModulesBasedOnGame();
             BattleChipData battleChipData = new BattleChipData();
             PopulateDataGridView(battleChipData, saveData);
 
@@ -600,7 +601,6 @@ namespace NaviDoctor
 
             //Show the current game loaded
             lblGameVersion.Text = $"Loaded: {saveData.GameName.GetString()}";
-            DisplayModulesBasedOnGame();
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
