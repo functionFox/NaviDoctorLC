@@ -181,7 +181,7 @@ namespace NaviDoctor
             {
                 for (int i = PALibStart; i <= PALibEnd; i++)
                 {
-                    saveDataObject.LibraryData.Add(saveData[i]);
+                    saveDataObject.PALibraryData.Add(saveData[i]);
                 }
             }
 
@@ -453,7 +453,7 @@ namespace NaviDoctor
 
                     for (int i = PALibStart; i <= PALibEnd; i++)
                     {
-                            saveData[i] = saveDataObject.LibraryData[(i - PALibStart)];
+                            saveData[i] = saveDataObject.PALibraryData[(i - PALibStart)];
                     }
 
                     break;

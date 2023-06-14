@@ -70,32 +70,46 @@ namespace NaviDoctor
                     }
                 }
             }
-            public void GenerateConfirmButton(SaveDataObject saveData)
+            public void GenerateConfirmButton(SaveDataObject saveData, bool paLib = false)
             {
                 confirmButton = new Button();
                 confirmButton.Text = "Confirm";
                 confirmButton.Anchor = AnchorStyles.None;
                 confirmButton.Top = flowLayoutPanel.Bottom + 10;
                 confirmButton.Left = ((form.Width - confirmButton.Width) / 2) + 50;
-                confirmButton.Click += (sender, e) => ConfirmButton_Click(sender, e, saveData);
+                confirmButton.Click += (sender, e) => ConfirmButton_Click(sender, e, saveData, paLib);
 
                 form.Controls.Add(confirmButton);
             }
-            private void ConfirmButton_Click(object sender, EventArgs e, SaveDataObject saveData)
+            private void ConfirmButton_Click(object sender, EventArgs e, SaveDataObject saveData, bool paLib = false)
             {
-                UpdateLibraryData(saveData);
+                UpdateLibraryData(saveData, paLib);
                 form.Close();
             }
-            private void UpdateLibraryData(SaveDataObject saveData)
+            private void UpdateLibraryData(SaveDataObject saveData, bool paLib = false)
             {
                 List<BattleChipData> chipNameMap;
+                List<byte> libraryData;
+                int libraryIndex;
+                int paIndexStart;
                 switch (saveData.GameName)
                 {
                     case GameTitle.Title.MegaManBattleNetwork:
                         chipNameMap = BattleChipData.BN1ChipNameMap;
+                        libraryData = saveData.LibraryData;
+                        paIndexStart = 0; // BN1 doesn't have a PA library. Just set this to 0.
                         break;
                     case GameTitle.Title.MegaManBattleNetwork2:
                         chipNameMap = BattleChipData.BN2ChipNameMap;
+                        paIndexStart = 0x110;
+                        if (paLib)
+                        {
+                            libraryData = saveData.PALibraryData;
+                        }
+                        else
+                        {
+                            libraryData = saveData.LibraryData;
+                        }
                         break;
                     default:
                         return;
@@ -109,13 +123,20 @@ namespace NaviDoctor
 
                         if (chipIndex != -1)
                         {
-                            int libraryIndex = chipIndex / 8;
+                            if (!paLib)
+                            {
+                                libraryIndex = chipIndex / 8;
+                            }
+                            else
+                            {
+                                libraryIndex = (chipIndex - paIndexStart) / 8;
+                            }
                             int bitIndex = 7 - (chipIndex % 8);
 
                             if (checkBox.Checked)
-                                saveData.LibraryData[libraryIndex] |= (byte)(1 << bitIndex);
+                                libraryData[libraryIndex] |= (byte)(1 << bitIndex);
                             else
-                                saveData.LibraryData[libraryIndex] &= (byte)~(1 << bitIndex);
+                                libraryData[libraryIndex] &= (byte)~(1 << bitIndex);
                         }
                     }
                 }
@@ -132,11 +153,15 @@ namespace NaviDoctor
                 form.ShowDialog();
             }
         }
-        private void GenerateLibraryWindow(SaveDataObject saveData)
+        private void GenerateLibraryWindow(SaveDataObject saveData, bool paLib = false)
         {
             LibraryWindow libraryWindow = new LibraryWindow();
 
+            int standardStartID = 1;
             int standardStopID;
+            bool isChecked;
+            int libraryIndex;
+            int bitIndex;
             List<BattleChipData> chipNameMap;
 
             switch (saveData.GameName)
@@ -148,27 +173,39 @@ namespace NaviDoctor
                 case GameTitle.Title.MegaManBattleNetwork2:
                     standardStopID = 0x10F;
                     chipNameMap = BattleChipData.BN2ChipNameMap;
+                    if (paLib)
+                    {
+                        standardStartID = 0x110;
+                        standardStopID = 0x12F;
+                    }
                     break;
                 default:
                     return;
             }
 
-            for (int i = 1; i <= standardStopID; i++)
+            for (int i = standardStartID; i <= standardStopID; i++)
             {
                 string chipName = BattleChipData.GetChipNameByID(chipNameMap, i).Name;
 
                 if (chipName.Length < 3)
                     continue;
-
-                int libraryIndex = (i) / 8;
-                int bitIndex = 7 - ((i) % 8);
-                bool isChecked = (saveData.LibraryData[libraryIndex] & (1 << bitIndex)) != 0;
+                if (!paLib)
+                {
+                    libraryIndex = (i) / 8;
+                    bitIndex = 7 - ((i) % 8);
+                    isChecked = (saveData.LibraryData[libraryIndex] & (1 << bitIndex)) != 0;
+                } else
+                {
+                    libraryIndex = (i - standardStartID) / 8;
+                    bitIndex = 7 - (i % 8);
+                    isChecked = (saveData.PALibraryData[libraryIndex] & (1 << bitIndex)) != 0;
+                }
 
                 libraryWindow.AddChip(chipName, isChecked);
             }
 
             libraryWindow.GenerateCheckAllButton();
-            libraryWindow.GenerateConfirmButton(saveData);
+            libraryWindow.GenerateConfirmButton(saveData, paLib);
             libraryWindow.ShowDialog();
         }
         private string GetAlphabeticalCode(int chipCode)
@@ -2153,6 +2190,19 @@ namespace NaviDoctor
         private bool SubChipOverMax(decimal value)
         {
             return value > nudSubChipMax.Value;
+        }
+
+        private void btnShowPALibrary_Click(object sender, EventArgs e) // Literally a copy/paste
+        {
+            // Check if a save file has been loaded
+            if (saveData == null)
+            {
+                MessageBox.Show("Please load a save file first.");
+                return; // Exit the event handler
+            }
+
+            // Call the GenerateLibraryWindow method to display the library data
+            GenerateLibraryWindow(saveData, true);
         }
     }
 }
