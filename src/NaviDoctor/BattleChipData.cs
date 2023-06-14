@@ -528,12 +528,12 @@ namespace NaviDoctor
             new BattleChipData { ID = 0x107, Name = "ElecGspl" },
             new BattleChipData { ID = 0x108, Name = "WoodGspl" },
             new BattleChipData { ID = 0x109, Name = "GateSP" },
-            new BattleChipData { ID = 0x10A, Name = "10A" },
-            new BattleChipData { ID = 0x10B, Name = "10B" },
-            new BattleChipData { ID = 0x10C, Name = "10C" },
-            new BattleChipData { ID = 0x10D, Name = "10D" },
+            new BattleChipData { ID = 0x10A, Name = "0A" }, // Shortened due to how the Library currently operates.
+            new BattleChipData { ID = 0x10B, Name = "0B" },
+            new BattleChipData { ID = 0x10C, Name = "0C" },
+            new BattleChipData { ID = 0x10D, Name = "0D" },
             new BattleChipData { ID = 0x10E, Name = "Snctuary" },
-            new BattleChipData { ID = 0x10F, Name = "10F" },
+            new BattleChipData { ID = 0x10F, Name = "0F" },
             new BattleChipData { ID = 0x110, Name = "Z-Canon1" },
             new BattleChipData { ID = 0x111, Name = "Z-Canon2" },
             new BattleChipData { ID = 0x112, Name = "Z-Canon3" },
@@ -1088,12 +1088,12 @@ namespace NaviDoctor
             { "ElecGspl", new List<string> { "X", "None", "None", "None", "None", "None" } },
             { "WoodGspl", new List<string> { "X", "None", "None", "None", "None", "None" } },
             { "GateSP", new List<string> { "G", "None", "None", "None", "None", "None" } },
-            { "10A", new List<string> { "None", "None", "None", "None", "None", "None" } },
-            { "10B", new List<string> { "None", "None", "None", "None", "None", "None" } },
-            { "10C", new List<string> { "None", "None", "None", "None", "None", "None" } },
-            { "10D", new List<string> { "None", "None", "None", "None", "None", "None" } },
+            { "0A", new List<string> { "None", "None", "None", "None", "None", "None" } }, // ID 10A
+            { "0B", new List<string> { "None", "None", "None", "None", "None", "None" } }, // ID 10B
+            { "0C", new List<string> { "None", "None", "None", "None", "None", "None" } }, // ID 10C
+            { "0D", new List<string> { "None", "None", "None", "None", "None", "None" } }, // ID 10D
             { "Snctuary", new List<string> { "A", "C", "E", "L", "S", "None" } },
-            { "10F", new List<string> { "None", "None", "None", "None", "None", "None" } },
+            { "0F", new List<string> { "None", "None", "None", "None", "None", "None" } }, // ID 10F
             { "Z-Canon1", new List<string> { "None", "None", "None", "None", "None", "None" } },
             { "Z-Canon2", new List<string> { "None", "None", "None", "None", "None", "None" } },
             { "Z-Canon3", new List<string> { "None", "None", "None", "None", "None", "None" } },

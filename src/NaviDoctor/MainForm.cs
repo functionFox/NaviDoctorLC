@@ -34,6 +34,8 @@ namespace NaviDoctor
                 form = new Form();
                 flowLayoutPanel = new FlowLayoutPanel();
 
+                form.Text = "Library Viewer";
+
                 form.Width = 860;
                 form.Height = 500;
                 form.FormBorderStyle = FormBorderStyle.FixedSingle; // Disable resizing
@@ -85,12 +87,24 @@ namespace NaviDoctor
             }
             private void UpdateLibraryData(SaveDataObject saveData)
             {
+                List<BattleChipData> chipNameMap;
+                switch (saveData.GameName)
+                {
+                    case GameTitle.Title.MegaManBattleNetwork:
+                        chipNameMap = BattleChipData.BN1ChipNameMap;
+                        break;
+                    case GameTitle.Title.MegaManBattleNetwork2:
+                        chipNameMap = BattleChipData.BN2ChipNameMap;
+                        break;
+                    default:
+                        return;
+                }
                 foreach (Control control in flowLayoutPanel.Controls)
                 {
                     if (control is CheckBox checkBox)
                     {
                         string chipName = checkBox.Text;
-                        int chipIndex = BattleChipData.GetChipIDByName(BattleChipData.BN1ChipNameMap, chipName);
+                        int chipIndex = BattleChipData.GetChipIDByName(chipNameMap, chipName);
 
                         if (chipIndex != -1)
                         {
@@ -121,11 +135,28 @@ namespace NaviDoctor
         {
             LibraryWindow libraryWindow = new LibraryWindow();
 
-            for (int i = 1; i <= 199; i++) // We need to update the max value on these for BN2
-            {
-                string chipName = BattleChipData.GetChipNameByID(BattleChipData.BN1ChipNameMap, i).Name;
+            int standardStopID;
+            List<BattleChipData> chipNameMap;
 
-                if (chipName.Length < 4)
+            switch (saveData.GameName)
+            {
+                case GameTitle.Title.MegaManBattleNetwork:
+                    standardStopID = 199;
+                    chipNameMap = BattleChipData.BN1ChipNameMap;
+                    break;
+                case GameTitle.Title.MegaManBattleNetwork2:
+                    standardStopID = 0x10F;
+                    chipNameMap = BattleChipData.BN2ChipNameMap;
+                    break;
+                default:
+                    return;
+            }
+
+            for (int i = 1; i <= standardStopID; i++)
+            {
+                string chipName = BattleChipData.GetChipNameByID(chipNameMap, i).Name;
+
+                if (chipName.Length < 3)
                     continue;
 
                 int libraryIndex = (i) / 8;
@@ -314,6 +345,8 @@ namespace NaviDoctor
             int maxBattleChipCopies;
             int maxNaviChips;
             int maxTotalChipsInFolder = 30;
+            bool isBattleChip;
+            bool isNaviChip;
             List<BattleChipData> chipNameMap;
             switch (tabsFolders.SelectedIndex) // Check which folder is currently selected
             {
@@ -363,16 +396,22 @@ namespace NaviDoctor
 
                 // Check if the Folder has reached the maximum number of copies for the selected chip ID
                 int currentChipCopies = folderData.Count(data => data.Item1 == chipID);
-                int currentNaviChips = folderData.Count(data => data.Item1 >= naviIDLow && data.Item1 <= naviIDHigh);
+                int currentNaviChips;
 
-                bool isBattleChip = chipID >= 1 && chipID <= battleIDHigh;
-                bool isNaviChip = chipID >= naviIDLow && chipID <= naviIDHigh;
-
-                if (saveData.GameName == GameTitle.Title.MegaManBattleNetwork2)
+                switch (saveData.GameName)
                 {
-                    isBattleChip = chipID >= secretIDLow && chipID <= 260; // Secret NetBattle reward chips
-                    isNaviChip = chipID >= 261 && chipID <= 265; // Event Navis
-                    isBattleChip = chipID >= 266 && chipID <= secretIDHigh; // Snctuary
+                    case GameTitle.Title.MegaManBattleNetwork:
+                        currentNaviChips = folderData.Count(data => data.Item1 >= naviIDLow && data.Item1 <= naviIDHigh);
+                        isBattleChip = chipID >= 1 && chipID <= battleIDHigh;
+                        isNaviChip = chipID >= naviIDLow && chipID <= naviIDHigh;
+                        break;
+                    case GameTitle.Title.MegaManBattleNetwork2:
+                        currentNaviChips = folderData.Count(data => (data.Item1 >= naviIDLow && data.Item1 <= naviIDHigh) || (data.Item1 >= 261 && data.Item1 <= 265));
+                        isBattleChip = (chipID >= 1 && chipID <= battleIDHigh) || (chipID >= secretIDLow && chipID <= 260) || (chipID >= 266 && chipID <= secretIDHigh); // Secret NetBattle reward chips
+                        isNaviChip = (chipID >= naviIDLow && chipID <= naviIDHigh) || (chipID >= 261 && chipID <= 265); // Event Navis
+                        break;
+                    default:
+                        return;
                 }
 
                 if (isBattleChip && currentChipCopies >= maxBattleChipCopies)
@@ -511,6 +550,8 @@ namespace NaviDoctor
             {
                 case GameTitle.Title.MegaManBattleNetwork:
                     LoadStyles(saveData); // This is loaded by all Vol.1 games, but not Vol.2 games.
+                    nudBugFrag.Value = 0; // It bothered me seeing my BugFrags and RegMem from BN2 when I loaded BN1 over it.
+                    nudRegMem.Value = 0;  // So they're 0 now.
                     break;
 
                 case GameTitle.Title.MegaManBattleNetwork2:
@@ -564,14 +605,11 @@ namespace NaviDoctor
                 try
                 {
                     SaveParse saveParse = new SaveParse(saveFile.FileName);
-
                     SaveFile(saveParse);
-
-                    MessageBox.Show("Save data successfully updated!");
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"An error occurred while saving the file: {ex.Message} {ex.StackTrace}");
+                    MessageBox.Show($"An error occurred while saving the file:\n{ex.Message}\n{ex.StackTrace}");
                 }
             }
         }
@@ -606,9 +644,14 @@ namespace NaviDoctor
                     saveData.SubUntrap = (byte)subUntrap.Value; */
                     break;
             }
-
+            if (dgvFolder1.Rows.Count < 30 || (saveData.Folders == 2 && dgvFolder2.Rows.Count < 30) || (saveData.Folders == 3 && dgvFolder3.Rows.Count < 30))
+            {
+                MessageBox.Show("An error occured while saving the file:\nFolder has less than 30 chips.");
+                return;
+            }
             saveParse.UpdateSaveData(saveData);
             saveParse.SaveChanges();
+            MessageBox.Show("Save data successfully updated!");
         }
 
         private void LoadStyles(SaveDataObject saveData)
@@ -752,8 +795,12 @@ namespace NaviDoctor
                     if (tabsFolders.TabPages.Contains(tabPage_Folder2)) tabsFolders.TabPages.Remove(tabPage_Folder2);
                     if (tabsFolders.TabPages.Contains(tabPage_Folder3)) tabsFolders.TabPages.Remove(tabPage_Folder3);
                     btnSelectStyles.Enabled = true;
+                    nudBugFrag.Enabled = false;
+                    nudRegMem.Enabled = false;
                     break;
                 case GameTitle.Title.MegaManBattleNetwork2:
+                    nudBugFrag.Enabled = true;
+                    nudRegMem.Enabled = true;
                     switch (saveData.Folders)
                     {
                         case 1:

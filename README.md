@@ -19,14 +19,14 @@ Experimental features:
 
 Coming Soon:
 - Support for Mega Man Battle Network 2
-- Fully functional Style Editor: change your currently equipped style (BN2/BN3), and add up to three styles in your style inventory (BN2 only)
+- Fully functional Style Editor: change your currently equipped style (BN2/BN3)
 - Expanded Folder Viewer: edit up to three of your unlocked Folders (BN2+)
 - Editing capabilities for RegMem, BugFrags, SubChips, and the entire P.A. Memo Library (BN2+)
 
 Known Issues:
 
 - Trying to save with less than 30 chips in your folder generates an Index Out of Range error. I'll be adding a more user-friendly warning box that explains this better.
-- It is possible to edit your HP to 1000, then obtain an HP Memory in game to increase your HP past the base limit. Doing so will disable your ability to PvP Netbattle. The editor already takes this into account, so if you find yourself in this situation, save your game, load your file in the editor, and simply save again. The editor automatically tries to make sure you are able to PvP Netbattle.
+- It is possible to edit your HP to 1000, then obtain an HP Memory in game to increase your HP past the base limit. Doing so will disable your ability to PvP Netbattle. The editor already takes this into account, so if you find yourself in this situation, save your game, load your file in the editor, and simply save again. The editor automatically tries to make sure you are able to PvP Netbattle. Similar issues arise when setting RegMem to 50 in BN2+. The same process will fix this issue.
 - Inserting chips directly into the pack using the save editor will not update the Library in the game; you'll have to use the Library Viewer. Due to a quirk in how Legacy Collection handles checking for achievement completion, using the Library Viewer to complete the Library by itself is also not enough to get the BN1 achievement for having all chips. In order to get the achievement for having all chips, you'll need to have the Library fully checked off, and then obtain any chip in the game. For games with title screen stars or in-game icons for milestone achievements (such as the BN2 Red, Purple, and Blue stars), however, no additional steps are needed.
 
 Thank you for your patience while these features are being worked on! As always, NaviDoctor will strive to keep players within legitimately obtainable limits to ensure your ability to be Netbattle ready!

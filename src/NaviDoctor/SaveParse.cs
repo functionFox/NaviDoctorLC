@@ -17,6 +17,8 @@ namespace NaviDoctor
         private int EqStyleOffset;
         private int CurrHPOffset;
         private int MaxHPOffset;
+        private int HPRedundancy1;
+        private int HPRedundancy2;
         private int ZennyOffset;
         private int BugfragOffset;
         private int SubMaxOffset;
@@ -98,6 +100,8 @@ namespace NaviDoctor
                     RegChip3Offset =     0x001F;
                     CurrHPOffset =       0x0020;
                     MaxHPOffset =        0x0022;
+                    HPRedundancy1 =      0x008C; // BN2 has two HP redundancies.
+                    HPRedundancy2 =      0x008E;
                     ZennyOffset =        0x0074;
                     FoldersOffset =      0x0082;
                     AttackOffset =       0x0084;
@@ -213,7 +217,6 @@ namespace NaviDoctor
                     int stylesFound = 0;       // Style parse system for BN2. It'll change a bit for BN3 but hopefully it'll be mostly the same.
                     saveDataObject.Style1 = 0; // Initialize these to 0. No null values!
                     saveDataObject.Style2 = 0;
-                    saveDataObject.Style3 = 0;
                     saveDataObject.StyleTypes.Add(StyleOffset); // Normal Style is always present.
                     for (int i = StyleOffset + 0x6; i <= StyleOffset + 0x19; i++) // We know where Normal Style starts, so skip to the good part.
                     {
@@ -236,17 +239,13 @@ namespace NaviDoctor
                                     saveDataObject.StyleTypes.Add(i);
                                     break;
 
-                                case 3:
-                                    saveDataObject.Style3 = saveData[i];
-                                    saveDataObject.StyleTypes.Add(i);
-                                    break;
                             }
                         }
-                        if (stylesFound >= 3) break;
+                        if (stylesFound >= 2) break;
                     }
-                    for (int i = saveDataObject.StyleTypes.Count; i < 4; i++)
+                    for (int i = saveDataObject.StyleTypes.Count; i < 3; i++)
                     {
-                        saveDataObject.StyleTypes.Add(0); // NormStyl + 3 Styles = 4. If there's less than that, pad the rest
+                        saveDataObject.StyleTypes.Add(0); // NormStyl + 2 Styles = 3. If there's less than that, pad the rest
                     }
 
                     saveDataObject.RegMem = saveData[RegMemOffset];
@@ -372,12 +371,15 @@ namespace NaviDoctor
                     break;
 
                 case GameTitle.Title.MegaManBattleNetwork2:
+                    Buffer.BlockCopy(BitConverter.GetBytes(saveDataObject.CurrHP), 0, saveData, HPRedundancy1, 2);
+                    Buffer.BlockCopy(BitConverter.GetBytes(saveDataObject.MaxHP), 0, saveData, HPRedundancy2, 2);
+
                     for (int i = StyleOffset + 0x1; i <= StyleOffset + 0x19; i++) // Erase the currently saved styles
                     {
                         saveData[i] = 0;
                     }
 
-                    for (int i = 1; i <= 3; i++) // Let's save some styles.
+                    for (int i = 1; i <= 2; i++) // Let's save some styles.
                     {
                         if (saveDataObject.StyleTypes[i] == 0)
                         {
@@ -390,9 +392,6 @@ namespace NaviDoctor
                                 break;
                             case 2:
                                 saveData[saveDataObject.StyleTypes[i]] = saveDataObject.Style2;
-                                break;
-                            case 3:
-                                saveData[saveDataObject.StyleTypes[i]] = saveDataObject.Style3;
                                 break;
                         } 
                     }
