@@ -41,6 +41,7 @@ namespace NaviDoctor
                 form.Height = 500;
                 form.FormBorderStyle = FormBorderStyle.FixedSingle; // Disable resizing
                 form.MaximizeBox = false; // Disable maximize button
+                form.Icon = Properties.Resources.icon;
 
                 flowLayoutPanel.Dock = DockStyle.Top;
                 flowLayoutPanel.Height = (int)(form.Height * 0.8);
@@ -601,19 +602,6 @@ namespace NaviDoctor
                 }
             }
             return chipPackage;
-        }
-
-        private void btnShowLibrary_Click(object sender, EventArgs e)
-        {
-            // Check if a save file has been loaded
-            if (saveData == null)
-            {
-                MessageBox.Show("Please load a save file first.");
-                return; // Exit the event handler
-            }
-
-            // Call the GenerateLibraryWindow method to display the library data
-            GenerateLibraryWindow(saveData);
         }
 
         private void loadToolStripMenuItem_Click(object sender, EventArgs e)
@@ -2192,7 +2180,7 @@ namespace NaviDoctor
             return value > nudSubChipMax.Value;
         }
 
-        private void btnShowPALibrary_Click(object sender, EventArgs e) // Literally a copy/paste
+        private void libraryToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // Check if a save file has been loaded
             if (saveData == null)
@@ -2202,7 +2190,27 @@ namespace NaviDoctor
             }
 
             // Call the GenerateLibraryWindow method to display the library data
+            GenerateLibraryWindow(saveData);
+        }
+
+        private void programAdvanceMemoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            // Check if a save file has been loaded
+            if (saveData == null)
+            {
+                MessageBox.Show("Please load a save file first.");
+                return; // Exit the event handler
+            }
+
+            // Call the GenerateLibraryWindow method to display the library data
             GenerateLibraryWindow(saveData, true);
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var aboutPage = new AboutUs();
+            aboutPage.ShowDialog();
         }
     }
 }
