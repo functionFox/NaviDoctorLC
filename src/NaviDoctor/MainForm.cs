@@ -200,6 +200,7 @@ namespace NaviDoctor
             for (int i = 0; i < packChips.Count; i++)
             {
                 entries[i].Quantity = packChips[i];
+                if (entries[i].Code == "None") entries[i].Quantity = 0; // Automatically set illegal chips to 0.
             }
 
             DataTable dataTable = new DataTable();
@@ -456,40 +457,43 @@ namespace NaviDoctor
         private void PackageChips()
         {
             dgvPack.Sort(dgvPack.Columns[0], ListSortDirection.Ascending); // Sort by ID column in ascending order
+            Dictionary<string, List<string>> chipCodeMap;
 
             switch (saveData.GameName)
             {
                 case GameTitle.Title.MegaManBattleNetwork:
-                    saveData.BattleChips = GeneratePackage(1, 147, 5);
-                    saveData.NaviChips = GeneratePackage(148, 239, 1);
+                    chipCodeMap = BattleChipData.BN1ChipCodeMap;
+                    saveData.BattleChips = GeneratePackage(1, 147, 5, chipCodeMap);
+                    saveData.NaviChips = GeneratePackage(148, 239, 1, chipCodeMap);
                     break;
 
                 case GameTitle.Title.MegaManBattleNetwork2:
-                    saveData.BattleChips = GeneratePackage(1, 193, 6);
-                    saveData.NaviChips = GeneratePackage(194, 250, 2);
-                    saveData.SecretChips = GeneratePackage(251, 271, 6);
+                    chipCodeMap = BattleChipData.BN2ChipCodeMap;
+                    saveData.BattleChips = GeneratePackage(1, 193, 6, chipCodeMap);
+                    saveData.NaviChips = GeneratePackage(194, 250, 2, chipCodeMap);
+                    saveData.SecretChips = GeneratePackage(251, 271, 6, chipCodeMap);
                     break;
             }
         }
 
-        private List<byte> GeneratePackage(int startID, int stopID, int codeCount)
+        private List<byte> GeneratePackage(int startID, int stopID, int codeCount, Dictionary<string, List<string>> chipCodeMap)
         {
             List<byte> chipPackage = new List<byte>(Enumerable.Repeat((byte)0, (stopID - startID + 1) * codeCount));
-            int codeSeries = 0;
+
             foreach (DataGridViewRow row in dgvPack.Rows)
             {
                 if (row.Cells["ID"].Value != null && row.Cells["Quantity"].Value != null)
                 {
                     int chipID = (int)row.Cells["ID"].Value;
                     int quantity = (int)row.Cells["Quantity"].Value;
-
+                    
                     quantity = Math.Max(0, Math.Min(quantity, 99));
 
                     if (chipID >= startID && chipID <= stopID)
                     {
+                        int codeSeries = chipCodeMap[row.Cells["Name"].Value.ToString()].IndexOf(row.Cells["Code"].Value.ToString());
                         int index = ((chipID - startID) * codeCount) + codeSeries;
                         chipPackage[index] = (byte)quantity;
-                        codeSeries = (codeSeries + 1) % codeCount;
                     }
                 }
             }
