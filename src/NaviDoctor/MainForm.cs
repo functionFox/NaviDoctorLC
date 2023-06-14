@@ -588,13 +588,13 @@ namespace NaviDoctor
                     LoadStyles(saveData);
                     nudBugFrag.Value = saveData.BugFrags;
                     nudRegMem.Value = saveData.RegMem;
-                    /* subChipMax.Value = saveData.SubChipMax;
-                    subMini.Value = saveData.SubMiniEnrg;
-                    subFull.Value = saveData.SubFullEnrg;
-                    subLoc.Value = saveData.SubLocEnemy;
-                    subSneak.Value = saveData.SubSneakRun;
-                    subUnlock.Value = saveData.SubUnlocker;
-                    subUntrap.Value = saveData.SubUntrap; */
+                    nudSubChipMax.Value = saveData.SubChipMax;
+                    nudMiniEnrg.Value = saveData.SubMiniEnrg;
+                    nudFullEnrg.Value = saveData.SubFullEnrg;
+                    nudLocEnemy.Value = saveData.SubLocEnemy;
+                    nudSneakRun.Value = saveData.SubSneakRun;
+                    nudUnlocker.Value = saveData.SubUnlocker;
+                    nudUntrap.Value = saveData.SubUntrap;
                     break;
             }
 
@@ -667,15 +667,15 @@ namespace NaviDoctor
 
                 case GameTitle.Title.MegaManBattleNetwork2:
                     UpdateStyles(saveData);
-                    /* saveData.BugFrags = (byte)bugFrags.Value; // Uncomment when these fields exist
-                    saveData.RegMem = (byte)regMem.Value;
-                    saveData.SubChipMax = (byte)subChipMax.Value;
-                    saveData.SubMiniEnrg = (byte)subMini.Value;
-                    saveData.SubFullEnrg = (byte)subFull.Value;
-                    saveData.SubLocEnemy = (byte)subLoc.Value;
-                    saveData.SubSneakRun = (byte)subSneak.Value;
-                    saveData.SubUnlocker = (byte)subUnlock.Value;
-                    saveData.SubUntrap = (byte)subUntrap.Value; */
+                    saveData.BugFrags = (byte)nudBugFrag.Value; 
+                    saveData.RegMem = (byte)nudRegMem.Value;
+                    saveData.SubChipMax = (byte)nudSubChipMax.Value;
+                    saveData.SubMiniEnrg = (byte)nudMiniEnrg.Value;
+                    saveData.SubFullEnrg = (byte)nudFullEnrg.Value;
+                    saveData.SubLocEnemy = (byte)nudLocEnemy.Value;
+                    saveData.SubSneakRun = (byte)nudSneakRun.Value;
+                    saveData.SubUnlocker = (byte)nudUnlocker.Value;
+                    saveData.SubUntrap = (byte)nudUntrap.Value;
                     break;
             }
             if (dgvFolder1.Rows.Count < 30 || (saveData.Folders == 2 && dgvFolder2.Rows.Count < 30) || (saveData.Folders == 3 && dgvFolder3.Rows.Count < 30))
@@ -2050,6 +2050,62 @@ namespace NaviDoctor
                     lblFolderCount.Text = "";
                     break;
             }
+        }
+
+        private void nudMiniEnrg_ValueChanged(object sender, EventArgs e)
+        {
+            if(SubChipOverMax(nudMiniEnrg.Value))
+            {
+                nudMiniEnrg.Value--;
+            }
+        }
+
+        private void nudFullEnrg_ValueChanged(object sender, EventArgs e)
+        {
+            if (SubChipOverMax(nudFullEnrg.Value))
+            {
+                nudFullEnrg.Value--;
+            }
+        }
+
+        private void nudUntrap_ValueChanged(object sender, EventArgs e)
+        {
+            if (SubChipOverMax(nudUntrap.Value))
+            {
+                nudUntrap.Value--;
+            }
+        }
+
+        private void nudSneakRun_ValueChanged(object sender, EventArgs e)
+        {
+            if (SubChipOverMax(nudSneakRun.Value))
+            {
+                nudSneakRun.Value--;
+            }
+
+        }
+
+        private void nudLocEnemy_ValueChanged(object sender, EventArgs e)
+        {
+            if (SubChipOverMax(nudLocEnemy.Value))
+            {
+                nudLocEnemy.Value--;
+            }
+
+        }
+
+        private void nudUnlocker_ValueChanged(object sender, EventArgs e)
+        {
+            if (SubChipOverMax(nudUnlocker.Value))
+            {
+                nudUnlocker.Value--;
+            }
+
+        }
+
+        private bool SubChipOverMax(decimal value)
+        {
+            return value > nudSubChipMax.Value;
         }
     }
 }
