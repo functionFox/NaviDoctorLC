@@ -2067,7 +2067,7 @@ namespace NaviDoctor
                             break;
                         case 3:
                             if (!tabsFolders.TabPages.Contains(tabPage_Folder2)) tabsFolders.TabPages.Insert(1, tabPage_Folder2);
-                            if (!tabsFolders.TabPages.Contains(tabPage_Folder3)) tabsFolders.TabPages.Insert(1, tabPage_Folder3);
+                            if (!tabsFolders.TabPages.Contains(tabPage_Folder3)) tabsFolders.TabPages.Insert(2, tabPage_Folder3);
                             break;
                         default:
                             break;
