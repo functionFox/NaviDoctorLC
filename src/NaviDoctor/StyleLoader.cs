@@ -31,6 +31,16 @@ namespace NaviDoctor
             _styles = styles;
             _currentGame = title;
             if (_currentGame == GameTitle.Title.MegaManBattleNetwork) label3.Visible = false;
+            switch(title)
+            {
+                case GameTitle.Title.MegaManBattleNetwork:
+                    this.Height = 245;
+                    break;
+                case GameTitle.Title.MegaManBattleNetwork2:
+                    this.Height = 680;
+                    this.Width = 292;
+                    break;
+            }
             PopulateStyles();
         }
 

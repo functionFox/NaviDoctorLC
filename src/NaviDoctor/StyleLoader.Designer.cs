@@ -31,10 +31,10 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StyleLoader));
             this.flpStyleChange = new System.Windows.Forms.FlowLayoutPanel();
             this.panelTop = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.btnDone = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
             this.panelTop.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -45,7 +45,7 @@
             this.flpStyleChange.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flpStyleChange.Location = new System.Drawing.Point(0, 32);
             this.flpStyleChange.Name = "flpStyleChange";
-            this.flpStyleChange.Size = new System.Drawing.Size(276, 325);
+            this.flpStyleChange.Size = new System.Drawing.Size(276, 56);
             this.flpStyleChange.TabIndex = 20;
             // 
             // panelTop
@@ -58,6 +58,16 @@
             this.panelTop.Name = "panelTop";
             this.panelTop.Size = new System.Drawing.Size(276, 32);
             this.panelTop.TabIndex = 21;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(191, 9);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(73, 16);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Style Level";
             // 
             // label2
             // 
@@ -82,7 +92,7 @@
             // btnDone
             // 
             this.btnDone.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.btnDone.Location = new System.Drawing.Point(0, 357);
+            this.btnDone.Location = new System.Drawing.Point(0, 88);
             this.btnDone.Name = "btnDone";
             this.btnDone.Size = new System.Drawing.Size(276, 32);
             this.btnDone.TabIndex = 22;
@@ -90,21 +100,11 @@
             this.btnDone.UseVisualStyleBackColor = true;
             this.btnDone.Click += new System.EventHandler(this.btnDone_Click);
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(191, 9);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(73, 16);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Style Level";
-            // 
             // StyleLoader
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(276, 389);
+            this.ClientSize = new System.Drawing.Size(276, 120);
             this.Controls.Add(this.flpStyleChange);
             this.Controls.Add(this.btnDone);
             this.Controls.Add(this.panelTop);

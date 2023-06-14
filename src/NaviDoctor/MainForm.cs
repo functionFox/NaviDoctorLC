@@ -921,6 +921,361 @@ namespace NaviDoctor
                             }
                             index++;
                         }
+
+                        var equipHex = Convert.ToString(saveData.EqStyle, 16).ToUpper();
+                        
+                        switch(equipHex)
+                        {
+                            case "00": // Normal Style
+                                {
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.Normal).Equip = true;
+                                    break;
+                                }
+                            case "09": // Elec Guts V1
+                                {
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecGuts).Equip = true;
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecGuts).Version = 1;
+                                    break;
+                                }
+                            case "0A": // Heat Guts V1
+                                {
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatGuts).Equip = true;
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatGuts).Version = 1;
+                                    break;
+                                }
+                            case "0B": // Aqua Guts V1
+                                {
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaGuts).Equip = true;
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaGuts).Version = 1;
+                                    break;
+                                }
+                            case "0C": // Wood Guts V1
+                                {
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodGuts).Equip = true;
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodGuts).Version = 1;
+                                    break;
+                                }
+                            case "11": // Elec Custom V1
+                                {
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecCust).Equip = true;
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecCust).Version = 1;
+                                    break;
+                                }
+                            case "12": // Fire Custom V1
+                                {
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatCust).Equip = true;
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatCust).Version = 1;
+                                    break;
+                                }
+                            case "13": // Aqua Custom V1
+                                {
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaCust).Equip = true;
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaCust).Version = 1;
+                                    break;
+                                }
+                            case "14": // Wood Custom V1
+                                {
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodCust).Equip = true;
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodCust).Version = 1;
+                                    break;
+                                }
+                            case "19": // Elec Team V1
+                                {
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecTeam).Equip = true;
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecTeam).Version = 1;
+                                    break;
+                                }
+                            case "1A": // Fire Team V1
+                                {
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatTeam).Equip = true;
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatTeam).Version = 1;
+                                    break;
+                                }
+                            case "1B": // Aqua Team V1
+                                {
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaTeam).Equip = true;
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaTeam).Version = 1;
+                                    break;
+                                }
+                            case "1C": // Wood Team V1
+                                {
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodTeam).Equip = true;
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodTeam).Version = 1;
+                                    break;
+                                }
+                            case "21": // Elec Shield V1
+                                {
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecShield).Equip = true;
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecShield).Version = 1;
+                                    break;
+                                }
+                            case "22": // Fire Shield V1
+                                {
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatShield).Equip = true;
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatShield).Version = 1;
+                                    break;
+                                }
+                            case "23": // Aqua Shield V1
+                                {
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaShield).Equip = true;
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaShield).Version = 1;
+                                    break;
+                                }
+                            case "24": // Wood Shield V1
+                                {
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodShield).Equip = true;
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodShield).Version = 1;
+                                    break;
+                                }
+                            case "28": // Hub Style
+                                {
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.Hub).Equip = true;
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.Hub).Version = 1;
+                                    break;
+                                }
+                            case "40": // Normal Style V2
+                                {
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.Normal).Equip = true;
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.Normal).Version = 2;
+                                    break;
+                                }
+                            case "49": // Elec Guts V2
+                                {
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecGuts).Equip = true;
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecGuts).Version = 2;
+                                    break;
+                                }
+                            case "4A": // Heat Guts V2
+                                {
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatGuts).Equip = true;
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatGuts).Version = 2;
+                                    break;
+                                }
+                            case "4B": // Aqua Guts V2
+                                {
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaGuts).Equip = true;
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaGuts).Version = 2;
+                                    break;
+                                }
+                            case "4C": // Wood Guts V2
+                                {
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodGuts).Equip = true;
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodGuts).Version = 2;
+                                    break;
+                                }
+                            case "51": // Elec Custom V2
+                                {
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecCust).Equip = true;
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecCust).Version = 2;
+                                    break;
+                                }
+                            case "52": // Heat Custom V2
+                                {
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatCust).Equip = true;
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatCust).Version = 2;
+                                    break;
+                                }
+                            case "53": // Aqua Custom V2
+                                {
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaCust).Equip = true;
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaCust).Version = 2;
+                                    break;
+                                }
+                            case "54": // Wood Custom V2
+                                {
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodCust).Equip = true;
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodCust).Version = 2;
+                                    break;
+                                }
+                            case "59": // Elec Team V2
+                                {
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecTeam).Equip = true;
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecTeam).Version = 2;
+                                    break;
+                                }
+                            case "5A": // Heat Team V2
+                                {
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatTeam).Equip = true;
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatTeam).Version = 2;
+                                    break;
+                                }
+                            case "5B": // Aqua Team V2
+                                {
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaTeam).Equip = true;
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaTeam).Version = 2;
+                                    break;
+                                }
+                            case "5C": // Wood Team V2
+                                {
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodTeam).Equip = true;
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodTeam).Version = 2;
+                                    break;
+                                }
+                            case "61": // Elec Shield V2
+                                {
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecShield).Equip = true;
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecShield).Version = 2;
+                                    break;
+                                }
+                            case "62": // Heat Shield V2
+                                {
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatShield).Equip = true;
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatShield).Version = 2;
+                                    break;
+                                }
+                            case "63": // Aqua Shield V2
+                                {
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaShield).Equip = true;
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaShield).Version = 2;
+                                    break;
+                                }
+                            case "64": // Wood Shield V2
+                                {
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodShield).Equip = true;
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodShield).Version = 2;
+                                    break;
+                                }
+                            case "68": // Hub Style V2
+                                {
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.Hub).Equip = true;
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.Hub).Version = 2;
+                                    break;
+                                }
+                            case "80": // Normal Style V3
+                            case "C0": // Normal Style V4
+                                {
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.Normal).Equip = true;
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.Normal).Version = 3;
+                                    break;
+                                }
+                            case "C9": // Elec Guts V4
+                            case "89": // Elec Guts V3
+                                {
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecGuts).Equip = true;
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecGuts).Version = 3;
+                                    break;
+                                }
+                            case "CA": // Heat Guts V4
+                            case "8A": // Heat Guts V3
+                                {
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatGuts).Equip = true;
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatGuts).Version = 3;
+                                    break;
+                                }
+                            case "CB": // Aqua Guts V4
+                            case "8B": // Aqua Guts V3
+                                {
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaGuts).Equip = true;
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaGuts).Version = 3;
+                                    break;
+                                }
+                            case "CC": // Wood Guts V4
+                            case "8C": // Wood Guts V3
+                                {
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodGuts).Equip = true;
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodGuts).Version = 3;
+                                    break;
+                                }
+                            case "D1": // Elec Custom V4
+                            case "91": // Elec Custom V3
+                                {
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecCust).Equip = true;
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecCust).Version = 3;
+                                    break;
+                                }
+                            case "D2": // Heat Custom V4
+                            case "92": // Heat Custom V3
+                                {
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatCust).Equip = true;
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatCust).Version = 3;
+                                    break;
+                                }
+                            case "D3": // Aqua Custom V4
+                            case "93": // Aqua Custom V3
+                                {
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaCust).Equip = true;
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaCust).Version = 3;
+                                    break;
+                                }
+                            case "D4": // Wood Custom V4
+                            case "94": // Wood Custom V3
+                                {
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodCust).Equip = true;
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodCust).Version = 3;
+                                    break;
+                                }
+                            case "D9": // Elec Team V4
+                            case "99": // Elec Team V3
+                                {
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecTeam).Equip = true;
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecTeam).Version = 3;
+                                    break;
+                                }
+                            case "DA": // Heat Team V4
+                            case "9A": // Heat Team V3
+                                {
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatTeam).Equip = true;
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatTeam).Version = 3;
+                                    break;
+                                }
+                            case "DB": // Aqua Team V4
+                            case "9B": // Aqua Team V3
+                                {
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaTeam).Equip = true;
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaTeam).Version = 3;
+                                    break;
+                                }
+                            case "DC": // Wood Team V4
+                            case "9C": // Wood Team V3
+                                {
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodTeam).Equip = true;
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodTeam).Version = 3;
+                                    break;
+                                }
+                            case "E1": // Elec Shield V4
+                            case "A1": // Elec Shield V3
+                                {
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecShield).Equip = true;
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecShield).Version = 3;
+                                    break;
+                                }
+                            case "E2": // Heat Shield V4
+                            case "A2": // Heat Shield V3
+                                {
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatShield).Equip = true;
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatShield).Version = 3;
+                                    break;
+                                }
+                            case "E3": // Aqua Shield V4
+                            case "A3": // Aqua Shield V3
+                                {
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaShield).Equip = true;
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaShield).Version = 3;
+                                    break;
+                                }
+                            case "E4": // Wood Shield V4
+                            case "A4": // Wood Shield V3
+                                {
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodShield).Equip = true;
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodShield).Version = 3;
+                                    break;
+                                }
+                            case "E8": // Hub Style V4
+                            case "A8": // Hub Style V3
+                                {
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.Hub).Equip = true;
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.Hub).Version = 3;
+                                    break;
+                                }
+                            default: //default to normal
+                                {
+                                    _tempStyles.FirstOrDefault(x => x.Name == Style.Value.Normal).Equip = true;
+                                    break;
+                                }
+
+
+                        }
+
                         _styles = _tempStyles;
                         break;
                     }
