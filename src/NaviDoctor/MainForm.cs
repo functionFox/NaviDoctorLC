@@ -324,22 +324,59 @@ namespace NaviDoctor
 
         private void btnRemoveChip_Click(object sender, EventArgs e)
         {
+            switch (saveData.GameName)
+            {
+                case GameTitle.Title.MegaManBattleNetwork:
+                    {
+                        RemoveChip(dgvFolder1, saveData.FolderData);
+                        break;
+                    }
+                case GameTitle.Title.MegaManBattleNetwork2:
+                    {
+                        switch (tabsFolders.SelectedIndex)
+                        {
+                            case 0:
+                                {
+                                    RemoveChip(dgvFolder1, saveData.FolderData);
+                                    break;
+                                }
+                            case 1:
+                                {
+                                    RemoveChip(dgvFolder2, saveData.Folder2Data);
+                                    break;
+                                }
+                            case 2:
+                                {
+                                    RemoveChip(dgvFolder3, saveData.Folder3Data);
+                                    break;
+                                }
+                            default:
+                                break;
+                        }
+                        break;
+                    }
+            }
+           
+        }
+
+        private void RemoveChip(DataGridView dgvFolder, List<Tuple<int, int>> folderData)
+        {
             // Check if there is a selected row in the Folder DataGridView
-            if (dgvFolder1.SelectedRows.Count > 0)
+            if (dgvFolder.SelectedRows.Count > 0)
             {
                 // Get the selected chip ID
-                int chipID = (int)dgvFolder1.SelectedRows[0].Cells["ID"].Value;
-                string chipCode = (string)dgvFolder1.SelectedRows[0].Cells["Code"].Value;
+                int chipID = (int)dgvFolder.SelectedRows[0].Cells["ID"].Value;
+                string chipCode = (string)dgvFolder.SelectedRows[0].Cells["Code"].Value;
                 int chipInt = 26; // Assuming * code unless told otherwise.
                 if (chipCode != "*") chipInt = chipCode[0] - 'A';
 
                 // Find the first occurrence of the chip in the FolderData list
-                var chipToRemove = saveData.FolderData.FirstOrDefault(data => data.Item1 == chipID && data.Item2 == chipInt);
+                var chipToRemove = folderData.FirstOrDefault(data => data.Item1 == chipID && data.Item2 == chipInt);
 
                 // Remove the chip if found
                 if (chipToRemove != null)
                 {
-                    saveData.FolderData.Remove(chipToRemove);
+                    folderData.Remove(chipToRemove);
                 }
                 else
                 {
@@ -353,7 +390,10 @@ namespace NaviDoctor
             {
                 MessageBox.Show("Please select a chip in the Folder view.");
             }
+
+            UpdateFolderCount();
         }
+
         // check the quantity of a chip ID and code in the Folder
         private int GetChipQuantityInFolder(int chipID, string chipCode)
         { 
@@ -449,7 +489,7 @@ namespace NaviDoctor
                 {
                     MessageBox.Show($"The limit for Navi Chips cannot exceed {maxNaviChips}.");
                 }
-                else if (saveData.FolderData.Count >= maxTotalChipsInFolder)
+                else if (folderData.Count >= maxTotalChipsInFolder)
                 {
                     MessageBox.Show($"The number of chips in the folder cannot exceed {maxTotalChipsInFolder}.");
                 }
@@ -466,8 +506,8 @@ namespace NaviDoctor
                     }
 
                     // Add the chip to the FolderData list with the selected chip code
-                    if (chipCode != "*") saveData.FolderData.Add(new Tuple<int, int>(chipID, chipCode[0] - 'A'));
-                    else saveData.FolderData.Add(new Tuple<int, int>(chipID, 26));
+                    if (chipCode != "*") folderData.Add(new Tuple<int, int>(chipID, chipCode[0] - 'A'));
+                    else folderData.Add(new Tuple<int, int>(chipID, 26));
 
                     // Refresh the Folder DataGridView
                     LoadFolderData(saveData);
@@ -477,6 +517,7 @@ namespace NaviDoctor
             {
                 MessageBox.Show("Please select a chip in the Pack view.");
             }
+            UpdateFolderCount();
         }
 
         private void PackageChips()
@@ -2035,7 +2076,12 @@ namespace NaviDoctor
 
         private void tabsFolders_SelectedIndexChanged(object sender, EventArgs e)
         {
-            switch(tabsFolders.SelectedIndex)
+            UpdateFolderCount();
+        }
+
+        private void UpdateFolderCount()
+        {
+            switch (tabsFolders.SelectedIndex)
             {
                 case 0:
                     lblFolderCount.Text = $"Folder1 Count: {dgvFolder1.RowCount}";
