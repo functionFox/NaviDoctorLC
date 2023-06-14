@@ -607,6 +607,7 @@ namespace NaviDoctor
             this.panelBugFragRegMem.Name = "panelBugFragRegMem";
             this.panelBugFragRegMem.Size = new System.Drawing.Size(258, 119);
             this.panelBugFragRegMem.TabIndex = 21;
+            this.panelBugFragRegMem.Visible = false;
             // 
             // label10
             // 
@@ -673,6 +674,7 @@ namespace NaviDoctor
             this.panelSubChips.Name = "panelSubChips";
             this.panelSubChips.Size = new System.Drawing.Size(258, 109);
             this.panelSubChips.TabIndex = 20;
+            this.panelSubChips.Visible = false;
             // 
             // panel_MegamanZennyAndSteamID
             // 
@@ -813,7 +815,7 @@ namespace NaviDoctor
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(123, 10);
+            this.label14.Location = new System.Drawing.Point(123, 12);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(51, 17);
             this.label14.TabIndex = 15;
@@ -833,7 +835,7 @@ namespace NaviDoctor
             // 
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.Location = new System.Drawing.Point(123, 70);
+            this.label16.Location = new System.Drawing.Point(125, 68);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(64, 17);
             this.label16.TabIndex = 19;
@@ -875,49 +877,29 @@ namespace NaviDoctor
             // nudMiniEnrg
             // 
             this.nudMiniEnrg.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nudMiniEnrg.Location = new System.Drawing.Point(65, 8);
+            this.nudMiniEnrg.Location = new System.Drawing.Point(74, 8);
             this.nudMiniEnrg.Maximum = new decimal(new int[] {
             8,
-            0,
-            0,
-            0});
-            this.nudMiniEnrg.Minimum = new decimal(new int[] {
-            1,
             0,
             0,
             0});
             this.nudMiniEnrg.Name = "nudMiniEnrg";
             this.nudMiniEnrg.Size = new System.Drawing.Size(43, 23);
             this.nudMiniEnrg.TabIndex = 12;
-            this.nudMiniEnrg.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             this.nudMiniEnrg.ValueChanged += new System.EventHandler(this.nudMiniEnrg_ValueChanged);
             // 
             // nudFullEnrg
             // 
             this.nudFullEnrg.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nudFullEnrg.Location = new System.Drawing.Point(65, 37);
+            this.nudFullEnrg.Location = new System.Drawing.Point(74, 37);
             this.nudFullEnrg.Maximum = new decimal(new int[] {
             8,
-            0,
-            0,
-            0});
-            this.nudFullEnrg.Minimum = new decimal(new int[] {
-            1,
             0,
             0,
             0});
             this.nudFullEnrg.Name = "nudFullEnrg";
             this.nudFullEnrg.Size = new System.Drawing.Size(43, 23);
             this.nudFullEnrg.TabIndex = 20;
-            this.nudFullEnrg.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             this.nudFullEnrg.ValueChanged += new System.EventHandler(this.nudFullEnrg_ValueChanged);
             // 
             // nudSneakRun
@@ -929,43 +911,23 @@ namespace NaviDoctor
             0,
             0,
             0});
-            this.nudSneakRun.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             this.nudSneakRun.Name = "nudSneakRun";
             this.nudSneakRun.Size = new System.Drawing.Size(43, 23);
             this.nudSneakRun.TabIndex = 21;
-            this.nudSneakRun.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             this.nudSneakRun.ValueChanged += new System.EventHandler(this.nudSneakRun_ValueChanged);
             // 
             // nudUntrap
             // 
             this.nudUntrap.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nudUntrap.Location = new System.Drawing.Point(180, 10);
+            this.nudUntrap.Location = new System.Drawing.Point(203, 10);
             this.nudUntrap.Maximum = new decimal(new int[] {
             8,
-            0,
-            0,
-            0});
-            this.nudUntrap.Minimum = new decimal(new int[] {
-            1,
             0,
             0,
             0});
             this.nudUntrap.Name = "nudUntrap";
             this.nudUntrap.Size = new System.Drawing.Size(43, 23);
             this.nudUntrap.TabIndex = 22;
-            this.nudUntrap.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             this.nudUntrap.ValueChanged += new System.EventHandler(this.nudUntrap_ValueChanged);
             // 
             // nudLocEnemy
@@ -977,43 +939,23 @@ namespace NaviDoctor
             0,
             0,
             0});
-            this.nudLocEnemy.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             this.nudLocEnemy.Name = "nudLocEnemy";
             this.nudLocEnemy.Size = new System.Drawing.Size(43, 23);
             this.nudLocEnemy.TabIndex = 23;
-            this.nudLocEnemy.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             this.nudLocEnemy.ValueChanged += new System.EventHandler(this.nudLocEnemy_ValueChanged);
             // 
             // nudUnlocker
             // 
             this.nudUnlocker.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nudUnlocker.Location = new System.Drawing.Point(193, 68);
+            this.nudUnlocker.Location = new System.Drawing.Point(203, 68);
             this.nudUnlocker.Maximum = new decimal(new int[] {
             8,
-            0,
-            0,
-            0});
-            this.nudUnlocker.Minimum = new decimal(new int[] {
-            1,
             0,
             0,
             0});
             this.nudUnlocker.Name = "nudUnlocker";
             this.nudUnlocker.Size = new System.Drawing.Size(43, 23);
             this.nudUnlocker.TabIndex = 24;
-            this.nudUnlocker.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             this.nudUnlocker.ValueChanged += new System.EventHandler(this.nudUnlocker_ValueChanged);
             // 
             // MainForm

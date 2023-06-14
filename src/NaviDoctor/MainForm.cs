@@ -642,6 +642,7 @@ namespace NaviDoctor
 
             //Show the current game loaded
             lblGameVersion.Text = $"Loaded: {saveData.GameName.GetString()}";
+            UpdateFolderCount();
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1444,7 +1445,7 @@ namespace NaviDoctor
                                                     break;
                                             }
                                         }
-                                        else if (style.Add.GetValueOrDefault(false))
+                                        if (style.Add.GetValueOrDefault(false))
                                         {
                                             saveData.StyleTypes.Add(Convert.ToInt32("198", 16));
                                             switch(index)
@@ -1477,7 +1478,7 @@ namespace NaviDoctor
                                                     break;
                                             }
                                         }
-                                        else if (style.Add.GetValueOrDefault(false))
+                                        if (style.Add.GetValueOrDefault(false))
                                         {
                                             saveData.StyleTypes.Add(Convert.ToInt32("199", 16));
                                             switch (index)
@@ -1510,7 +1511,7 @@ namespace NaviDoctor
                                                     break;
                                             }
                                         }
-                                        else if (style.Add.GetValueOrDefault(false))
+                                        if (style.Add.GetValueOrDefault(false))
                                         {
                                             saveData.StyleTypes.Add(Convert.ToInt32("197", 16));
                                             switch (index)
@@ -1543,7 +1544,7 @@ namespace NaviDoctor
                                                     break;
                                             }
                                         }
-                                        else if (style.Add.GetValueOrDefault(false))
+                                        if (style.Add.GetValueOrDefault(false))
                                         {
                                             saveData.StyleTypes.Add(Convert.ToInt32("196", 16));
                                             switch (index)
@@ -1576,7 +1577,7 @@ namespace NaviDoctor
                                                     break;
                                             }
                                         }
-                                        else if (style.Add.GetValueOrDefault(false))
+                                        if (style.Add.GetValueOrDefault(false))
                                         {
                                             saveData.StyleTypes.Add(Convert.ToInt32("19D", 16));
                                             switch (index)
@@ -1609,7 +1610,7 @@ namespace NaviDoctor
                                                     break;
                                             }
                                         }
-                                        else if (style.Add.GetValueOrDefault(false))
+                                        if (style.Add.GetValueOrDefault(false))
                                         {
                                             saveData.StyleTypes.Add(Convert.ToInt32("19E", 16));
                                             switch (index)
@@ -1642,7 +1643,7 @@ namespace NaviDoctor
                                                     break;
                                             }
                                         }
-                                        else if (style.Add.GetValueOrDefault(false))
+                                        if (style.Add.GetValueOrDefault(false))
                                         {
                                             saveData.StyleTypes.Add(Convert.ToInt32("19C", 16));
                                             switch (index)
@@ -1675,7 +1676,7 @@ namespace NaviDoctor
                                                     break;
                                             }
                                         }
-                                        else if (style.Add.GetValueOrDefault(false))
+                                        if (style.Add.GetValueOrDefault(false))
                                         {
                                             saveData.StyleTypes.Add(Convert.ToInt32("19B", 16));
                                             switch (index)
@@ -1708,7 +1709,7 @@ namespace NaviDoctor
                                                     break;
                                             }
                                         }
-                                        else if (style.Add.GetValueOrDefault(false))
+                                        if (style.Add.GetValueOrDefault(false))
                                         {
                                             saveData.StyleTypes.Add(Convert.ToInt32("1A2", 16));
                                             switch (index)
@@ -1741,7 +1742,7 @@ namespace NaviDoctor
                                                     break;
                                             }
                                         }
-                                        else if (style.Add.GetValueOrDefault(false))
+                                        if (style.Add.GetValueOrDefault(false))
                                         {
                                             saveData.StyleTypes.Add(Convert.ToInt32("1A3", 16));
                                             switch (index)
@@ -1774,7 +1775,7 @@ namespace NaviDoctor
                                                     break;
                                             }
                                         }
-                                        else if (style.Add.GetValueOrDefault(false))
+                                        if (style.Add.GetValueOrDefault(false))
                                         {
                                             saveData.StyleTypes.Add(Convert.ToInt32("1A1", 16));
                                             switch (index)
@@ -1807,7 +1808,7 @@ namespace NaviDoctor
                                                     break;
                                             }
                                         }
-                                        else if (style.Add.GetValueOrDefault(false))
+                                        if (style.Add.GetValueOrDefault(false))
                                         {
                                             saveData.StyleTypes.Add(Convert.ToInt32("1A0", 16));
                                             switch (index)
@@ -1840,7 +1841,7 @@ namespace NaviDoctor
                                                     break;
                                             }
                                         }
-                                        else if (style.Add.GetValueOrDefault(false))
+                                        if (style.Add.GetValueOrDefault(false))
                                         {
                                             saveData.StyleTypes.Add(Convert.ToInt32("1A7", 16));
                                             switch (index)
@@ -1873,7 +1874,7 @@ namespace NaviDoctor
                                                     break;
                                             }
                                         }
-                                        else if (style.Add.GetValueOrDefault(false))
+                                        if (style.Add.GetValueOrDefault(false))
                                         {
                                             saveData.StyleTypes.Add(Convert.ToInt32("1A8", 16));
                                             switch (index)
@@ -1906,7 +1907,7 @@ namespace NaviDoctor
                                                     break;
                                             }
                                         }
-                                        else if (style.Add.GetValueOrDefault(false))
+                                        if (style.Add.GetValueOrDefault(false))
                                         {
                                             saveData.StyleTypes.Add(Convert.ToInt32("1A6", 16));
                                             switch (index)
@@ -1939,7 +1940,7 @@ namespace NaviDoctor
                                                     break;
                                             }
                                         }
-                                        else if (style.Add.GetValueOrDefault(false))
+                                        if (style.Add.GetValueOrDefault(false))
                                         {
                                             saveData.StyleTypes.Add(Convert.ToInt32("1A5", 16));
                                             switch (index)
@@ -1972,7 +1973,7 @@ namespace NaviDoctor
                                                     break;
                                             }
                                         }
-                                        else if (style.Add.GetValueOrDefault(false))
+                                        if (style.Add.GetValueOrDefault(false))
                                         {
                                             saveData.StyleTypes.Add(Convert.ToInt32("1A9", 16));
                                             switch (index)
@@ -2025,12 +2026,10 @@ namespace NaviDoctor
                     if (tabsFolders.TabPages.Contains(tabPage_Folder2)) tabsFolders.TabPages.Remove(tabPage_Folder2);
                     if (tabsFolders.TabPages.Contains(tabPage_Folder3)) tabsFolders.TabPages.Remove(tabPage_Folder3);
                     btnSelectStyles.Enabled = true;
-                    nudBugFrag.Enabled = false;
-                    nudRegMem.Enabled = false;
+                    panelBugFragRegMem.Visible = false;
+                    panelSubChips.Visible = false;
                     break;
                 case GameTitle.Title.MegaManBattleNetwork2:
-                    nudBugFrag.Enabled = true;
-                    nudRegMem.Enabled = true;
                     switch (saveData.Folders)
                     {
                         case 1:
@@ -2049,6 +2048,8 @@ namespace NaviDoctor
                             break;
                     }
                     btnSelectStyles.Enabled = true;
+                    panelBugFragRegMem.Visible = true;
+                    panelSubChips.Visible = true;
                     break;
                 case GameTitle.Title.MegaManBattleNetwork3White:
                 case GameTitle.Title.MegaManBattleNetwork3Blue:

@@ -396,6 +396,15 @@ namespace NaviDoctor
                         } 
                     }
 
+                    saveData[BugfragOffset] = (byte)saveDataObject.BugFrags;
+                    saveData[SubFullOffset] = (byte)saveDataObject.SubFullEnrg;
+                    saveData[SubLocEnOffset] = (byte)saveDataObject.SubLocEnemy;
+                    saveData[SubMiniOffset] = (byte)saveDataObject.SubMiniEnrg;
+                    saveData[SubSneakOffset] = (byte)saveDataObject.SubSneakRun;
+                    saveData[SubUnlockerOffset] = (byte)saveDataObject.SubUnlocker;
+                    saveData[SubUntrapOffset] = (byte)saveDataObject.SubUntrap;
+                    saveData[RegMemOffset] = (byte)saveDataObject.RegMem;
+
                     for (int i = FolderOffsetStart; i <= Folder3OffsetEnd; i += 4)
                     {
                         if (i >= FolderOffsetStart && i <= FolderOffsetEnd)
