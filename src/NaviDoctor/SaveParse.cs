@@ -52,7 +52,7 @@ namespace NaviDoctor
         private int LibraryOffsetEnd;
         private int PALibStart;
         private int PALibEnd;
-        private string saveFilePath;
+        public string saveFilePath;
         private byte[] saveData;
 
         public SaveParse(string filePath)
@@ -350,7 +350,7 @@ namespace NaviDoctor
 
                     for (int i = FolderOffsetStart; i <= FolderOffsetEnd; i += 2) // Only one folder to save for BN1
                     {
-                        CopyFolderData(saveDataObject.FolderData, i);
+                        CopyFolderData(saveDataObject.FolderData, i, FolderOffsetStart);
                     }
 
                     for (int i = BattleOffsetStart; i < BattleOffsetEnd; i++)
@@ -379,7 +379,7 @@ namespace NaviDoctor
                         saveData[i] = 0;
                     }
 
-                    for (int i = 1; i <= 2; i++) // Let's save some styles.
+                    for (int i = 1; i < saveDataObject.StyleTypes.Count; i++) // Let's save some styles.
                     {
                         if (saveDataObject.StyleTypes[i] == 0)
                         {
@@ -400,15 +400,15 @@ namespace NaviDoctor
                     {
                         if (i >= FolderOffsetStart && i <= FolderOffsetEnd)
                         {
-                            CopyFolderData(saveDataObject.FolderData, i, 2);
-                        }
-                        if (i >= Folder2OffsetStart && i <= Folder2OffsetEnd && saveDataObject.Folders >= 2)
+                            CopyFolderData(saveDataObject.FolderData, i, FolderOffsetStart, 2);
+                        } 
+                        else if (i >= Folder2OffsetStart && i <= Folder2OffsetEnd && saveDataObject.Folders >= 2)
                         {
-                            CopyFolderData(saveDataObject.Folder2Data, i, 2);
+                            CopyFolderData(saveDataObject.Folder2Data, i, Folder2OffsetStart, 2);
                         }
-                        if (i >= Folder3OffsetStart && i <= Folder3OffsetEnd && saveDataObject.Folders >= 3)
+                        else if (i >= Folder3OffsetStart && i <= Folder3OffsetEnd && saveDataObject.Folders >= 3)
                         {
-                            CopyFolderData(saveDataObject.Folder3Data, i, 2);
+                            CopyFolderData(saveDataObject.Folder3Data, i, Folder3OffsetStart, 2);
                         }
                     }
 
@@ -454,9 +454,9 @@ namespace NaviDoctor
 
         }
 
-        private void CopyFolderData(List<Tuple<int, int>> folderData, int index, int bitMulti = 1)
+        private void CopyFolderData(List<Tuple<int, int>> folderData, int index, int offset, int bitMulti = 1)
         {
-            Tuple<int, int> value = folderData[(index - FolderOffsetStart) / (2 * bitMulti)];
+            Tuple<int, int> value = folderData[(index - offset) / (2 * bitMulti)];
             Buffer.BlockCopy(BitConverter.GetBytes(value.Item1), 0, saveData, index, bitMulti);
             Buffer.BlockCopy(BitConverter.GetBytes(value.Item2), 0, saveData, index + bitMulti, bitMulti);  
         }

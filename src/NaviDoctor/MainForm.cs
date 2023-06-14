@@ -17,6 +17,7 @@ namespace NaviDoctor
     {
         private SaveDataObject saveData;
         private List<Style> _styles;
+        private SaveParse _openFile;
 
         public MainForm()
         {
@@ -548,8 +549,8 @@ namespace NaviDoctor
             {
                 try
                 {
-                    SaveParse saveParse = new SaveParse(openFile.FileName);
-                    LoadFile(saveParse);
+                    _openFile = new SaveParse(openFile.FileName);
+                    LoadFile(_openFile);
                 }
                 catch (Exception ex)
                 {
@@ -631,9 +632,14 @@ namespace NaviDoctor
             if (saveFile.ShowDialog() == DialogResult.OK)
             {
                 try
-                {
-                    SaveParse saveParse = new SaveParse(saveFile.FileName);
-                    SaveFile(saveParse);
+                { 
+                    if (_openFile.saveFilePath == saveFile.FileName && File.Exists(saveFile.FileName))
+                    {
+                        _openFile.saveFilePath = saveFile.FileName + ".backup";
+                        _openFile.SaveChanges();
+                    }
+                    _openFile.saveFilePath = saveFile.FileName;
+                    SaveFile(_openFile);
                 }
                 catch (Exception ex)
                 {
