@@ -437,7 +437,7 @@ namespace NaviDoctor
             this.programAdvanceMemoToolStripMenuItem.Name = "programAdvanceMemoToolStripMenuItem";
             this.programAdvanceMemoToolStripMenuItem.Size = new System.Drawing.Size(313, 34);
             this.programAdvanceMemoToolStripMenuItem.Text = "Program Advance Memo";
-            this.programAdvanceMemoToolStripMenuItem.Click += new System.EventHandler(this.nudLocEnemy_ValueChanged);
+            this.programAdvanceMemoToolStripMenuItem.Click += new System.EventHandler(this.programAdvanceMemoToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
