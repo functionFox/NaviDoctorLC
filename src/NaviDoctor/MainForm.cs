@@ -2053,8 +2053,10 @@ namespace NaviDoctor
                     btnSelectStyles.Enabled = true;
                     panelBugFragRegMem.Visible = false;
                     panelSubChips.Visible = false;
+                    programAdvanceMemoToolStripMenuItem.Enabled = false;
                     break;
                 case GameTitle.Title.MegaManBattleNetwork2:
+                    programAdvanceMemoToolStripMenuItem.Enabled = true;
                     switch (saveData.Folders)
                     {
                         case 1:
@@ -2196,15 +2198,6 @@ namespace NaviDoctor
         private void programAdvanceMemoToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
-            // Check if a save file has been loaded
-            if (saveData == null)
-            {
-                MessageBox.Show("Please load a save file first.");
-                return; // Exit the event handler
-            }
-
-            // Call the GenerateLibraryWindow method to display the library data
-            GenerateLibraryWindow(saveData, true);
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)

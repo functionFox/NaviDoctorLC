@@ -403,7 +403,11 @@ namespace NaviDoctor
                     saveData[SubSneakOffset] = (byte)saveDataObject.SubSneakRun;
                     saveData[SubUnlockerOffset] = (byte)saveDataObject.SubUnlocker;
                     saveData[SubUntrapOffset] = (byte)saveDataObject.SubUntrap;
+                    saveData[SubMaxOffset] = (byte)saveDataObject.SubChipMax;
                     saveData[RegMemOffset] = (byte)saveDataObject.RegMem;
+                    saveData[RegChip1Offset] = 0xFF; // Turn off the regular chips.
+                    saveData[RegChip2Offset] = 0xFF;
+                    saveData[RegChip3Offset] = 0xFF;
 
                     for (int i = FolderOffsetStart; i <= Folder3OffsetEnd; i += 4)
                     {
