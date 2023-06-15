@@ -2197,7 +2197,15 @@ namespace NaviDoctor
 
         private void programAdvanceMemoToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            // Check if a save file has been loaded
+            if (saveData == null)
+            {
+                MessageBox.Show("Please load a save file first.");
+                return; // Exit the event handler
+            }
 
+            // Call the GenerateLibraryWindow method to display the library data
+            GenerateLibraryWindow(saveData, true);
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
