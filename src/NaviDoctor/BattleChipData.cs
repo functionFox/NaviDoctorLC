@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.IO;
 using System.Windows.Forms;
+using NaviDoctor.models;
 
 namespace NaviDoctor
 {
@@ -527,12 +528,12 @@ namespace NaviDoctor
             new BattleChipData { ID = 0x107, Name = "ElecGspl" },
             new BattleChipData { ID = 0x108, Name = "WoodGspl" },
             new BattleChipData { ID = 0x109, Name = "GateSP" },
-            new BattleChipData { ID = 0x10A, Name = "10A" },
-            new BattleChipData { ID = 0x10B, Name = "10B" },
-            new BattleChipData { ID = 0x10C, Name = "10C" },
-            new BattleChipData { ID = 0x10D, Name = "10D" },
+            new BattleChipData { ID = 0x10A, Name = "0A" }, // Shortened due to how the Library currently operates.
+            new BattleChipData { ID = 0x10B, Name = "0B" },
+            new BattleChipData { ID = 0x10C, Name = "0C" },
+            new BattleChipData { ID = 0x10D, Name = "0D" },
             new BattleChipData { ID = 0x10E, Name = "Snctuary" },
-            new BattleChipData { ID = 0x10F, Name = "10F" },
+            new BattleChipData { ID = 0x10F, Name = "0F" },
             new BattleChipData { ID = 0x110, Name = "Z-Canon1" },
             new BattleChipData { ID = 0x111, Name = "Z-Canon2" },
             new BattleChipData { ID = 0x112, Name = "Z-Canon3" },
@@ -859,7 +860,7 @@ namespace NaviDoctor
             { "Kunai1", new List<string> { "E", "I", "L", "P", "S", "None" } },
             { "Kunai2", new List<string> { "D", "F", "J", "Q", "R", "None" } },
             { "Kunai3", new List<string> { "C", "G", "H", "K", "N", "None" } },
-            { "Slasher ", new List<string> { "A", "D", "H", "L", "Q", "*" } },
+            { "Slasher", new List<string> { "A", "D", "H", "L", "Q", "*" } },
             { "Shockwav", new List<string> { "H", "J", "L", "R", "U", "None" } },
             { "Sonicwav", new List<string> { "E", "I", "M", "S", "W", "None" } },
             { "Dynawave", new List<string> { "G", "N", "Q", "T", "V", "None" } },
@@ -942,7 +943,7 @@ namespace NaviDoctor
             { "BrnzFist", new List<string> { "B", "N", "O", "R", "S", "None" } },
             { "SilvFist", new List<string> { "E", "I", "L", "S", "V", "None" } },
             { "GoldFist", new List<string> { "D", "G", "L", "O", "Z", "None" } },
-            { "VarSwrd", new List<string> { "B", "L", "N", "T", "Z" } },
+            { "VarSwrd", new List<string> { "B", "L", "N", "T", "Z", "None" } },
             { "Recov10", new List<string> { "A", "C", "E", "G", "L", "*" } },
             { "Recov30", new List<string> { "B", "D", "F", "H", "M", "*" } },
             { "Recov50", new List<string> { "C", "E", "G", "I", "N", "*" } },
@@ -1018,7 +1019,7 @@ namespace NaviDoctor
             { "Roll", new List<string> { "R", "*" } },
             { "Roll V2", new List<string> { "R", "*" } },
             { "Roll V3", new List<string> { "R", "None" } },
-            { "GutsMan ", new List<string> { "G", "*" } },
+            { "GutsMan", new List<string> { "G", "*" } },
             { "GutsMan V2", new List<string> { "G", "None" } },
             { "GutsMan V3", new List<string> { "G", "None" } },
             { "ProtoMan", new List<string> { "B", "*" } },
@@ -1063,7 +1064,7 @@ namespace NaviDoctor
             { "PlanetMn", new List<string> { "P", "None" } },
             { "PlnetMn V2", new List<string> { "P", "None" } },
             { "PlnetMn V3", new List<string> { "P", "None" } },
-            { "NapalmMnV3", new List<string> { "N", "None" } },
+            { "NapalmMn", new List<string> { "N", "None" } },
             { "NaplmMn V2", new List<string> { "N", "None" } },
             { "NaplmMn V3", new List<string> { "N", "None" } },
             { "PharoMan", new List<string> { "P", "None" } },
@@ -1087,12 +1088,12 @@ namespace NaviDoctor
             { "ElecGspl", new List<string> { "X", "None", "None", "None", "None", "None" } },
             { "WoodGspl", new List<string> { "X", "None", "None", "None", "None", "None" } },
             { "GateSP", new List<string> { "G", "None", "None", "None", "None", "None" } },
-            { "10A", new List<string> { "None", "None", "None", "None", "None", "None" } },
-            { "10B", new List<string> { "None", "None", "None", "None", "None", "None" } },
-            { "10C", new List<string> { "None", "None", "None", "None", "None", "None" } },
-            { "10D", new List<string> { "None", "None", "None", "None", "None", "None" } },
+            { "0A", new List<string> { "None", "None", "None", "None", "None", "None" } }, // ID 10A
+            { "0B", new List<string> { "None", "None", "None", "None", "None", "None" } }, // ID 10B
+            { "0C", new List<string> { "None", "None", "None", "None", "None", "None" } }, // ID 10C
+            { "0D", new List<string> { "None", "None", "None", "None", "None", "None" } }, // ID 10D
             { "Snctuary", new List<string> { "A", "C", "E", "L", "S", "None" } },
-            { "10F", new List<string> { "None", "None", "None", "None", "None", "None" } },
+            { "0F", new List<string> { "None", "None", "None", "None", "None", "None" } }, // ID 10F
             { "Z-Canon1", new List<string> { "None", "None", "None", "None", "None", "None" } },
             { "Z-Canon2", new List<string> { "None", "None", "None", "None", "None", "None" } },
             { "Z-Canon3", new List<string> { "None", "None", "None", "None", "None", "None" } },
@@ -1127,12 +1128,28 @@ namespace NaviDoctor
             { "Darkness", new List<string> { "None", "None", "None", "None", "None", "None" } }
         };
 
-        public List<BattleChipData> GenerateChipEntries()
+        public List<BattleChipData> GenerateChipEntries(SaveDataObject saveData)
         {
             List<BattleChipData> chipEntries = new List<BattleChipData>();
+            Dictionary<string, List<string>> chipCodeMap;
+            List<BattleChipData> chipNameMap;
+
+            switch (saveData.GameName)
+            {
+                case GameTitle.Title.MegaManBattleNetwork:
+                    chipCodeMap = BN1ChipCodeMap;
+                    chipNameMap = BN1ChipNameMap;
+                    break;
+                case GameTitle.Title.MegaManBattleNetwork2:
+                    chipCodeMap = BN2ChipCodeMap;
+                    chipNameMap = BN2ChipNameMap;
+                    break;
+                default:
+                    return chipEntries;
+            }
 
             // Generate chip entries for each chip name and associated codes
-            foreach (var kvp in BN1ChipCodeMap)
+            foreach (var kvp in chipCodeMap)
             {
                 string chipName = kvp.Key;
                 List<string> chipCodes = kvp.Value;
@@ -1141,7 +1158,7 @@ namespace NaviDoctor
                 {
                     BattleChipData chipEntry = new BattleChipData
                     {
-                        ID = GetChipIDByName(BN1ChipNameMap, chipName),
+                        ID = GetChipIDByName(chipNameMap, chipName),
                         Name = chipName,
                         Code = chipCode,
                         Quantity = 0 // Set the initial quantity to 0

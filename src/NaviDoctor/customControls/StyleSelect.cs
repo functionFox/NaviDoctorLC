@@ -15,6 +15,7 @@ namespace NaviDoctor.customControls
     public partial class StyleSelect : UserControl
     {
         public event EventHandler EquipStyleChecked;
+        public event EventHandler AddStyleChecked;
         public Style.Value StyleValue {get; set;}
 
         public bool AddStyle
@@ -35,17 +36,42 @@ namespace NaviDoctor.customControls
             set => radEquipStyle.Text = value;
         }
 
+        public int Version
+        {
+            get => (int)nudVersion.Value;
+            set => nudVersion.Value = value;
+        }
+
         public StyleSelect()
         {
             InitializeComponent();
         }
 
-        public StyleSelect(Style.Value styleName)
+        public StyleSelect(Style style, GameTitle.Title title)
         {
             InitializeComponent();
-            StyleValue = styleName;
-            StyleName = styleName.GetString();
+            StyleValue = style.Name;
+            StyleName = style.Name.GetString();
+            switch(title)
+            {
+                case GameTitle.Title.MegaManBattleNetwork:
+                    nudVersion.Visible = false;
+                    break;
+                case GameTitle.Title.MegaManBattleNetwork2:
+                    break;
+
+            }
+            if(style.Name == Style.Value.Normal)
+            {
+                cbxAddStyle.Visible = false;
+                nudVersion.Visible = false;
+            }
+            if(style.Name == Style.Value.Hub)
+            {
+                nudVersion.Visible = false;
+            }
             radEquipStyle.CheckedChanged += (s, e) => EquipStyleChecked?.Invoke(this, e);
+            cbxAddStyle.CheckedChanged += (s, e) => AddStyleChecked?.Invoke(this, e);
         }
     }
 }

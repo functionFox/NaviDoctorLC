@@ -14,6 +14,9 @@ namespace NaviDoctor
 {
     public partial class StyleLoader : Form
     {
+        private const int MAX_STYLE_BN2 = 2;
+        private int currentAddCount = 0;
+        private GameTitle.Title _currentGame;
         private Style.Value _currentEquipStyle;
         public List<Style> _styles;
 
@@ -22,10 +25,22 @@ namespace NaviDoctor
             InitializeComponent();
         }
 
-        public StyleLoader( List<Style> styles)
+        public StyleLoader(List<Style> styles, GameTitle.Title title)
         {
             InitializeComponent();
             _styles = styles;
+            _currentGame = title;
+            if (_currentGame == GameTitle.Title.MegaManBattleNetwork) label3.Visible = false;
+            switch(title)
+            {
+                case GameTitle.Title.MegaManBattleNetwork:
+                    this.Height = 245;
+                    break;
+                case GameTitle.Title.MegaManBattleNetwork2:
+                    this.Height = 680;
+                    this.Width = 292;
+                    break;
+            }
             PopulateStyles();
         }
 
@@ -33,11 +48,15 @@ namespace NaviDoctor
         {
             foreach(var style in _styles)
             {
-                var styleSelect = new StyleSelect(style.Name);
+                var styleSelect = new StyleSelect(style, _currentGame);
                 styleSelect.EquipStyle = _styles.FirstOrDefault(x => x.Name == style.Name).Equip.GetValueOrDefault();
                 styleSelect.AddStyle = _styles.FirstOrDefault(x => x.Name == style.Name).Add.GetValueOrDefault();
+                if (_currentGame == GameTitle.Title.MegaManBattleNetwork2 && style.Name != Style.Value.Normal)
+                {
+                    styleSelect.Version = _styles.FirstOrDefault(x => x.Name == style.Name).Version.GetValueOrDefault();
+                }
                 styleSelect.EquipStyleChecked += (s, e) => EquipCheck(styleSelect);
-                //Most likely will need to also add an AddStyleCheck since we won't allow users to add all styles for BN2
+                styleSelect.AddStyleChecked += (s, e) => AddCheck();
                 flpStyleChange.Controls.Add(styleSelect);
             }
         }
@@ -57,12 +76,32 @@ namespace NaviDoctor
             }
         }
 
+        private void AddCheck()
+        {
+            currentAddCount = 0;
+            foreach (StyleSelect style in flpStyleChange.Controls)
+            {
+                if (style.AddStyle) currentAddCount++;
+
+                if (_currentGame == GameTitle.Title.MegaManBattleNetwork2)
+                {
+                    if (currentAddCount > MAX_STYLE_BN2)
+                    {
+                        MessageBox.Show($"You can only select {MAX_STYLE_BN2} styles to add.", "Error", MessageBoxButtons.OK);
+                        style.AddStyle = false;
+                        return;
+                    } 
+                }
+            }
+        }
+
         private void GetStyles()
         {
             foreach (StyleSelect style in flpStyleChange.Controls)
             {
                 _styles.FirstOrDefault(x => x.Name == style.StyleValue).Equip = style.EquipStyle;
                 _styles.FirstOrDefault(x => x.Name == style.StyleValue).Add = style.AddStyle;
+                if (_currentGame == GameTitle.Title.MegaManBattleNetwork2) { _styles.FirstOrDefault(x => x.Name == style.StyleValue).Version = style.Version; }
             }
         }
 

@@ -17,6 +17,8 @@ namespace NaviDoctor
         private int EqStyleOffset;
         private int CurrHPOffset;
         private int MaxHPOffset;
+        private int HPRedundancy1;
+        private int HPRedundancy2;
         private int ZennyOffset;
         private int BugfragOffset;
         private int SubMaxOffset;
@@ -50,7 +52,7 @@ namespace NaviDoctor
         private int LibraryOffsetEnd;
         private int PALibStart;
         private int PALibEnd;
-        private string saveFilePath;
+        public string saveFilePath;
         private byte[] saveData;
 
         public SaveParse(string filePath)
@@ -98,6 +100,8 @@ namespace NaviDoctor
                     RegChip3Offset =     0x001F;
                     CurrHPOffset =       0x0020;
                     MaxHPOffset =        0x0022;
+                    HPRedundancy1 =      0x008C; // BN2 has two HP redundancies.
+                    HPRedundancy2 =      0x008E;
                     ZennyOffset =        0x0074;
                     FoldersOffset =      0x0082;
                     AttackOffset =       0x0084;
@@ -177,7 +181,7 @@ namespace NaviDoctor
             {
                 for (int i = PALibStart; i <= PALibEnd; i++)
                 {
-                    saveDataObject.LibraryData.Add(saveData[i]);
+                    saveDataObject.PALibraryData.Add(saveData[i]);
                 }
             }
 
@@ -213,7 +217,6 @@ namespace NaviDoctor
                     int stylesFound = 0;       // Style parse system for BN2. It'll change a bit for BN3 but hopefully it'll be mostly the same.
                     saveDataObject.Style1 = 0; // Initialize these to 0. No null values!
                     saveDataObject.Style2 = 0;
-                    saveDataObject.Style3 = 0;
                     saveDataObject.StyleTypes.Add(StyleOffset); // Normal Style is always present.
                     for (int i = StyleOffset + 0x6; i <= StyleOffset + 0x19; i++) // We know where Normal Style starts, so skip to the good part.
                     {
@@ -236,17 +239,13 @@ namespace NaviDoctor
                                     saveDataObject.StyleTypes.Add(i);
                                     break;
 
-                                case 3:
-                                    saveDataObject.Style3 = saveData[i];
-                                    saveDataObject.StyleTypes.Add(i);
-                                    break;
                             }
                         }
-                        if (stylesFound >= 3) break;
+                        if (stylesFound >= 2) break;
                     }
-                    for (int i = saveDataObject.StyleTypes.Count; i < 4; i++)
+                    for (int i = saveDataObject.StyleTypes.Count; i < 3; i++)
                     {
-                        saveDataObject.StyleTypes.Add(0); // NormStyl + 3 Styles = 4. If there's less than that, pad the rest
+                        saveDataObject.StyleTypes.Add(0); // NormStyl + 2 Styles = 3. If there's less than that, pad the rest
                     }
 
                     saveDataObject.RegMem = saveData[RegMemOffset];
@@ -351,7 +350,7 @@ namespace NaviDoctor
 
                     for (int i = FolderOffsetStart; i <= FolderOffsetEnd; i += 2) // Only one folder to save for BN1
                     {
-                        CopyFolderData(saveDataObject.FolderData, i);
+                        CopyFolderData(saveDataObject.FolderData, i, FolderOffsetStart);
                     }
 
                     for (int i = BattleOffsetStart; i < BattleOffsetEnd; i++)
@@ -372,7 +371,15 @@ namespace NaviDoctor
                     break;
 
                 case GameTitle.Title.MegaManBattleNetwork2:
-                    for (int i = 1; i <= 3; i++) // Let's save some styles.
+                    Buffer.BlockCopy(BitConverter.GetBytes(saveDataObject.CurrHP), 0, saveData, HPRedundancy1, 2);
+                    Buffer.BlockCopy(BitConverter.GetBytes(saveDataObject.MaxHP), 0, saveData, HPRedundancy2, 2);
+
+                    for (int i = StyleOffset + 0x1; i <= StyleOffset + 0x19; i++) // Erase the currently saved styles
+                    {
+                        saveData[i] = 0;
+                    }
+
+                    for (int i = 1; i < saveDataObject.StyleTypes.Count; i++) // Let's save some styles.
                     {
                         if (saveDataObject.StyleTypes[i] == 0)
                         {
@@ -386,25 +393,35 @@ namespace NaviDoctor
                             case 2:
                                 saveData[saveDataObject.StyleTypes[i]] = saveDataObject.Style2;
                                 break;
-                            case 3:
-                                saveData[saveDataObject.StyleTypes[i]] = saveDataObject.Style3;
-                                break;
                         } 
                     }
+
+                    saveData[BugfragOffset] = (byte)saveDataObject.BugFrags;
+                    saveData[SubFullOffset] = (byte)saveDataObject.SubFullEnrg;
+                    saveData[SubLocEnOffset] = (byte)saveDataObject.SubLocEnemy;
+                    saveData[SubMiniOffset] = (byte)saveDataObject.SubMiniEnrg;
+                    saveData[SubSneakOffset] = (byte)saveDataObject.SubSneakRun;
+                    saveData[SubUnlockerOffset] = (byte)saveDataObject.SubUnlocker;
+                    saveData[SubUntrapOffset] = (byte)saveDataObject.SubUntrap;
+                    saveData[SubMaxOffset] = (byte)saveDataObject.SubChipMax;
+                    saveData[RegMemOffset] = (byte)saveDataObject.RegMem;
+                    saveData[RegChip1Offset] = 0xFF; // Turn off the regular chips.
+                    saveData[RegChip2Offset] = 0xFF;
+                    saveData[RegChip3Offset] = 0xFF;
 
                     for (int i = FolderOffsetStart; i <= Folder3OffsetEnd; i += 4)
                     {
                         if (i >= FolderOffsetStart && i <= FolderOffsetEnd)
                         {
-                            CopyFolderData(saveDataObject.FolderData, i, 2);
-                        }
-                        if (i >= Folder2OffsetStart && i <= Folder2OffsetEnd && saveDataObject.Folders >= 2)
+                            CopyFolderData(saveDataObject.FolderData, i, FolderOffsetStart, 2);
+                        } 
+                        else if (i >= Folder2OffsetStart && i <= Folder2OffsetEnd && saveDataObject.Folders >= 2)
                         {
-                            CopyFolderData(saveDataObject.Folder2Data, i, 2);
+                            CopyFolderData(saveDataObject.Folder2Data, i, Folder2OffsetStart, 2);
                         }
-                        if (i >= Folder3OffsetStart && i <= Folder3OffsetEnd && saveDataObject.Folders >= 3)
+                        else if (i >= Folder3OffsetStart && i <= Folder3OffsetEnd && saveDataObject.Folders >= 3)
                         {
-                            CopyFolderData(saveDataObject.Folder3Data, i, 2);
+                            CopyFolderData(saveDataObject.Folder3Data, i, Folder3OffsetStart, 2);
                         }
                     }
 
@@ -440,7 +457,7 @@ namespace NaviDoctor
 
                     for (int i = PALibStart; i <= PALibEnd; i++)
                     {
-                            saveData[i] = saveDataObject.LibraryData[(i - PALibStart)];
+                            saveData[i] = saveDataObject.PALibraryData[(i - PALibStart)];
                     }
 
                     break;
@@ -450,9 +467,9 @@ namespace NaviDoctor
 
         }
 
-        private void CopyFolderData(List<Tuple<int, int>> folderData, int index, int bitMulti = 1)
+        private void CopyFolderData(List<Tuple<int, int>> folderData, int index, int offset, int bitMulti = 1)
         {
-            Tuple<int, int> value = folderData[(index - FolderOffsetStart) / (2 * bitMulti)];
+            Tuple<int, int> value = folderData[(index - offset) / (2 * bitMulti)];
             Buffer.BlockCopy(BitConverter.GetBytes(value.Item1), 0, saveData, index, bitMulti);
             Buffer.BlockCopy(BitConverter.GetBytes(value.Item2), 0, saveData, index + bitMulti, bitMulti);  
         }

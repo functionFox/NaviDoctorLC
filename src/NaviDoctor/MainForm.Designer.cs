@@ -51,12 +51,16 @@ namespace NaviDoctor
             this.label8 = new System.Windows.Forms.Label();
             this.maxHPStat = new System.Windows.Forms.NumericUpDown();
             this.steamID = new System.Windows.Forms.NumericUpDown();
-            this.btnShowLibrary = new System.Windows.Forms.Button();
             this.btnSetPackQuantity = new System.Windows.Forms.Button();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.chipDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.libraryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.programAdvanceMemoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabsFolders = new System.Windows.Forms.TabControl();
             this.tabPage_Folder1 = new System.Windows.Forms.TabPage();
             this.dgvFolder1 = new System.Windows.Forms.DataGridView();
@@ -68,6 +72,26 @@ namespace NaviDoctor
             this.nudPackQuantity = new System.Windows.Forms.NumericUpDown();
             this.lblGameVersion = new System.Windows.Forms.Label();
             this.pnl_MainLeft = new System.Windows.Forms.Panel();
+            this.panelBugFragRegMem = new System.Windows.Forms.Panel();
+            this.label17 = new System.Windows.Forms.Label();
+            this.nudSubChipMax = new System.Windows.Forms.NumericUpDown();
+            this.label10 = new System.Windows.Forms.Label();
+            this.nudBugFrag = new System.Windows.Forms.NumericUpDown();
+            this.label7 = new System.Windows.Forms.Label();
+            this.nudRegMem = new System.Windows.Forms.NumericUpDown();
+            this.panelSubChips = new System.Windows.Forms.Panel();
+            this.nudUnlocker = new System.Windows.Forms.NumericUpDown();
+            this.nudLocEnemy = new System.Windows.Forms.NumericUpDown();
+            this.nudUntrap = new System.Windows.Forms.NumericUpDown();
+            this.nudSneakRun = new System.Windows.Forms.NumericUpDown();
+            this.nudFullEnrg = new System.Windows.Forms.NumericUpDown();
+            this.nudMiniEnrg = new System.Windows.Forms.NumericUpDown();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             this.panel_MegamanZennyAndSteamID = new System.Windows.Forms.Panel();
             this.cbx_EditSteamID = new System.Windows.Forms.CheckBox();
             this.pnl_MegamanStyle = new System.Windows.Forms.Panel();
@@ -94,6 +118,17 @@ namespace NaviDoctor
             ((System.ComponentModel.ISupportInitialize)(this.dgvFolder3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPackQuantity)).BeginInit();
             this.pnl_MainLeft.SuspendLayout();
+            this.panelBugFragRegMem.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSubChipMax)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBugFrag)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudRegMem)).BeginInit();
+            this.panelSubChips.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudUnlocker)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudLocEnemy)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudUntrap)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSneakRun)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudFullEnrg)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMiniEnrg)).BeginInit();
             this.panel_MegamanZennyAndSteamID.SuspendLayout();
             this.pnl_MegamanStyle.SuspendLayout();
             this.panel_MegamanStats.SuspendLayout();
@@ -332,17 +367,6 @@ namespace NaviDoctor
             this.steamID.Size = new System.Drawing.Size(120, 30);
             this.steamID.TabIndex = 14;
             // 
-            // btnShowLibrary
-            // 
-            this.btnShowLibrary.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnShowLibrary.Location = new System.Drawing.Point(373, 467);
-            this.btnShowLibrary.Name = "btnShowLibrary";
-            this.btnShowLibrary.Size = new System.Drawing.Size(124, 39);
-            this.btnShowLibrary.TabIndex = 16;
-            this.btnShowLibrary.Text = "Show Library";
-            this.btnShowLibrary.UseVisualStyleBackColor = true;
-            this.btnShowLibrary.Click += new System.EventHandler(this.btnShowLibrary_Click);
-            // 
             // btnSetPackQuantity
             // 
             this.btnSetPackQuantity.Dock = System.Windows.Forms.DockStyle.Left;
@@ -360,7 +384,9 @@ namespace NaviDoctor
             this.menuStrip.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.menuStrip.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem});
+            this.fileToolStripMenuItem,
+            this.chipDataToolStripMenuItem,
+            this.helpToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Size = new System.Drawing.Size(1015, 33);
@@ -390,6 +416,44 @@ namespace NaviDoctor
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
+            // chipDataToolStripMenuItem
+            // 
+            this.chipDataToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.libraryToolStripMenuItem,
+            this.programAdvanceMemoToolStripMenuItem});
+            this.chipDataToolStripMenuItem.Name = "chipDataToolStripMenuItem";
+            this.chipDataToolStripMenuItem.Size = new System.Drawing.Size(106, 29);
+            this.chipDataToolStripMenuItem.Text = "Chip Data";
+            // 
+            // libraryToolStripMenuItem
+            // 
+            this.libraryToolStripMenuItem.Name = "libraryToolStripMenuItem";
+            this.libraryToolStripMenuItem.Size = new System.Drawing.Size(313, 34);
+            this.libraryToolStripMenuItem.Text = "Chip Library";
+            this.libraryToolStripMenuItem.Click += new System.EventHandler(this.libraryToolStripMenuItem_Click);
+            // 
+            // programAdvanceMemoToolStripMenuItem
+            // 
+            this.programAdvanceMemoToolStripMenuItem.Name = "programAdvanceMemoToolStripMenuItem";
+            this.programAdvanceMemoToolStripMenuItem.Size = new System.Drawing.Size(313, 34);
+            this.programAdvanceMemoToolStripMenuItem.Text = "Program Advance Memo";
+            this.programAdvanceMemoToolStripMenuItem.Click += new System.EventHandler(this.nudLocEnemy_ValueChanged);
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutToolStripMenuItem});
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(65, 29);
+            this.helpToolStripMenuItem.Text = "Help";
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(164, 34);
+            this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
             // tabsFolders
             // 
             this.tabsFolders.Controls.Add(this.tabPage_Folder1);
@@ -400,6 +464,7 @@ namespace NaviDoctor
             this.tabsFolders.SelectedIndex = 0;
             this.tabsFolders.Size = new System.Drawing.Size(314, 444);
             this.tabsFolders.TabIndex = 19;
+            this.tabsFolders.SelectedIndexChanged += new System.EventHandler(this.tabsFolders_SelectedIndexChanged);
             // 
             // tabPage_Folder1
             // 
@@ -508,9 +573,9 @@ namespace NaviDoctor
             this.lblFolderCount.AutoSize = true;
             this.lblFolderCount.Location = new System.Drawing.Point(9, 467);
             this.lblFolderCount.Name = "lblFolderCount";
-            this.lblFolderCount.Size = new System.Drawing.Size(215, 33);
+            this.lblFolderCount.Size = new System.Drawing.Size(231, 33);
             this.lblFolderCount.TabIndex = 20;
-            this.lblFolderCount.Text = "Folder Count: 0";
+            this.lblFolderCount.Text = "Folder1 Count: 0";
             // 
             // nudPackQuantity
             // 
@@ -551,6 +616,8 @@ namespace NaviDoctor
             // 
             // pnl_MainLeft
             // 
+            this.pnl_MainLeft.Controls.Add(this.panelBugFragRegMem);
+            this.pnl_MainLeft.Controls.Add(this.panelSubChips);
             this.pnl_MainLeft.Controls.Add(this.panel_MegamanZennyAndSteamID);
             this.pnl_MainLeft.Controls.Add(this.pnl_MegamanStyle);
             this.pnl_MainLeft.Controls.Add(this.panel_MegamanStats);
@@ -560,6 +627,265 @@ namespace NaviDoctor
             this.pnl_MainLeft.Name = "pnl_MainLeft";
             this.pnl_MainLeft.Size = new System.Drawing.Size(258, 519);
             this.pnl_MainLeft.TabIndex = 23;
+            // 
+            // panelBugFragRegMem
+            // 
+            this.panelBugFragRegMem.Controls.Add(this.label17);
+            this.panelBugFragRegMem.Controls.Add(this.nudSubChipMax);
+            this.panelBugFragRegMem.Controls.Add(this.label10);
+            this.panelBugFragRegMem.Controls.Add(this.nudBugFrag);
+            this.panelBugFragRegMem.Controls.Add(this.label7);
+            this.panelBugFragRegMem.Controls.Add(this.nudRegMem);
+            this.panelBugFragRegMem.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelBugFragRegMem.Location = new System.Drawing.Point(0, 309);
+            this.panelBugFragRegMem.Name = "panelBugFragRegMem";
+            this.panelBugFragRegMem.Size = new System.Drawing.Size(258, 119);
+            this.panelBugFragRegMem.TabIndex = 21;
+            this.panelBugFragRegMem.Visible = false;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.Location = new System.Drawing.Point(4, 73);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(132, 25);
+            this.label17.TabIndex = 11;
+            this.label17.Text = "SubChip Max";
+            // 
+            // nudSubChipMax
+            // 
+            this.nudSubChipMax.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nudSubChipMax.Location = new System.Drawing.Point(100, 71);
+            this.nudSubChipMax.Maximum = new decimal(new int[] {
+            8,
+            0,
+            0,
+            0});
+            this.nudSubChipMax.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudSubChipMax.Name = "nudSubChipMax";
+            this.nudSubChipMax.Size = new System.Drawing.Size(43, 30);
+            this.nudSubChipMax.TabIndex = 10;
+            this.nudSubChipMax.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(4, 40);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(102, 25);
+            this.label10.TabIndex = 9;
+            this.label10.Text = "Bug Frags";
+            // 
+            // nudBugFrag
+            // 
+            this.nudBugFrag.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nudBugFrag.Location = new System.Drawing.Point(83, 38);
+            this.nudBugFrag.Maximum = new decimal(new int[] {
+            99,
+            0,
+            0,
+            0});
+            this.nudBugFrag.Name = "nudBugFrag";
+            this.nudBugFrag.Size = new System.Drawing.Size(60, 30);
+            this.nudBugFrag.TabIndex = 8;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(4, 8);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(91, 25);
+            this.label7.TabIndex = 7;
+            this.label7.Text = "RegMem";
+            // 
+            // nudRegMem
+            // 
+            this.nudRegMem.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nudRegMem.Location = new System.Drawing.Point(83, 6);
+            this.nudRegMem.Maximum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.nudRegMem.Name = "nudRegMem";
+            this.nudRegMem.Size = new System.Drawing.Size(60, 30);
+            this.nudRegMem.TabIndex = 6;
+            // 
+            // panelSubChips
+            // 
+            this.panelSubChips.Controls.Add(this.nudUnlocker);
+            this.panelSubChips.Controls.Add(this.nudLocEnemy);
+            this.panelSubChips.Controls.Add(this.nudUntrap);
+            this.panelSubChips.Controls.Add(this.nudSneakRun);
+            this.panelSubChips.Controls.Add(this.nudFullEnrg);
+            this.panelSubChips.Controls.Add(this.nudMiniEnrg);
+            this.panelSubChips.Controls.Add(this.label16);
+            this.panelSubChips.Controls.Add(this.label15);
+            this.panelSubChips.Controls.Add(this.label14);
+            this.panelSubChips.Controls.Add(this.label13);
+            this.panelSubChips.Controls.Add(this.label12);
+            this.panelSubChips.Controls.Add(this.label11);
+            this.panelSubChips.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelSubChips.Location = new System.Drawing.Point(0, 200);
+            this.panelSubChips.Name = "panelSubChips";
+            this.panelSubChips.Size = new System.Drawing.Size(258, 109);
+            this.panelSubChips.TabIndex = 20;
+            this.panelSubChips.Visible = false;
+            // 
+            // nudUnlocker
+            // 
+            this.nudUnlocker.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nudUnlocker.Location = new System.Drawing.Point(203, 68);
+            this.nudUnlocker.Maximum = new decimal(new int[] {
+            8,
+            0,
+            0,
+            0});
+            this.nudUnlocker.Name = "nudUnlocker";
+            this.nudUnlocker.Size = new System.Drawing.Size(43, 30);
+            this.nudUnlocker.TabIndex = 24;
+            this.nudUnlocker.ValueChanged += new System.EventHandler(this.nudUnlocker_ValueChanged);
+            // 
+            // nudLocEnemy
+            // 
+            this.nudLocEnemy.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nudLocEnemy.Location = new System.Drawing.Point(203, 39);
+            this.nudLocEnemy.Maximum = new decimal(new int[] {
+            8,
+            0,
+            0,
+            0});
+            this.nudLocEnemy.Name = "nudLocEnemy";
+            this.nudLocEnemy.Size = new System.Drawing.Size(43, 30);
+            this.nudLocEnemy.TabIndex = 23;
+            this.nudLocEnemy.ValueChanged += new System.EventHandler(this.nudLocEnemy_ValueChanged);
+            // 
+            // nudUntrap
+            // 
+            this.nudUntrap.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nudUntrap.Location = new System.Drawing.Point(203, 10);
+            this.nudUntrap.Maximum = new decimal(new int[] {
+            8,
+            0,
+            0,
+            0});
+            this.nudUntrap.Name = "nudUntrap";
+            this.nudUntrap.Size = new System.Drawing.Size(43, 30);
+            this.nudUntrap.TabIndex = 22;
+            this.nudUntrap.ValueChanged += new System.EventHandler(this.nudUntrap_ValueChanged);
+            // 
+            // nudSneakRun
+            // 
+            this.nudSneakRun.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nudSneakRun.Location = new System.Drawing.Point(76, 68);
+            this.nudSneakRun.Maximum = new decimal(new int[] {
+            8,
+            0,
+            0,
+            0});
+            this.nudSneakRun.Name = "nudSneakRun";
+            this.nudSneakRun.Size = new System.Drawing.Size(43, 30);
+            this.nudSneakRun.TabIndex = 21;
+            this.nudSneakRun.ValueChanged += new System.EventHandler(this.nudSneakRun_ValueChanged);
+            // 
+            // nudFullEnrg
+            // 
+            this.nudFullEnrg.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nudFullEnrg.Location = new System.Drawing.Point(74, 37);
+            this.nudFullEnrg.Maximum = new decimal(new int[] {
+            8,
+            0,
+            0,
+            0});
+            this.nudFullEnrg.Name = "nudFullEnrg";
+            this.nudFullEnrg.Size = new System.Drawing.Size(43, 30);
+            this.nudFullEnrg.TabIndex = 20;
+            this.nudFullEnrg.ValueChanged += new System.EventHandler(this.nudFullEnrg_ValueChanged);
+            // 
+            // nudMiniEnrg
+            // 
+            this.nudMiniEnrg.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nudMiniEnrg.Location = new System.Drawing.Point(74, 8);
+            this.nudMiniEnrg.Maximum = new decimal(new int[] {
+            8,
+            0,
+            0,
+            0});
+            this.nudMiniEnrg.Name = "nudMiniEnrg";
+            this.nudMiniEnrg.Size = new System.Drawing.Size(43, 30);
+            this.nudMiniEnrg.TabIndex = 12;
+            this.nudMiniEnrg.ValueChanged += new System.EventHandler(this.nudMiniEnrg_ValueChanged);
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.Location = new System.Drawing.Point(125, 68);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(89, 25);
+            this.label16.TabIndex = 19;
+            this.label16.Text = "Unlocker";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.Location = new System.Drawing.Point(123, 39);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(105, 25);
+            this.label15.TabIndex = 17;
+            this.label15.Text = "LocEnemy";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Location = new System.Drawing.Point(123, 12);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(70, 25);
+            this.label14.TabIndex = 15;
+            this.label14.Text = "Untrap";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(3, 70);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(104, 25);
+            this.label13.TabIndex = 13;
+            this.label13.Text = "SneakRun";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(3, 39);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(84, 25);
+            this.label12.TabIndex = 11;
+            this.label12.Text = "FullEnrg";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(3, 8);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(89, 25);
+            this.label11.TabIndex = 9;
+            this.label11.Text = "MiniEnrg";
             // 
             // panel_MegamanZennyAndSteamID
             // 
@@ -634,7 +960,6 @@ namespace NaviDoctor
             // 
             // pnl_MainFill
             // 
-            this.pnl_MainFill.Controls.Add(this.btnShowLibrary);
             this.pnl_MainFill.Controls.Add(this.pnl_PackQuantity);
             this.pnl_MainFill.Controls.Add(this.tabsFolders);
             this.pnl_MainFill.Controls.Add(this.dgvPack);
@@ -701,6 +1026,19 @@ namespace NaviDoctor
             ((System.ComponentModel.ISupportInitialize)(this.dgvFolder3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPackQuantity)).EndInit();
             this.pnl_MainLeft.ResumeLayout(false);
+            this.panelBugFragRegMem.ResumeLayout(false);
+            this.panelBugFragRegMem.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSubChipMax)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBugFrag)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudRegMem)).EndInit();
+            this.panelSubChips.ResumeLayout(false);
+            this.panelSubChips.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudUnlocker)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudLocEnemy)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudUntrap)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSneakRun)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudFullEnrg)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMiniEnrg)).EndInit();
             this.panel_MegamanZennyAndSteamID.ResumeLayout(false);
             this.panel_MegamanZennyAndSteamID.PerformLayout();
             this.pnl_MegamanStyle.ResumeLayout(false);
@@ -736,7 +1074,6 @@ namespace NaviDoctor
         private System.Windows.Forms.NumericUpDown maxHPStat;
         private System.Windows.Forms.NumericUpDown steamID;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Button btnShowLibrary;
         private System.Windows.Forms.Button btnSetPackQuantity;
         private System.Windows.Forms.MenuStrip menuStrip;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
@@ -762,6 +1099,31 @@ namespace NaviDoctor
         private System.Windows.Forms.DataGridView dgvFolder2;
         private System.Windows.Forms.DataGridView dgvFolder3;
         private System.Windows.Forms.Button btnSelectStyles;
+        private System.Windows.Forms.Panel panelBugFragRegMem;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.NumericUpDown nudBugFrag;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.NumericUpDown nudRegMem;
+        private System.Windows.Forms.Panel panelSubChips;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.NumericUpDown nudSubChipMax;
+        private System.Windows.Forms.NumericUpDown nudUnlocker;
+        private System.Windows.Forms.NumericUpDown nudLocEnemy;
+        private System.Windows.Forms.NumericUpDown nudUntrap;
+        private System.Windows.Forms.NumericUpDown nudSneakRun;
+        private System.Windows.Forms.NumericUpDown nudFullEnrg;
+        private System.Windows.Forms.NumericUpDown nudMiniEnrg;
+        private System.Windows.Forms.ToolStripMenuItem chipDataToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem libraryToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem programAdvanceMemoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
     }
 }
 
