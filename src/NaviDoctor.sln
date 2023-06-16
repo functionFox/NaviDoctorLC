@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.4.33122.133
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.33801.447
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NaviDoctor", "NaviDoctor\NaviDoctor.csproj", "{1E30346B-F96D-4352-9EC7-793C06EF6005}"
 EndProject
@@ -11,8 +11,8 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{1E30346B-F96D-4352-9EC7-793C06EF6005}.Debug|Any CPU.ActiveCfg = Release|Any CPU
-		{1E30346B-F96D-4352-9EC7-793C06EF6005}.Debug|Any CPU.Build.0 = Release|Any CPU
+		{1E30346B-F96D-4352-9EC7-793C06EF6005}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E30346B-F96D-4352-9EC7-793C06EF6005}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1E30346B-F96D-4352-9EC7-793C06EF6005}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1E30346B-F96D-4352-9EC7-793C06EF6005}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
