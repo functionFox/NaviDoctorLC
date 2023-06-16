@@ -298,7 +298,7 @@ namespace NaviDoctor
                     {
                         for (int j = 0; j < 6; j++) // Some act as Navi chips, some act as regular chips, just get them all.
                         {
-                            saveDataObject.SecretChips.Add(saveData[i]);
+                            saveDataObject.SecretChips.Add(saveData[i+j]);
                         }
                     }
 
