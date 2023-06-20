@@ -10,20 +10,12 @@ concurrency: new-build
 
 jobs:
   build:
-    name: Build Branch
+    name: msbuild
     runs-on: windows-latest
     steps:
     - name: Checkout
       uses: actions/checkout@v3
-    - name: Build
-      uses: EasyDesk/action-dotnet-build@v1
-      with:
-        # (Optional) Additional arguments for dotnet build.
-        build-args: -v normal
-
-        # (Optional) Build configuration, defaults to 'Release'.
-        # If the version starts with the 'v' prefix, it will be removed to conform to the requirements of dotnet pack.
-        build-configuration: Release
-        
-        # (Optional) The path of the project to build; if omitted, the whole solution is built.
-        path: ./src/NaviDoctor/NaviDoctor.csproj
+    - name: Add msbuild to PATH
+      uses: microsoft/setup-msbuild@v1.1
+    - name: Build app for release
+      run: msbuild .\src\NaviDoctor\NaviDoctor.csproj -t:rebuild -verbosity:diag -property:Configuration=Release
