@@ -23,4 +23,4 @@ jobs:
         build-configuration: Release
         
         # (Optional) The path of the project to build; if omitted, the whole solution is built.
-        path: ./NaviDoctor/
+        path: ./src/
