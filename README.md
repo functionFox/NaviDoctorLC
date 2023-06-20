@@ -1,16 +1,22 @@
+![GitHub issues](https://img.shields.io/github/issues/functionFox/NaviDoctorLC?style=plastic)
+![GitHub release (latest by date)](https://img.shields.io/github/downloads/functionFox/NaviDoctorLC/latest/total?style=plastic)
+
 # NaviDoctorLC
 Mega Man Battle Network Legacy Collection save editor
 
-NOTICE: Currently only supports MMBN1 for the Battle Network Legacy Collection for Steam.
+NOTICE: Currently only supports MMBN1 and MMBN2 for the Battle Network Legacy Collection for Steam.
 
 Features:
 
 - Edit MegaMan.EXE's HP and stats
 - Equip and add Armors to your inventory
 - Edit chip quantities in your Pack
-- A "Set" button for Pack viewer to increase the quantity of the chips in your pack to a specified amount
+- New! A "Set" button for Pack viewer to increase the quantity of the chips in your pack to a specified amount
 - Fully functional Folder Editor
+- New! Enhanced Folder Editor for BN2+: edit up to three of your unlocked Folders (BN2+)
+- New! A fully functional Style Editor: change your currently equipped style (BN2/BN3)
 - Add/Remove entries to your chip Library
+- New! Editing capabilities for RegMem, BugFrags, SubChips, and the entire P.A. Memo Library (BN2+)
 
 Experimental features:
 
@@ -18,15 +24,16 @@ Experimental features:
 - Can transfer saves to other people by editing the Steam ID
 
 Coming Soon:
-- Support for Mega Man Battle Network 2
-- Fully functional Style Editor: change your currently equipped style (BN2/BN3)
-- Expanded Folder Viewer: edit up to three of your unlocked Folders (BN2+)
-- Editing capabilities for RegMem, BugFrags, SubChips, and the entire P.A. Memo Library (BN2+)
+
+- Support for Mega Man Battle Network 3: White and Mega Man Battle Network 3: Blue
+- NaviCust Viewer: Edit your NaviCust directly (BN3+)
+- NaviCust Parts Editor: Add parts to your inventory, and compress/decompress your parts at will (BN3+)
+- Mega and Giga Chip Libraries (BN3+)
+- Xtra Folder editor: Edit the contents of your Xtra folder, including its name! (Side note: we still need to check if that's possible, but it's a feature we want.) (BN3+)
 
 Known Issues:
 
-- Trying to save with less than 30 chips in your folder generates an Index Out of Range error. I'll be adding a more user-friendly warning box that explains this better.
-- It is possible to edit your HP to 1000, then obtain an HP Memory in game to increase your HP past the base limit. Doing so will disable your ability to PvP Netbattle. The editor already takes this into account, so if you find yourself in this situation, save your game, load your file in the editor, and simply save again. The editor automatically tries to make sure you are able to PvP Netbattle. Similar issues arise when setting RegMem to 50 in BN2+. The same process will fix this issue.
+- It is possible to edit your HP to 1000, then obtain an HP Memory in game to increase your HP past the base limit. Doing so will disable your ability to PvP Netbattle. The editor already takes this into account, so if you find yourself in this situation, save your game, load your file in the editor, and simply save again. The editor automatically tries to make sure you are able to PvP Netbattle. Similar issues arise when setting RegMem to 50, and SubMem to 8 in BN2+. The same process will fix this issue.
 - Inserting chips directly into the pack using the save editor will not update the Library in the game; you'll have to use the Library Viewer. Due to a quirk in how Legacy Collection handles checking for achievement completion, using the Library Viewer to complete the Library by itself is also not enough to get the BN1 achievement for having all chips. In order to get the achievement for having all chips, you'll need to have the Library fully checked off, and then obtain any chip in the game. For games with title screen stars or in-game icons for milestone achievements (such as the BN2 Red, Purple, and Blue stars), however, no additional steps are needed.
 
 Thank you for your patience while these features are being worked on! As always, NaviDoctor will strive to keep players within legitimately obtainable limits to ensure your ability to be Netbattle ready!
@@ -34,9 +41,7 @@ Thank you for your patience while these features are being worked on! As always,
 Future features and additions:
 
 - Support for the entire MMBNLC line of games!
-- NaviCust Editor (BN3+)
-- NaviCust Parts editor: obtain NaviCust parts you want, and compress/decompress your parts at will without having to find and input lengthy button codes
-- Probably more, I literally just started this project about a week ago.
+- Probably more stuff, this project is still very early in development. If you have suggestions, feel free to let us know!
 
 Special thanks to MegaRockEXE, Prof. 9, Weenie, luckytyphlosion, GreigaMaster, GhostlyMire, and the rest of the TREZ community for your support!
 
