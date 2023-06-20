@@ -1,10 +1,18 @@
-![GitHub issues](https://img.shields.io/github/issues/functionFox/NaviDoctorLC?style=plastic)
-![GitHub release (latest by date)](https://img.shields.io/github/downloads/functionFox/NaviDoctorLC/latest/total?style=plastic)
-
 # NaviDoctorLC
 Mega Man Battle Network Legacy Collection save editor
 
-NOTICE: Currently only supports MMBN1 and MMBN2 for the Battle Network Legacy Collection for Steam.
+![Github license](https://img.shields.io/github/license/functionFox/NaviDoctorLC?style=plastic)
+![GitHub issues](https://img.shields.io/github/issues/functionFox/NaviDoctorLC?style=plastic&logo=github)
+![Github Release](https://img.shields.io/github/v/release/functionFox/NaviDoctorLC?style=plastic&logo=github)
+![GitHub release (latest by date)](https://img.shields.io/github/downloads/functionFox/NaviDoctorLC/latest/total?style=plastic&logo=github)
+
+### Current Support
+![BN1 Supported](https://img.shields.io/badge/Battle_Network_1-✓-green?style=plastic&logo=steam)
+![BN2 Supported](https://img.shields.io/badge/Battle_Network_2-✓-green?style=plastic&logo=steam)
+![BN3 Supported](https://img.shields.io/badge/Battle_Network_3-✕-red?style=plastic&logo=steam)
+![BN4 Supported](https://img.shields.io/badge/Battle_Network_4-✕-red?style=plastic&logo=steam)
+![BN5 Supported](https://img.shields.io/badge/Battle_Network_5-✕-red?style=plastic&logo=steam)
+![BN6 Supported](https://img.shields.io/badge/Battle_Network_6-✕-red?style=plastic&logo=steam)
 
 Features:
 
