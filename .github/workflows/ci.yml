@@ -10,10 +10,13 @@ concurrency: new-build
 
 jobs:
   build:
-    name: Build
+    name: Build Branch
     runs-on: windows-latest
     steps:
-    - uses: EasyDesk/action-dotnet-build@v1
+    - name: Checkout
+      uses: actions/checkout@v3
+    - name: Build
+      uses: EasyDesk/action-dotnet-build@v1
       with:
         # (Optional) Additional arguments for dotnet build.
         build-args: -v normal
@@ -23,4 +26,4 @@ jobs:
         build-configuration: Release
         
         # (Optional) The path of the project to build; if omitted, the whole solution is built.
-        path: ./src/
+        path: ./src/NaviDoctor/NaviDoctor.csproj
