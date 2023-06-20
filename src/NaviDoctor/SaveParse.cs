@@ -309,29 +309,18 @@ namespace NaviDoctor
 
         public void UpdateSaveData(SaveDataObject saveDataObject)
         {
-            // Let's write all of the data common to all games first
+            short max = 1000; // Let's write all of the data common to all games first
             saveData[AttackOffset] = saveDataObject.AttackPower;
             saveData[RapidOffset] = saveDataObject.RapidPower;
             saveData[ChargeOffset] = saveDataObject.ChargePower;
             saveData[EqStyleOffset] = saveDataObject.EqStyle;
 
-            if (saveDataObject.CurrHP > 1000) // Cheating? In MY House? Not on my watch.
-            {
-                saveDataObject.CurrHP = 1000;
-            }
+            saveDataObject.CurrHP = Math.Min(saveDataObject.CurrHP, max);
+            saveDataObject.MaxHP = Math.Min(saveDataObject.MaxHP, max);
             Buffer.BlockCopy(BitConverter.GetBytes(saveDataObject.CurrHP), 0, saveData, CurrHPOffset, 2);
-
-            if (saveDataObject.MaxHP > 1000) // Yes, I understand the irony of that statement.
-            {
-                saveDataObject.MaxHP = 1000;
-            }
-
             Buffer.BlockCopy(BitConverter.GetBytes(saveDataObject.MaxHP), 0, saveData, MaxHPOffset, 2);
-
             Buffer.BlockCopy(BitConverter.GetBytes(saveDataObject.Zenny), 0, saveData, ZennyOffset, 4);
-
             Buffer.BlockCopy(BitConverter.GetBytes(saveDataObject.SteamID), 0, saveData, SteamOffset, 4);
-
             saveData[HPUpOffset] = (byte)((saveDataObject.MaxHP - 100) / 20);
 
             for (int i = LibraryOffsetStart; i <= LibraryOffsetEnd; i++)

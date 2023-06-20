@@ -389,7 +389,7 @@ namespace NaviDoctor
             this.helpToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(1015, 33);
+            this.menuStrip.Size = new System.Drawing.Size(1015, 36);
             this.menuStrip.TabIndex = 18;
             this.menuStrip.Text = "menuStrip1";
             // 
@@ -399,7 +399,7 @@ namespace NaviDoctor
             this.loadToolStripMenuItem,
             this.saveToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(54, 29);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(54, 32);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // loadToolStripMenuItem
@@ -422,7 +422,7 @@ namespace NaviDoctor
             this.libraryToolStripMenuItem,
             this.programAdvanceMemoToolStripMenuItem});
             this.chipDataToolStripMenuItem.Name = "chipDataToolStripMenuItem";
-            this.chipDataToolStripMenuItem.Size = new System.Drawing.Size(106, 29);
+            this.chipDataToolStripMenuItem.Size = new System.Drawing.Size(106, 32);
             this.chipDataToolStripMenuItem.Text = "Chip Data";
             // 
             // libraryToolStripMenuItem
@@ -444,7 +444,7 @@ namespace NaviDoctor
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(65, 29);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(65, 32);
             this.helpToolStripMenuItem.Text = "Help";
             // 
             // aboutToolStripMenuItem
@@ -623,9 +623,9 @@ namespace NaviDoctor
             this.pnl_MainLeft.Controls.Add(this.panel_MegamanStats);
             this.pnl_MainLeft.Controls.Add(this.pnl_MegamanHealth);
             this.pnl_MainLeft.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnl_MainLeft.Location = new System.Drawing.Point(0, 33);
+            this.pnl_MainLeft.Location = new System.Drawing.Point(0, 36);
             this.pnl_MainLeft.Name = "pnl_MainLeft";
-            this.pnl_MainLeft.Size = new System.Drawing.Size(258, 519);
+            this.pnl_MainLeft.Size = new System.Drawing.Size(258, 516);
             this.pnl_MainLeft.TabIndex = 23;
             // 
             // panelBugFragRegMem
@@ -895,7 +895,7 @@ namespace NaviDoctor
             this.panel_MegamanZennyAndSteamID.Controls.Add(this.steamID);
             this.panel_MegamanZennyAndSteamID.Controls.Add(this.label9);
             this.panel_MegamanZennyAndSteamID.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel_MegamanZennyAndSteamID.Location = new System.Drawing.Point(0, 419);
+            this.panel_MegamanZennyAndSteamID.Location = new System.Drawing.Point(0, 416);
             this.panel_MegamanZennyAndSteamID.Name = "panel_MegamanZennyAndSteamID";
             this.panel_MegamanZennyAndSteamID.Size = new System.Drawing.Size(258, 100);
             this.panel_MegamanZennyAndSteamID.TabIndex = 19;
@@ -968,9 +968,9 @@ namespace NaviDoctor
             this.pnl_MainFill.Controls.Add(this.lblFolderCount);
             this.pnl_MainFill.Controls.Add(this.btnRemoveChip);
             this.pnl_MainFill.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnl_MainFill.Location = new System.Drawing.Point(258, 33);
+            this.pnl_MainFill.Location = new System.Drawing.Point(258, 36);
             this.pnl_MainFill.Name = "pnl_MainFill";
-            this.pnl_MainFill.Size = new System.Drawing.Size(757, 519);
+            this.pnl_MainFill.Size = new System.Drawing.Size(757, 516);
             this.pnl_MainFill.TabIndex = 24;
             // 
             // pnl_PackQuantity
