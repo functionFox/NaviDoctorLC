@@ -1,0 +1,477 @@
+BN2
+
+0x0001: Current style
+[Valid Styles:
+ 00: Normal Style
+ 09: Elec Guts V1
+ 0A: Heat Guts V1
+ 0B: Aqua Guts V1
+ 0C: Wood Guts V1
+ 11: Elec Custom V1
+ 12: Fire Custom V1
+ 13: Aqua Custom V1
+ 14: Wood Custom V1
+ 19: Elec Team V1
+ 1A: Fire Team V1
+ 1B: Aqua Team V1
+ 1C: Wood Team V1
+ 21: Elec Shield V1
+ 22: Fire Shield V1
+ 23: Aqua Shield V1
+ 24: Wood Shield V1
+ 28: Hub Style
+ 40: Normal Style V2
+ 49: Elec Guts V2
+ 4A: Heat Guts V2
+ 4B: Aqua Guts V2
+ 4C: Wood Guts V2
+ 51: Elec Custom V2
+ 52: Heat Custom V2
+ 53: Aqua Custom V2
+ 54: Wood Custom V2
+ 59: Elec Team V2
+ 5A: Heat Team V2
+ 5B: Aqua Team V2
+ 5C: Wood Team V2
+ 61: Elec Shield V2
+ 62: Heat Shield V2
+ 63: Aqua Shield V2
+ 64: Wood Shield V2
+ 68: Hub Style V2
+ 80: Normal Style V3
+ 89: Elec Guts V3
+ 8A: Heat Guts V3
+ 8B: Aqua Guts V3
+ 8C: Wood Guts V3
+ 91: Elec Custom V3
+ 92: Heat Custom V3
+ 93: Aqua Custom V3
+ 94: Wood Custom V3
+ 99: Elec Team V3
+ 9A: Heat Team V3
+ 9B: Aqua Team V3
+ 9C: Wood Team V3
+ A1: Elec Shield V3
+ A2: Heat Shield V3
+ A3: Aqua Shield V3
+ A4: Wood Shield V3
+ A8: Hub Style V3
+ C0: Normal Style V4
+ C9: Elec Guts V4
+ CA: Heat Guts V4
+ CB: Aqua Guts V4
+ CC: Wood Guts V4
+ D1: Elec Custom V4
+ D2: Heat Custom V4
+ D3: Aqua Custom V4
+ D4: Wood Custom V4
+ D9: Elec Team V4
+ DA: Heat Team V4
+ DB: Aqua Team V4
+ DC: Wood Team V4
+ E1: Elec Shield V4
+ E2: Heat Shield V4
+ E3: Aqua Shield V4
+ E4: Wood Shield V4
+ E8: Hub Style V4 ]
+ 
+ Note: V4 styles have a charged buster damage of 257. They're "valid" but I really don't recommend enabling them.
+ 
+0x0017: RegMem (Default max 50 [0x32])
+0x001D: Folder 1 Regular Chip slot
+0x001E: Folder 2 Regular Chip slot
+0x001F: Folder 3 Regular Chip slot
+NOTE: For some reason, 0x1C and mirrors either 0x1D or 0x0E based on how many folders you've unlocked. It's weird, I know. Setting 0x1C and 0x1D/0x1E to different values doesn't seem to matter, as the regular chip takes the correct value anyway. Might be an internal parsing issue. As far as I'm aware, this doesn't affect anything.
+
+0x0020: Current HP 
+0x0022: Max HP (Default Max 1000 [0x03E8])
+0x0074: Zenny (Default Max 999999 [0x0F423F])
+0x0082: Number of Folders obtained
+NOTE: The max number of folders is 3, and ties data in the below regions in order for it to work. Since it's possible to unlock Folder 2 and 3 via regular gameplay, it's probably safer to not edit this value. Wouldn't want to unlock a "glitched" fourth folder that collides with pack data!
+0x0084: Attack (Default Max: 4)
+0x0085: Rapid  (Default Max: 4)
+0x0086: Charge (Default Max: 4)
+0x008C: HP Redundancy value
+0x008E: HP Redundancy value
+NOTE: In a really dumb turn of events, BN2 has TWO sets of HP values. Why? Dunno. Best guess would be an anti-cheat measure. If the save doesn't have matching values, it will take the lower of the two, so they have to match in addition to the HP Ups needing to be applied.
+
+0x00A0: Time
+0x00A8: Checksum
+Checksum Notes: Same as BN1. Sum of all bytes except the bytes in checksum and Steam ID.
+0x0104: Steam ID
+
+0x0155: Bugfrags (Default max: 99? [0x63]) NOTE: Seems like the default max ISN'T 99 as the game does allow higher amounts of bugfrags? I mean, I set it to 0x63 and got a bugfrag in game, it just displayed weird. Additional note: As it would turn out, there are 32 total bugfrags in the game, and the bugfrag trader's wares total to 32. I may update the max value for BN2 in the future, but seeing as how it largely doesn't matter...
+0x0170: HP Ups applied (Default max: 45 [0x45])
+0x0175: Subchip Max value (Default min: 4/Default max: 8) Note: You CAN set this to 0, but I don't know why you'd want to. Harder mode?
+
+  ===SUBCHIPS===
+ 0x0180: MiniEnrg
+ 0x0181: FullEnrg
+ 0x0182: SneakRun
+ 0x0183: Untrap
+ 0x0184: LocEnemy
+ 0x0185: Unlocker
+
+0x0190 - 0x01A9: Style Storage
+[ 0x0190: Normal Style
+
+  0x0196: ElecGuts
+  0x0197: HeatGuts
+  0x0198: AquaGuts
+  0x0199: WoodGuts
+
+  0x019B: ElecCust
+  0x019C: HeatCust
+  0x019D: AquaCust
+  0x019E: WoodCust
+
+  0x01A0: ElecTeam
+  0x01A1: HeatTeam
+  0x01A2: AquaTeam
+  0x01A3: WoodTeam
+
+  0x01A5: ElecShld
+  0x01A6: HeatShld
+  0x01A7: AquaShld
+  0x01A8: WoodShld
+  
+  0x01A9: HubStyle ]
+ 
+NOTE: Values for Style Storage range from 00 (don't have) to 03 (V3). No more than 3 of the above between addresses 0x0196 and 0x01A9 can have a value other than 00--it'll crash the game if you try to change styles in the MegaMan menu. Normal Style should always have a value of 01. Hub Style should have a value no higher than 01. All other styles should have values no higher than 03. All styles can technically have values of 04 and it'd still work (charge shot damage becomes 257).
+
+===FOLDER 1===
+0x01B0 - 0x0227
+
+===FOLDER 2===
+0x0228 - 0x029F
+
+===FOLDER 3===
+0x02A0 - 0x0317
+
+Chips are stored in alternating 16-bit chip index values and 16-bit chip codes. Why 16-bit for codes when they only have a range of 27 values? No clue. Just remember: it's little endian, so lower bytes first.
+
+Codes: 00 (A) - 1A (Z), and 1B (*)
+
+===BATTLE CHIP PACK ADDRESSES & FOLDER IDS===
+ (START)  (END)  (ID)  (NAME)   (CODES)
+ 0x032A - 0x032F 0001: Cannon   ABCDE*
+ 0x033C - 0x0341 0002: HiCannon CDEFG*
+ 0x034E - 0x0353 0003: M-Cannon EFGHI*
+ 0x0360 - 0x0365 0004: Shotgun  BFHJN*
+ 0x0372 - 0x0377 0005: V-Gun    AFGLP*
+ 0x0384 - 0x0389 0006: CrossGun HJMQS*
+ 0x0396 - 0x039B 0007: Spreader MNOPQ*
+ 0x03A8 - 0x03AD 0008: Bubbler  BGHPR
+ 0x03BA - 0x03BF 0009: Bub-V    CDJNS
+ 0x03CC - 0x03D1 000A: BubCross KOPTV
+ 0x03DE - 0x03E3 000B: BubSprd  EFILM
+ 0x03F0 - 0x03F5 000C: HeatShot BGHPR
+ 0x0402 - 0x0407 000D: Heat-V   CDJNS
+ 0x0414 - 0x0419 000E: HeatCros KOPTV
+ 0x0426 - 0x042B 000F: HeatSprd EFILM
+ 0x0438 - 0x043D 0010: MiniBomb BEGLO*
+ 0x044A - 0x044F 0011: LilBomb  FJOQT*
+ 0x045C - 0x0461 0012: CrosBomb DJOQT
+ 0x046E - 0x0473 0013: BigBomb  OQTVY*
+ 0x0480 - 0x0485 0014: TreeBom1 BGHPR*
+ 0x0492 - 0x0497 0015: TreeBom2 CDJNS*
+ 0x04A4 - 0x04A9 0016: TreeBom3 KOPTV*
+ 0x04B6 - 0x04BB 0017: Sword    AKLSY*
+ 0x04C8 - 0x04CD 0018: WideSwrd ACLQY*
+ 0x04DA - 0x04DF 0019: LongSwrd AILOY
+ 0x04EC - 0x04F1 001A: FireSwrd FHNRU
+ 0x04FE - 0x0503 001B: AquaSwrd AHNRW
+ 0x0510 - 0x0515 001C: ElecSwrd EHNRV*
+ 0x0522 - 0x0527 001D: FireBlde FHPRZ*
+ 0x0534 - 0x0539 001E: AquaBlde AFJRZ*
+ 0x0546 - 0x054B 001F: ElecBlde EFMNR*
+ 0x0558 - 0x055D 0020: StepSwrd DHMQU*
+ 0x056A - 0x056F 0021: Muramasa NOTUW
+ 0x057C - 0x0581 0022: CustSwrd BGKQT
+ 0x058E - 0x0593 0023: Kunai1   EILPS
+ 0x05A0 - 0x05A5 0024: Kunai2   DFJQR
+ 0x05B2 - 0x05B7 0025: Kunai3   CGHKN
+ 0x05C4 - 0x05C9 0026: Slasher  ADHLQ*
+ 0x05D6 - 0x05DB 0027: Shockwav HJLRU
+ 0x05E8 - 0x05ED 0028: Sonicwav EIMSW
+ 0x05FA - 0x05FF 0029: Dynawave GNQTV
+ 0x060C - 0x0611 002A: Quake1   AMPQW
+ 0x061E - 0x0623 002B: Quake2   BGNQW
+ 0x0630 - 0x0635 002C: Quake3   CEOQW
+ 0x0642 - 0x0647 002D: GutPunch BDHKN
+ 0x0654 - 0x0659 002E: ColdPnch BDLPS
+ 0x0666 - 0x066B 002F: Atk+20   *      NOTE: Chips with only star codes ONLY use the last byte in the block!
+ 0x0678 - 0x067D 0030: Atk+30   *            Attempting to use the other bytes causes weird stuff--don't use them!
+ 0x068A - 0x068F 0031: Navi+40  *
+ 0x069C - 0x06A1 0032: DashAtk  BDGJL*
+ 0x06AE - 0x06B3 0033: Wrecker  OQSUW
+ 0x06C0 - 0x06C5 0034: CannBall OPQRS*
+ 0x06D2 - 0x06D7 0035: DoubNdl  ACFIJ
+ 0x06E4 - 0x06E9 0036: TripNdl  CIMTV
+ 0x06F6 - 0x06FB 0037: QuadNdl  CHIPU
+ 0x0708 - 0x070D 0038: Trident  EIKOT
+ 0x071A - 0x071F 0039: Ratton1  HIJKL*
+ 0x072C - 0x0731 003A: Ratton2  JKLMN*
+ 0x073E - 0x0743 003B: Ratton3  LMNOP*
+ 0x0750 - 0x0755 003C: FireRat  BFGHR*
+ 0x0762 - 0x0767 003D: Tornado  EJLMQ
+ 0x0774 - 0x0779 003E: Twister  NOTUY
+ 0x0786 - 0x078B 003F: Blower   PRTWZ
+ 0x0798 - 0x079D 0040: Burner   ABFLS
+ 0x07AA - 0x07AF 0041: ZapRing1 AMPQW*
+ 0x07BC - 0x07C1 0042: ZapRing2 BGNRS
+ 0x07CE - 0x07D3 0043: ZapRing3 CEOTZ
+ 0x07E0 - 0x07E5 0044: Spice1   ACGQT
+ 0x07F2 - 0x07F7 0045: Spice2   BEHJN
+ 0x0804 - 0x0809 0046: Spice3   DKMPQ
+ 0x0816 - 0x081B 0047: Satelit1 GOQUW
+ 0x0828 - 0x082D 0048: Satelit2 HJKPR
+ 0x083A - 0x083F 0049: Satelit3 LSTYZ
+ 0x084C - 0x0851 004A: Yo-Yo1   CERTV
+ 0x085E - 0x0863 004B: Yo-Yo2   AGJKN
+ 0x0870 - 0x0875 004C: Yo-Yo3   DIMSY
+ 0x0882 - 0x0887 004D: MagBomb1 FGJMN*
+ 0x0894 - 0x0899 004E: MagBomb2 BDIRT*
+ 0x08A6 - 0x08AB 004F: MagBomb3 HKOQS*
+ 0x08B8 - 0x08BD 0050: Meteor9  CELSV*
+ 0x08CA - 0x08CF 0051: Meteor12 ACFJW*
+ 0x08DC - 0x08E1 0052: Meteor15 DGHRZ*
+ 0x08EE - 0x08F3 0053: Meteor18 BGIKO*
+ 0x0900 - 0x0905 0054: Hammer   RTUVZ
+ 0x0912 - 0x0917 0055: CrsShld1 AOPSZ
+ 0x0924 - 0x0929 0056: CrsShld2 AOPTV
+ 0x0936 - 0x093B 0057: CrsShld3 AOPUW
+ 0x0948 - 0x094D 0058: TimeBom1 CGKMZ
+ 0x095A - 0x095F 0059: TimeBom2 FGKOZ
+ 0x096C - 0x0971 005A: TimeBom3 EGKPZ
+ 0x097E - 0x0983 005B: LilCloud CGIKN
+ 0x0990 - 0x0995 005C: MedCloud DHJLO
+ 0x09A2 - 0x09A7 005D: BigCloud QRTUW
+ 0x09B4 - 0x09B9 005E: Mine     LNRSV
+ 0x09C6 - 0x09CB 005F: FrntSnsr HMQRT
+ 0x09D8 - 0x09DD 0060: DblSnsr  EJPWY
+ 0x09EA - 0x09EF 0061: Remobit1 EGJKN
+ 0x09FC - 0x0A01 0062: Remobit2 BFIRU
+ 0x0A0E - 0x0A13 0063: Remobit3 ALMTY
+ 0x0A20 - 0x0A25 0064: AquaBall ABQTW
+ 0x0A32 - 0x0A37 0065: ElecBall EHJKV
+ 0x0A44 - 0x0A49 0066: HeatBall CFRSU
+ 0x0A56 - 0x0A5B 0067: Geyser   ABDLS
+ 0x0A68 - 0x0A6D 0068: LavaDrag FGORY
+ 0x0A7A - 0x0A7F 0069: GodStone EILQU
+ 0x0A8C - 0x0A91 006A: OldWood  CMSTW
+ 0x0A9E - 0x0AA3 006B: PoisMask DSUWZ
+ 0x0AB0 - 0x0AB5 006C: PoisFace PQUWY
+ 0x0AC2 - 0x0AC7 006D: Whirlpl  ACEGI
+ 0x0AD4 - 0x0AD9 006E: Blckhole BDFHJ
+ 0x0AE6 - 0x0AEB 006F: Guard    *
+ 0x0AF8 - 0x0AFD 0070: Barrier  BELST*
+ 0x0B0A - 0x0B0F 0071: PanlOut1 ABDLS*
+ 0x0B1C - 0x0B21 0072: PanlOut3 CENRY*
+ 0x0B2E - 0x0B33 0073: LineOut  FHJQT*
+ 0x0B40 - 0x0B45 0074: Lance    OPTVY*
+ 0x0B52 - 0x0B57 0075: ZeusHamr JKOVZ
+ 0x0B64 - 0x0B69 0076: BrnzFist BNORS
+ 0x0B76 - 0x0B7B 0077: SilvFist EILSV
+ 0x0B88 - 0x0B8D 0078: GoldFist DGLOZ
+ 0x0B9A - 0x0B9F 0079: VarSwrd  BLNTZ
+ 0x0BAC - 0x0BB1 007A: Recov10  ACEGL*
+ 0x0BBE - 0x0BC3 007B: Recov30  BDFHM*
+ 0x0BD0 - 0x0BD5 007C: Recov50  CEGIN*
+ 0x0BE2 - 0x0BE7 007D: Recov80  DFHJO*
+ 0x0BF4 - 0x0BF9 007E: Recov120 OQSUW
+ 0x0C06 - 0x0C0B 007F: Recov150 NPRTV
+ 0x0C18 - 0x0C1D 0080: Recov200 MNUVW
+ 0x0C2A - 0x0C2F 0081: Recov300 ORVWZ
+ 0x0C3C - 0x0C41 0082: PanlGrab BHKLP*
+ 0x0C4E - 0x0C53 0083: AreaGrab ELRSZ*
+ 0x0C60 - 0x0C65 0084: GrabRvng ALPSW
+ 0x0C72 - 0x0C77 0085: Geddon1  CKLQS
+ 0x0C84 - 0x0C89 0086: Geddon2  JMRTZ
+ 0x0C96 - 0x0C9B 0087: Geddon3  EJNPY
+ 0x0CA8 - 0x0CAD 0088: Catcher  FIJNT*
+ 0x0CBA - 0x0CBF 0089: Mindbndr DIMNT
+ 0x0CCC - 0x0CD1 008A: Escape   FHJLN
+ 0x0CDE - 0x0CE3 008B: AirShoes AJOVZ*
+ 0x0CF0 - 0x0CF5 008C: Repair   ACELP*
+ 0x0D02 - 0x0D07 008D: Candle1  CFIMV*
+ 0x0D14 - 0x0D19 008E: Candle2  AGJLT*
+ 0x0D26 - 0x0D2B 008F: Candle3  BEHNW*
+ 0x0D38 - 0x0D3D 0090: RockCube BDGMV*
+ 0x0D4A - 0x0D4F 0091: Prism    BCLNQ*
+ 0x0D5C - 0x0D61 0092: Guardian OPUVZ
+ 0x0D6E - 0x0D73 0093: Wind     GJOQT*
+ 0x0D80 - 0x0D85 0094: Fan      AGLNY*
+ 0x0D92 - 0x0D97 0095: Anubis   HKMUW
+ 0x0DA4 - 0x0DA9 0096: SloGauge *
+ 0x0DB6 - 0x0DBB 0097: FstGauge *
+ 0x0DC8 - 0x0DCD 0098: FullCust *
+ 0x0DDA - 0x0DDF 0099: Invis1   AFLRU*
+ 0x0DEC - 0x0DF1 009A: Invis2   BHMQV*
+ 0x0DFE - 0x0E03 009B: Invis3   CGKPW*
+ 0x0E10 - 0x0E15 009C: DropDown ACFQS*
+ 0x0E22 - 0x0E27 009D: PopUp    DIJTW
+ 0x0E34 - 0x0E39 009E: StoneBod CESTW*
+ 0x0E46 - 0x0E4B 009F: Shadow1  BGHLR
+ 0x0E58 - 0x0E5D 00A0: Shadow2  DEJMT
+ 0x0E6A - 0x0E6F 00A1: Shadow3  CFKNV
+ 0x0E7C - 0x0E81 00A2: UnderSht HJNRW*
+ 0x0E8E - 0x0E93 00A3: BblWrap  IJQRW
+ 0x0EA0 - 0x0EA5 00A4: LeafShld ADRSW
+ 0x0EB2 - 0x0EB7 00A5: AquaAura AEIMQ*
+ 0x0EC4 - 0x0EC9 00A6: FireAura BFJNR*
+ 0x0ED6 - 0x0EDB 00A7: WoodAura CGKOS
+ 0x0EE8 - 0x0EED 00A8: ElecAura DHLPT
+ 0x0EFA - 0x0EFF 00A9: LifeAur1 BGIOQ
+ 0x0F0C - 0x0F11 00AA: LifeAur2 DFJNR
+ 0x0F1E - 0x0F23 00AB: LifeAur3 E-K-T NOTE: H, M, and * codes are NOT legitimately available for LifeAur3!
+ 0x0F30 - 0x0F35 00AC: MagLine  AEIMQ*
+ 0x0F42 - 0x0F47 00AD: LavaLine AFJMR*
+ 0x0F54 - 0x0F59 00AE: IceLine  BEJNQ*
+ 0x0F66 - 0x0F6B 00AF: GrassLne BFINR*
+ 0x0F78 - 0x0F7D 00B0: LavaStge DHMUV*
+ 0x0F8A - 0x0F8F 00B1: IceStage ACEIS*
+ 0x0F9C - 0x0FA1 00B2: GrassStg BDHPR
+ 0x0FAE - 0x0FB3 00B3: HolyPanl CEHLR*
+ 0x0FC0 - 0x0FC5 00B4: Jealosy  EJORU*
+ 0x0FD2 - 0x0FD7 00B5: AntiFire FKLPT
+ 0x0FE4 - 0x0FE9 00B6: AntiElec EHNUY
+ 0x0FF6 - 0x0FFB 00B7: AntiWatr ADQWZ
+ 0x1008 - 0x100D 00B8: AntiDmg  CJMRS
+ 0x101A - 0x101F 00B9: AntiSwrd DHIMT
+ 0x102C - 0x1031 00BA: AntiNavi KLOTX
+ 0x103E - 0x1043 00BB: AntiRecv BDMPW
+ 0x1050 - 0x1055 00BC: Atk+10   *
+ 0x1062 - 0x1067 00BD: Fire+40  *
+ 0x1074 - 0x1079 00BE: Aqua+40  *
+ 0x1086 - 0x108B 00BF: Wood+40  *
+ 0x1098 - 0x109D 00C0: Elec+40  *
+ 0x10AA - 0x10AF 00C1: Navi+20  *
+
+===NAVI CHIP PACK ADDRESSES & FOLDER IDS===
+ (START)  (END)  (ID)  (NAME)  (CODES)
+ 0x10BC - 0x10C1 00C2: Roll       R* Note: For Navi chips, the start byte has the letter code, and the last byte has the star code.
+ 0x10CE - 0x10D3 00C3: Roll V2    R*       All bytes in between are supposed to be 00!
+ 0x10E0 - 0x10E5 00C4: Roll V3    R
+ 0x10F2 - 0x10F7 00C5: GutsMan    G*
+ 0x1104 - 0x1109 00C6: GutsMan V2 G
+ 0x1116 - 0x111B 00C7: GutsMan V3 G
+ 0x1128 - 0x112D 00C8: ProtoMan   B*
+ 0x113A - 0x113F 00C9: ProtoMn V2 B
+ 0x114C - 0x1151 00CA: ProtoMn V3 B
+ 0x115E - 0x1163 00CB: AirMan     A*
+ 0x1170 - 0x1175 00CC: AirMan V2  A*
+ 0x1182 - 0x1187 00CD: AirMan V3  A*
+ 0x1194 - 0x1199 00CE: QuickMan   Q*
+ 0x11A6 - 0x11AB 00CF: QuickMn V2 Q*
+ 0x11B8 - 0x11BD 00D0: QuickMn V3 Q*
+ 0x11CA - 0x11CF 00D1: CutMan     C*
+ 0x11DC - 0x11E1 00D2: CutMan V2  C*
+ 0x11EE - 0x11F3 00D3: CutMan V3  C*
+ 0x1200 - 0x1205 00D4: ShadoMan   S*
+ 0x1212 - 0x1217 00D5: ShadoMn V2 S
+ 0x1224 - 0x1229 00D6: ShadoMn V3 S
+ 0x1236 - 0x123B 00D7: KnightMn   K*
+ 0x1248 - 0x124D 00D8: KnghtMn V2 K
+ 0x125A - 0x125F 00D9: KnghtMn V3 K
+ 0x126C - 0x1271 00DA: MagnetMn   M*
+ 0x127E - 0x1283 00DB: MagntMn V2 M
+ 0x1290 - 0x1295 00DC: MagntMn V3 M
+ 0x12A2 - 0x12A7 00DD: FreezeMn   F*
+ 0x12B4 - 0x12B9 00DE: FrzMan V2  F
+ 0x12C6 - 0x12CB 00DF: FrzMan V3  F
+ 0x12D8 - 0x12DD 00E0: HeatMan    H*
+ 0x12EA - 0x12EF 00E1: HeatMan V2 H
+ 0x12FC - 0x1301 00E2: HeatMan V3 H
+ 0x130E - 0x1313 00E3: ToadMan    T*
+ 0x1320 - 0x1325 00E4: ToadMan V2 T
+ 0x1332 - 0x1337 00E5: ToadMan V3 T
+ 0x1344 - 0x1349 00E6: ThunMan    T*
+ 0x1356 - 0x135B 00E7: ThunMan V2 T
+ 0x1368 - 0x136D 00E8: ThunMan V3 T
+ 0x137A - 0x137F 00E9: SnakeMan   S*
+ 0x138C - 0x1391 00EA: SnakeMn V2 S
+ 0x139E - 0x13A3 00EB: SnakeMn V3 S
+ 0x13B0 - 0x13B5 00EC: GateMan    G*
+ 0x13C2 - 0x13C7 00ED: GateMan V2 G
+ 0x13D4 - 0x13D9 00EE: GateMan V3 G
+ 0x13E6 - 0x13EB 00EF: PlanetMn   P
+ 0x13F8 - 0x13FD 00F0: PlnetMn V2 P
+ 0x140A - 0x140F 00F1: PlnetMn V3 P
+ 0x141C - 0x1421 00F2: NapalmMn   N
+ 0x142E - 0x1433 00F3: NaplmMn V2 N
+ 0x1440 - 0x1445 00F4: NaplmMn V3 N
+ 0x1452 - 0x1457 00F5: PharoMan   P
+ 0x1464 - 0x1469 00F6: PharoMn V2 P
+ 0x1476 - 0x147B 00F7: PharoMn V3 P
+ 0x1488 - 0x148D 00F8: Bass       F
+ 0x149A - 0x149F 00F9: Bass V2    F
+ 0x14AC - 0x14B1 00FA: Bass V3    X
+
+===SECRET CHIP ADDRESSES & FOLDER IDS===
+ (START)  (END)  (ID)  (NAME)  (CODES)
+ 0x14BE - 0x14C3 00FB: BgRedWav FHPRS
+ 0x14D0 - 0x14D5 00FC: FreezBom AIJQU
+ 0x14E2 - 0x14E7 00FD: Sparker  CEGKV
+ 0x14F4 - 0x14F9 00FE: GaiaSwrd DLNWY
+ 0x1506 - 0x150B 00FF: BlkBomb  BFGPR
+ 0x1518 - 0x151D 0100: FtrSword AILSY*
+ 0x152A - 0x152F 0101: KngtSwrd FJKMQ
+ 0x153C - 0x1541 0102: HeroSwrd ENOT- Note: HeroSwrd Z is unobtainable due to a glitch
+ 0x154E - 0x1553 0103: Meteors  BHORV
+ 0x1560 - 0x1565 0104: Poltrgst EPRUW
+ 0x1572 - 0x1577 0105: FireGspl X
+ 0x1584 - 0x1589 0106: AquaGspl X
+ 0x1596 - 0x159B 0107: ElecGspl X
+ 0x15A8 - 0x15AD 0108: WoodGspl X
+ 0x15BA - 0x15BF 0109: GateSP   G
+ 0x15CC - 0x15D1 010A: Glitched Chip Data; Do not use
+ 0x15DE - 0x15E3 010B: Glitched Chip Data; Do not use
+ 0x15F0 - 0x15F5 010C: Glitched Chip Data; Do not use
+ 0x1602 - 0x1607 010D: Glitched Chip Data; Do not use
+ 0x1614 - 0x1619 010E: Snctuary ACELS
+ 0x1626 - 0x162B 010F: Glitched Chip Data; Do not use
+
+===PROGRAM ADVANCE FOLDER IDS===
+0110: Z-Canon1
+0111: Z-Canon2
+0112: Z-Canon3
+0113: H-Burst
+0114: Z-Ball
+0115: Z-Raton1
+0116: Z-Raton2
+0117: Z-Raton3
+0118: O-Canon1
+0119: O-Canon2
+011A: O-Canon3
+011B: M-Burst
+011C: O-Ball
+011D: O-Raton1
+011E: O-Raton2
+011F: O-Raton3
+0120: Arrows
+0121: UltraBmb
+0122: LifeSrd1
+0123: LifeSrd2
+0124: LifeSrd3
+0125: Punch
+0126: Curse
+0127: TimeBom+
+0128: HvyStamp
+0129: PoisPhar
+012A: Gater
+012B: GtsShoot
+012C: BigHeart
+012D: BodyGrd
+012E: 2xHero
+012F: Darkness
+
+NOTE: Although the chip list is far better organized here than in BN1, it's still not in the order of what's in the Library. Fortunately, there's only one chip that's truly "out of place" (Sanctuary), so this will make parsing a little easier. Library is also in the ID order listed above.
+
+0x1690 - 0x16B1: Chip Library
+(Completed Library will be:
+   7F FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+   FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+   FF C2)
+0x16CC - 0x16CF: PA Library 
+(Completed Library will be: FF FF FF FF)
