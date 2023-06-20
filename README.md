@@ -3,6 +3,7 @@ Mega Man Battle Network Legacy Collection save editor
 
 ![Github license](https://img.shields.io/github/license/functionFox/NaviDoctorLC?style=plastic)
 ![GitHub issues](https://img.shields.io/github/issues/functionFox/NaviDoctorLC?style=plastic&logo=github)
+![Github Workflow](https://img.shields.io/github/actions/workflow/status/functionFox/NaviDoctorLC/ci.yml?style=plastic&logo=github)
 ![Github Release](https://img.shields.io/github/v/release/functionFox/NaviDoctorLC?style=plastic&logo=github)
 ![GitHub release (latest by date)](https://img.shields.io/github/downloads/functionFox/NaviDoctorLC/latest/total?style=plastic&logo=github)
 
