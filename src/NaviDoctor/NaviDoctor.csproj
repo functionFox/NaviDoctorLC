@@ -67,10 +67,6 @@
   <PropertyGroup>
     <ApplicationIcon>images\icon.ico</ApplicationIcon>
   </PropertyGroup>
-  <PropertyGroup> 
-    <GenerateResourceMSBuildArchitecture>CurrentArchitecture</GenerateResourceMSBuildArchitecture>
-    <GenerateResourceMSBuildRuntime>CurrentRuntime</GenerateResourceMSBuildRuntime>    
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
