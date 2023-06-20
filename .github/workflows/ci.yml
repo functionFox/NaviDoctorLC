@@ -1,4 +1,4 @@
-name: Build Passing
+name: Build
 
 on:
   push:
@@ -23,4 +23,4 @@ jobs:
         build-configuration: Release
         
         # (Optional) The path of the project to build; if omitted, the whole solution is built.
-        path: /src/NaviDoctor/NaviDoctor.csproj
+        path: ./NaviDoctor/
