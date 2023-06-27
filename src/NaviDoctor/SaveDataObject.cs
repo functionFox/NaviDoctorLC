@@ -21,9 +21,9 @@ namespace NaviDoctor
         public int SteamID { get; set; }
         public byte HPUp { get; set; }
         public int RegMem { get; set; }      // Not used in BN1
-        public int RegChip1 { get; set; }
-        public int RegChip2 { get; set; }
-        public int RegChip3 { get; set; }
+        public int RegChip1 { get; set; }    // Not used in BN1
+        public int RegChip2 { get; set; }    // Not used in BN1
+        public int RegChip3 { get; set; }    // BN2 Only
         public int SubChipMax { get; set; }  // Not used in BN1
         public int SubMiniEnrg { get; set; } // Not used in BN1
         public int SubFullEnrg { get; set; } // Not used in BN1
@@ -34,9 +34,9 @@ namespace NaviDoctor
         public int BugFrags { get; set; }    // Not used in BN1
         public byte EqStyle { get; set; } // Not used in BN4+
         public byte Style1 { get; set; }  // Not used in BN4+
-        public byte Style2 { get; set; }  // Not used in BN4+
-        public byte Style3 { get; set; }  // Not used in BN4+
-        public List<int> StyleTypes { get; set; } = new List<int>();
+        public byte Style2 { get; set; }  // Not used in BN3+
+        public byte Style3 { get; set; }  // Not used in BN2+
+        public List<int> StyleTypes { get; set; } = new List<int>(); // Not used in BN1, BN4+
         public byte Folders { get; set; } // Not used in BN1. Designates how many folders the player has unlocked.
         public List<Tuple<int, int>> FolderData { get; set; } = new List<Tuple<int, int>>();
         public List<Tuple<int, int>> Folder2Data { get; set; } = new List<Tuple<int, int>>(); // Not used in BN1
@@ -46,5 +46,14 @@ namespace NaviDoctor
         public List<byte> SecretChips { get; set; } = new List<byte>(); // Not used in BN1
         public List<byte> LibraryData { get; set; } = new List<byte>();
         public List<byte> PALibraryData { get; set; } = new List<byte>(); // Not used in BN1
+        public byte CustSize { get; set; } // BN3+
+        public List<byte> NCPInventory { get; set; } = new List<byte>();   // BN3+
+        public List<byte> Compression { get; set; } = new List<byte>();    // BN3+
+        public List<byte[,]> NCPGrid { get; set; } = new List<byte[,]>();  // BN3+
+        public List<byte[,]> GridData { get; set; } = new List<byte[,]>(); // BN3+
+        public byte ModCode { get; set; } // BN3 only
+        public byte MegaLimit { get; set; } // BN3+
+        public byte GigaLimit { get; set; } // BN3+
+        public short BonusHP { get; set; } // BN3+, HP Bonus from NaviCust
     }
 }
