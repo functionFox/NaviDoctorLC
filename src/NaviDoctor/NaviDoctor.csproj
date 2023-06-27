@@ -87,7 +87,6 @@
     <Compile Include="AboutUs.Designer.cs">
       <DependentUpon>AboutUs.cs</DependentUpon>
     </Compile>
-    <Compile Include="BattleChipData.cs" />
     <Compile Include="customControls\StyleSelect.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -97,6 +96,8 @@
     <Compile Include="extensions\BooleanExtensions.cs" />
     <Compile Include="extensions\GetEnumString.cs" />
     <Compile Include="extensions\StringValueAttribute.cs" />
+    <Compile Include="models\BattleChipData.cs" />
+    <Compile Include="models\NaviCustParts.cs" />
     <Compile Include="models\GameTitle.cs" />
     <Compile Include="SaveParse.cs" />
     <Compile Include="SaveDataObject.cs" />

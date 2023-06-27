@@ -1,26 +1,82 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.IO;
-using System.Windows.Forms;
-using NaviDoctor.models;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace NaviDoctor
+namespace NaviDoctor.models
 {
-    public class BattleChipData
+    class BattleChipData
     {
         public int ID { get; set; }
         public string Name { get; set; }
         public string Code { get; set; }
+        public int Size { get; set; }
         public int Quantity { get; set; }
-
         public BattleChipData()
         {
         }
-        
+        public static BattleChipData GetChipNameByID(List<BattleChipData> chipmap, int chipID)
+        {
+            return chipmap.FirstOrDefault(x => x.ID == chipID);
+        }
+
+        public static int GetChipIDByName(List<BattleChipData> chipmap, string chipName)
+        {
+            return chipmap.FirstOrDefault(x => x.Name.ToLower() == chipName.ToLower()).ID;
+        }
+        public List<BattleChipData> GenerateChipEntries(SaveDataObject saveData)
+        {
+            List<BattleChipData> chipEntries = new List<BattleChipData>();
+            Dictionary<string, List<string>> chipCodeMap;
+            List<BattleChipData> chipNameMap;
+
+            switch (saveData.GameName)
+            {
+                case GameTitle.Title.MegaManBattleNetwork:
+                    chipCodeMap = BN1ChipCodeMap;
+                    chipNameMap = BN1ChipNameMap;
+                    break;
+                case GameTitle.Title.MegaManBattleNetwork2:
+                    chipCodeMap = BN2ChipCodeMap;
+                    chipNameMap = BN2ChipNameMap;
+                    break;
+                case GameTitle.Title.MegaManBattleNetwork3White:
+                    chipCodeMap = BN3ChipCodeMap;
+                    chipNameMap = BN3ChipNameMap;
+                    break;
+                case GameTitle.Title.MegaManBattleNetwork3Blue:
+                    chipCodeMap = BN3ChipCodeMap;
+                    chipNameMap = BN3ChipNameMap;
+                    break;
+                default:
+                    return chipEntries;
+            }
+
+            // Generate chip entries for each chip name and associated codes
+            foreach (var kvp in chipCodeMap)
+            {
+                string chipName = kvp.Key;
+                List<string> chipCodes = kvp.Value;
+
+                foreach (var chipCode in chipCodes)
+                {
+                    BattleChipData chipEntry = new BattleChipData
+                    {
+                        ID = BattleChipData.GetChipIDByName(chipNameMap, chipName),
+                        Name = chipName,
+                        Code = chipCode,
+                        Quantity = 0 // Set the initial quantity to 0
+                    };
+
+                    chipEntries.Add(chipEntry);
+                }
+            }
+            return chipEntries;
+        }
         public static List<BattleChipData> BN1ChipNameMap = new List<BattleChipData>()
-        { 
-            new BattleChipData { ID = 1, Name = "Cannon" },
+        {
+            new BattleChipData { ID = 1, Name = "Cannon", },
             new BattleChipData { ID = 2, Name = "HiCannon" },
             new BattleChipData { ID = 3, Name = "M-Cannon" },
             new BattleChipData { ID = 4, Name = "Sword" },
@@ -263,321 +319,314 @@ namespace NaviDoctor
 
         public static List<BattleChipData> BN2ChipNameMap = new List<BattleChipData>()
         {
-            new BattleChipData { ID = 0x1, Name = "Cannon" },
-            new BattleChipData { ID = 0x2, Name = "HiCannon" },
-            new BattleChipData { ID = 0x3, Name = "M-Cannon" },
-            new BattleChipData { ID = 0x4, Name = "Shotgun" },
-            new BattleChipData { ID = 0x5, Name = "V-Gun" },
-            new BattleChipData { ID = 0x6, Name = "CrossGun" },
-            new BattleChipData { ID = 0x7, Name = "Spreader" },
-            new BattleChipData { ID = 0x8, Name = "Bubbler" },
-            new BattleChipData { ID = 0x9, Name = "Bub-V" },
-            new BattleChipData { ID = 0xA, Name = "BubCross" },
-            new BattleChipData { ID = 0xB, Name = "BubSprd" },
-            new BattleChipData { ID = 0xC, Name = "HeatShot" },
-            new BattleChipData { ID = 0xD, Name = "Heat-V" },
-            new BattleChipData { ID = 0xE, Name = "HeatCros" },
-            new BattleChipData { ID = 0xF, Name = "HeatSprd" },
-            new BattleChipData { ID = 0x10, Name = "MiniBomb" },
-            new BattleChipData { ID = 0x11, Name = "LilBomb" },
-            new BattleChipData { ID = 0x12, Name = "CrosBomb" },
-            new BattleChipData { ID = 0x13, Name = "BigBomb" },
-            new BattleChipData { ID = 0x14, Name = "TreeBom1" },
-            new BattleChipData { ID = 0x15, Name = "TreeBom2" },
-            new BattleChipData { ID = 0x16, Name = "TreeBom3" },
-            new BattleChipData { ID = 0x17, Name = "Sword" },
-            new BattleChipData { ID = 0x18, Name = "WideSwrd" },
-            new BattleChipData { ID = 0x19, Name = "LongSwrd" },
-            new BattleChipData { ID = 0x1A, Name = "FireSwrd" },
-            new BattleChipData { ID = 0x1B, Name = "AquaSwrd" },
-            new BattleChipData { ID = 0x1C, Name = "ElecSwrd" },
-            new BattleChipData { ID = 0x1D, Name = "FireBlde" },
-            new BattleChipData { ID = 0x1E, Name = "AquaBlde" },
-            new BattleChipData { ID = 0x1F, Name = "ElecBlde" },
-            new BattleChipData { ID = 0x20, Name = "StepSwrd" },
-            new BattleChipData { ID = 0x21, Name = "Muramasa" },
-            new BattleChipData { ID = 0x22, Name = "CustSwrd" },
-            new BattleChipData { ID = 0x23, Name = "Kunai1" },
-            new BattleChipData { ID = 0x24, Name = "Kunai2" },
-            new BattleChipData { ID = 0x25, Name = "Kunai3" },
-            new BattleChipData { ID = 0x26, Name = "Slasher" },
-            new BattleChipData { ID = 0x27, Name = "Shockwav" },
-            new BattleChipData { ID = 0x28, Name = "Sonicwav" },
-            new BattleChipData { ID = 0x29, Name = "Dynawave" },
-            new BattleChipData { ID = 0x2A, Name = "Quake1" },
-            new BattleChipData { ID = 0x2B, Name = "Quake2" },
-            new BattleChipData { ID = 0x2C, Name = "Quake3" },
-            new BattleChipData { ID = 0x2D, Name = "GutPunch" },
-            new BattleChipData { ID = 0x2E, Name = "ColdPnch" },
-            new BattleChipData { ID = 0x2F, Name = "Atk+20" },
-            new BattleChipData { ID = 0x30, Name = "Atk+30" },
-            new BattleChipData { ID = 0x31, Name = "Navi+40" },
-            new BattleChipData { ID = 0x32, Name = "DashAtk" },
-            new BattleChipData { ID = 0x33, Name = "Wrecker" },
-            new BattleChipData { ID = 0x34, Name = "CannBall" },
-            new BattleChipData { ID = 0x35, Name = "DoubNdl" },
-            new BattleChipData { ID = 0x36, Name = "TripNdl" },
-            new BattleChipData { ID = 0x37, Name = "QuadNdl" },
-            new BattleChipData { ID = 0x38, Name = "Trident" },
-            new BattleChipData { ID = 0x39, Name = "Ratton1" },
-            new BattleChipData { ID = 0x3A, Name = "Ratton2" },
-            new BattleChipData { ID = 0x3B, Name = "Ratton3" },
-            new BattleChipData { ID = 0x3C, Name = "FireRat" },
-            new BattleChipData { ID = 0x3D, Name = "Tornado" },
-            new BattleChipData { ID = 0x3E, Name = "Twister" },
-            new BattleChipData { ID = 0x3F, Name = "Blower" },
-            new BattleChipData { ID = 0x40, Name = "Burner" },
-            new BattleChipData { ID = 0x41, Name = "ZapRing1" },
-            new BattleChipData { ID = 0x42, Name = "ZapRing2" },
-            new BattleChipData { ID = 0x43, Name = "ZapRing3" },
-            new BattleChipData { ID = 0x44, Name = "Spice1" },
-            new BattleChipData { ID = 0x45, Name = "Spice2" },
-            new BattleChipData { ID = 0x46, Name = "Spice3" },
-            new BattleChipData { ID = 0x47, Name = "Satelit1" },
-            new BattleChipData { ID = 0x48, Name = "Satelit2" },
-            new BattleChipData { ID = 0x49, Name = "Satelit3" },
-            new BattleChipData { ID = 0x4A, Name = "Yo-Yo1" },
-            new BattleChipData { ID = 0x4B, Name = "Yo-Yo2" },
-            new BattleChipData { ID = 0x4C, Name = "Yo-Yo3" },
-            new BattleChipData { ID = 0x4D, Name = "MagBomb1" },
-            new BattleChipData { ID = 0x4E, Name = "MagBomb2" },
-            new BattleChipData { ID = 0x4F, Name = "MagBomb3" },
-            new BattleChipData { ID = 0x50, Name = "Meteor9" },
-            new BattleChipData { ID = 0x51, Name = "Meteor12" },
-            new BattleChipData { ID = 0x52, Name = "Meteor15" },
-            new BattleChipData { ID = 0x53, Name = "Meteor18" },
-            new BattleChipData { ID = 0x54, Name = "Hammer" },
-            new BattleChipData { ID = 0x55, Name = "CrsShld1" },
-            new BattleChipData { ID = 0x56, Name = "CrsShld2" },
-            new BattleChipData { ID = 0x57, Name = "CrsShld3" },
-            new BattleChipData { ID = 0x58, Name = "TimeBom1" },
-            new BattleChipData { ID = 0x59, Name = "TimeBom2" },
-            new BattleChipData { ID = 0x5A, Name = "TimeBom3" },
-            new BattleChipData { ID = 0x5B, Name = "LilCloud" },
-            new BattleChipData { ID = 0x5C, Name = "MedCloud" },
-            new BattleChipData { ID = 0x5D, Name = "BigCloud" },
-            new BattleChipData { ID = 0x5E, Name = "Mine" },
-            new BattleChipData { ID = 0x5F, Name = "FrntSnsr" },
-            new BattleChipData { ID = 0x60, Name = "DblSnsr" },
-            new BattleChipData { ID = 0x61, Name = "Remobit1" },
-            new BattleChipData { ID = 0x62, Name = "Remobit2" },
-            new BattleChipData { ID = 0x63, Name = "Remobit3" },
-            new BattleChipData { ID = 0x64, Name = "AquaBall" },
-            new BattleChipData { ID = 0x65, Name = "ElecBall" },
-            new BattleChipData { ID = 0x66, Name = "HeatBall" },
-            new BattleChipData { ID = 0x67, Name = "Geyser" },
-            new BattleChipData { ID = 0x68, Name = "LavaDrag" },
-            new BattleChipData { ID = 0x69, Name = "GodStone" },
-            new BattleChipData { ID = 0x6A, Name = "OldWood" },
-            new BattleChipData { ID = 0x6B, Name = "PoisMask" },
-            new BattleChipData { ID = 0x6C, Name = "PoisFace" },
-            new BattleChipData { ID = 0x6D, Name = "Whirlpl" },
-            new BattleChipData { ID = 0x6E, Name = "Blckhole" },
-            new BattleChipData { ID = 0x6F, Name = "Guard" },
-            new BattleChipData { ID = 0x70, Name = "Barrier" },
-            new BattleChipData { ID = 0x71, Name = "PanlOut1" },
-            new BattleChipData { ID = 0x72, Name = "PanlOut3" },
-            new BattleChipData { ID = 0x73, Name = "LineOut" },
-            new BattleChipData { ID = 0x74, Name = "Lance" },
-            new BattleChipData { ID = 0x75, Name = "ZeusHamr" },
-            new BattleChipData { ID = 0x76, Name = "BrnzFist" },
-            new BattleChipData { ID = 0x77, Name = "SilvFist" },
-            new BattleChipData { ID = 0x78, Name = "GoldFist" },
-            new BattleChipData { ID = 0x79, Name = "VarSwrd" },
-            new BattleChipData { ID = 0x7A, Name = "Recov10" },
-            new BattleChipData { ID = 0x7B, Name = "Recov30" },
-            new BattleChipData { ID = 0x7C, Name = "Recov50" },
-            new BattleChipData { ID = 0x7D, Name = "Recov80" },
-            new BattleChipData { ID = 0x7E, Name = "Recov120" },
-            new BattleChipData { ID = 0x7F, Name = "Recov150" },
-            new BattleChipData { ID = 0x80, Name = "Recov200" },
-            new BattleChipData { ID = 0x81, Name = "Recov300" },
-            new BattleChipData { ID = 0x82, Name = "PanlGrab" },
-            new BattleChipData { ID = 0x83, Name = "AreaGrab" },
-            new BattleChipData { ID = 0x84, Name = "GrabRvng" },
-            new BattleChipData { ID = 0x85, Name = "Geddon1" },
-            new BattleChipData { ID = 0x86, Name = "Geddon2" },
-            new BattleChipData { ID = 0x87, Name = "Geddon3" },
-            new BattleChipData { ID = 0x88, Name = "Catcher" },
-            new BattleChipData { ID = 0x89, Name = "Mindbndr" },
-            new BattleChipData { ID = 0x8A, Name = "Escape" },
-            new BattleChipData { ID = 0x8B, Name = "AirShoes" },
-            new BattleChipData { ID = 0x8C, Name = "Repair" },
-            new BattleChipData { ID = 0x8D, Name = "Candle1" },
-            new BattleChipData { ID = 0x8E, Name = "Candle2" },
-            new BattleChipData { ID = 0x8F, Name = "Candle3" },
-            new BattleChipData { ID = 0x90, Name = "RockCube" },
-            new BattleChipData { ID = 0x91, Name = "Prism" },
-            new BattleChipData { ID = 0x92, Name = "Guardian" },
-            new BattleChipData { ID = 0x93, Name = "Wind" },
-            new BattleChipData { ID = 0x94, Name = "Fan" },
-            new BattleChipData { ID = 0x95, Name = "Anubis" },
-            new BattleChipData { ID = 0x96, Name = "SloGauge" },
-            new BattleChipData { ID = 0x97, Name = "FstGauge" },
-            new BattleChipData { ID = 0x98, Name = "FullCust" },
-            new BattleChipData { ID = 0x99, Name = "Invis1" },
-            new BattleChipData { ID = 0x9A, Name = "Invis2" },
-            new BattleChipData { ID = 0x9B, Name = "Invis3" },
-            new BattleChipData { ID = 0x9C, Name = "DropDown" },
-            new BattleChipData { ID = 0x9D, Name = "PopUp" },
-            new BattleChipData { ID = 0x9E, Name = "StoneBod" },
-            new BattleChipData { ID = 0x9F, Name = "Shadow1" },
-            new BattleChipData { ID = 0xA0, Name = "Shadow2" },
-            new BattleChipData { ID = 0xA1, Name = "Shadow3" },
-            new BattleChipData { ID = 0xA2, Name = "UnderSht" },
-            new BattleChipData { ID = 0xA3, Name = "BblWrap" },
-            new BattleChipData { ID = 0xA4, Name = "LeafShld" },
-            new BattleChipData { ID = 0xA5, Name = "AquaAura" },
-            new BattleChipData { ID = 0xA6, Name = "FireAura" },
-            new BattleChipData { ID = 0xA7, Name = "WoodAura" },
-            new BattleChipData { ID = 0xA8, Name = "ElecAura" },
-            new BattleChipData { ID = 0xA9, Name = "LifeAur1" },
-            new BattleChipData { ID = 0xAA, Name = "LifeAur2" },
-            new BattleChipData { ID = 0xAB, Name = "LifeAur3" },
-            new BattleChipData { ID = 0xAC, Name = "MagLine" },
-            new BattleChipData { ID = 0xAD, Name = "LavaLine" },
-            new BattleChipData { ID = 0xAE, Name = "IceLine" },
-            new BattleChipData { ID = 0xAF, Name = "GrassLne" },
-            new BattleChipData { ID = 0xB0, Name = "LavaStge" },
-            new BattleChipData { ID = 0xB1, Name = "IceStage" },
-            new BattleChipData { ID = 0xB2, Name = "GrassStg" },
-            new BattleChipData { ID = 0xB3, Name = "HolyPanl" },
-            new BattleChipData { ID = 0xB4, Name = "Jealosy" },
-            new BattleChipData { ID = 0xB5, Name = "AntiFire" },
-            new BattleChipData { ID = 0xB6, Name = "AntiElec" },
-            new BattleChipData { ID = 0xB7, Name = "AntiWatr" },
-            new BattleChipData { ID = 0xB8, Name = "AntiDmg" },
-            new BattleChipData { ID = 0xB9, Name = "AntiSwrd" },
-            new BattleChipData { ID = 0xBA, Name = "AntiNavi" },
-            new BattleChipData { ID = 0xBB, Name = "AntiRecv" },
-            new BattleChipData { ID = 0xBC, Name = "Atk+10" },
-            new BattleChipData { ID = 0xBD, Name = "Fire+40" },
-            new BattleChipData { ID = 0xBE, Name = "Aqua+40" },
-            new BattleChipData { ID = 0xBF, Name = "Wood+40" },
-            new BattleChipData { ID = 0xC0, Name = "Elec+40" },
-            new BattleChipData { ID = 0xC1, Name = "Navi+20" },
-            new BattleChipData { ID = 0xC2, Name = "Roll" },
-            new BattleChipData { ID = 0xC3, Name = "Roll V2" },
-            new BattleChipData { ID = 0xC4, Name = "Roll V3" },
-            new BattleChipData { ID = 0xC5, Name = "GutsMan" },
-            new BattleChipData { ID = 0xC6, Name = "GutsMan V2" },
-            new BattleChipData { ID = 0xC7, Name = "GutsMan V3" },
-            new BattleChipData { ID = 0xC8, Name = "ProtoMan" },
-            new BattleChipData { ID = 0xC9, Name = "ProtoMn V2" },
-            new BattleChipData { ID = 0xCA, Name = "ProtoMn V3" },
-            new BattleChipData { ID = 0xCB, Name = "AirMan" },
-            new BattleChipData { ID = 0xCC, Name = "AirMan V2" },
-            new BattleChipData { ID = 0xCD, Name = "AirMan V3" },
-            new BattleChipData { ID = 0xCE, Name = "QuickMan" },
-            new BattleChipData { ID = 0xCF, Name = "QuickMn V2" },
-            new BattleChipData { ID = 0xD0, Name = "QuickMn V3" },
-            new BattleChipData { ID = 0xD1, Name = "CutMan" },
-            new BattleChipData { ID = 0xD2, Name = "CutMan V2" },
-            new BattleChipData { ID = 0xD3, Name = "CutMan V3" },
-            new BattleChipData { ID = 0xD4, Name = "ShadoMan" },
-            new BattleChipData { ID = 0xD5, Name = "ShadoMn V2" },
-            new BattleChipData { ID = 0xD6, Name = "ShadoMn V3" },
-            new BattleChipData { ID = 0xD7, Name = "KnightMn" },
-            new BattleChipData { ID = 0xD8, Name = "KnghtMn V2" },
-            new BattleChipData { ID = 0xD9, Name = "KnghtMn V3" },
-            new BattleChipData { ID = 0xDA, Name = "MagnetMn" },
-            new BattleChipData { ID = 0xDB, Name = "MagntMn V2" },
-            new BattleChipData { ID = 0xDC, Name = "MagntMn V3" },
-            new BattleChipData { ID = 0xDD, Name = "FreezeMn" },
-            new BattleChipData { ID = 0xDE, Name = "FrzMan V2" },
-            new BattleChipData { ID = 0xDF, Name = "FrzMan V3" },
-            new BattleChipData { ID = 0xE0, Name = "HeatMan" },
-            new BattleChipData { ID = 0xE1, Name = "HeatMan V2" },
-            new BattleChipData { ID = 0xE2, Name = "HeatMan V3" },
-            new BattleChipData { ID = 0xE3, Name = "ToadMan" },
-            new BattleChipData { ID = 0xE4, Name = "ToadMan V2" },
-            new BattleChipData { ID = 0xE5, Name = "ToadMan V3" },
-            new BattleChipData { ID = 0xE6, Name = "ThunMan" },
-            new BattleChipData { ID = 0xE7, Name = "ThunMan V2" },
-            new BattleChipData { ID = 0xE8, Name = "ThunMan V3" },
-            new BattleChipData { ID = 0xE9, Name = "SnakeMan" },
-            new BattleChipData { ID = 0xEA, Name = "SnakeMn V2" },
-            new BattleChipData { ID = 0xEB, Name = "SnakeMn V3" },
-            new BattleChipData { ID = 0xEC, Name = "GateMan" },
-            new BattleChipData { ID = 0xED, Name = "GateMan V2" },
-            new BattleChipData { ID = 0xEE, Name = "GateMan V3" },
-            new BattleChipData { ID = 0xEF, Name = "PlanetMn" },
-            new BattleChipData { ID = 0xF0, Name = "PlnetMn V2" },
-            new BattleChipData { ID = 0xF1, Name = "PlnetMn V3" },
-            new BattleChipData { ID = 0xF2, Name = "NapalmMn" },
-            new BattleChipData { ID = 0xF3, Name = "NaplmMn V2" },
-            new BattleChipData { ID = 0xF4, Name = "NaplmMn V3" },
-            new BattleChipData { ID = 0xF5, Name = "PharoMan" },
-            new BattleChipData { ID = 0xF6, Name = "PharoMn V2" },
-            new BattleChipData { ID = 0xF7, Name = "PharoMn V3" },
-            new BattleChipData { ID = 0xF8, Name = "Bass" },
-            new BattleChipData { ID = 0xF9, Name = "Bass V2" },
-            new BattleChipData { ID = 0xFA, Name = "Bass V3" },
-            new BattleChipData { ID = 0xFB, Name = "BgRedWav" },
-            new BattleChipData { ID = 0xFC, Name = "FreezBom" },
-            new BattleChipData { ID = 0xFD, Name = "Sparker" },
-            new BattleChipData { ID = 0xFE, Name = "GaiaSwrd" },
-            new BattleChipData { ID = 0xFF, Name = "BlkBomb" },
-            new BattleChipData { ID = 0x100, Name = "FtrSword" },
-            new BattleChipData { ID = 0x101, Name = "KngtSwrd" },
-            new BattleChipData { ID = 0x102, Name = "HeroSwrd" },
-            new BattleChipData { ID = 0x103, Name = "Meteors" },
-            new BattleChipData { ID = 0x104, Name = "Poltrgst" },
-            new BattleChipData { ID = 0x105, Name = "FireGspl" },
-            new BattleChipData { ID = 0x106, Name = "AquaGspl" },
-            new BattleChipData { ID = 0x107, Name = "ElecGspl" },
-            new BattleChipData { ID = 0x108, Name = "WoodGspl" },
-            new BattleChipData { ID = 0x109, Name = "GateSP" },
-            new BattleChipData { ID = 0x10A, Name = "0A" }, // Shortened due to how the Library currently operates.
-            new BattleChipData { ID = 0x10B, Name = "0B" },
-            new BattleChipData { ID = 0x10C, Name = "0C" },
-            new BattleChipData { ID = 0x10D, Name = "0D" },
-            new BattleChipData { ID = 0x10E, Name = "Snctuary" },
-            new BattleChipData { ID = 0x10F, Name = "0F" },
-            new BattleChipData { ID = 0x110, Name = "Z-Canon1" },
-            new BattleChipData { ID = 0x111, Name = "Z-Canon2" },
-            new BattleChipData { ID = 0x112, Name = "Z-Canon3" },
-            new BattleChipData { ID = 0x113, Name = "H-Burst" },
-            new BattleChipData { ID = 0x114, Name = "Z-Ball" },
-            new BattleChipData { ID = 0x115, Name = "Z-Raton1" },
-            new BattleChipData { ID = 0x116, Name = "Z-Raton2" },
-            new BattleChipData { ID = 0x117, Name = "Z-Raton3" },
-            new BattleChipData { ID = 0x118, Name = "O-Canon1" },
-            new BattleChipData { ID = 0x119, Name = "O-Canon2" },
-            new BattleChipData { ID = 0x11A, Name = "O-Canon3" },
-            new BattleChipData { ID = 0x11B, Name = "M-Burst" },
-            new BattleChipData { ID = 0x11C, Name = "O-Ball" },
-            new BattleChipData { ID = 0x11D, Name = "O-Raton1" },
-            new BattleChipData { ID = 0x11E, Name = "O-Raton2" },
-            new BattleChipData { ID = 0x11F, Name = "O-Raton3" },
-            new BattleChipData { ID = 0x120, Name = "Arrows" },
-            new BattleChipData { ID = 0x121, Name = "UltraBmb" },
-            new BattleChipData { ID = 0x122, Name = "LifeSrd1" },
-            new BattleChipData { ID = 0x123, Name = "LifeSrd2" },
-            new BattleChipData { ID = 0x124, Name = "LifeSrd3" },
-            new BattleChipData { ID = 0x125, Name = "Punch" },
-            new BattleChipData { ID = 0x126, Name = "Curse" },
-            new BattleChipData { ID = 0x127, Name = "TimeBom+" },
-            new BattleChipData { ID = 0x128, Name = "HvyStamp" },
-            new BattleChipData { ID = 0x129, Name = "PoisPhar" },
-            new BattleChipData { ID = 0x12A, Name = "Gater" },
-            new BattleChipData { ID = 0x12B, Name = "GtsShoot" },
-            new BattleChipData { ID = 0x12C, Name = "BigHeart" },
-            new BattleChipData { ID = 0x12D, Name = "BodyGrd" },
-            new BattleChipData { ID = 0x12E, Name = "2xHero" },
-            new BattleChipData { ID = 0x12F, Name = "Darkness" }
+            new BattleChipData { ID = 0x1, Name = "Cannon", Size = 16 },
+            new BattleChipData { ID = 0x2, Name = "HiCannon", Size = 24 },
+            new BattleChipData { ID = 0x3, Name = "M-Cannon", Size = 32 },
+            new BattleChipData { ID = 0x4, Name = "Shotgun", Size = 4 },
+            new BattleChipData { ID = 0x5, Name = "V-Gun", Size = 4 },
+            new BattleChipData { ID = 0x6, Name = "CrossGun", Size = 8 },
+            new BattleChipData { ID = 0x7, Name = "Spreader", Size = 20 },
+            new BattleChipData { ID = 0x8, Name = "Bubbler", Size = 12 },
+            new BattleChipData { ID = 0x9, Name = "Bub-V", Size = 16 },
+            new BattleChipData { ID = 0xA, Name = "BubCross", Size = 20 },
+            new BattleChipData { ID = 0xB, Name = "BubSprd", Size = 32 },
+            new BattleChipData { ID = 0xC, Name = "HeatShot", Size = 14 },
+            new BattleChipData { ID = 0xD, Name = "Heat-V", Size = 18 },
+            new BattleChipData { ID = 0xE, Name = "HeatCros", Size = 22 },
+            new BattleChipData { ID = 0xF, Name = "HeatSprd", Size = 36 },
+            new BattleChipData { ID = 0x10, Name = "MiniBomb", Size = 8 },
+            new BattleChipData { ID = 0x11, Name = "LilBomb", Size = 12 },
+            new BattleChipData { ID = 0x12, Name = "CrosBomb", Size = 16 },
+            new BattleChipData { ID = 0x13, Name = "BigBomb", Size = 32 },
+            new BattleChipData { ID = 0x14, Name = "TreeBom1", Size = 10 },
+            new BattleChipData { ID = 0x15, Name = "TreeBom2", Size = 15 },
+            new BattleChipData { ID = 0x16, Name = "TreeBom3", Size = 20 },
+            new BattleChipData { ID = 0x17, Name = "Sword", Size = 12 },
+            new BattleChipData { ID = 0x18, Name = "WideSwrd", Size = 16 },
+            new BattleChipData { ID = 0x19, Name = "LongSwrd", Size = 22 },
+            new BattleChipData { ID = 0x1A, Name = "FireSwrd", Size = 24 },
+            new BattleChipData { ID = 0x1B, Name = "AquaSwrd", Size = 26 },
+            new BattleChipData { ID = 0x1C, Name = "ElecSwrd", Size = 28 },
+            new BattleChipData { ID = 0x1D, Name = "FireBlde", Size = 32 },
+            new BattleChipData { ID = 0x1E, Name = "AquaBlde", Size = 32 },
+            new BattleChipData { ID = 0x1F, Name = "ElecBlde", Size = 32 },
+            new BattleChipData { ID = 0x20, Name = "StepSwrd", Size = 54 },
+            new BattleChipData { ID = 0x21, Name = "Muramasa", Size = 88 },
+            new BattleChipData { ID = 0x22, Name = "CustSwrd", Size = 68 },
+            new BattleChipData { ID = 0x23, Name = "Kunai1", Size = 48 },
+            new BattleChipData { ID = 0x24, Name = "Kunai2", Size = 64 },
+            new BattleChipData { ID = 0x25, Name = "Kunai3", Size = 78 },
+            new BattleChipData { ID = 0x26, Name = "Slasher", Size = 24 },
+            new BattleChipData { ID = 0x27, Name = "Shockwav", Size = 10 },
+            new BattleChipData { ID = 0x28, Name = "Sonicwav", Size = 30 },
+            new BattleChipData { ID = 0x29, Name = "Dynawave", Size = 50 },
+            new BattleChipData { ID = 0x2A, Name = "Quake1", Size = 16 },
+            new BattleChipData { ID = 0x2B, Name = "Quake2", Size = 32 },
+            new BattleChipData { ID = 0x2C, Name = "Quake3", Size = 64 },
+            new BattleChipData { ID = 0x2D, Name = "GutPunch", Size = 8 },
+            new BattleChipData { ID = 0x2E, Name = "ColdPnch", Size = 8 },
+            new BattleChipData { ID = 0x2F, Name = "Atk+20", Size = 20 },
+            new BattleChipData { ID = 0x30, Name = "Atk+30", Size = 38 },
+            new BattleChipData { ID = 0x31, Name = "Navi+40", Size = 42 },
+            new BattleChipData { ID = 0x32, Name = "DashAtk", Size = 12 },
+            new BattleChipData { ID = 0x33, Name = "Wrecker", Size = 16 },
+            new BattleChipData { ID = 0x34, Name = "CannBall", Size = 22 },
+            new BattleChipData { ID = 0x35, Name = "DoubNdl", Size = 18 },
+            new BattleChipData { ID = 0x36, Name = "TripNdl", Size = 24 },
+            new BattleChipData { ID = 0x37, Name = "QuadNdl", Size = 30 },
+            new BattleChipData { ID = 0x38, Name = "Trident", Size = 30 },
+            new BattleChipData { ID = 0x39, Name = "Ratton1", Size = 26 },
+            new BattleChipData { ID = 0x3A, Name = "Ratton2", Size = 32 },
+            new BattleChipData { ID = 0x3B, Name = "Ratton3", Size = 38 },
+            new BattleChipData { ID = 0x3C, Name = "FireRat", Size = 30 },
+            new BattleChipData { ID = 0x3D, Name = "Tornado", Size = 22 },
+            new BattleChipData { ID = 0x3E, Name = "Twister", Size = 22 },
+            new BattleChipData { ID = 0x3F, Name = "Blower", Size = 22 },
+            new BattleChipData { ID = 0x40, Name = "Burner", Size = 28 },
+            new BattleChipData { ID = 0x41, Name = "ZapRing1", Size = 12 },
+            new BattleChipData { ID = 0x42, Name = "ZapRing2", Size = 16 },
+            new BattleChipData { ID = 0x43, Name = "ZapRing3", Size = 40 },
+            new BattleChipData { ID = 0x44, Name = "Spice1", Size = 14 },
+            new BattleChipData { ID = 0x45, Name = "Spice2", Size = 28 },
+            new BattleChipData { ID = 0x46, Name = "Spice3", Size = 42 },
+            new BattleChipData { ID = 0x47, Name = "Satelit1", Size = 20 },
+            new BattleChipData { ID = 0x48, Name = "Satelit2", Size = 24 },
+            new BattleChipData { ID = 0x49, Name = "Satelit3", Size = 28 },
+            new BattleChipData { ID = 0x4A, Name = "Yo-Yo1", Size = 36 },
+            new BattleChipData { ID = 0x4B, Name = "Yo-Yo2", Size = 40 },
+            new BattleChipData { ID = 0x4C, Name = "Yo-Yo3", Size = 44 },
+            new BattleChipData { ID = 0x4D, Name = "MagBomb1", Size = 10 },
+            new BattleChipData { ID = 0x4E, Name = "MagBomb2", Size = 14 },
+            new BattleChipData { ID = 0x4F, Name = "MagBomb3", Size = 18 },
+            new BattleChipData { ID = 0x50, Name = "Meteor9", Size = 12 },
+            new BattleChipData { ID = 0x51, Name = "Meteor12", Size = 24 },
+            new BattleChipData { ID = 0x52, Name = "Meteor15", Size = 48 },
+            new BattleChipData { ID = 0x53, Name = "Meteor18", Size = 60 },
+            new BattleChipData { ID = 0x54, Name = "Hammer", Size = 24 },
+            new BattleChipData { ID = 0x55, Name = "CrsShld1", Size = 18 },
+            new BattleChipData { ID = 0x56, Name = "CrsShld2", Size = 24 },
+            new BattleChipData { ID = 0x57, Name = "CrsShld3", Size = 32 },
+            new BattleChipData { ID = 0x58, Name = "TimeBom1", Size = 32 },
+            new BattleChipData { ID = 0x59, Name = "TimeBom2", Size = 48 },
+            new BattleChipData { ID = 0x5A, Name = "TimeBom3", Size = 64 },
+            new BattleChipData { ID = 0x5B, Name = "LilCloud", Size = 16 },
+            new BattleChipData { ID = 0x5C, Name = "MedCloud", Size = 24 },
+            new BattleChipData { ID = 0x5D, Name = "BigCloud", Size = 32 },
+            new BattleChipData { ID = 0x5E, Name = "Mine", Size = 12 },
+            new BattleChipData { ID = 0x5F, Name = "FrntSnsr", Size = 14 },
+            new BattleChipData { ID = 0x60, Name = "DblSnsr", Size = 24 },
+            new BattleChipData { ID = 0x61, Name = "Remobit1", Size = 8 },
+            new BattleChipData { ID = 0x62, Name = "Remobit2", Size = 16 },
+            new BattleChipData { ID = 0x63, Name = "Remobit3", Size = 32 },
+            new BattleChipData { ID = 0x64, Name = "AquaBall", Size = 20 },
+            new BattleChipData { ID = 0x65, Name = "ElecBall", Size = 20 },
+            new BattleChipData { ID = 0x66, Name = "HeatBall", Size = 20 },
+            new BattleChipData { ID = 0x67, Name = "Geyser", Size = 40 },
+            new BattleChipData { ID = 0x68, Name = "LavaDrag", Size = 60 },
+            new BattleChipData { ID = 0x69, Name = "GodStone", Size = 60 },
+            new BattleChipData { ID = 0x6A, Name = "OldWood", Size = 60 },
+            new BattleChipData { ID = 0x6B, Name = "PoisMask", Size = 24 },
+            new BattleChipData { ID = 0x6C, Name = "PoisFace", Size = 30 },
+            new BattleChipData { ID = 0x6D, Name = "Whirlpl", Size = 20 },
+            new BattleChipData { ID = 0x6E, Name = "Blckhole", Size = 30 },
+            new BattleChipData { ID = 0x6F, Name = "Guard", Size = 2 },
+            new BattleChipData { ID = 0x70, Name = "Barrier", Size = 8 },
+            new BattleChipData { ID = 0x71, Name = "PanlOut1", Size = 4 },
+            new BattleChipData { ID = 0x72, Name = "PanlOut3", Size = 8 },
+            new BattleChipData { ID = 0x73, Name = "LineOut", Size = 24 },
+            new BattleChipData { ID = 0x74, Name = "Lance", Size = 20 },
+            new BattleChipData { ID = 0x75, Name = "ZeusHamr", Size = 70 },
+            new BattleChipData { ID = 0x76, Name = "BrnzFist", Size = 18 },
+            new BattleChipData { ID = 0x77, Name = "SilvFist", Size = 30 },
+            new BattleChipData { ID = 0x78, Name = "GoldFist", Size = 60 },
+            new BattleChipData { ID = 0x79, Name = "VarSwrd", Size = 40 },
+            new BattleChipData { ID = 0x7A, Name = "Recov10", Size = 2 },
+            new BattleChipData { ID = 0x7B, Name = "Recov30", Size = 4 },
+            new BattleChipData { ID = 0x7C, Name = "Recov50", Size = 8 },
+            new BattleChipData { ID = 0x7D, Name = "Recov80", Size = 16 },
+            new BattleChipData { ID = 0x7E, Name = "Recov120", Size = 32 },
+            new BattleChipData { ID = 0x7F, Name = "Recov150", Size = 48 },
+            new BattleChipData { ID = 0x80, Name = "Recov200", Size = 64 },
+            new BattleChipData { ID = 0x81, Name = "Recov300", Size = 80 },
+            new BattleChipData { ID = 0x82, Name = "PanlGrab", Size = 4 },
+            new BattleChipData { ID = 0x83, Name = "AreaGrab", Size = 8 },
+            new BattleChipData { ID = 0x84, Name = "GrabRvng", Size = 24 },
+            new BattleChipData { ID = 0x85, Name = "Geddon1", Size = 16 },
+            new BattleChipData { ID = 0x86, Name = "Geddon2", Size = 32 },
+            new BattleChipData { ID = 0x87, Name = "Geddon3", Size = 48 },
+            new BattleChipData { ID = 0x88, Name = "Catcher", Size = 12 },
+            new BattleChipData { ID = 0x89, Name = "Mindbndr", Size = 38 },
+            new BattleChipData { ID = 0x8A, Name = "Escape", Size = 64 },
+            new BattleChipData { ID = 0x8B, Name = "AirShoes", Size = 12 },
+            new BattleChipData { ID = 0x8C, Name = "Repair", Size = 8 },
+            new BattleChipData { ID = 0x8D, Name = "Candle1", Size = 50 },
+            new BattleChipData { ID = 0x8E, Name = "Candle2", Size = 60 },
+            new BattleChipData { ID = 0x8F, Name = "Candle3", Size = 70 },
+            new BattleChipData { ID = 0x90, Name = "RockCube", Size = 16 },
+            new BattleChipData { ID = 0x91, Name = "Prism", Size = 24 },
+            new BattleChipData { ID = 0x92, Name = "Guardian", Size = 54 },
+            new BattleChipData { ID = 0x93, Name = "Wind", Size = 10 },
+            new BattleChipData { ID = 0x94, Name = "Fan", Size = 10 },
+            new BattleChipData { ID = 0x95, Name = "Anubis", Size = 90 },
+            new BattleChipData { ID = 0x96, Name = "SloGauge", Size = 10 },
+            new BattleChipData { ID = 0x97, Name = "FstGauge", Size = 10 },
+            new BattleChipData { ID = 0x98, Name = "FullCust", Size = 10 },
+            new BattleChipData { ID = 0x99, Name = "Invis1", Size = 12 },
+            new BattleChipData { ID = 0x9A, Name = "Invis2", Size = 24 },
+            new BattleChipData { ID = 0x9B, Name = "Invis3", Size = 48 },
+            new BattleChipData { ID = 0x9C, Name = "DropDown", Size = 64 },
+            new BattleChipData { ID = 0x9D, Name = "PopUp", Size = 84 },
+            new BattleChipData { ID = 0x9E, Name = "StoneBod", Size = 64 },
+            new BattleChipData { ID = 0x9F, Name = "Shadow1", Size = 32 },
+            new BattleChipData { ID = 0xA0, Name = "Shadow2", Size = 48 },
+            new BattleChipData { ID = 0xA1, Name = "Shadow3", Size = 64 },
+            new BattleChipData { ID = 0xA2, Name = "UnderSht", Size = 18 },
+            new BattleChipData { ID = 0xA3, Name = "BblWrap", Size = 36 },
+            new BattleChipData { ID = 0xA4, Name = "LeafShld", Size = 26 },
+            new BattleChipData { ID = 0xA5, Name = "AquaAura", Size = 30 },
+            new BattleChipData { ID = 0xA6, Name = "FireAura", Size = 36 },
+            new BattleChipData { ID = 0xA7, Name = "WoodAura", Size = 42 },
+            new BattleChipData { ID = 0xA8, Name = "ElecAura", Size = 48 },
+            new BattleChipData { ID = 0xA9, Name = "LifeAur1", Size = 60 },
+            new BattleChipData { ID = 0xAA, Name = "LifeAur2", Size = 70 },
+            new BattleChipData { ID = 0xAB, Name = "LifeAur3", Size = 80 },
+            new BattleChipData { ID = 0xAC, Name = "MagLine", Size = 24 },
+            new BattleChipData { ID = 0xAD, Name = "LavaLine", Size = 24 },
+            new BattleChipData { ID = 0xAE, Name = "IceLine", Size = 24 },
+            new BattleChipData { ID = 0xAF, Name = "GrassLne", Size = 24 },
+            new BattleChipData { ID = 0xB0, Name = "LavaStge", Size = 64 },
+            new BattleChipData { ID = 0xB1, Name = "IceStage", Size = 64 },
+            new BattleChipData { ID = 0xB2, Name = "GrassStg", Size = 64 },
+            new BattleChipData { ID = 0xB3, Name = "HolyPanl", Size = 64 },
+            new BattleChipData { ID = 0xB4, Name = "Jealosy", Size = 22 },
+            new BattleChipData { ID = 0xB5, Name = "AntiFire", Size = 32 },
+            new BattleChipData { ID = 0xB6, Name = "AntiElec", Size = 32 },
+            new BattleChipData { ID = 0xB7, Name = "AntiWatr", Size = 32 },
+            new BattleChipData { ID = 0xB8, Name = "AntiDmg", Size = 32 },
+            new BattleChipData { ID = 0xB9, Name = "AntiSwrd", Size = 32 },
+            new BattleChipData { ID = 0xBA, Name = "AntiNavi", Size = 32 },
+            new BattleChipData { ID = 0xBB, Name = "AntiRecv", Size = 32 },
+            new BattleChipData { ID = 0xBC, Name = "Atk+10", Size = 4 },
+            new BattleChipData { ID = 0xBD, Name = "Fire+40", Size = 12 },
+            new BattleChipData { ID = 0xBE, Name = "Aqua+40", Size = 12 },
+            new BattleChipData { ID = 0xBF, Name = "Wood+40", Size = 12 },
+            new BattleChipData { ID = 0xC0, Name = "Elec+40", Size = 12 },
+            new BattleChipData { ID = 0xC1, Name = "Navi+20", Size = 24 },
+            new BattleChipData { ID = 0xC2, Name = "Roll", Size = 8 },
+            new BattleChipData { ID = 0xC3, Name = "Roll V2", Size = 24 },
+            new BattleChipData { ID = 0xC4, Name = "Roll V3", Size = 48 },
+            new BattleChipData { ID = 0xC5, Name = "GutsMan", Size = 32 },
+            new BattleChipData { ID = 0xC6, Name = "GutsMan V2", Size = 48 },
+            new BattleChipData { ID = 0xC7, Name = "GutsMan V3", Size = 64 },
+            new BattleChipData { ID = 0xC8, Name = "ProtoMan", Size = 52 },
+            new BattleChipData { ID = 0xC9, Name = "ProtoMn V2", Size = 64 },
+            new BattleChipData { ID = 0xCA, Name = "ProtoMn V3", Size = 76 },
+            new BattleChipData { ID = 0xCB, Name = "AirMan", Size = 16 },
+            new BattleChipData { ID = 0xCC, Name = "AirMan V2", Size = 34 },
+            new BattleChipData { ID = 0xCD, Name = "AirMan V3", Size = 72 },
+            new BattleChipData { ID = 0xCE, Name = "QuickMan", Size = 32 },
+            new BattleChipData { ID = 0xCF, Name = "QuickMn V2", Size = 56 },
+            new BattleChipData { ID = 0xD0, Name = "QuickMn V3", Size = 80 },
+            new BattleChipData { ID = 0xD1, Name = "CutMan", Size = 20 },
+            new BattleChipData { ID = 0xD2, Name = "CutMan V2", Size = 50 },
+            new BattleChipData { ID = 0xD3, Name = "CutMan V3", Size = 80 },
+            new BattleChipData { ID = 0xD4, Name = "ShadoMan", Size = 64 },
+            new BattleChipData { ID = 0xD5, Name = "ShadoMn V2", Size = 80 },
+            new BattleChipData { ID = 0xD6, Name = "ShadoMn V3", Size = 96 },
+            new BattleChipData { ID = 0xD7, Name = "KnightMn", Size = 64 },
+            new BattleChipData { ID = 0xD8, Name = "KnghtMn V2", Size = 80 },
+            new BattleChipData { ID = 0xD9, Name = "KnghtMn V3", Size = 96 },
+            new BattleChipData { ID = 0xDA, Name = "MagnetMn", Size = 48 },
+            new BattleChipData { ID = 0xDB, Name = "MagntMn V2", Size = 64 },
+            new BattleChipData { ID = 0xDC, Name = "MagntMn V3", Size = 80 },
+            new BattleChipData { ID = 0xDD, Name = "FreezeMn", Size = 64 },
+            new BattleChipData { ID = 0xDE, Name = "FrzMan V2", Size = 80 },
+            new BattleChipData { ID = 0xDF, Name = "FrzMan V3", Size = 96 },
+            new BattleChipData { ID = 0xE0, Name = "HeatMan", Size = 64 },
+            new BattleChipData { ID = 0xE1, Name = "HeatMan V2", Size = 80 },
+            new BattleChipData { ID = 0xE2, Name = "HeatMan V3", Size = 96 },
+            new BattleChipData { ID = 0xE3, Name = "ToadMan", Size = 28 },
+            new BattleChipData { ID = 0xE4, Name = "ToadMan V2", Size = 48 },
+            new BattleChipData { ID = 0xE5, Name = "ToadMan V3", Size = 68 },
+            new BattleChipData { ID = 0xE6, Name = "ThunMan", Size = 30 },
+            new BattleChipData { ID = 0xE7, Name = "ThunMan V2", Size = 60 },
+            new BattleChipData { ID = 0xE8, Name = "ThunMan V3", Size = 90 },
+            new BattleChipData { ID = 0xE9, Name = "SnakeMan", Size = 25 },
+            new BattleChipData { ID = 0xEA, Name = "SnakeMn V2", Size = 50 },
+            new BattleChipData { ID = 0xEB, Name = "SnakeMn V3", Size = 75 },
+            new BattleChipData { ID = 0xEC, Name = "GateMan", Size = 24 },
+            new BattleChipData { ID = 0xED, Name = "GateMan V2", Size = 40 },
+            new BattleChipData { ID = 0xEE, Name = "GateMan V3", Size = 56 },
+            new BattleChipData { ID = 0xEF, Name = "PlanetMn", Size = 64 },
+            new BattleChipData { ID = 0xF0, Name = "PlnetMn V2", Size = 80 },
+            new BattleChipData { ID = 0xF1, Name = "PlnetMn V3", Size = 96 },
+            new BattleChipData { ID = 0xF2, Name = "NapalmMn", Size = 48 },
+            new BattleChipData { ID = 0xF3, Name = "NaplmMn V2", Size = 64 },
+            new BattleChipData { ID = 0xF4, Name = "NaplmMn V3", Size = 80 },
+            new BattleChipData { ID = 0xF5, Name = "PharoMan", Size = 32 },
+            new BattleChipData { ID = 0xF6, Name = "PharoMn V2", Size = 48 },
+            new BattleChipData { ID = 0xF7, Name = "PharoMn V3", Size = 64 },
+            new BattleChipData { ID = 0xF8, Name = "Bass", Size = 96 },
+            new BattleChipData { ID = 0xF9, Name = "Bass V2", Size = 96 },
+            new BattleChipData { ID = 0xFA, Name = "Bass V3", Size = 96 },
+            new BattleChipData { ID = 0xFB, Name = "BgRedWav", Size = 64 },
+            new BattleChipData { ID = 0xFC, Name = "FreezBom", Size = 56 },
+            new BattleChipData { ID = 0xFD, Name = "Sparker", Size = 48 },
+            new BattleChipData { ID = 0xFE, Name = "GaiaSwrd", Size = 72 },
+            new BattleChipData { ID = 0xFF, Name = "BlkBomb", Size = 64 },
+            new BattleChipData { ID = 0x100, Name = "FtrSword", Size = 50 },
+            new BattleChipData { ID = 0x101, Name = "KngtSwrd", Size = 64 },
+            new BattleChipData { ID = 0x102, Name = "HeroSwrd", Size = 90 },
+            new BattleChipData { ID = 0x103, Name = "Meteors", Size = 68 },
+            new BattleChipData { ID = 0x104, Name = "Poltrgst", Size = 50 },
+            new BattleChipData { ID = 0x105, Name = "FireGspl", Size = 96 },
+            new BattleChipData { ID = 0x106, Name = "AquaGspl", Size = 96 },
+            new BattleChipData { ID = 0x107, Name = "ElecGspl", Size = 96 },
+            new BattleChipData { ID = 0x108, Name = "WoodGspl", Size = 96 },
+            new BattleChipData { ID = 0x109, Name = "GateSP", Size = 50 },
+            new BattleChipData { ID = 0x10A, Name = "0A", Size = 100 }, // Shortened due to how the Library currently operates.
+            new BattleChipData { ID = 0x10B, Name = "0B", Size = 100 }, // Setting illegal/glitch chips to 100 MB size
+            new BattleChipData { ID = 0x10C, Name = "0C", Size = 100 },
+            new BattleChipData { ID = 0x10D, Name = "0D", Size = 100 },
+            new BattleChipData { ID = 0x10E, Name = "Snctuary", Size = 99 },
+            new BattleChipData { ID = 0x10F, Name = "0F", Size = 100 },
+            new BattleChipData { ID = 0x110, Name = "Z-Canon1", Size = 100 },
+            new BattleChipData { ID = 0x111, Name = "Z-Canon2", Size = 100 },
+            new BattleChipData { ID = 0x112, Name = "Z-Canon3", Size = 100 },
+            new BattleChipData { ID = 0x113, Name = "H-Burst", Size = 100 },
+            new BattleChipData { ID = 0x114, Name = "Z-Ball", Size = 100 },
+            new BattleChipData { ID = 0x115, Name = "Z-Raton1", Size = 100 },
+            new BattleChipData { ID = 0x116, Name = "Z-Raton2", Size = 100 },
+            new BattleChipData { ID = 0x117, Name = "Z-Raton3", Size = 100 },
+            new BattleChipData { ID = 0x118, Name = "O-Canon1", Size = 100 },
+            new BattleChipData { ID = 0x119, Name = "O-Canon2", Size = 100 },
+            new BattleChipData { ID = 0x11A, Name = "O-Canon3", Size = 100 },
+            new BattleChipData { ID = 0x11B, Name = "M-Burst", Size = 100 },
+            new BattleChipData { ID = 0x11C, Name = "O-Ball", Size = 100 },
+            new BattleChipData { ID = 0x11D, Name = "O-Raton1", Size = 100 },
+            new BattleChipData { ID = 0x11E, Name = "O-Raton2", Size = 100 },
+            new BattleChipData { ID = 0x11F, Name = "O-Raton3", Size = 100 },
+            new BattleChipData { ID = 0x120, Name = "Arrows", Size = 100 },
+            new BattleChipData { ID = 0x121, Name = "UltraBmb", Size = 100 },
+            new BattleChipData { ID = 0x122, Name = "LifeSrd1", Size = 100 },
+            new BattleChipData { ID = 0x123, Name = "LifeSrd2", Size = 100 },
+            new BattleChipData { ID = 0x124, Name = "LifeSrd3", Size = 100 },
+            new BattleChipData { ID = 0x125, Name = "Punch", Size = 100 },
+            new BattleChipData { ID = 0x126, Name = "Curse", Size = 100 },
+            new BattleChipData { ID = 0x127, Name = "TimeBom+", Size = 100 },
+            new BattleChipData { ID = 0x128, Name = "HvyStamp", Size = 100 },
+            new BattleChipData { ID = 0x129, Name = "PoisPhar", Size = 100 },
+            new BattleChipData { ID = 0x12A, Name = "Gater", Size = 100 },
+            new BattleChipData { ID = 0x12B, Name = "GtsShoot", Size = 100 },
+            new BattleChipData { ID = 0x12C, Name = "BigHeart", Size = 100 },
+            new BattleChipData { ID = 0x12D, Name = "BodyGrd", Size = 100 },
+            new BattleChipData { ID = 0x12E, Name = "2xHero", Size = 100 },
+            new BattleChipData { ID = 0x12F, Name = "Darkness", Size = 100 }
 
         };
-
-        public static BattleChipData GetChipNameByID(List<BattleChipData> chipmap, int chipID)
+        public static List<BattleChipData> BN3ChipNameMap = new List<BattleChipData>()
         {
-            return chipmap.FirstOrDefault(x => x.ID == chipID);
-        }
-
-        public static int GetChipIDByName(List<BattleChipData> chipmap, string chipName)
-        {
-            return chipmap.FirstOrDefault(x => x.Name.ToLower() == chipName.ToLower()).ID;
-        }
+        };
 
         public static Dictionary<string, List<string>> BN1ChipCodeMap = new Dictionary<string, List<string>>()
             {
@@ -1127,49 +1176,8 @@ namespace NaviDoctor
             { "2xHero", new List<string> { "None", "None", "None", "None", "None", "None" } },
             { "Darkness", new List<string> { "None", "None", "None", "None", "None", "None" } }
         };
-
-        public List<BattleChipData> GenerateChipEntries(SaveDataObject saveData)
+        public static Dictionary<string, List<string>> BN3ChipCodeMap = new Dictionary<string, List<string>>()
         {
-            List<BattleChipData> chipEntries = new List<BattleChipData>();
-            Dictionary<string, List<string>> chipCodeMap;
-            List<BattleChipData> chipNameMap;
-
-            switch (saveData.GameName)
-            {
-                case GameTitle.Title.MegaManBattleNetwork:
-                    chipCodeMap = BN1ChipCodeMap;
-                    chipNameMap = BN1ChipNameMap;
-                    break;
-                case GameTitle.Title.MegaManBattleNetwork2:
-                    chipCodeMap = BN2ChipCodeMap;
-                    chipNameMap = BN2ChipNameMap;
-                    break;
-                default:
-                    return chipEntries;
-            }
-
-            // Generate chip entries for each chip name and associated codes
-            foreach (var kvp in chipCodeMap)
-            {
-                string chipName = kvp.Key;
-                List<string> chipCodes = kvp.Value;
-
-                foreach (var chipCode in chipCodes)
-                {
-                    BattleChipData chipEntry = new BattleChipData
-                    {
-                        ID = GetChipIDByName(chipNameMap, chipName),
-                        Name = chipName,
-                        Code = chipCode,
-                        Quantity = 0 // Set the initial quantity to 0
-                    };
-
-                    chipEntries.Add(chipEntry);
-                }
-            }
-            return chipEntries;
-        }
-
+        };
     }
 }
-
