@@ -1,0 +1,623 @@
+0x0001: Equipped Style
+
+[ Styles:
+  00: Normal Style
+  01: Elec Normal style Note: 01 - 04 are not used, but
+  02: Heat Normal style       they are functional. Just
+  03: Aqua Normal style       wanted to document these
+  04: Wood Normal style       because they're neat. :3
+
+  09: ElecGuts
+  0A: HeatGuts
+  0B: AquaGuts
+  0C: WoodGuts
+
+  11: ElecCust
+  12: HeatCust
+  13: AquaCust
+  14: WoodCust
+
+  19: ElecTeam
+  1A: HeatTeam
+  1B: AquaTeam
+  1C: WoodTeam
+
+  21: ElecShld
+  22: HeatShld
+  23: AquaShld
+  24: WoodShld
+
+  29: ElecGrnd
+  2A: HeatGrnd
+  2B: AquaGrnd
+  2C: WoodGrnd
+
+  31: ElecShdw
+  32: HeatShdw
+  33: AquaShdw
+  34: WoodShdw
+
+  39: ElecBug
+  3A: HeatBug
+  3B: AquaBug
+  3C: WoodBug
+  
+  NOTE 1: It would appear that even though you can only store one style, if you have a style equipped outside the one you have stored, the default option to change into becomes "Normal Style" (except for the "Elemental Normal Styles") in the MegaMan menu. This may have been a failsafe to address what would have caused a crash or softlock in BN2. 
+  NOTE 2: It appears that the styles wrap around every 0x40 values, but this is definitely an 8-bit value.
+  The cap appears to be confirmed at 3C, WoodBug Style (which I literally just grinded for, just happened to get Wood).  ]
+0x0014: Stored Style (See Style list above)
+0x0015: Style Level (00 = Lv.1, 03 = Lv.4)
+Note: The purpose of the levels is to determine your NCP reward. I'm uncertain what sort of effects occur when you edit this as I haven't currently tested it. Even if you can reobtain rewards this way, there seems to be little point in resetting a level as each reward (outside of Custom1/2, MegFldr1/2, etc) can only be run once without bugging out the NaviCust, and I intend on implementing a NaviCust parts editor anyway. Just give yourself the parts you want.
+0x0017: RegMem
+0x001D: Reg Chip 1 (FF = off)
+0x001F: Reg Chip 2 (FF = off)
+0x0020: Current HP
+0x0022: Max HP
+
+0x0074: Zenny
+0x0078: Bugfrags
+
+0x0086: Folders Unlocked (WARNING: Do not edit unless you know what you're doing!)
+NOTE: The order of the folders unlocked in BN3 is Folder 1 (value: 0x1), Extra Folder (0x2), and *then* Folder 2 (0x3).
+0x0094: Temporary HP
+Note: This is used to keep track when adjusting HP values via NCPs. For example, if you have 800 base HP, and boost it to 1500, but take 400 damage, this will stay 1100, even if you reduce the amount of HP via NCPs and then increase it again past the amount you had damage for. For the prior example, if you were to raise it back to 1200 after removing all NCPs and mod codes, it would still remain 1100, accounting for the damage you had previously taken.
+0x00A0: Time
+0x00A8: Checksum
+0x00D0: Save Game version
+0x00D4: Save Game version
+Note: These are seemingly 32-bit values that differ between game version, and they're in ASCII text. White version's read "3W.." (33 57 00 00) and "Exe3" (45 78 65 33) while blue's reads "3B.." (33 42 00 00) and "3W.." (33 57 00 00). It may be possible to convert a Blue save to a White save and vice versa by changing these values.
+0x00E0: Steam ID
+
+===NaviCust Key Items===
+(Note: Value can be greater than 1 and still work properly.)
+0x0137: Spin White
+0x0138: Spin Pink
+0x0139: Spin Yellow
+0x013A: Spin Red
+0x013B: Spin Blue
+0x013C: Spin Green
+0x013D: Spin Orange
+0x013E: Spin Purple
+0x013F: Spin Dark
+
+0x0150: HP memories applied
+0x0151: NaviCust size (0: 4x4, 1: 4x5, 2: 5x5)
+WARNING: NaviCust size values greater than 2 breaks NaviCust!
+0x0152: RegMem found? Unclear. Even if it is, it's kinda unneccessary to modify this as RegMem value should take care of the correct total
+0x0155: SubChip maximum (SubMem)
+
+===SUBCHIPS===
+0x0160: MiniEnrg
+0x0161: FullEnrg
+0x0162: SneakRun
+0x0163: Untrap
+0x0164: LocEnemy
+0x0165: Unlocker
+
+===NaviCust Parts===
+(Note: Max value of 99 (0x63))
+Address=NCP Name=Color====ID=Color+ID Hex
+0x01B7: SprArmor (Red)     1   07
+0x01BB: BrakBust (Red)     2   0B
+0x01BC: BrakChrg (Orange)  3   0C (occupies white table)
+0x01BF: BrakChrg (Red)     3   0F
+0x01C3: SetGreen (Green)   4   13
+0x01C7: SetIce   (Green)   5   17
+0x01CB: SetLava  (Green)   6   1B
+0x01CF: SetSand  (Green)   7   1F
+0x01D3: SetMetal (Green)   8   23
+0x01D7: SetHoly  (Green)   9   27
+0x01DA: Custom1  (Yellow) 10   2A
+0x01DB: Custom1  (Blue)   10   2B
+0x01DF: Custom2  (Blue)   11   2F
+0x01E1: MegFldr1 (Pink)   12   31
+0x01E3: MegFldr1 (Green)  12   33
+0x01E7: MegFldr2 (Green)  13   37
+0x01EB: Block    (Blue)   14   3B
+0x01EF: Shield   (Blue)   15   3F
+0x01F3: Reflect  (Blue)   16   43
+0x01F7: ShdwShoe (Red)    17   47
+0x01FC: FlotShoe (Red)    18   4B
+0x01FF: AntiDmg  (Red)    19   4F
+0x0200: Press    (White)  20   50
+0x0204: EngyChng (White)  21   54
+0x0209: Alpha    (Pink)   22   59
+0x020E: SneakRun (Yellow) 23   5E
+0x0213: OilBody  (Yellow) 24   62
+0x0215: Fish     (Pink)   25   65
+0x021B: Battery  (Yellow) 26   6A
+0x021C: Jungle   (White)  27   6C
+0x0221: Collect  (Pink)   28   71
+0x0224: AirShoes (White)  29   74
+0x0228: UnderSht (White)  30   78
+0x022D: FstGauge (Pink)   31   7D
+0x0232: Rush     (Yellow) 32   82
+0x0234: Beat     (White)  33   84
+0x0239: Tango    (Pink)   34   89
+0x023C: WeapLv   (White)  35   8C
+0x023D: WeapLv   (Pink)   35   8D
+0x023E: WeapLv   (Yellow) 35   8E
+0x0240: HP+100   (White)  36   90
+0x0241: HP+100   (Pink)   36   91
+0x0242: HP+100   (Yellow) 36   92
+0x0244: HP+200   (White)  37   94 (ILLEGAL)
+0x0245: HP+200   (Pink)   37   95
+0x0246: HP+200   (Yellow) 37   96
+0x0248: HP+300   (White)  38   98 (ILLEGAL)
+0x0249: HP+300   (Pink)   38   99
+0x024A: HP+300   (Yellow) 38   9A (ILLEGAL)
+0x024C: HP+500   (White)  39   9C (ILLEGAL)
+0x024D: HP+500   (Pink)   39   9D (ILLEGAL)
+0x024E: HP+500   (Yellow) 39   9E
+0x0250: Reg+5    (White)  40   A0
+0x0251: Reg+5    (Pink)   40   A1 (ILLEGAL)
+0x0252: Reg+5    (Yellow) 40   A2
+0x0254: Atk+1    (White)  41   A4
+0x0255: Atk+1    (Pink)   41   A5
+0x0256: Atk+1    (Yellow) 41   A6
+0x0258: Speed+1  (White)  42   A8
+0x0259: Speed+1  (Pink)   42   A9
+0x025A: Speed+1  (Yellow) 42   AA
+0x025C: Charge+1 (White)  43   AC
+0x025D: Charge+1 (Pink)   43   AD
+0x025E: Charge+1 (Yellow) 43   AE
+0x0260: BugStop  (White)  44   B0
+0x0265: Humor    (Pink)   45   B5
+0x0268: BlckMind (White)  46   B8
+0x026D: BustrMAX (Pink)   47   BD
+0x0270: GigFldr1 (Purple) 48   C0 (occupies white table)
+0x0275: HubBatc  (Orange) 49   C4 (occupies white table)
+0x0278: DarkLcns (Dark)   50   C8 (occupies white table)
+
+0x0290 - 0x0307: Folder 1 Data 
+Note: These seems to be formatted identically to how it was in BN2, as pairs of 16-bit values representing Chip ID and Letter Code (0x00=A, 0x19=Z, 0x1A = *). Given the length of each folder appears to be the same, it might be possible to edit the Extra Folder.
+0x0308 - 0x037F: Extra Folder Data
+0x0380 - 0x03F7: Folder 2 Data
+
+0x0412 - 0x1A73: Pack Chips data. It is formatted identically to how it was in BN2, with sets of six bytes indicating the quantity of each code, the sixth slot always being * code.
+
+NOTE: You cannot simply add values here. The game does not like it when you add chips to your pack that are not also listed in your library. If you add a value here, you'll have to set the corresponding Library flag and edit the Library checksum.
+
+// Standard Chips
+ID = 0x01, Name = "Cannon", Size = 12, Type = 0
+ID = 0x02, Name = "HiCannon", Size = 24, Type = 0
+ID = 0x03, Name = "M-Cannon", Size = 36, Type = 0
+ID = 0x04, Name = "AirShot1", Size = 4, Type = 0
+ID = 0x05, Name = "AirShot2", Size = 12, Type = 0
+ID = 0x06, Name = "AirShot3", Size = 18, Type = 0
+ID = 0x07, Name = "LavaCan1", Size = 34, Type = 0
+ID = 0x08, Name = "LavaCan2", Size = 42, Type = 0
+ID = 0x09, Name = "LavaCan3", Size = 60, Type = 0
+ID = 0x0A, Name = "ShotGun", Size = 8, Type = 0
+ID = 0x0B, Name = "V-Gun", Size = 8, Type = 0
+ID = 0x0C, Name = "SideGun", Size = 8, Type = 0
+ID = 0x0D, Name = "Spreader", Size = 16, Type = 0
+ID = 0x0E, Name = "Bubbler", Size = 14, Type = 0
+ID = 0x0F, Name = "Bub-V", Size = 22, Type = 0
+ID = 0x10, Name = "BublSide", Size = 30, Type = 0
+ID = 0x11, Name = "HeatShot", Size = 16, Type = 0
+ID = 0x12, Name = "Heat-V", Size = 24, Type = 0
+ID = 0x13, Name = "HeatSide", Size = 32, Type = 0
+ID = 0x14, Name = "MiniBomb", Size = 6, Type = 0
+ID = 0x15, Name = "SnglBomb", Size = 12, Type = 0
+ID = 0x16, Name = "DublBomb", Size = 24, Type = 0
+ID = 0x17, Name = "TrplBomb", Size = 36, Type = 0
+ID = 0x18, Name = "CannBall", Size = 33, Type = 0
+ID = 0x19, Name = "IceBall", Size = 18, Type = 0
+ID = 0x1A, Name = "LavaBall", Size = 20, Type = 0
+ID = 0x1B, Name = "BlkBomb1", Size = 60, Type = 0
+ID = 0x1C, Name = "BlkBomb2", Size = 70, Type = 0
+ID = 0x1D, Name = "BlkBomb3", Size = 80, Type = 0
+ID = 0x1E, Name = "Sword", Size = 10, Type = 0
+ID = 0x1F, Name = "WideSwrd", Size = 16, Type = 0
+ID = 0x20, Name = "LongSwrd", Size = 24, Type = 0
+ID = 0x21, Name = "FireSwrd", Size = 20, Type = 0
+ID = 0x22, Name = "AquaSwrd", Size = 25, Type = 0
+ID = 0x23, Name = "ElecSwrd", Size = 23, Type = 0
+ID = 0x24, Name = "BambSwrd", Size = 18, Type = 0
+ID = 0x25, Name = "CustSwrd", Size = 21, Type = 0
+ID = 0x26, Name = "VarSwrd", Size = 68, Type = 0
+ID = 0x27, Name = "StepSwrd", Size = 43, Type = 0
+ID = 0x28, Name = "StepCros", Size = 74, Type = 0
+ID = 0x29, Name = "Panic", Size = 14, Type = 0
+ID = 0x2A, Name = "AirSwrd", Size = 30, Type = 0
+ID = 0x2B, Name = "Slasher", Size = 12, Type = 0
+ID = 0x2C, Name = "ShockWav", Size = 10, Type = 0
+ID = 0x2D, Name = "SonicWav", Size = 26, Type = 0
+ID = 0x2E, Name = "DynaWave", Size = 42, Type = 0
+ID = 0x2F, Name = "GutPunch", Size = 14, Type = 0
+ID = 0x30, Name = "GutStrgt", Size = 30, Type = 0
+ID = 0x31, Name = "GutImpct", Size = 50, Type = 0
+ID = 0x32, Name = "AirStrm1", Size = 26, Type = 0
+ID = 0x33, Name = "AirStrm2", Size = 35, Type = 0
+ID = 0x34, Name = "AirStrm3", Size = 44, Type = 0
+ID = 0x35, Name = "DashAtk", Size = 11, Type = 0
+ID = 0x36, Name = "Burner", Size = 15, Type = 0
+ID = 0x37, Name = "Totem1", Size = 29, Type = 0
+ID = 0x38, Name = "Totem2", Size = 38, Type = 0
+ID = 0x39, Name = "Totem3", Size = 47, Type = 0
+ID = 0x3A, Name = "Ratton1", Size = 14, Type = 0
+ID = 0x3B, Name = "Ratton2", Size = 24, Type = 0
+ID = 0x3C, Name = "Ratton3", Size = 34, Type = 0
+ID = 0x3D, Name = "Wave", Size = 60, Type = 0
+ID = 0x3E, Name = "RedWave", Size = 72, Type = 0
+ID = 0x3F, Name = "MudWave", Size = 84, Type = 0
+ID = 0x40, Name = "Hammer", Size = 16, Type = 0
+ID = 0x41, Name = "Tornado", Size = 18, Type = 0
+ID = 0x42, Name = "ZapRing1", Size = 8, Type = 0
+ID = 0x43, Name = "ZapRing2", Size = 18, Type = 0
+ID = 0x44, Name = "ZapRing3", Size = 28, Type = 0
+ID = 0x45, Name = "Yo-Yo1", Size = 72, Type = 0
+ID = 0x46, Name = "Yo-Yo2", Size = 80, Type = 0
+ID = 0x47, Name = "Yo-Yo3", Size = 88, Type = 0
+ID = 0x48, Name = "Spice1", Size = 22, Type = 0
+ID = 0x49, Name = "Spice2", Size = 34, Type = 0
+ID = 0x4A, Name = "Spice3", Size = 46, Type = 0
+ID = 0x4B, Name = "Lance", Size = 46, Type = 0
+ID = 0x4C, Name = "Scuttlst", Size = 52, Type = 0
+ID = 0x4D, Name = "Momogra", Size = 38, Type = 0
+ID = 0x4E, Name = "Rope1", Size = 45, Type = 0
+ID = 0x4F, Name = "Rope2", Size = 55, Type = 0
+ID = 0x50, Name = "Rope3", Size = 65, Type = 0
+ID = 0x51, Name = "Magnum1", Size = 35, Type = 0
+ID = 0x52, Name = "Magnum2", Size = 55, Type = 0
+ID = 0x53, Name = "Magnum3", Size = 75, Type = 0
+ID = 0x54, Name = "Boomer1", Size = 15, Type = 0
+ID = 0x55, Name = "Boomer2", Size = 22, Type = 0
+ID = 0x56, Name = "Boomer3", Size = 30, Type = 0
+ID = 0x57, Name = "RndmMetr", Size = 28, Type = 0
+ID = 0x58, Name = "HoleMetr", Size = 48, Type = 0
+ID = 0x59, Name = "ShotMetr", Size = 38, Type = 0
+ID = 0x5A, Name = "IceWave1", Size = 14, Type = 0
+ID = 0x5B, Name = "IceWave2", Size = 22, Type = 0
+ID = 0x5C, Name = "IceWave3", Size = 30, Type = 0
+ID = 0x5D, Name = "Plasma1", Size = 14, Type = 0
+ID = 0x5E, Name = "Plasma2", Size = 26, Type = 0
+ID = 0x5F, Name = "Plasma3", Size = 34, Type = 0
+ID = 0x60, Name = "Arrow1", Size = 40, Type = 0
+ID = 0x61, Name = "Arrow2", Size = 60, Type = 0
+ID = 0x62, Name = "Arrow3", Size = 80, Type = 0
+ID = 0x63, Name = "TimeBomb", Size = 32, Type = 0
+ID = 0x64, Name = "Mine", Size = 16, Type = 0
+ID = 0x65, Name = "Sensor1", Size = 62, Type = 0
+ID = 0x66, Name = "Sensor2", Size = 70, Type = 0
+ID = 0x67, Name = "Sensor3", Size = 72, Type = 0
+ID = 0x68, Name = "CrsShld1", Size = 25, Type = 0
+ID = 0x69, Name = "CrsShld2", Size = 33, Type = 0
+ID = 0x6A, Name = "CrsShld3", Size = 41, Type = 0
+ID = 0x6B, Name = "Geyser", Size = 22, Type = 0
+ID = 0x6C, Name = "PoisMask", Size = 30, Type = 0
+ID = 0x6D, Name = "PoisFace", Size = 38, Type = 0
+ID = 0x6E, Name = "Shake1", Size = 34, Type = 0
+ID = 0x6F, Name = "Shake2", Size = 40, Type = 0
+ID = 0x70, Name = "Shake3", Size = 50, Type = 0
+ID = 0x71, Name = "BigWave", Size = 82, Type = 0
+ID = 0x72, Name = "Volcano", Size = 75, Type = 0
+ID = 0x73, Name = "Condor", Size = 44, Type = 0
+ID = 0x74, Name = "Burning", Size = 42, Type = 0
+ID = 0x75, Name = "FireRatn", Size = 35, Type = 0
+ID = 0x76, Name = "Guard", Size = 5, Type = 0
+ID = 0x77, Name = "PanlOut1", Size = 4, Type = 0
+ID = 0x78, Name = "PanlOut3", Size = 7, Type = 0
+ID = 0x79, Name = "Recov10", Size = 5, Type = 0
+ID = 0x7A, Name = "Recov30", Size = 8, Type = 0
+ID = 0x7B, Name = "Recov50", Size = 14, Type = 0
+ID = 0x7C, Name = "Recov80", Size = 20, Type = 0
+ID = 0x7D, Name = "Recov120", Size = 35, Type = 0
+ID = 0x7E, Name = "Recov150", Size = 50, Type = 0
+ID = 0x7F, Name = "Recov200", Size = 65, Type = 0
+ID = 0x80, Name = "Recov300", Size = 80, Type = 0
+ID = 0x81, Name = "PanlGrab", Size = 10, Type = 0
+ID = 0x82, Name = "AreaGrab", Size = 15, Type = 0
+ID = 0x83, Name = "Snake", Size = 20, Type = 0
+ID = 0x84, Name = "Team1", Size = 16, Type = 0
+ID = 0x85, Name = "MetaGel1", Size = 18, Type = 0
+ID = 0x86, Name = "MetaGel2", Size = 28, Type = 0
+ID = 0x87, Name = "MetaGel3", Size = 38, Type = 0
+ID = 0x88, Name = "GrabBack", Size = 10, Type = 0
+ID = 0x89, Name = "GrabRvng", Size = 30, Type = 0
+ID = 0x8A, Name = "Geddon1", Size = 10, Type = 0
+ID = 0x8B, Name = "Geddon2", Size = 50, Type = 0
+ID = 0x8C, Name = "Geddon3", Size = 90, Type = 0
+ID = 0x8D, Name = "RockCube", Size = 9, Type = 0
+ID = 0x8E, Name = "Prism", Size = 60, Type = 0
+ID = 0x8F, Name = "Wind", Size = 14, Type = 0
+ID = 0x90, Name = "Fan", Size = 14, Type = 0
+ID = 0x91, Name = "RockArm1", Size = 23, Type = 0
+ID = 0x92, Name = "RockArm2", Size = 35, Type = 0
+ID = 0x93, Name = "RockArm3", Size = 47, Type = 0
+ID = 0x94, Name = "NoBeam1", Size = 66, Type = 0
+ID = 0x95, Name = "NoBeam2", Size = 77, Type = 0
+ID = 0x96, Name = "NoBeam3", Size = 88, Type = 0
+ID = 0x97, Name = "Pawn", Size = 44, Type = 0
+ID = 0x98, Name = "Knight", Size = 64, Type = 0
+ID = 0x99, Name = "Rook", Size = 30, Type = 0
+ID = 0x9A, Name = "Needler1", Size = 32, Type = 0
+ID = 0x9B, Name = "Needler2", Size = 52, Type = 0
+ID = 0x9C, Name = "Needler3", Size = 73, Type = 0
+ID = 0x9D, Name = "SloGauge", Size = 20, Type = 0
+ID = 0x9E, Name = "FstGauge", Size = 40, Type = 0
+ID = 0x9F, Name = "Repair", Size = 8, Type = 0
+ID = 0xA0, Name = "Invis", Size = 11, Type = 0
+ID = 0xA1, Name = "Hole", Size = 55, Type = 0
+ID = 0xA2, Name = "Mole1", Size = 28, Type = 0
+ID = 0xA3, Name = "Mole2", Size = 35, Type = 0
+ID = 0xA4, Name = "Mole3", Size = 42, Type = 0
+ID = 0xA5, Name = "Shadow", Size = 60, Type = 0
+ID = 0xA6, Name = "Mettaur", Size = 30, Type = 0
+ID = 0xA7, Name = "Bunny", Size = 32, Type = 0
+ID = 0xA8, Name = "AirShoes", Size = 26, Type = 0
+ID = 0xA9, Name = "Team2", Size = 20, Type = 0
+ID = 0xAA, Name = "Fanfare", Size = 32, Type = 0
+ID = 0xAB, Name = "Discord", Size = 38, Type = 0
+ID = 0xAC, Name = "Timpani", Size = 42, Type = 0
+ID = 0xAD, Name = "Barrier", Size = 7, Type = 0
+ID = 0xAE, Name = "Barr100", Size = 25, Type = 0
+ID = 0xAF, Name = "Barr200", Size = 50, Type = 0
+ID = 0xB0, Name = "Aura", Size = 55, Type = 0
+ID = 0xB1, Name = "NrthWind", Size = 43, Type = 0
+ID = 0xB2, Name = "HolyPanl", Size = 14, Type = 0
+ID = 0xB3, Name = "LavaStge", Size = 22, Type = 0
+ID = 0xB4, Name = "IceStage", Size = 20, Type = 0
+ID = 0xB5, Name = "GrassStg", Size = 10, Type = 0
+ID = 0xB6, Name = "SandStge", Size = 18, Type = 0
+ID = 0xB7, Name = "MetlStge", Size = 26, Type = 0
+ID = 0xB8, Name = "Snctuary", Size = 54, Type = 0
+ID = 0xB9, Name = "Swordy", Size = 30, Type = 0
+ID = 0xBA, Name = "Spikey", Size = 34, Type = 0
+ID = 0xBB, Name = "Mushy", Size = 38, Type = 0
+ID = 0xBC, Name = "Jelly", Size = 46, Type = 0
+ID = 0xBD, Name = "KillrEye", Size = 50, Type = 0
+ID = 0xBE, Name = "AntiNavi", Size = 60, Type = 0
+ID = 0xBF, Name = "AntiDmg", Size = 45, Type = 0
+ID = 0xC0, Name = "AntiSwrd", Size = 68, Type = 0
+ID = 0xC1, Name = "AntiRecv", Size = 73, Type = 0
+ID = 0xC2, Name = "CopyDmg", Size = 18, Type = 0
+ID = 0xC3, Name = "Atk+10", Size = 4, Type = 0
+ID = 0xC4, Name = "Fire+30", Size = 20, Type = 0
+ID = 0xC5, Name = "Aqua+30", Size = 21, Type = 0
+ID = 0xC6, Name = "Elec+30", Size = 23, Type = 0
+ID = 0xC7, Name = "Wood+30", Size = 26, Type = 0
+ID = 0xC8, Name = "Navi+20", Size = 34, Type = 0
+// Mega and Giga chips
+ID = 0xC9, Name = "LifeAura", Size = 77, Type = 1
+ID = 0xCA, Name = "Muramasa", Size = 74, Type = 1
+ID = 0xCB, Name = "Guardian", Size = 82, Type = 1
+ID = 0xCC, Name = "Anubis", Size = 90, Type = 1
+ID = 0xCD, Name = "Atk+30", Size = 50, Type = 1
+ID = 0xCE, Name = "Navi+40", Size = 60, Type = 1
+ID = 0xCF, Name = "HeroSwrd", Size = 65, Type = 1
+ID = 0xD0, Name = "ZeusHamr", Size = 90, Type = 1
+ID = 0xD1, Name = "GodStone", Size = 66, Type = 1
+ID = 0xD2, Name = "OldWood", Size = 72, Type = 1
+ID = 0xD3, Name = "FullCust", Size = 10, Type = 1
+ID = 0xD4, Name = "Meteors", Size = 86, Type = 1
+ID = 0xD5, Name = "Poltrgst", Size = 58, Type = 1
+ID = 0xD6, Name = "Jealousy", Size = 64, Type = 1
+ID = 0xD7, Name = "StandOut", Size = 22, Type = 1
+ID = 0xD8, Name = "WatrLine", Size = 18, Type = 1
+ID = 0xD9, Name = "Ligtning", Size = 30, Type = 1
+ID = 0xDA, Name = "GaiaSwrd", Size = 28, Type = 1
+ID = 0xDB, Name = "Roll", Size = 10, Type = 1
+ID = 0xDC, Name = "Roll V2", Size = 22, Type = 1
+ID = 0xDD, Name = "Roll V3", Size = 34, Type = 1
+ID = 0xDE, Name = "GutsMan", Size = 15, Type = 1
+ID = 0xDF, Name = "GutsMan V2", Size = 41, Type = 1
+ID = 0xE0, Name = "GutsMan V3", Size = 57, Type = 1
+ID = 0xE1, Name = "GutsMan V4", Size = 63, Type = 1
+ID = 0xE2, Name = "GutsMan V5", Size = 79, Type = 2
+ID = 0xE3, Name = "ProtoMan", Size = 68, Type = 1
+ID = 0xE4, Name = "ProtoMan V2", Size = 76, Type = 1
+ID = 0xE5, Name = "ProtoMan V3", Size = 82, Type = 1
+ID = 0xE6, Name = "ProtoMan V4", Size = 90, Type = 1
+ID = 0xE7, Name = "ProtoMan V5", Size = 98, Type = 2
+ID = 0xE8, Name = "FlashMan", Size = 39, Type = 1
+ID = 0xE9, Name = "FlashMn V2", Size = 59, Type = 1
+ID = 0xEA, Name = "FlashMn V3", Size = 69, Type = 1
+ID = 0xEB, Name = "FlashMn V4", Size = 79, Type = 1
+ID = 0xEC, Name = "FlashMn V5", Size = 89, Type = 2
+ID = 0xED, Name = "BeastMan", Size = 38, Type = 1
+ID = 0xEE, Name = "BeastMn V2", Size = 60, Type = 1
+ID = 0xEF, Name = "BeastMn V3", Size = 68, Type = 1
+ID = 0xF0, Name = "BeastMn V4", Size = 76, Type = 1
+ID = 0xF1, Name = "BeastMn V5", Size = 84, Type = 2
+ID = 0xF2, Name = "BubblMan", Size = 50, Type = 1
+ID = 0xF3, Name = "BubblMn V2", Size = 62, Type = 1
+ID = 0xF4, Name = "BubblMn V3", Size = 74, Type = 1
+ID = 0xF5, Name = "BubblMn V4", Size = 80, Type = 1
+ID = 0xF6, Name = "BubblMn V5", Size = 86, Type = 2
+ID = 0xF7, Name = "DesrtMan", Size = 38, Type = 1
+ID = 0xF8, Name = "DesrtMn V2", Size = 52, Type = 1
+ID = 0xF9, Name = "DesrtMn V3", Size = 64, Type = 1
+ID = 0xFA, Name = "DesrtMn V4", Size = 72, Type = 1
+ID = 0xFB, Name = "DesrtMn V5", Size = 80, Type = 2
+ID = 0xFC, Name = "PlantMan", Size = 60, Type = 1
+ID = 0xFD, Name = "PlantMn V2", Size = 65, Type = 1
+ID = 0xFE, Name = "PlantMn V3", Size = 70, Type = 1
+ID = 0xFF, Name = "PlantMn V4", Size = 75, Type = 1
+ID = 0x100, Name = "PlantMn V5", Size = 80, Type = 2
+ID = 0x101, Name = "FlamMan", Size = 32, Type = 1
+ID = 0x102, Name = "FlamMan V2", Size = 52, Type = 1
+ID = 0x103, Name = "FlamMan V3", Size = 62, Type = 1
+ID = 0x104, Name = "FlamMan V4", Size = 72, Type = 1
+ID = 0x105, Name = "FlamMan V5", Size = 82, Type = 2
+ID = 0x106, Name = "DrillMan", Size = 66, Type = 1
+ID = 0x107, Name = "DrillMn V2", Size = 70, Type = 1
+ID = 0x108, Name = "DrillMn V3", Size = 74, Type = 1
+ID = 0x109, Name = "DrillMn V4", Size = 78, Type = 1
+ID = 0x10A, Name = "DrillMn V5", Size = 82, Type = 2
+ID = 0x10B, Name = "MetalMan", Size = 40, Type = 1
+ID = 0x10C, Name = "MetalMn V2", Size = 60, Type = 1
+ID = 0x10D, Name = "MetalMn V3", Size = 70, Type = 1
+ID = 0x10E, Name = "MetalMn V4", Size = 80, Type = 1
+ID = 0x10F, Name = "MetalMn V5", Size = 90, Type = 2
+ID = 0x110, Name = "Punk", Size = 92, Type = 1
+ID = 0x111, Name = "Salamndr", Size = 50, Type = 1
+ID = 0x112, Name = "Fountain", Size = 48, Type = 1
+ID = 0x113, Name = "Bolt", Size = 52, Type = 1
+ID = 0x114, Name = "GaiaBlad", Size = 55, Type = 1
+ID = 0x115, Name = "KingMan", Size = 36, Type = 1
+ID = 0x116, Name = "KingMan V2", Size = 48, Type = 1
+ID = 0x117, Name = "KingMan V3", Size = 60, Type = 1
+ID = 0x118, Name = "KingMan V4", Size = 72, Type = 1
+ID = 0x119, Name = "KingMan V5", Size = 84, Type = 2
+ID = 0x11A, Name = "MistMan", Size = 68, Type = 1
+ID = 0x11B, Name = "MistMan V2", Size = 71, Type = 1
+ID = 0x11C, Name = "MistMan V3", Size = 74, Type = 1
+ID = 0x11D, Name = "MistMan V4", Size = 77, Type = 1
+ID = 0x11E, Name = "MistMan V5", Size = 80, Type = 2
+ID = 0x11F, Name = "BowlMan", Size = 80, Type = 1
+ID = 0x120, Name = "BowlMan V2", Size = 82, Type = 1
+ID = 0x121, Name = "BowlMan V3", Size = 84, Type = 1
+ID = 0x122, Name = "BowlMan V4", Size = 86, Type = 1
+ID = 0x123, Name = "BowlMan V5", Size = 88, Type = 2
+ID = 0x124, Name = "DarkMan", Size = 72, Type = 1
+ID = 0x125, Name = "DarkMan V2", Size = 76, Type = 1
+ID = 0x126, Name = "DarkMan V3", Size = 80, Type = 1
+ID = 0x127, Name = "DarkMan V4", Size = 84, Type = 1
+ID = 0x128, Name = "DarkMan V5", Size = 88, Type = 2
+ID = 0x129, Name = "JapanMan", Size = 82, Type = 1
+ID = 0x12A, Name = "JapanMn V2", Size = 85, Type = 1
+ID = 0x12B, Name = "JapanMn V3", Size = 88, Type = 1
+ID = 0x12C, Name = "JapanMn V4", Size = 91, Type = 1
+ID = 0x12D, Name = "JapanMn V5", Size = 94, Type = 2
+ID = 0x12E, Name = "DeltaRay", Size = 92, Type = 4
+ID = 0x12F, Name = "FoldrBak", Size = 99, Type = 4
+ID = 0x130, Name = "NavRcycl", Size = 50, Type = 3
+ID = 0x131, Name = "AlphArm Sigma", Size = 97, Type = 3
+ID = 0x132, Name = "Bass", Size = 98, Type = 3
+ID = 0x133, Name = "Serenade", Size = 97, Type = 3
+ID = 0x134, Name = "Balance", Size = 60, Type = 3
+ID = 0x135, Name = "DarkAura", Size = 55, Type = 4
+ID = 0x136, Name = "AlphArm Omega", Size = 97, Type = 4
+ID = 0x137, Name = "Bass+", Size = 98, Type = 4
+ID = 0x138, Name = "BassGS", Size = 99, Type = 2
+ID = 0x139, Name = "39" // Glitch chips
+ID = 0x139, Name = "3A"
+ID = 0x139, Name = "3B"
+ID = 0x139, Name = "3C"
+ID = 0x139, Name = "3D"
+ID = 0x139, Name = "3E"
+ID = 0x139, Name = "3F"
+// PAs
+ID = 0x140, Name = "Z-Canon1", Size = 99
+ID = 0x141, Name = "Z-Canon2", Size = 99
+ID = 0x142, Name = "Z-Canon3", Size = 99
+ID = 0x143, Name = "Z-Punch", Size = 99
+ID = 0x144, Name = "Z-Strght", Size = 99
+ID = 0x145, Name = "Z-Impact", Size = 99
+ID = 0x146, Name = "Z-Varibl", Size = 99
+ID = 0x147, Name = "Z-Yoyo1", Size = 99
+ID = 0x148, Name = "Z-Yoyo2", Size = 99
+ID = 0x149, Name = "Z-Yoyo3", Size = 99
+ID = 0x14A, Name = "Z-Step1", Size = 99
+ID = 0x14B, Name = "Z-Step2", Size = 99
+ID = 0x14C, Name = "TimeBom+", Size = 99
+ID = 0x14D, Name = "H-Burst", Size = 99
+ID = 0x14E, Name = "BubSprd", Size = 99
+ID = 0x14F, Name = "HeatSprd", Size = 99
+ID = 0x150, Name = "LifeSwrd", Size = 99
+ID = 0x151, Name = "ElemSwrd", Size = 99
+ID = 0x152, Name = "EvilCut", Size = 99
+ID = 0x153, Name = "2xHero", Size = 99
+ID = 0x154, Name = "HyperRat", Size = 99
+ID = 0x155, Name = "EverCrse", Size = 99
+ID = 0x156, Name = "GelRain", Size = 99
+ID = 0x157, Name = "PoisPhar", Size = 99
+ID = 0x158, Name = "BodyGrd", Size = 99
+ID = 0x159, Name = "500Barr", Size = 99
+ID = 0x15A, Name = "BigHeart", Size = 99
+ID = 0x15B, Name = "GtsShoot", Size = 99
+ID = 0x15C, Name = "DeuxHero", Size = 99
+ID = 0x15D, Name = "MomQuake", Size = 99
+ID = 0x15E, Name = "PrixPowr", Size = 99
+ID = 0x15F, Name = "MstrStyl", Size = 99
+
+0x1D60 - 0x1D79: NaviCust Parts Compression
+NOTE 1: Compression is stored similarly to how libraries are stored, though each part ID has four colors. Seeing as how compressing one program color in-game compresses all colors (whether you have it or not), it might as well be a set of nybbles (they could have saved SO much space). Otherwise, the bit order from left to right is for White (or Orange for some parts, like BrakChrg and HubBatc), Pink, Yellow, and Special (red/green/purple/etc, depending on the part). 0x1D60's value in particular is for the NONE program placeholder and SprArmor (side note: SprArmor has only one valid color, red), so that value will be 0x00 (0b00000000) or 0x0F (0b00001111) by the game's design, though realistically, it could be set to 01 (00000001) and nobody'd be the wiser. HOWEVER, if a compressable program has multiple colors, and one color is uncompressed and another color IS compressed via editing, you can't compress the color that's uncompressed while in the game. There's no benefit (that I can discern) to uncompressing only one color of a series while compressing others, and a big drawback to it, so just stick to setting values as 00, 0F, F0, or FF, as it will mirror the game's intended functionality.
+NOTE 2: These are in order by ID, leaving DarkLcns by itself at 0x1D79 with F0. Interestingly, there are slots present for NCPs that don't have compression codes and NCP plus parts. Setting everything to F doesn't cause any crashes or bugs; in fact, program parts without compression codes CAN be compressed, and plus parts remain unaffected. NCPs without compression codes: Press, EngyChng, Alpha, all plus parts.
+(Fully compressed sequence would be: 0F FF FF FF FF FF FF FF FF FF 00 0F FF FF FF FF 
+                                     FF F0 00 00 00 00 FF FF FF F0)
+		 
+0x1D80 - 0x1DA7: Standard/Mega/Giga Library
+Note: Editing these values alone will break your save file. You'll also have to perform the Library checksum (see below). A full chip library will look like: 
+7F FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+FF FF FF FF FF FF FF 80
+
+0x1DA8 - 0x1DAB: PA Library
+Note: This follows the same rules as the above Library, and is added into the library checksum, as well. A full PA library will be:
+FF FF FF FF
+
+0x4D40: NaviCust Part ID + Color
+Note: These are actually parsed with the upper 6 bits noting the ID in binary, and the lower 2 bits acting as the table for color (00 = white/orange/purple/dark, 01 = pink, 10 = yellow, 11 = red/green/blue).
+(Example C# code to parse the byte for ID and color, where variable ncp is the byte's hex value at this address:
+	byte[] bytes = BitConverter.GetBytes(ncp);
+	int color = bytes[0] & 0x3;
+	int id = bytes[0] >> 2; // Thanks, weenie!)
+0x4D42: Part's pivot X grid position (00 = leftmost column)
+0x4D43: Part's pivot Y grid position (00 = topmost row)
+0x4D44: Part Rotation (Note: value increases by 1 with each clockwise rotation. 00 = no rotation)
+Note: Every 8 bytes represents one part, and there is a maximum of 25 slots (technically 26, but that last one's probably invalid). To find the address just add (0x8*(0xN-0x1)) to 0x4D40, where N = the part # on the grid you want to find, converted to hex.
+
+0x4E10 - 0x4E28: NaviCust Grid
+
+Example Grid:
+08 03 03 02 02
+08 08 03 05 02
+01 01 06 04 0B
+09 01 06 04 07
+09 09 06 06 0A
+
+The grid shows which parts were placed in what order.
+00 = empty square
+01 = 1st part
+02 = 2nd part, etc.
+
+0x4E50: NaviCust Mod Codes
+(Note: Error codes just leave a value of 00 here.)
+1E: HP+100
+1F: HP+150
+20: HP+200
+21: HP+250
+22: HP+300
+23: HP+350
+24: HP+400
+25: HP+450
+26: HP+500
+27: HP+550
+28: HP+600
+29: HP+650
+2A: HP+700
+2B: Equip Super Armor
+2C: Equip Break Buster
+2D: Equip Break Charge
+2E: Equip Shadow Shoes
+2F: Equip Float Shoes
+30: Equip Air Shoes
+31: Equip UnderShirt
+32: Equip Block       (Left+B)
+33: Equip Shield      (Left+B)
+34: Equip Reflect     (Left+B)
+35: Equip Anti-Damage (Left+B)
+36: MegaChip+1
+37: MegaChip+2
+38: Activate FastGauge
+39: Activate SneakRun
+3A: Activate Humor
+3B: HP+800
+3C: HP+900
+3D: HP+1000
+3E: MegaChip+3
+3F: MegaChip+4
+40: MegaChip+5
+41: GigaChip+1
+
+0x4E74: MegaChip limit (Max: 10 [0x0A])
+0x4E75: GigaChip limit (Max: 2)
+
+0x4E8C: HP Redundancy (16-bit value) (Note: They tried to get tricky with this. The formula is ((100+(20*HPMem))+NCP+Mod)/5), or more simply put, the Max HP value divided by five.
+
+0x5430: Library checksum
+
+NOTE: Library checksum is probably the biggest pain in the butt problem when it comes to BN3. Fortunately, it's easier in LC than it is for the original GBA. First, you will add up all of the values of the libraries by starting at the first address in the series (0x1D80) and add all of the values from there to 0x1DAF (for a length of 0x40 values). From there, you negate the value and set it as a 16-bit value. That's it.
