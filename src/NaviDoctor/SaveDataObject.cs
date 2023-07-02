@@ -15,6 +15,7 @@ namespace NaviDoctor
         public byte AttackPower { get; set; }
         public byte RapidPower { get; set; }
         public byte ChargePower { get; set; }
+        public byte CShotPower { get; set; }
         public int Zenny { get; set; }
         public int PlayTime { get; set; }
         public int CheckSum { get; set; }
@@ -49,8 +50,8 @@ namespace NaviDoctor
         public byte CustSize { get; set; } // BN3+
         public List<byte> NCPInventory { get; set; } = new List<byte>();   // BN3+
         public List<byte> Compression { get; set; } = new List<byte>();    // BN3+
-        public List<byte[,]> NCPGrid { get; set; } = new List<byte[,]>();  // BN3+
-        public List<byte[,]> GridData { get; set; } = new List<byte[,]>(); // BN3+
+        public List<byte[]> NCPGrid { get; set; } = new List<byte[]>();  // BN3+
+        public byte[,] GridPosData { get; set; } = new byte[5,5]; // BN3+
         public byte ModCode { get; set; } // BN3 only
         public byte MegaLimit { get; set; } // BN3+
         public byte GigaLimit { get; set; } // BN3+
