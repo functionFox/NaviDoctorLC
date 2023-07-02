@@ -57,7 +57,7 @@ Note: The purpose of the levels is to determine your NCP reward. I'm uncertain w
 0x0074: Zenny
 0x0078: Bugfrags
 
-0x0086: Folders Unlocked (WARNING: Do not edit unless you know what you're doing!)
+0x0086: Folders Unlocked (WARNING: Do not edit!)
 NOTE: The order of the folders unlocked in BN3 is Folder 1 (value: 0x1), Extra Folder (0x2), and *then* Folder 2 (0x3).
 0x0094: Temporary HP
 Note: This is used to keep track when adjusting HP values via NCPs. For example, if you have 800 base HP, and boost it to 1500, but take 400 damage, this will stay 1100, even if you reduce the amount of HP via NCPs and then increase it again past the amount you had damage for. For the prior example, if you were to raise it back to 1200 after removing all NCPs and mod codes, it would still remain 1100, accounting for the damage you had previously taken.
@@ -536,18 +536,19 @@ ID = 0x15F, Name = "MstrStyl", Size = 99
 0x1D60 - 0x1D79: NaviCust Parts Compression
 NOTE 1: Compression is stored similarly to how libraries are stored, though each part ID has four colors. Seeing as how compressing one program color in-game compresses all colors (whether you have it or not), it might as well be a set of nybbles (they could have saved SO much space). Otherwise, the bit order from left to right is for White (or Orange for some parts, like BrakChrg and HubBatc), Pink, Yellow, and Special (red/green/purple/etc, depending on the part). 0x1D60's value in particular is for the NONE program placeholder and SprArmor (side note: SprArmor has only one valid color, red), so that value will be 0x00 (0b00000000) or 0x0F (0b00001111) by the game's design, though realistically, it could be set to 01 (00000001) and nobody'd be the wiser. HOWEVER, if a compressable program has multiple colors, and one color is uncompressed and another color IS compressed via editing, you can't compress the color that's uncompressed while in the game. There's no benefit (that I can discern) to uncompressing only one color of a series while compressing others, and a big drawback to it, so just stick to setting values as 00, 0F, F0, or FF, as it will mirror the game's intended functionality.
 NOTE 2: These are in order by ID, leaving DarkLcns by itself at 0x1D79 with F0. Interestingly, there are slots present for NCPs that don't have compression codes and NCP plus parts. Setting everything to F doesn't cause any crashes or bugs; in fact, program parts without compression codes CAN be compressed, and plus parts remain unaffected. NCPs without compression codes: Press, EngyChng, Alpha, all plus parts.
-(Fully compressed sequence would be: 0F FF FF FF FF FF FF FF FF FF 00 0F FF FF FF FF 
-                                     FF F0 00 00 00 00 FF FF FF F0)
+(Fully compressed sequence would be: 
+    0F FF FF FF FF FF FF FF FF FF 00 0F FF FF FF FF 
+    FF F0 00 00 00 00 FF FF FF F0)
 		 
 0x1D80 - 0x1DA7: Standard/Mega/Giga Library
 Note: Editing these values alone will break your save file. You'll also have to perform the Library checksum (see below). A full chip library will look like: 
-7F FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
-FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
-FF FF FF FF FF FF FF 80
+    7F FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+    FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+    FF FF FF FF FF FF FF 80
 
 0x1DA8 - 0x1DAB: PA Library
 Note: This follows the same rules as the above Library, and is added into the library checksum, as well. A full PA library will be:
-FF FF FF FF
+    FF FF FF FF
 
 0x4D40: NaviCust Part ID + Color
 Note: These are actually parsed with the upper 6 bits noting the ID in binary, and the lower 2 bits acting as the table for color (00 = white/orange/purple/dark, 01 = pink, 10 = yellow, 11 = red/green/blue).
@@ -612,6 +613,11 @@ The grid shows which parts were placed in what order.
 3F: MegaChip+4
 40: MegaChip+5
 41: GigaChip+1
+
+0x4E68: Attack Power
+0x4E69: Speed Power
+0x4E6A: Charge Power
+0x4E6D: Charge Shot Power
 
 0x4E74: MegaChip limit (Max: 10 [0x0A])
 0x4E75: GigaChip limit (Max: 2)
