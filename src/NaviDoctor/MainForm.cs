@@ -249,10 +249,23 @@ namespace NaviDoctor
             dataView.Table.Columns.Add("Code", typeof(string));
             dataView.Table.Columns.Add("Quantity", typeof(int));
 
-            foreach (var entry in entries)
+            if(saveData.GameName != GameTitle.Title.MegaManBattleNetwork)
             {
-                dataView.Table.Rows.Add(entry.ID, entry.Name, entry.Code, entry.Quantity);
+                dataView.Table.Columns.Add("MB", typeof(int)); 
+                foreach (var entry in entries)
+                {
+                    dataView.Table.Rows.Add(entry.ID, entry.Name, entry.Code, entry.Quantity, entry.Size);
+                }
             }
+            else
+            {
+                foreach (var entry in entries)
+                {
+                    dataView.Table.Rows.Add(entry.ID, entry.Name, entry.Code, entry.Quantity);
+                }
+            }
+
+           
 
             dataView.RowFilter = "Code <> 'None'";
 
@@ -263,6 +276,10 @@ namespace NaviDoctor
             dgvPack.Columns["Name"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dgvPack.Columns["Code"].ReadOnly = true;
             dgvPack.Columns["Quantity"].ReadOnly = false;
+            if (saveData.GameName != GameTitle.Title.MegaManBattleNetwork)
+            {
+                dgvPack.Columns["MB"].ReadOnly = true;
+            }
 
             dgvPack.AutoResizeColumns();
         }
@@ -311,6 +328,11 @@ namespace NaviDoctor
             folderDataTable.Columns.Add("ID", typeof(int));
             folderDataTable.Columns.Add("Name", typeof(string));
             folderDataTable.Columns.Add("Code", typeof(string));
+            if(saveData.GameName != GameTitle.Title.MegaManBattleNetwork)
+            {
+                folderDataTable.Columns.Add("MB", typeof(int));
+            }
+
             List<BattleChipData> chipNameMap;
             switch (saveData.GameName)
             {
@@ -331,8 +353,16 @@ namespace NaviDoctor
 
                 string chipName = BattleChipData.GetChipNameByID(chipNameMap, chipID).Name;
                 string chipCodeLetter = GetAlphabeticalCode(chipCode);
+                if (saveData.GameName != GameTitle.Title.MegaManBattleNetwork)
+                {
+                    int size = BattleChipData.GetChipNameByID(chipNameMap, chipID).Size;
 
-                folderDataTable.Rows.Add(chipID, chipName, chipCodeLetter);
+                    folderDataTable.Rows.Add(chipID, chipName, chipCodeLetter, size);
+                }
+                else
+                {
+                    folderDataTable.Rows.Add(chipID, chipName, chipCodeLetter);
+                }
             }
             // Preserve the current selection and scroll position
             int selectedRowIndex = -1;

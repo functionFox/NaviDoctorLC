@@ -68,7 +68,8 @@ namespace NaviDoctor.models
                         ID = BattleChipData.GetChipIDByName(chipNameMap, chipName),
                         Name = chipName,
                         Code = chipCode,
-                        Quantity = 0 // Set the initial quantity to 0
+                        Quantity = 0, // Set the initial quantity to 0,
+                        Size = chipNameMap.FirstOrDefault(x => x.Name == chipName).Size
                     };
 
                     chipEntries.Add(chipEntry);
