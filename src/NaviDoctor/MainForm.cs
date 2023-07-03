@@ -2263,6 +2263,27 @@ namespace NaviDoctor
                     break;
                 case GameTitle.Title.MegaManBattleNetwork3White:
                 case GameTitle.Title.MegaManBattleNetwork3Blue:
+                    programAdvanceMemoToolStripMenuItem.Enabled = true;
+                    switch (saveData.Folders)
+                    {
+                        case 1:
+                            if (tabsFolders.TabPages.Contains(tabPage_Folder2)) tabsFolders.TabPages.Remove(tabPage_Folder2);
+                            if (tabsFolders.TabPages.Contains(tabPage_Folder3)) tabsFolders.TabPages.Remove(tabPage_Folder3);
+                            break;
+                        case 2:
+                            if (!tabsFolders.TabPages.Contains(tabPage_Folder2)) tabsFolders.TabPages.Insert(1, tabPage_Folder2);
+                            if (tabsFolders.TabPages.Contains(tabPage_Folder3)) tabsFolders.TabPages.Remove(tabPage_Folder3);
+                            break;
+                        case 3:
+                            if (!tabsFolders.TabPages.Contains(tabPage_Folder2)) tabsFolders.TabPages.Insert(1, tabPage_Folder2);
+                            if (!tabsFolders.TabPages.Contains(tabPage_Folder3)) tabsFolders.TabPages.Insert(2, tabPage_Folder3);
+                            break;
+                        default:
+                            break;
+                    }
+                    btnSelectStyles.Enabled = true;
+                    panelBugFragRegMem.Visible = true;
+                    panelSubChips.Visible = true;
                     break;
                 case GameTitle.Title.MegaManBattleNetwork4RedSun:
                 case GameTitle.Title.MegaManBattleNetwork4BlueMoon:
