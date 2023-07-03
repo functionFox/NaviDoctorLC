@@ -44,9 +44,6 @@ namespace NaviDoctor.models
                     chipNameMap = BN2ChipNameMap;
                     break;
                 case GameTitle.Title.MegaManBattleNetwork3White:
-                    chipCodeMap = BN3ChipCodeMap;
-                    chipNameMap = BN3ChipNameMap;
-                    break;
                 case GameTitle.Title.MegaManBattleNetwork3Blue:
                     chipCodeMap = BN3ChipCodeMap;
                     chipNameMap = BN3ChipNameMap;
@@ -935,12 +932,12 @@ namespace NaviDoctor.models
             new BattleChipData { ID = 0x12E, Name = "DeltaRay", Size = 92, Type = 4 },
             new BattleChipData { ID = 0x12F, Name = "FoldrBak", Size = 99, Type = 4 },
             new BattleChipData { ID = 0x130, Name = "NavRcycl", Size = 50, Type = 3 },
-            new BattleChipData { ID = 0x131, Name = "AlphArm Sigma", Size = 97, Type = 3 },
+            new BattleChipData { ID = 0x131, Name = "AlphArm Σ", Size = 97, Type = 3 },
             new BattleChipData { ID = 0x132, Name = "Bass", Size = 98, Type = 3 },
             new BattleChipData { ID = 0x133, Name = "Serenade", Size = 97, Type = 3 },
             new BattleChipData { ID = 0x134, Name = "Balance", Size = 60, Type = 3 },
             new BattleChipData { ID = 0x135, Name = "DarkAura", Size = 55, Type = 4 },
-            new BattleChipData { ID = 0x136, Name = "AlphArm Omega", Size = 97, Type = 4 },
+            new BattleChipData { ID = 0x136, Name = "AlphArm Ω", Size = 97, Type = 4 },
             new BattleChipData { ID = 0x137, Name = "Bass+", Size = 98, Type = 4 },
             new BattleChipData { ID = 0x138, Name = "BassGS", Size = 99, Type = 2 },
             // Glitch chips

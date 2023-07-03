@@ -112,6 +112,19 @@ namespace NaviDoctor
                             libraryData = saveData.LibraryData;
                         }
                         break;
+                    case GameTitle.Title.MegaManBattleNetwork3Blue:
+                    case GameTitle.Title.MegaManBattleNetwork3White:
+                        chipNameMap = BattleChipData.BN3ChipNameMap;
+                        paIndexStart = 0x140;
+                        if (paLib)
+                        {
+                            libraryData = saveData.PALibraryData;
+                        }
+                        else
+                        {
+                            libraryData = saveData.LibraryData;
+                        }
+                        break;
                     default:
                         return;
                 }
@@ -180,6 +193,16 @@ namespace NaviDoctor
                         standardStopID = 0x12F;
                     }
                     break;
+                case GameTitle.Title.MegaManBattleNetwork3Blue:
+                case GameTitle.Title.MegaManBattleNetwork3White:
+                    standardStopID = 0x138;
+                    chipNameMap = BattleChipData.BN3ChipNameMap;
+                    if (paLib)
+                    {
+                        standardStartID = 0x140;
+                        standardStopID = 0x15F;
+                    }
+                    break;
                 default:
                     return;
             }
@@ -231,6 +254,10 @@ namespace NaviDoctor
                     break;
                 case GameTitle.Title.MegaManBattleNetwork2:
                     packChips = saveData.BattleChips.Concat(saveData.NaviChips).Concat(saveData.SecretChips).ToList();
+                    break;
+                case GameTitle.Title.MegaManBattleNetwork3Blue:
+                case GameTitle.Title.MegaManBattleNetwork3White:
+                    packChips = saveData.BattleChips.Concat(saveData.NaviChips).ToList();
                     break;
                 default:
                     return;
@@ -319,6 +346,34 @@ namespace NaviDoctor
                         }
                         break;
                     }
+                case GameTitle.Title.MegaManBattleNetwork3White:
+                case GameTitle.Title.MegaManBattleNetwork3Blue:
+                    {
+                        for (var i = 1; i <= saveData.Folders; i++) // Just a copy/paste of BN2 for now.
+                        {
+                            switch (i)
+                            {
+                                case 1:
+                                    {
+                                        PopulateFolderDataGridView(dgvFolder1, saveData.FolderData);
+                                        break;
+                                    }
+                                case 2:
+                                    {
+                                        PopulateFolderDataGridView(dgvFolder2, saveData.Folder2Data); // This is Xtra Folder
+                                        break;
+                                    }
+                                case 3:
+                                    {
+                                        PopulateFolderDataGridView(dgvFolder3, saveData.Folder3Data);
+                                        break;
+                                    }
+                                default:
+                                    break;
+                            }
+                        }
+                        break;
+                    }
             }
         }
         
@@ -341,6 +396,10 @@ namespace NaviDoctor
                     break;
                 case GameTitle.Title.MegaManBattleNetwork2:
                     chipNameMap = BattleChipData.BN2ChipNameMap;
+                    break;
+                case GameTitle.Title.MegaManBattleNetwork3White:
+                case GameTitle.Title.MegaManBattleNetwork3Blue:
+                    chipNameMap = BattleChipData.BN3ChipNameMap;
                     break;
                 default:
                     return;
@@ -423,6 +482,31 @@ namespace NaviDoctor
                         }
                         break;
                     }
+                case GameTitle.Title.MegaManBattleNetwork3Blue:
+                case GameTitle.Title.MegaManBattleNetwork3White:
+                    {
+                        switch (tabsFolders.SelectedIndex)
+                        {
+                            case 0:
+                                {
+                                    RemoveChip(dgvFolder1, saveData.FolderData);
+                                    break;
+                                }
+                            case 1:
+                                {
+                                    // RemoveChip(dgvFolder2, saveData.Folder2Data); Can't edit Xtra Folder
+                                    break;
+                                }
+                            case 2:
+                                {
+                                    RemoveChip(dgvFolder3, saveData.Folder3Data);
+                                    break;
+                                }
+                            default:
+                                break;
+                        }
+                        break;
+                    }
             }
            
         }
@@ -471,16 +555,20 @@ namespace NaviDoctor
         private void btnAddChip_Click(object sender, EventArgs e)
         {
             List<Tuple<int, int>> folderData;
-            int battleIDHigh;
-            int naviIDLow;
-            int naviIDHigh;
-            int secretIDLow;
-            int secretIDHigh;
-            int maxBattleChipCopies;
-            int maxNaviChips;
+            int battleIDHigh = 0;
+            int naviIDLow = 0;
+            int naviIDHigh = 0;
+            int secretIDLow = 0;
+            int secretIDHigh = 0;
+            int maxBattleChipCopies = 0;
+            int maxNaviChips = 0;
             int maxTotalChipsInFolder = 30;
-            bool isBattleChip;
-            bool isNaviChip;
+            bool isBattleChip = false;
+            bool isNaviChip = false;
+            bool isMegaChip = false;
+            bool isGigaChip = false;
+            int megaLimit = 0;
+            int gigaLimit = 0;
             List<BattleChipData> chipNameMap;
             switch (tabsFolders.SelectedIndex) // Check which folder is currently selected
             {
@@ -501,8 +589,6 @@ namespace NaviDoctor
                     battleIDHigh = 147;
                     naviIDLow = 148;
                     naviIDHigh = 239;
-                    secretIDLow = 0;
-                    secretIDHigh = 0;
                     maxBattleChipCopies = 10;
                     maxNaviChips = 5;
                     chipNameMap = BattleChipData.BN1ChipNameMap;
@@ -517,6 +603,17 @@ namespace NaviDoctor
                     maxNaviChips = 5;
                     chipNameMap = BattleChipData.BN2ChipNameMap;
                     break;
+                case GameTitle.Title.MegaManBattleNetwork3White:
+                case GameTitle.Title.MegaManBattleNetwork3Blue:
+                    battleIDHigh = 0xC8;
+                    naviIDLow = 0xC9;
+                    naviIDHigh = 0x138;
+                    maxBattleChipCopies = 4;
+                    megaLimit = saveData.MegaLimit;
+                    gigaLimit = saveData.GigaLimit;
+                    maxNaviChips = 5;
+                    chipNameMap = BattleChipData.BN3ChipNameMap;
+                    break;
                 default:
                     return;
             }
@@ -530,7 +627,8 @@ namespace NaviDoctor
 
                 // Check if the Folder has reached the maximum number of copies for the selected chip ID
                 int currentChipCopies = folderData.Count(data => data.Item1 == chipID);
-                int currentNaviChips;
+                int currentNaviChips = 0;
+                int currentGigaChips = 0;
 
                 switch (saveData.GameName)
                 {
@@ -544,18 +642,47 @@ namespace NaviDoctor
                         isBattleChip = (chipID >= 1 && chipID <= battleIDHigh) || (chipID >= secretIDLow && chipID <= 260) || (chipID >= 266 && chipID <= secretIDHigh); // Secret NetBattle reward chips
                         isNaviChip = (chipID >= naviIDLow && chipID <= naviIDHigh) || (chipID >= 261 && chipID <= 265); // Event Navis
                         break;
+                    case GameTitle.Title.MegaManBattleNetwork3Blue:
+                    case GameTitle.Title.MegaManBattleNetwork3White:
+                        currentNaviChips = folderData.Count(data => data.Item1 >= naviIDLow && data.Item1 <= naviIDHigh && chipNameMap.FirstOrDefault(chip => chip.ID == data.Item1).Type == 1); // current count of mega chips
+                        currentGigaChips = folderData.Count(data => data.Item1 >= naviIDLow && data.Item1 <= naviIDHigh && chipNameMap.FirstOrDefault(chip => chip.ID == data.Item1).Type > 1); // current count of giga chips
+                        isBattleChip = chipNameMap.FirstOrDefault(data => data.ID == chipID).Type == 0;
+                        isNaviChip = chipNameMap.FirstOrDefault(data => data.ID == chipID).Type != 0;
+                        isMegaChip = chipNameMap.FirstOrDefault(data => data.ID == chipID).Type == 1;
+                        isGigaChip = chipNameMap.FirstOrDefault(data => data.ID == chipID).Type >= 2;
+                        break;
                     default:
                         return;
                 }
 
+                string chipName = BattleChipData.GetChipNameByID(chipNameMap, chipID).Name;
+
                 if (isBattleChip && currentChipCopies >= maxBattleChipCopies)
                 {
-                    string chipName = BattleChipData.GetChipNameByID(chipNameMap, chipID).Name;
                     MessageBox.Show($"The limit for {chipName} cannot exceed {maxBattleChipCopies}.");
                 }
-                else if (isNaviChip && currentNaviChips >= maxNaviChips)
+                else if (isNaviChip && currentNaviChips >= maxNaviChips && saveData.GameName <= GameTitle.Title.MegaManBattleNetwork2)
                 {
                     MessageBox.Show($"The limit for Navi Chips cannot exceed {maxNaviChips}.");
+                }
+                else if (isNaviChip && saveData.GameName >= GameTitle.Title.MegaManBattleNetwork3White)
+                {
+                    if (isMegaChip && currentChipCopies < 1 && currentNaviChips >= megaLimit)
+                    {
+                        MessageBox.Show($"The limit for Mega Chips cannot exceed {megaLimit}.");
+                    }
+                    else if (isMegaChip && currentChipCopies >= 1)
+                    {
+                        MessageBox.Show($"You may only have one copy of {chipName} in this folder.");
+                    }
+                    else if (isGigaChip && currentChipCopies < 1 && currentGigaChips >= gigaLimit)
+                    {
+                        MessageBox.Show($"The limit for Giga Chips cannot exceed {gigaLimit}.");
+                    }
+                    else if (isGigaChip && currentChipCopies >= 1)
+                    {
+                        MessageBox.Show($"You may only have one copy of {chipName} in this folder.");
+                    }
                 }
                 else if (folderData.Count >= maxTotalChipsInFolder)
                 {
@@ -607,6 +734,12 @@ namespace NaviDoctor
                     saveData.NaviChips = GeneratePackage(194, 250, 2, chipCodeMap);
                     saveData.SecretChips = GeneratePackage(251, 271, 6, chipCodeMap);
                     break;
+                case GameTitle.Title.MegaManBattleNetwork3White:
+                case GameTitle.Title.MegaManBattleNetwork3Blue:
+                    chipCodeMap = BattleChipData.BN3ChipCodeMap;
+                    saveData.BattleChips = GeneratePackage(1, 0xC8, 6, chipCodeMap);
+                    saveData.NaviChips = GeneratePackage(0xC9, 0x138, 2, chipCodeMap);
+                    break;
             }
         }
 
@@ -639,7 +772,7 @@ namespace NaviDoctor
             OpenFileDialog openFile = new OpenFileDialog();
             openFile.Title = "Open MMBN Save File...";
             openFile.InitialDirectory = @"C:\Program Files (x86)\Steam\userdata";
-            openFile.Filter = "Legacy Collection Save File|*save_0.bin|MMBN1 Save File|exe1_save_0.bin|MMBN2 Save File|exe2j_save_0.bin|All Files|*.*";
+            openFile.Filter = "Legacy Collection Save File|*save_0.bin|MMBN1 Save File|exe1_save_0.bin|MMBN2 Save File|exe2j_save_0.bin|exe3?_save_0.bin|MMBN3 Save File|All Files|*.*";
             openFile.RestoreDirectory = true;
             if (openFile.ShowDialog() == DialogResult.OK)
             {
@@ -665,7 +798,7 @@ namespace NaviDoctor
 
             LoadFolderData(saveData);
 
-            maxHPStat.Value = saveData.MaxHP;
+            maxHPStat.Value = saveData.HPUp * 20 + 100; // Calculate base HP based on how many HP ups were obtained.
             attackStat.Value = saveData.AttackPower + 1;
             rapidStat.Value = saveData.RapidPower + 1;
             chargeStat.Value = saveData.ChargePower + 1;
@@ -692,8 +825,20 @@ namespace NaviDoctor
                     nudUnlocker.Value = saveData.SubUnlocker;
                     nudUntrap.Value = saveData.SubUntrap;
                     break;
+                case GameTitle.Title.MegaManBattleNetwork3White:
+                case GameTitle.Title.MegaManBattleNetwork3Blue:
+                    // LoadStyles(saveData); // Uncomment when styles are implemented properly
+                    nudBugFrag.Value = saveData.BugFrags;
+                    nudRegMem.Value = saveData.RegMem;
+                    nudSubChipMax.Value = saveData.SubChipMax;
+                    nudMiniEnrg.Value = saveData.SubMiniEnrg;
+                    nudFullEnrg.Value = saveData.SubFullEnrg;
+                    nudLocEnemy.Value = saveData.SubLocEnemy;
+                    nudSneakRun.Value = saveData.SubSneakRun;
+                    nudUnlocker.Value = saveData.SubUnlocker;
+                    nudUntrap.Value = saveData.SubUntrap;
+                    break;
             }
-
 
             //Show the current game loaded
             lblGameVersion.Text = $"Loaded: {saveData.GameName.GetString()}";
@@ -722,6 +867,14 @@ namespace NaviDoctor
                 case GameTitle.Title.MegaManBattleNetwork2:
                     saveFile.FileName = "exe2j_save_0.bin";
                     saveFile.Filter = "MMBN2 Save File|exe2j_save_0.bin|All Files|*.*";
+                    break;
+                case GameTitle.Title.MegaManBattleNetwork3White:
+                    saveFile.FileName = "exe3w_save_0.bin";
+                    saveFile.Filter = "MMBN3W Save File|exe3w_save_0.bin|All Files|*.*";
+                    break;
+                case GameTitle.Title.MegaManBattleNetwork3Blue:
+                    saveFile.FileName = "exe3b_save_0.bin";
+                    saveFile.Filter = "MMBN3B Save File|exe3b_save_0.bin|All Files|*.*";
                     break;
 
             }
