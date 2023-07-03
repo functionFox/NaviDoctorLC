@@ -308,7 +308,7 @@ namespace NaviDoctor
                 dgvPack.Columns["MB"].ReadOnly = true;
             }
 
-            dgvPack.AutoResizeColumns();
+            dgvPack.RowHeadersWidth = 30;
         }
         private void LoadFolderData(SaveDataObject saveData)
         {
@@ -447,6 +447,7 @@ namespace NaviDoctor
                 dgvFolder.FirstDisplayedScrollingRowIndex = firstDisplayedScrollingRowIndex;
 
             dgvFolder.Columns["Name"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dgvFolder.RowHeadersWidth = 30;
         }
 
         private void btnRemoveChip_Click(object sender, EventArgs e)
@@ -902,9 +903,12 @@ namespace NaviDoctor
         {
             saveData.MaxHP = (short)maxHPStat.Value;
             saveData.CurrHP = (short)maxHPStat.Value;
-            saveData.AttackPower = (byte)(attackStat.Value - 1);
-            saveData.RapidPower = (byte)(rapidStat.Value - 1);
-            saveData.ChargePower = (byte)(chargeStat.Value - 1);
+            if(saveData.GameName == GameTitle.Title.MegaManBattleNetwork || saveData.GameName == GameTitle.Title.MegaManBattleNetwork2)
+            {
+                saveData.AttackPower = (byte)(attackStat.Value - 1);
+                saveData.RapidPower = (byte)(rapidStat.Value - 1);
+                saveData.ChargePower = (byte)(chargeStat.Value - 1);
+            }
             saveData.Zenny = (int)zennyBox.Value;
             saveData.SteamID = (int)steamID.Value;
             PackageChips();
@@ -2237,6 +2241,7 @@ namespace NaviDoctor
                     panelBugFragRegMem.Visible = false;
                     panelSubChips.Visible = false;
                     programAdvanceMemoToolStripMenuItem.Enabled = false;
+                    panel_MegamanStats.Visible = true;
                     break;
                 case GameTitle.Title.MegaManBattleNetwork2:
                     programAdvanceMemoToolStripMenuItem.Enabled = true;
@@ -2260,6 +2265,7 @@ namespace NaviDoctor
                     btnSelectStyles.Enabled = true;
                     panelBugFragRegMem.Visible = true;
                     panelSubChips.Visible = true;
+                    panel_MegamanStats.Visible = true;
                     break;
                 case GameTitle.Title.MegaManBattleNetwork3White:
                 case GameTitle.Title.MegaManBattleNetwork3Blue:
@@ -2284,6 +2290,7 @@ namespace NaviDoctor
                     btnSelectStyles.Enabled = true;
                     panelBugFragRegMem.Visible = true;
                     panelSubChips.Visible = true;
+                    panel_MegamanStats.Visible = false;
                     break;
                 case GameTitle.Title.MegaManBattleNetwork4RedSun:
                 case GameTitle.Title.MegaManBattleNetwork4BlueMoon:
