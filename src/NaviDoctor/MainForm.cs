@@ -800,9 +800,12 @@ namespace NaviDoctor
             LoadFolderData(saveData);
 
             maxHPStat.Value = saveData.HPUp * 20 + 100; // Calculate base HP based on how many HP ups were obtained.
-            attackStat.Value = saveData.AttackPower + 1;
-            rapidStat.Value = saveData.RapidPower + 1;
-            chargeStat.Value = saveData.ChargePower + 1;
+            if (saveData.GameName == GameTitle.Title.MegaManBattleNetwork || saveData.GameName == GameTitle.Title.MegaManBattleNetwork2)
+            {
+                attackStat.Value = saveData.AttackPower + 1;
+                rapidStat.Value = saveData.RapidPower + 1;
+                chargeStat.Value = saveData.ChargePower + 1;
+            }
             zennyBox.Value = saveData.Zenny;
             steamID.Value = saveData.SteamID;
 
