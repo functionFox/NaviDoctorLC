@@ -360,12 +360,12 @@ namespace NaviDoctor
                                     }
                                 case 2:
                                     {
-                                        PopulateFolderDataGridView(dgvFolder2, saveData.Folder2Data); // This is Xtra Folder
+                                        PopulateFolderDataGridView(dgvFolder2, saveData.Folder3Data); 
                                         break;
                                     }
                                 case 3:
                                     {
-                                        PopulateFolderDataGridView(dgvFolder3, saveData.Folder3Data);
+                                        PopulateFolderDataGridView(dgvFolder3, saveData.Folder2Data); // This is Xtra Folder
                                         break;
                                     }
                                 default:
