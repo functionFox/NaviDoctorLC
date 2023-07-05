@@ -40,6 +40,11 @@ namespace NaviDoctor
                     this.Height = 680;
                     this.Width = 292;
                     break;
+                case GameTitle.Title.MegaManBattleNetwork3Blue:
+                case GameTitle.Title.MegaManBattleNetwork3White:
+                    this.Height = 1100;
+                    this.Width = 292;
+                    break;
             }
             PopulateStyles();
         }
@@ -57,6 +62,10 @@ namespace NaviDoctor
                 }
                 styleSelect.EquipStyleChecked += (s, e) => EquipCheck(styleSelect);
                 styleSelect.AddStyleChecked += (s, e) => AddCheck();
+                if (_currentGame == GameTitle.Title.MegaManBattleNetwork3Blue || _currentGame == GameTitle.Title.MegaManBattleNetwork3White)
+                {
+                    styleSelect.ToggleAdd(false);
+                }
                 flpStyleChange.Controls.Add(styleSelect);
             }
         }

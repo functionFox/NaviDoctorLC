@@ -73,5 +73,14 @@ namespace NaviDoctor.customControls
             radEquipStyle.CheckedChanged += (s, e) => EquipStyleChecked?.Invoke(this, e);
             cbxAddStyle.CheckedChanged += (s, e) => AddStyleChecked?.Invoke(this, e);
         }
+
+        public void ToggleAdd(bool toggle)
+        {
+            cbxAddStyle.Enabled = toggle;
+        }
+        public void ToggleEquip(bool toggle)
+        {
+            radEquipStyle.Enabled = toggle;
+        }
     }
 }
