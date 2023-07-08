@@ -66,7 +66,8 @@ namespace NaviDoctor.models
                         Name = chipName,
                         Code = chipCode,
                         Quantity = 0, // Set the initial quantity to 0,
-                        Size = chipNameMap.FirstOrDefault(x => x.Name == chipName).Size
+                        Size = chipNameMap.FirstOrDefault(x => x.Name == chipName).Size,
+                        Type = chipNameMap.FirstOrDefault(x => x.Name == chipName).Type
                     };
 
                     chipEntries.Add(chipEntry);

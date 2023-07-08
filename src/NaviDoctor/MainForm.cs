@@ -281,7 +281,18 @@ namespace NaviDoctor
                 dataView.Table.Columns.Add("MB", typeof(int)); 
                 foreach (var entry in entries)
                 {
-                    dataView.Table.Rows.Add(entry.ID, entry.Name, entry.Code, entry.Quantity, entry.Size);
+                    switch (saveData.GameName)
+                    {
+                        case GameTitle.Title.MegaManBattleNetwork2:
+                            dataView.Table.Rows.Add(entry.ID, entry.Name, entry.Code, entry.Quantity, entry.Size);
+                            break;
+                        case GameTitle.Title.MegaManBattleNetwork3White:
+                            if (entry.Type != 4) dataView.Table.Rows.Add(entry.ID, entry.Name, entry.Code, entry.Quantity, entry.Size);
+                            break;
+                        case GameTitle.Title.MegaManBattleNetwork3Blue:
+                            if (entry.Type != 3) dataView.Table.Rows.Add(entry.ID, entry.Name, entry.Code, entry.Quantity, entry.Size);
+                            break;
+                    }
                 }
             }
             else
@@ -291,8 +302,6 @@ namespace NaviDoctor
                     dataView.Table.Rows.Add(entry.ID, entry.Name, entry.Code, entry.Quantity);
                 }
             }
-
-           
 
             dataView.RowFilter = "Code <> 'None'";
 
