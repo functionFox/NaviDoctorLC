@@ -78,73 +78,73 @@ namespace NaviDoctor
                 if (saveData.Length == 8909)
                 {
                     GameName = GameTitle.Title.MegaManBattleNetwork;
-                    AttackOffset =       0x0014;
-                    RapidOffset =        0x0015;
-                    ChargeOffset =       0x0016;
-                    EqStyleOffset =      0x0017;
-                    CurrHPOffset =       0x001C;
-                    MaxHPOffset =        0x001E;
-                    ZennyOffset =        0x0074;
-                    TimeOffset =         0x0098;
-                    ChecksumOffset =     0x00A0;
-                    SteamOffset =        0x00BC;
-                    HPUpOffset =         0x0100;
-                    StyleOffset =        0x0104;
-                    FolderOffsetStart =  0x0120;
-                    FolderOffsetEnd =    0x015B;
-                    BattleOffsetStart =  0x0170;
-                    BattleOffsetEnd =    0x0A94;
-                    NaviOffsetStart =    0x0AA0;
-                    NaviOffsetEnd =      0x1050;
+                    AttackOffset = 0x0014;
+                    RapidOffset = 0x0015;
+                    ChargeOffset = 0x0016;
+                    EqStyleOffset = 0x0017;
+                    CurrHPOffset = 0x001C;
+                    MaxHPOffset = 0x001E;
+                    ZennyOffset = 0x0074;
+                    TimeOffset = 0x0098;
+                    ChecksumOffset = 0x00A0;
+                    SteamOffset = 0x00BC;
+                    HPUpOffset = 0x0100;
+                    StyleOffset = 0x0104;
+                    FolderOffsetStart = 0x0120;
+                    FolderOffsetEnd = 0x015B;
+                    BattleOffsetStart = 0x0170;
+                    BattleOffsetEnd = 0x0A94;
+                    NaviOffsetStart = 0x0AA0;
+                    NaviOffsetEnd = 0x1050;
                     LibraryOffsetStart = 0x1080;
-                    LibraryOffsetEnd =   0x1098;
-    }
+                    LibraryOffsetEnd = 0x1098;
+                }
                 else if (saveData.Length == 14976)
                 {
                     GameName = GameTitle.Title.MegaManBattleNetwork2;
-                    EqStyleOffset =      0x0001;
-                    RegMemOffset =       0x0017;
-                    RegChip1Offset =     0x001D;
-                    RegChip2Offset =     0x001E;
-                    RegChip3Offset =     0x001F;
-                    CurrHPOffset =       0x0020;
-                    MaxHPOffset =        0x0022;
-                    HPRedundancy1 =      0x008C; // BN2 has two HP redundancies.
-                    HPRedundancy2 =      0x008E;
-                    ZennyOffset =        0x0074;
-                    FoldersOffset =      0x0082;
-                    AttackOffset =       0x0084;
-                    RapidOffset =        0x0085;
-                    ChargeOffset =       0x0086;
-                    TimeOffset =         0x00A0;
-                    ChecksumOffset =     0x00A8;
-                    SteamOffset =        0x0104;
-                    BugfragOffset =      0x0155;
-                    HPUpOffset =         0x0170;
-                    SubMaxOffset =       0x0175;
-                    SubMiniOffset =      0x0180;
-                    SubFullOffset =      0x0181;
-                    SubSneakOffset =     0x0182;
-                    SubUntrapOffset =    0x0183;
-                    SubLocEnOffset =     0x0184;
-                    SubUnlockerOffset =  0x0185;
-                    StyleOffset =        0x0190;
-                    FolderOffsetStart =  0x01B0;
-                    FolderOffsetEnd =    0x0227;
+                    EqStyleOffset = 0x0001;
+                    RegMemOffset = 0x0017;
+                    RegChip1Offset = 0x001D;
+                    RegChip2Offset = 0x001E;
+                    RegChip3Offset = 0x001F;
+                    CurrHPOffset = 0x0020;
+                    MaxHPOffset = 0x0022;
+                    HPRedundancy1 = 0x008C; // BN2 has two HP redundancies.
+                    HPRedundancy2 = 0x008E;
+                    ZennyOffset = 0x0074;
+                    FoldersOffset = 0x0082;
+                    AttackOffset = 0x0084;
+                    RapidOffset = 0x0085;
+                    ChargeOffset = 0x0086;
+                    TimeOffset = 0x00A0;
+                    ChecksumOffset = 0x00A8;
+                    SteamOffset = 0x0104;
+                    BugfragOffset = 0x0155;
+                    HPUpOffset = 0x0170;
+                    SubMaxOffset = 0x0175;
+                    SubMiniOffset = 0x0180;
+                    SubFullOffset = 0x0181;
+                    SubSneakOffset = 0x0182;
+                    SubUntrapOffset = 0x0183;
+                    SubLocEnOffset = 0x0184;
+                    SubUnlockerOffset = 0x0185;
+                    StyleOffset = 0x0190;
+                    FolderOffsetStart = 0x01B0;
+                    FolderOffsetEnd = 0x0227;
                     Folder2OffsetStart = 0x0228;
-                    Folder2OffsetEnd =   0x029F;
+                    Folder2OffsetEnd = 0x029F;
                     Folder3OffsetStart = 0x02A0;
-                    Folder3OffsetEnd =   0x0317;
-                    BattleOffsetStart =  0x032A;
-                    BattleOffsetEnd =    0x10AF;
-                    NaviOffsetStart =    0x10BC;
-                    NaviOffsetEnd =      0x14B1;
-                    SecretOffsetStart =  0x14BE;
-                    SecretOffsetEnd =    0x162B;
+                    Folder3OffsetEnd = 0x0317;
+                    BattleOffsetStart = 0x032A;
+                    BattleOffsetEnd = 0x10AF;
+                    NaviOffsetStart = 0x10BC;
+                    NaviOffsetEnd = 0x14B1;
+                    SecretOffsetStart = 0x14BE;
+                    SecretOffsetEnd = 0x162B;
                     LibraryOffsetStart = 0x1690;
-                    LibraryOffsetEnd =   0x16B1;
-                    PALibStart =         0x16CC;
-                    PALibEnd =           0x16CF;
+                    LibraryOffsetEnd = 0x16B1;
+                    PALibStart = 0x16CC;
+                    PALibEnd = 0x16CF;
                 }
                 else if (saveData.Length == 22456)
                 {
@@ -160,55 +160,55 @@ namespace NaviDoctor
                     {
                         throw new Exception("Invalid save file data.\nPlease load a valid Battle\nNetwork 3 save file.");
                     }
-                    EqStyleOffset =      0x0001;
-                    StyleOffset =        0x0014;
-                    RegMemOffset =       0x0017;
-                    RegChip1Offset =     0x001D;
-                    RegChip2Offset =     0x001F;
-                    CurrHPOffset =       0x0020;
-                    MaxHPOffset =        0x0022;
-                    ZennyOffset =        0x0074;
-                    BugfragOffset =      0x0078;
-                    FoldersOffset =      0x0086;
-                    HPRedundancy1 =      0x0094; // Temporary HP tracker
-                    TimeOffset =         0x00A0;
-                    ChecksumOffset =     0x00A8;
-                    SteamOffset =        0x00E0;
-                    HPUpOffset =         0x0150;
-                    CustSizeOffset =     0x0151;
-                    SubMaxOffset =       0x0155;
-                    SubMiniOffset =      0x0160;
-                    SubFullOffset =      0x0161;
-                    SubSneakOffset =     0x0162;
-                    SubUntrapOffset =    0x0163;
-                    SubLocEnOffset =     0x0164;
-                    SubUnlockerOffset =  0x0165;
-                    CustInvOffset =      0x01B7;
-                    FolderOffsetStart =  0x0290;
-                    FolderOffsetEnd =    0x0307;
+                    EqStyleOffset = 0x0001;
+                    StyleOffset = 0x0014;
+                    RegMemOffset = 0x0017;
+                    RegChip1Offset = 0x001D;
+                    RegChip2Offset = 0x001F;
+                    CurrHPOffset = 0x0020;
+                    MaxHPOffset = 0x0022;
+                    ZennyOffset = 0x0074;
+                    BugfragOffset = 0x0078;
+                    FoldersOffset = 0x0086;
+                    HPRedundancy1 = 0x0094; // Temporary HP tracker
+                    TimeOffset = 0x00A0;
+                    ChecksumOffset = 0x00A8;
+                    SteamOffset = 0x00E0;
+                    HPUpOffset = 0x0150;
+                    CustSizeOffset = 0x0151;
+                    SubMaxOffset = 0x0155;
+                    SubMiniOffset = 0x0160;
+                    SubFullOffset = 0x0161;
+                    SubSneakOffset = 0x0162;
+                    SubUntrapOffset = 0x0163;
+                    SubLocEnOffset = 0x0164;
+                    SubUnlockerOffset = 0x0165;
+                    CustInvOffset = 0x01B7;
+                    FolderOffsetStart = 0x0290;
+                    FolderOffsetEnd = 0x0307;
                     Folder2OffsetStart = 0x0308; // Xtra Folder
-                    Folder2OffsetEnd =   0x037F;
+                    Folder2OffsetEnd = 0x037F;
                     Folder3OffsetStart = 0x0380; // Folder 2
-                    Folder3OffsetEnd =   0x03F7; // Trust me, it makes sense.
-                    BattleOffsetStart =  0x0412;
-                    BattleOffsetEnd =    0x1215;
-                    NaviOffsetStart =    0x1222; // Mega and Giga chips
-                    NaviOffsetEnd =      0x1A73;
-                    CompressOffset =     0x1D60;
+                    Folder3OffsetEnd = 0x03F7; // Trust me, it makes sense.
+                    BattleOffsetStart = 0x0412;
+                    BattleOffsetEnd = 0x1215;
+                    NaviOffsetStart = 0x1222; // Mega and Giga chips
+                    NaviOffsetEnd = 0x1A01;
+                    CompressOffset = 0x1D60;
                     LibraryOffsetStart = 0x1D80; // All Standard, Mega, and Giga chips
-                    LibraryOffsetEnd =   0x1DA7;
-                    PALibStart =         0x1DA8;
-                    PALibEnd =           0x1DAB;
-                    GridPartsOffset =    0x4D40;
-                    CustGridOffset =     0x4E10;
-                    ModOffset =          0x4E50;
-                    AttackOffset =       0x4E68;
-                    RapidOffset =        0x4E69;
-                    ChargeOffset =       0x4E6A;
-                    CShotPowerOffset =   0x4E6D;
-                    LimitsOffset =       0x4E74;
-                    HPRedundancy2 =      0x4E8C; // Max HP divided by five
-                    LibChecksumOffset =  0x5430;
+                    LibraryOffsetEnd = 0x1DA7;
+                    PALibStart = 0x1DA8;
+                    PALibEnd = 0x1DAB;
+                    GridPartsOffset = 0x4D40;
+                    CustGridOffset = 0x4E10;
+                    ModOffset = 0x4E50;
+                    AttackOffset = 0x4E68;
+                    RapidOffset = 0x4E69;
+                    ChargeOffset = 0x4E6A;
+                    CShotPowerOffset = 0x4E6D;
+                    LimitsOffset = 0x4E74;
+                    HPRedundancy2 = 0x4E8C; // Max HP divided by five
+                    LibChecksumOffset = 0x5430;
                 }
                 else
                 {
@@ -294,14 +294,6 @@ namespace NaviDoctor
                         saveDataObject.BattleChips.Add(saveData[i + j]);
                     }
                 }
-
-                for (int i = NaviOffsetStart; i <= NaviOffsetEnd; i += 0x12) // For BN3, these are Mega/Giga chips
-                {
-                    for (int j = 0; j < 6; j += 5) // We'll only need the first and last byte of each block.
-                    {
-                        saveDataObject.NaviChips.Add(saveData[i]);
-                    }
-                }
             }
 
             switch (saveDataObject.GameName)
@@ -369,14 +361,20 @@ namespace NaviDoctor
 
                     saveDataObject.RegChip3 = saveData[RegChip3Offset];
 
-                    for (int i = SecretOffsetStart; i <= SecretOffsetEnd; i+=0x12)
+                    for (int i = SecretOffsetStart; i <= SecretOffsetEnd; i += 0x12)
                     {
                         for (int j = 0; j < 6; j++) // Some act as Navi chips, some act as regular chips, just get them all.
                         {
-                            saveDataObject.SecretChips.Add(saveData[i+j]);
+                            saveDataObject.SecretChips.Add(saveData[i + j]);
                         }
                     }
-
+                    for (int i = NaviOffsetStart; i <= NaviOffsetEnd; i += 0x12)
+                    {
+                        for (int j = 0; j < 6; j += 5) // We'll only need the first and last byte of each block.
+                        {
+                            saveDataObject.NaviChips.Add(saveData[i]);
+                        }
+                    }
                     break;
                 case GameTitle.Title.MegaManBattleNetwork3White:
                 case GameTitle.Title.MegaManBattleNetwork3Blue:
@@ -435,20 +433,27 @@ namespace NaviDoctor
                             default:
                                 saveDataObject.Compression.Add(0);
                                 saveDataObject.Compression.Add(0);
-                                break;      
+                                break;
                         }
                     }
 
                     for (int i = GridPartsOffset; i < 0x4E08; i += 0x8)
                     {
-                        saveDataObject.NCPGrid.Add(new byte[] { saveData[i], saveData[i + 2], saveData[i + 3], saveData[i + 4] } );
+                        saveDataObject.NCPGrid.Add(new byte[] { saveData[i], saveData[i + 2], saveData[i + 3], saveData[i + 4] });
                     }
 
                     for (int i = 0; i < 5; i++) // NaviCust Grid locations here
                     {
-                        for (int j = 0; j <5; j++)
+                        for (int j = 0; j < 5; j++)
                         {
-                            saveDataObject.GridPosData[i, j] = saveData[CustGridOffset+j+(i*5)];
+                            saveDataObject.GridPosData[i, j] = saveData[CustGridOffset + j + (i * 5)];
+                        }
+                    }
+                    for (int i = NaviOffsetStart; i <= NaviOffsetEnd; i += 0x12) // For BN3, these are Mega/Giga chips
+                    {
+                        for (int j = 0; j < 2; j++) // BN3 checks only the first two slots.
+                        {
+                            saveDataObject.NaviChips.Add(saveData[i]);
                         }
                     }
                     break;
@@ -465,15 +470,48 @@ namespace NaviDoctor
 
             short max = 1000;
             short basehp;
-            
+
             Buffer.BlockCopy(BitConverter.GetBytes(saveDataObject.Zenny), 0, saveData, ZennyOffset, 4);
             Buffer.BlockCopy(BitConverter.GetBytes(saveDataObject.SteamID), 0, saveData, SteamOffset, 4);
+
+            if (saveDataObject.GameName >= GameTitle.Title.MegaManBattleNetwork3White)
+            {
+                for (int i = 0; i < saveDataObject.BattleChips.Count / 6 + saveDataObject.NaviChips.Count / 2; i++)
+                {
+                    if (i < saveDataObject.BattleChips.Count / 6)
+                    {
+                        for (int j = 0; j < 6; j++)
+                        {
+                            int libraryIndex = (i + 1) / 8;
+                            int bitIndex = 7 - ((i + 1) % 8);
+                            bool isChecked = (saveDataObject.LibraryData[libraryIndex] & (1 << bitIndex)) != 0;
+                            if (saveDataObject.BattleChips[(i * 6) + j] >= 1 && !isChecked)
+                            {
+                                saveDataObject.LibraryData[libraryIndex] |= (byte)(1 << bitIndex);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        for (int j = 0; j < 2; j++)
+                        {
+                            int libraryIndex = (i + 1) / 8;
+                            int bitIndex = 7 - ((i + 1) % 8);
+                            bool isChecked = (saveDataObject.LibraryData[libraryIndex] & (1 << bitIndex)) != 0;
+                            if (saveDataObject.NaviChips[(i - saveDataObject.BattleChips.Count / 6) * 2 + j] >= 1 && !isChecked)
+                            {
+                                saveDataObject.LibraryData[libraryIndex] |= (byte)(1 << bitIndex);
+                            }
+                        }
+                    }
+                }
+            }
 
             for (int i = LibraryOffsetStart; i <= LibraryOffsetEnd; i++)
             {
                 saveData[i] = saveDataObject.LibraryData[i - LibraryOffsetStart];
             }
-            
+
             var index = 0; // This is a secret tool we'll use later!
 
             if (saveDataObject.GameName != GameTitle.Title.MegaManBattleNetwork)
@@ -515,15 +553,6 @@ namespace NaviDoctor
                     }
                 }
 
-                index = 0;
-                for (int i = NaviOffsetStart; i <= NaviOffsetEnd; i += 0x12)
-                {
-                    for (int j = 0; j < 6; j += 5)
-                    {
-                        saveData[(i + j)] = saveDataObject.NaviChips[index];
-                        index++;
-                    }
-                }
                 for (int i = PALibStart; i <= PALibEnd; i++)
                 {
                     saveData[i] = saveDataObject.PALibraryData[(i - PALibStart)];
@@ -583,7 +612,7 @@ namespace NaviDoctor
                         {
                             break; // If the user has no Style, kick 'em out.
                         }
-                        switch(i)
+                        switch (i)
                         {
                             case 1:
                                 saveData[saveDataObject.StyleTypes[i]] = saveDataObject.Style1;
@@ -591,7 +620,17 @@ namespace NaviDoctor
                             case 2:
                                 saveData[saveDataObject.StyleTypes[i]] = saveDataObject.Style2;
                                 break;
-                        } 
+                        }
+                    }
+
+                    index = 0;
+                    for (int i = NaviOffsetStart; i <= NaviOffsetEnd; i += 0x12)
+                    {
+                        for (int j = 0; j < 6; j += 5)
+                        {
+                            saveData[(i + j)] = saveDataObject.NaviChips[index];
+                            index++;
+                        }
                     }
 
                     saveData[RegChip3Offset] = 0xFF; // Turn off the third RegChip
@@ -650,6 +689,16 @@ namespace NaviDoctor
                             mapIndex += 1;
                     }
 
+                    index = 0;
+                    for (int i = NaviOffsetStart; i <= NaviOffsetEnd; i += 0x12)
+                    {
+                        for (int j = 0; j < 2; j++)
+                        {
+                            saveData[(i + j)] = saveDataObject.NaviChips[index];
+                            index++;
+                        }
+                    }
+
                     for (int i = 0; i < saveDataObject.Compression.Count; i += 2)
                     {
                         byte value = (byte)((saveDataObject.Compression[i] << 1) | saveDataObject.Compression[i + 1]);
@@ -689,19 +738,11 @@ namespace NaviDoctor
                     }
                     Buffer.BlockCopy(gridData, 0, saveData, CustGridOffset, 25);
 
-                    byte[] gridParts = { };
-                    foreach (byte[] item in saveDataObject.NCPGrid)
+                    for (int i = 0; i < saveDataObject.NCPGrid.Count; i++)
                     {
-                        foreach (byte value in item)
-                        {
-                            if (gridParts.GetLength(0) % 8 == 2)
-                            {
-                                gridParts.SetValue(0, gridParts.GetLength(0));
-                            }
-                            gridParts.SetValue(value, gridParts.GetLength(0));
-                        }
+                        byte[] gridParts = new byte[] { saveDataObject.NCPGrid[i][0], 0, saveDataObject.NCPGrid[i][1], saveDataObject.NCPGrid[i][2], saveDataObject.NCPGrid[i][3], 0, 0, 0 };
+                        Buffer.BlockCopy(gridParts, 0, saveData, GridPartsOffset + (i * 8), 8);
                     }
-                    Buffer.BlockCopy(gridParts, 0, saveData, GridPartsOffset, gridParts.Length);
 
                     break;
             }
@@ -714,7 +755,7 @@ namespace NaviDoctor
         {
             Tuple<int, int> value = folderData[(index - offset) / (2 * bitMulti)];
             Buffer.BlockCopy(BitConverter.GetBytes(value.Item1), 0, saveData, index, bitMulti);
-            Buffer.BlockCopy(BitConverter.GetBytes(value.Item2), 0, saveData, index + bitMulti, bitMulti);  
+            Buffer.BlockCopy(BitConverter.GetBytes(value.Item2), 0, saveData, index + bitMulti, bitMulti);
         }
 
         private void CalculateAndWriteChecksum()
