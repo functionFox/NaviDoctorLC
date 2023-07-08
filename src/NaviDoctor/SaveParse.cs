@@ -253,7 +253,6 @@ namespace NaviDoctor
             if (saveDataObject.GameName != GameTitle.Title.MegaManBattleNetwork)
             // BN1 is the only game without a PA Library, BugFrags, and a Folder count greater than 1.
             {
-                saveDataObject.BugFrags = saveData[BugfragOffset];
                 saveDataObject.Folders = saveData[FoldersOffset];
                 for (int i = PALibStart; i <= PALibEnd; i++)
                 {
@@ -360,6 +359,7 @@ namespace NaviDoctor
                     }
 
                     saveDataObject.RegChip3 = saveData[RegChip3Offset];
+                    saveDataObject.BugFrags = saveData[BugfragOffset];
 
                     for (int i = SecretOffsetStart; i <= SecretOffsetEnd; i += 0x12)
                     {
@@ -385,6 +385,7 @@ namespace NaviDoctor
                     saveDataObject.CShotPower = saveData[CShotPowerOffset];
                     saveDataObject.MegaLimit = saveData[LimitsOffset];
                     saveDataObject.GigaLimit = saveData[LimitsOffset + 1];
+                    saveDataObject.BugFrags = BitConverter.ToUInt16(saveData, BugfragOffset);
                     saveDataObject.BonusHP = (short)((saveData[HPRedundancy2] * 5) - (saveDataObject.HPUp * 20) - 100);
 
                     int index = CustInvOffset;
@@ -516,7 +517,6 @@ namespace NaviDoctor
 
             if (saveDataObject.GameName != GameTitle.Title.MegaManBattleNetwork)
             {
-                saveData[BugfragOffset] = (byte)saveDataObject.BugFrags;
                 saveData[SubFullOffset] = (byte)saveDataObject.SubFullEnrg;
                 saveData[SubLocEnOffset] = (byte)saveDataObject.SubLocEnemy;
                 saveData[SubMiniOffset] = (byte)saveDataObject.SubMiniEnrg;
@@ -601,6 +601,8 @@ namespace NaviDoctor
                     Buffer.BlockCopy(BitConverter.GetBytes(saveDataObject.CurrHP), 0, saveData, HPRedundancy1, 2);
                     Buffer.BlockCopy(BitConverter.GetBytes(saveDataObject.MaxHP), 0, saveData, HPRedundancy2, 2);
 
+                    saveData[BugfragOffset] = (byte)saveDataObject.BugFrags;
+
                     for (int i = StyleOffset + 0x1; i <= StyleOffset + 0x19; i++) // Erase the currently saved styles
                     {
                         saveData[i] = 0;
@@ -662,6 +664,8 @@ namespace NaviDoctor
                     saveData[CShotPowerOffset] = saveDataObject.CShotPower;
                     saveData[LimitsOffset] = saveDataObject.MegaLimit;
                     saveData[LimitsOffset + 1] = saveDataObject.GigaLimit;
+
+                    Buffer.BlockCopy(BitConverter.GetBytes(saveDataObject.BugFrags), 0, saveData, BugfragOffset, 2);
 
                     int mapIndex = CustInvOffset;
                     Dictionary<int, int> indexMap = new Dictionary<int, int>()

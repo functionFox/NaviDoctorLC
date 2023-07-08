@@ -303,7 +303,7 @@ namespace NaviDoctor
                 }
             }
 
-            dataView.RowFilter = "Code <> 'None'";
+            dataView.RowFilter = "Code <> 'None' AND Code <> '+'";
 
             dgvPack.DataSource = dataView;
 
@@ -504,12 +504,13 @@ namespace NaviDoctor
                                 }
                             case 1:
                                 {
-                                    // RemoveChip(dgvFolder2, saveData.Folder2Data); Can't edit Xtra Folder
+                                    RemoveChip(dgvFolder2, saveData.Folder3Data); 
                                     break;
                                 }
                             case 2:
                                 {
-                                    RemoveChip(dgvFolder3, saveData.Folder3Data);
+                                    MessageBox.Show("Unable to edit the Xtra Folder");
+                                    // RemoveChip(dgvFolder3, saveData.Folder2Data); // Can't edit Xtra Folder
                                     break;
                                 }
                             default:
@@ -558,10 +559,24 @@ namespace NaviDoctor
 
         // check the quantity of a chip ID and code in the Folder
         private int GetChipQuantityInFolder(int chipID, string chipCode)
-        { 
-            if (chipCode != "*") return saveData.FolderData.Count(data => data.Item1 == chipID && data.Item2 == (byte)(chipCode[0] - 'A'));
-            return saveData.FolderData.Count(data => data.Item1 == chipID && data.Item2 == 26);
+        {
+            switch (saveData.GameName)
+            {
+                case GameTitle.Title.MegaManBattleNetwork:
+                    if (chipCode != "*") return saveData.FolderData.Count(data => data.Item1 == chipID && data.Item2 == (byte)(chipCode[0] - 'A'));
+                    return saveData.FolderData.Count(data => data.Item1 == chipID && data.Item2 == 26);
+                case GameTitle.Title.MegaManBattleNetwork2:
+                    if (chipCode != "*") return saveData.FolderData.Count(data => data.Item1 == chipID && data.Item2 == (byte)(chipCode[0] - 'A')) + saveData.Folder2Data.Count(data => data.Item1 == chipID && data.Item2 == (byte)(chipCode[0] - 'A')) + saveData.Folder3Data.Count(data => data.Item1 == chipID && data.Item2 == (byte)(chipCode[0] - 'A'));
+                    return saveData.FolderData.Count(data => data.Item1 == chipID && data.Item2 == 26) + saveData.Folder2Data.Count(data => data.Item1 == chipID && data.Item2 == 26) + saveData.Folder3Data.Count(data => data.Item1 == chipID && data.Item2 == 26);
+                case GameTitle.Title.MegaManBattleNetwork3White:
+                case GameTitle.Title.MegaManBattleNetwork3Blue:
+                    if (chipCode != "*") return saveData.FolderData.Count(data => data.Item1 == chipID && data.Item2 == (byte)(chipCode[0] - 'A')) + saveData.Folder3Data.Count(data => data.Item1 == chipID && data.Item2 == (byte)(chipCode[0] - 'A'));
+                    return saveData.FolderData.Count(data => data.Item1 == chipID && data.Item2 == 26) + saveData.Folder3Data.Count(data => data.Item1 == chipID && data.Item2 == 26);
+                default:
+                    return 0;
+            }
         }
+
         private void btnAddChip_Click(object sender, EventArgs e)
         {
             List<Tuple<int, int>> folderData;
@@ -584,9 +599,11 @@ namespace NaviDoctor
             {
                 case 1:
                     folderData = saveData.Folder2Data;
+                    if (saveData.GameName > GameTitle.Title.MegaManBattleNetwork3White) folderData = saveData.Folder3Data;
                     break;
                 case 2:
                     folderData = saveData.Folder3Data;
+                    if (saveData.GameName > GameTitle.Title.MegaManBattleNetwork3White) folderData = saveData.Folder2Data;
                     break;
                 default:
                     folderData = saveData.FolderData;
@@ -675,24 +692,21 @@ namespace NaviDoctor
                 {
                     MessageBox.Show($"The limit for Navi Chips cannot exceed {maxNaviChips}.");
                 }
-                else if (isNaviChip && saveData.GameName >= GameTitle.Title.MegaManBattleNetwork3White)
+                else if (isNaviChip && saveData.GameName >= GameTitle.Title.MegaManBattleNetwork3White && isMegaChip && currentChipCopies < 1 && currentNaviChips >= megaLimit)
                 {
-                    if (isMegaChip && currentChipCopies < 1 && currentNaviChips >= megaLimit)
-                    {
-                        MessageBox.Show($"The limit for Mega Chips cannot exceed {megaLimit}.");
-                    }
-                    else if (isMegaChip && currentChipCopies >= 1)
-                    {
-                        MessageBox.Show($"You may only have one copy of {chipName} in this folder.");
-                    }
-                    else if (isGigaChip && currentChipCopies < 1 && currentGigaChips >= gigaLimit)
-                    {
-                        MessageBox.Show($"The limit for Giga Chips cannot exceed {gigaLimit}.");
-                    }
-                    else if (isGigaChip && currentChipCopies >= 1)
-                    {
-                        MessageBox.Show($"You may only have one copy of {chipName} in this folder.");
-                    }
+                    MessageBox.Show($"The limit for Mega Chips cannot exceed {megaLimit}.");
+                }
+                else if (isNaviChip && saveData.GameName >= GameTitle.Title.MegaManBattleNetwork3White && isMegaChip && currentChipCopies >= 1)
+                {
+                    MessageBox.Show($"You may only have one copy of {chipName} in this folder.");
+                }
+                else if (isNaviChip && saveData.GameName >= GameTitle.Title.MegaManBattleNetwork3White && isGigaChip && currentChipCopies < 1 && currentGigaChips >= gigaLimit)
+                {
+                    MessageBox.Show($"The limit for Giga Chips cannot exceed {gigaLimit}.");
+                }
+                else if (isNaviChip && saveData.GameName >= GameTitle.Title.MegaManBattleNetwork3White && isGigaChip && currentChipCopies >= 1)
+                {
+                    MessageBox.Show($"You may only have one copy of {chipName} in this folder.");
                 }
                 else if (folderData.Count >= maxTotalChipsInFolder)
                 {
@@ -840,7 +854,7 @@ namespace NaviDoctor
                     break;
                 case GameTitle.Title.MegaManBattleNetwork3White:
                 case GameTitle.Title.MegaManBattleNetwork3Blue:
-                    LoadStyles(saveData); // Uncomment when styles are implemented properly
+                    LoadStyles(saveData);
                     nudBugFrag.Value = saveData.BugFrags;
                     nudRegMem.Value = saveData.RegMem;
                     nudSubChipMax.Value = saveData.SubChipMax;
@@ -921,6 +935,10 @@ namespace NaviDoctor
                 saveData.RapidPower = (byte)(rapidStat.Value - 1);
                 saveData.ChargePower = (byte)(chargeStat.Value - 1);
             }
+            if (saveData.GameName == GameTitle.Title.MegaManBattleNetwork2)
+            {
+                nudBugFrag.Value = Math.Min(nudBugFrag.Value, 32);
+            }
             saveData.Zenny = (int)zennyBox.Value;
             saveData.SteamID = (int)steamID.Value;
             PackageChips();
@@ -932,10 +950,10 @@ namespace NaviDoctor
                     break;
 
                 case GameTitle.Title.MegaManBattleNetwork2:
-                //case GameTitle.Title.MegaManBattleNetwork3White: TODO: Uncomment when ready to enable saving
-                //case GameTitle.Title.MegaManBattleNetwork3Blue:
+                case GameTitle.Title.MegaManBattleNetwork3White:
+                case GameTitle.Title.MegaManBattleNetwork3Blue:
                     UpdateStyles(saveData);
-                    saveData.BugFrags = (byte)nudBugFrag.Value; 
+                    saveData.BugFrags = (int)nudBugFrag.Value; 
                     saveData.RegMem = (byte)nudRegMem.Value;
                     saveData.SubChipMax = (byte)nudSubChipMax.Value;
                     saveData.SubMiniEnrg = (byte)nudMiniEnrg.Value;
