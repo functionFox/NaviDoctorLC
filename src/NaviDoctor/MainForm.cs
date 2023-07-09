@@ -18,7 +18,7 @@ namespace NaviDoctor
         private SaveDataObject saveData;
         private List<Style> _styles;
         private SaveParse _openFile;
-
+        private int loadSpinCount = 0;
         public MainForm()
         {
             InitializeComponent();
@@ -167,6 +167,24 @@ namespace NaviDoctor
                 form.ShowDialog();
             }
         }
+
+        private void ShowLoading()
+        {
+            pbx_Loading.Visible = true;
+            lbl_Loading.Visible = true;
+            loadSpinCount++;
+        }
+
+        private void HideLoading()
+        {
+            loadSpinCount--;
+            if (loadSpinCount == 0)
+            {
+                pbx_Loading.Visible = false;
+                lbl_Loading.Visible = false;
+            }
+        }
+
         private void GenerateLibraryWindow(SaveDataObject saveData, bool paLib = false)
         {
             LibraryWindow libraryWindow = new LibraryWindow();
@@ -1598,7 +1616,7 @@ namespace NaviDoctor
                 case GameTitle.Title.MegaManBattleNetwork3White:
                     {
                         _tempStyles = Style.BN3;
-                        switch (saveData.Style1.ToString())
+                        switch(saveData.EqStyle.ToString())
                         {
                             case "0": //Normal
                                 break;
@@ -1639,7 +1657,7 @@ namespace NaviDoctor
                                 _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecTeam).Version = saveData.Style2;
                                 break;
                             case "26": //HeatTeam
-                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatTeam).Equip = true; 
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatTeam).Equip = true;
                                 _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatTeam).Version = saveData.Style2;
                                 break;
                             case "27": //AquaTeam
@@ -1712,6 +1730,124 @@ namespace NaviDoctor
                                 break;
                             case "60": //WoodBug
                                 _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodBug).Equip = true;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodBug).Version = saveData.Style2;
+                                break;
+                        }
+                        
+                        switch (saveData.Style1.ToString())
+                        {
+                            case "0": //Normal
+                                break;
+                            case "9": //ElecGuts
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecGuts).Add = true;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecGuts).Version = saveData.Style2;
+                                break;
+                            case "10": //HeatGuts
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatGuts).Add = true;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatGuts).Version = saveData.Style2;
+                                break;
+                            case "11": //AquaGuts
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaGuts).Add = true;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaGuts).Version = saveData.Style2;
+                                break;
+                            case "12": //WoodGuts
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodGuts).Add = true;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodGuts).Version = saveData.Style2;
+                                break;
+                            case "17": //ElecCust
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecCust).Add = true;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecCust).Version = saveData.Style2;
+                                break;
+                            case "18": //HeatCust
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatCust).Add = true;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatCust).Version = saveData.Style2;
+                                break;
+                            case "19": //AquaCust
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaCust).Add = true;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaCust).Version = saveData.Style2;
+                                break;
+                            case "20": //WoodCust
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodCust).Add = true;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodCust).Version = saveData.Style2;
+                                break;
+                            case "25": //ElecTeam
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecTeam).Add = true;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecTeam).Version = saveData.Style2;
+                                break;
+                            case "26": //HeatTeam
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatTeam).Add = true; 
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatTeam).Version = saveData.Style2;
+                                break;
+                            case "27": //AquaTeam
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaTeam).Add = true;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaTeam).Version = saveData.Style2;
+                                break;
+                            case "28": //WoodTeam
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodTeam).Add = true;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodTeam).Version = saveData.Style2;
+                                break;
+                            case "33": //ElecShld
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecShield).Add = true;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecShield).Version = saveData.Style2;
+                                break;
+                            case "34": //HeatShld
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatShield).Add = true;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatShield).Version = saveData.Style2;
+                                break;
+                            case "35": //AquaShld
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaShield).Add = true;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaShield).Version = saveData.Style2;
+                                break;
+                            case "36": //WoodShld
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodShield).Add = true;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodShield).Version = saveData.Style2;
+                                break;
+                            case "41": //ElecGround
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecGround).Add = true;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecGround).Version = saveData.Style2;
+                                break;
+                            case "42": //HeatGround
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatGround).Add = true;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatGround).Version = saveData.Style2;
+                                break;
+                            case "43": //AquaGround
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaGround).Add = true;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaGround).Version = saveData.Style2;
+                                break;
+                            case "44": //WoodGround
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodGround).Add = true;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodGround).Version = saveData.Style2;
+                                break;
+                            case "49": //ElecShdw
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecShadow).Add = true;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecShadow).Version = saveData.Style2;
+                                break;
+                            case "50": //HeatShdw
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatShadow).Add = true;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatShadow).Version = saveData.Style2;
+                                break;
+                            case "51": //AquaShdw
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaShadow).Add = true;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaShadow).Version = saveData.Style2;
+                                break;
+                            case "52": //WoodShdw
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodShadow).Add = true;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodShadow).Version = saveData.Style2;
+                                break;
+                            case "57": //ElecBug
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecBug).Add = true;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecBug).Version = saveData.Style2;
+                                break;
+                            case "58": //HeatBug
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatBug).Add = true;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatBug).Version = saveData.Style2;
+                                break;
+                            case "59": //AquaBug
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaBug).Add = true;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaBug).Version = saveData.Style2;
+                                break;
+                            case "60": //WoodBug
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodBug).Add = true;
                                 _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodBug).Version = saveData.Style2;
                                 break;
                         }
@@ -2377,6 +2513,10 @@ namespace NaviDoctor
                                         {
                                             saveData.Style1 = 0;
                                         }
+                                        else if (style.Add.GetValueOrDefault(false))
+                                        {
+                                            saveData.EqStyle = 0;
+                                        }
                                         break;
                                     }
                                 case Style.Value.AquaGuts:
@@ -2384,6 +2524,22 @@ namespace NaviDoctor
                                         if (style.Equip.GetValueOrDefault(false))
                                         {
                                             saveData.Style1 = 11;
+                                            switch (style.Version.GetValueOrDefault(1))
+                                            {
+                                                case 1:
+                                                    saveData.Style2 = 0;
+                                                    break;
+                                                case 2:
+                                                    saveData.Style2 = 1;
+                                                    break;
+                                                case 3:
+                                                    saveData.Style2 = 2;
+                                                    break;
+                                            }
+                                        }
+                                        else if (style.Add.GetValueOrDefault(false))
+                                        {
+                                            saveData.EqStyle = 11;
                                             switch (style.Version.GetValueOrDefault(1))
                                             {
                                                 case 1:
@@ -2417,6 +2573,22 @@ namespace NaviDoctor
                                                     break;
                                             }
                                         }
+                                        else if (style.Add.GetValueOrDefault(false))
+                                        {
+                                            saveData.EqStyle = 12;
+                                            switch (style.Version.GetValueOrDefault(1))
+                                            {
+                                                case 1:
+                                                    saveData.Style2 = 0;
+                                                    break;
+                                                case 2:
+                                                    saveData.Style2 = 1;
+                                                    break;
+                                                case 3:
+                                                    saveData.Style2 = 2;
+                                                    break;
+                                            }
+                                        }
                                         break;
                                     }
                                 case Style.Value.HeatGuts:
@@ -2424,6 +2596,22 @@ namespace NaviDoctor
                                         if (style.Equip.GetValueOrDefault(false))
                                         {
                                             saveData.Style1 = 10;
+                                            switch (style.Version.GetValueOrDefault(1))
+                                            {
+                                                case 1:
+                                                    saveData.Style2 = 0;
+                                                    break;
+                                                case 2:
+                                                    saveData.Style2 = 1;
+                                                    break;
+                                                case 3:
+                                                    saveData.Style2 = 2;
+                                                    break;
+                                            }
+                                        }
+                                        else if (style.Add.GetValueOrDefault(false))
+                                        {
+                                            saveData.EqStyle = 10;
                                             switch (style.Version.GetValueOrDefault(1))
                                             {
                                                 case 1:
@@ -2457,6 +2645,22 @@ namespace NaviDoctor
                                                     break;
                                             }
                                         }
+                                        else if (style.Add.GetValueOrDefault(false))
+                                        {
+                                            saveData.EqStyle = 9;
+                                            switch (style.Version.GetValueOrDefault(1))
+                                            {
+                                                case 1:
+                                                    saveData.Style2 = 0;
+                                                    break;
+                                                case 2:
+                                                    saveData.Style2 = 1;
+                                                    break;
+                                                case 3:
+                                                    saveData.Style2 = 2;
+                                                    break;
+                                            }
+                                        }
                                         break;
                                     }
                                 case Style.Value.AquaCust:
@@ -2464,6 +2668,22 @@ namespace NaviDoctor
                                         if (style.Equip.GetValueOrDefault(false))
                                         {
                                             saveData.Style1 = 19;
+                                            switch (style.Version.GetValueOrDefault(1))
+                                            {
+                                                case 1:
+                                                    saveData.Style2 = 0;
+                                                    break;
+                                                case 2:
+                                                    saveData.Style2 = 1;
+                                                    break;
+                                                case 3:
+                                                    saveData.Style2 = 2;
+                                                    break;
+                                            }
+                                        }
+                                        else if (style.Add.GetValueOrDefault(false))
+                                        {
+                                            saveData.EqStyle = 19;
                                             switch (style.Version.GetValueOrDefault(1))
                                             {
                                                 case 1:
@@ -2497,6 +2717,22 @@ namespace NaviDoctor
                                                     break;
                                             }
                                         }
+                                        else if (style.Add.GetValueOrDefault(false))
+                                        {
+                                            saveData.EqStyle = 20;
+                                            switch (style.Version.GetValueOrDefault(1))
+                                            {
+                                                case 1:
+                                                    saveData.Style2 = 0;
+                                                    break;
+                                                case 2:
+                                                    saveData.Style2 = 1;
+                                                    break;
+                                                case 3:
+                                                    saveData.Style2 = 2;
+                                                    break;
+                                            }
+                                        }
                                         break;
                                     }
                                 case Style.Value.HeatCust:
@@ -2504,6 +2740,22 @@ namespace NaviDoctor
                                         if (style.Equip.GetValueOrDefault(false))
                                         {
                                             saveData.Style1 = 18;
+                                            switch (style.Version.GetValueOrDefault(1))
+                                            {
+                                                case 1:
+                                                    saveData.Style2 = 0;
+                                                    break;
+                                                case 2:
+                                                    saveData.Style2 = 1;
+                                                    break;
+                                                case 3:
+                                                    saveData.Style2 = 2;
+                                                    break;
+                                            }
+                                        }
+                                        else if (style.Add.GetValueOrDefault(false))
+                                        {
+                                            saveData.EqStyle = 18;
                                             switch (style.Version.GetValueOrDefault(1))
                                             {
                                                 case 1:
@@ -2537,6 +2789,22 @@ namespace NaviDoctor
                                                     break;
                                             }
                                         }
+                                        else if (style.Add.GetValueOrDefault(false))
+                                        {
+                                            saveData.EqStyle = 17;
+                                            switch (style.Version.GetValueOrDefault(1))
+                                            {
+                                                case 1:
+                                                    saveData.Style2 = 0;
+                                                    break;
+                                                case 2:
+                                                    saveData.Style2 = 1;
+                                                    break;
+                                                case 3:
+                                                    saveData.Style2 = 2;
+                                                    break;
+                                            }
+                                        }
                                         break;
                                     }
                                 case Style.Value.AquaTeam:
@@ -2544,6 +2812,22 @@ namespace NaviDoctor
                                         if (style.Equip.GetValueOrDefault(false))
                                         {
                                             saveData.Style1 = 27;
+                                            switch (style.Version.GetValueOrDefault(1))
+                                            {
+                                                case 1:
+                                                    saveData.Style2 = 0;
+                                                    break;
+                                                case 2:
+                                                    saveData.Style2 = 1;
+                                                    break;
+                                                case 3:
+                                                    saveData.Style2 = 2;
+                                                    break;
+                                            }
+                                        }
+                                        else if (style.Add.GetValueOrDefault(false))
+                                        {
+                                            saveData.EqStyle = 27;
                                             switch (style.Version.GetValueOrDefault(1))
                                             {
                                                 case 1:
@@ -2577,6 +2861,22 @@ namespace NaviDoctor
                                                     break;
                                             }
                                         }
+                                        else if (style.Add.GetValueOrDefault(false))
+                                        {
+                                            saveData.EqStyle = 28;
+                                            switch (style.Version.GetValueOrDefault(1))
+                                            {
+                                                case 1:
+                                                    saveData.Style2 = 0;
+                                                    break;
+                                                case 2:
+                                                    saveData.Style2 = 1;
+                                                    break;
+                                                case 3:
+                                                    saveData.Style2 = 2;
+                                                    break;
+                                            }
+                                        }
                                         break;
                                     }
                                 case Style.Value.HeatTeam:
@@ -2584,6 +2884,22 @@ namespace NaviDoctor
                                         if (style.Equip.GetValueOrDefault(false))
                                         {
                                             saveData.Style1 = 26;
+                                            switch (style.Version.GetValueOrDefault(1))
+                                            {
+                                                case 1:
+                                                    saveData.Style2 = 0;
+                                                    break;
+                                                case 2:
+                                                    saveData.Style2 = 1;
+                                                    break;
+                                                case 3:
+                                                    saveData.Style2 = 2;
+                                                    break;
+                                            }
+                                        }
+                                        else if (style.Add.GetValueOrDefault(false))
+                                        {
+                                            saveData.EqStyle = 26;
                                             switch (style.Version.GetValueOrDefault(1))
                                             {
                                                 case 1:
@@ -2617,6 +2933,22 @@ namespace NaviDoctor
                                                     break;
                                             }
                                         }
+                                        else if (style.Add.GetValueOrDefault(false))
+                                        {
+                                            saveData.EqStyle = 25;
+                                            switch (style.Version.GetValueOrDefault(1))
+                                            {
+                                                case 1:
+                                                    saveData.Style2 = 0;
+                                                    break;
+                                                case 2:
+                                                    saveData.Style2 = 1;
+                                                    break;
+                                                case 3:
+                                                    saveData.Style2 = 2;
+                                                    break;
+                                            }
+                                        }
                                         break;
                                     }
                                 case Style.Value.AquaShield:
@@ -2624,6 +2956,22 @@ namespace NaviDoctor
                                         if (style.Equip.GetValueOrDefault(false))
                                         {
                                             saveData.Style1 = 35;
+                                            switch (style.Version.GetValueOrDefault(1))
+                                            {
+                                                case 1:
+                                                    saveData.Style2 = 0;
+                                                    break;
+                                                case 2:
+                                                    saveData.Style2 = 1;
+                                                    break;
+                                                case 3:
+                                                    saveData.Style2 = 2;
+                                                    break;
+                                            }
+                                        }
+                                        else if (style.Add.GetValueOrDefault(false))
+                                        {
+                                            saveData.EqStyle = 35;
                                             switch (style.Version.GetValueOrDefault(1))
                                             {
                                                 case 1:
@@ -2657,6 +3005,22 @@ namespace NaviDoctor
                                                     break;
                                             }
                                         }
+                                        else if (style.Add.GetValueOrDefault(false))
+                                        {
+                                            saveData.EqStyle = 36;
+                                            switch (style.Version.GetValueOrDefault(1))
+                                            {
+                                                case 1:
+                                                    saveData.Style2 = 0;
+                                                    break;
+                                                case 2:
+                                                    saveData.Style2 = 1;
+                                                    break;
+                                                case 3:
+                                                    saveData.Style2 = 2;
+                                                    break;
+                                            }
+                                        }
                                         break;
                                     }
                                 case Style.Value.HeatShield:
@@ -2664,6 +3028,22 @@ namespace NaviDoctor
                                         if (style.Equip.GetValueOrDefault(false))
                                         {
                                             saveData.Style1 = 34;
+                                            switch (style.Version.GetValueOrDefault(1))
+                                            {
+                                                case 1:
+                                                    saveData.Style2 = 0;
+                                                    break;
+                                                case 2:
+                                                    saveData.Style2 = 1;
+                                                    break;
+                                                case 3:
+                                                    saveData.Style2 = 2;
+                                                    break;
+                                            }
+                                        }
+                                        else if (style.Add.GetValueOrDefault(false))
+                                        {
+                                            saveData.EqStyle = 34;
                                             switch (style.Version.GetValueOrDefault(1))
                                             {
                                                 case 1:
@@ -2697,6 +3077,22 @@ namespace NaviDoctor
                                                     break;
                                             }
                                         }
+                                        else if (style.Add.GetValueOrDefault(false))
+                                        {
+                                            saveData.EqStyle = 33;
+                                            switch (style.Version.GetValueOrDefault(1))
+                                            {
+                                                case 1:
+                                                    saveData.Style2 = 0;
+                                                    break;
+                                                case 2:
+                                                    saveData.Style2 = 1;
+                                                    break;
+                                                case 3:
+                                                    saveData.Style2 = 2;
+                                                    break;
+                                            }
+                                        }
                                         break;
                                     }
                                 case Style.Value.AquaGround:
@@ -2704,6 +3100,22 @@ namespace NaviDoctor
                                         if (style.Equip.GetValueOrDefault(false))
                                         {
                                             saveData.Style1 = 43;
+                                            switch (style.Version.GetValueOrDefault(1))
+                                            {
+                                                case 1:
+                                                    saveData.Style2 = 0;
+                                                    break;
+                                                case 2:
+                                                    saveData.Style2 = 1;
+                                                    break;
+                                                case 3:
+                                                    saveData.Style2 = 2;
+                                                    break;
+                                            }
+                                        }
+                                        else if (style.Add.GetValueOrDefault(false))
+                                        {
+                                            saveData.EqStyle = 43;
                                             switch (style.Version.GetValueOrDefault(1))
                                             {
                                                 case 1:
@@ -2737,6 +3149,22 @@ namespace NaviDoctor
                                                     break;
                                             }
                                         }
+                                        else if (style.Add.GetValueOrDefault(false))
+                                        {
+                                            saveData.EqStyle = 44;
+                                            switch (style.Version.GetValueOrDefault(1))
+                                            {
+                                                case 1:
+                                                    saveData.Style2 = 0;
+                                                    break;
+                                                case 2:
+                                                    saveData.Style2 = 1;
+                                                    break;
+                                                case 3:
+                                                    saveData.Style2 = 2;
+                                                    break;
+                                            }
+                                        }
                                         break;
                                     }
                                 case Style.Value.HeatGround:
@@ -2744,6 +3172,22 @@ namespace NaviDoctor
                                         if (style.Equip.GetValueOrDefault(false))
                                         {
                                             saveData.Style1 = 42;
+                                            switch (style.Version.GetValueOrDefault(1))
+                                            {
+                                                case 1:
+                                                    saveData.Style2 = 0;
+                                                    break;
+                                                case 2:
+                                                    saveData.Style2 = 1;
+                                                    break;
+                                                case 3:
+                                                    saveData.Style2 = 2;
+                                                    break;
+                                            }
+                                        }
+                                        else if (style.Add.GetValueOrDefault(false))
+                                        {
+                                            saveData.EqStyle = 42;
                                             switch (style.Version.GetValueOrDefault(1))
                                             {
                                                 case 1:
@@ -2777,6 +3221,22 @@ namespace NaviDoctor
                                                     break;
                                             }
                                         }
+                                        else if (style.Add.GetValueOrDefault(false))
+                                        {
+                                            saveData.EqStyle = 41;
+                                            switch (style.Version.GetValueOrDefault(1))
+                                            {
+                                                case 1:
+                                                    saveData.Style2 = 0;
+                                                    break;
+                                                case 2:
+                                                    saveData.Style2 = 1;
+                                                    break;
+                                                case 3:
+                                                    saveData.Style2 = 2;
+                                                    break;
+                                            }
+                                        }
                                         break;
                                     }
                                 case Style.Value.AquaShadow:
@@ -2784,6 +3244,22 @@ namespace NaviDoctor
                                         if (style.Equip.GetValueOrDefault(false))
                                         {
                                             saveData.Style1 = 51;
+                                            switch (style.Version.GetValueOrDefault(1))
+                                            {
+                                                case 1:
+                                                    saveData.Style2 = 0;
+                                                    break;
+                                                case 2:
+                                                    saveData.Style2 = 1;
+                                                    break;
+                                                case 3:
+                                                    saveData.Style2 = 2;
+                                                    break;
+                                            }
+                                        }
+                                        else if (style.Add.GetValueOrDefault(false))
+                                        {
+                                            saveData.EqStyle = 51;
                                             switch (style.Version.GetValueOrDefault(1))
                                             {
                                                 case 1:
@@ -2817,6 +3293,22 @@ namespace NaviDoctor
                                                     break;
                                             }
                                         }
+                                        else if (style.Add.GetValueOrDefault(false))
+                                        {
+                                            saveData.EqStyle = 52;
+                                            switch (style.Version.GetValueOrDefault(1))
+                                            {
+                                                case 1:
+                                                    saveData.Style2 = 0;
+                                                    break;
+                                                case 2:
+                                                    saveData.Style2 = 1;
+                                                    break;
+                                                case 3:
+                                                    saveData.Style2 = 2;
+                                                    break;
+                                            }
+                                        }
                                         break;
                                     }
                                 case Style.Value.HeatShadow:
@@ -2824,6 +3316,22 @@ namespace NaviDoctor
                                         if (style.Equip.GetValueOrDefault(false))
                                         {
                                             saveData.Style1 = 50;
+                                            switch (style.Version.GetValueOrDefault(1))
+                                            {
+                                                case 1:
+                                                    saveData.Style2 = 0;
+                                                    break;
+                                                case 2:
+                                                    saveData.Style2 = 1;
+                                                    break;
+                                                case 3:
+                                                    saveData.Style2 = 2;
+                                                    break;
+                                            }
+                                        }
+                                        else if (style.Add.GetValueOrDefault(false))
+                                        {
+                                            saveData.EqStyle = 50;
                                             switch (style.Version.GetValueOrDefault(1))
                                             {
                                                 case 1:
@@ -2857,6 +3365,22 @@ namespace NaviDoctor
                                                     break;
                                             }
                                         }
+                                        else if (style.Add.GetValueOrDefault(false))
+                                        {
+                                            saveData.EqStyle = 49;
+                                            switch (style.Version.GetValueOrDefault(1))
+                                            {
+                                                case 1:
+                                                    saveData.Style2 = 0;
+                                                    break;
+                                                case 2:
+                                                    saveData.Style2 = 1;
+                                                    break;
+                                                case 3:
+                                                    saveData.Style2 = 2;
+                                                    break;
+                                            }
+                                        }
                                         break;
                                     }
                                 case Style.Value.AquaBug:
@@ -2864,6 +3388,22 @@ namespace NaviDoctor
                                         if (style.Equip.GetValueOrDefault(false))
                                         {
                                             saveData.Style1 = 59;
+                                            switch (style.Version.GetValueOrDefault(1))
+                                            {
+                                                case 1:
+                                                    saveData.Style2 = 0;
+                                                    break;
+                                                case 2:
+                                                    saveData.Style2 = 1;
+                                                    break;
+                                                case 3:
+                                                    saveData.Style2 = 2;
+                                                    break;
+                                            }
+                                        }
+                                        else if (style.Add.GetValueOrDefault(false))
+                                        {
+                                            saveData.EqStyle = 59;
                                             switch (style.Version.GetValueOrDefault(1))
                                             {
                                                 case 1:
@@ -2897,6 +3437,22 @@ namespace NaviDoctor
                                                     break;
                                             }
                                         }
+                                        else if (style.Add.GetValueOrDefault(false))
+                                        {
+                                            saveData.EqStyle = 60;
+                                            switch (style.Version.GetValueOrDefault(1))
+                                            {
+                                                case 1:
+                                                    saveData.Style2 = 0;
+                                                    break;
+                                                case 2:
+                                                    saveData.Style2 = 1;
+                                                    break;
+                                                case 3:
+                                                    saveData.Style2 = 2;
+                                                    break;
+                                            }
+                                        }
                                         break;
                                     }
                                 case Style.Value.HeatBug:
@@ -2904,6 +3460,22 @@ namespace NaviDoctor
                                         if (style.Equip.GetValueOrDefault(false))
                                         {
                                             saveData.Style1 = 58;
+                                            switch (style.Version.GetValueOrDefault(1))
+                                            {
+                                                case 1:
+                                                    saveData.Style2 = 0;
+                                                    break;
+                                                case 2:
+                                                    saveData.Style2 = 1;
+                                                    break;
+                                                case 3:
+                                                    saveData.Style2 = 2;
+                                                    break;
+                                            }
+                                        }
+                                        else if (style.Add.GetValueOrDefault(false))
+                                        {
+                                            saveData.EqStyle = 58;
                                             switch (style.Version.GetValueOrDefault(1))
                                             {
                                                 case 1:
@@ -2937,6 +3509,22 @@ namespace NaviDoctor
                                                     break;
                                             }
                                         }
+                                        else if (style.Add.GetValueOrDefault(false))
+                                        {
+                                            saveData.EqStyle = 57;
+                                            switch (style.Version.GetValueOrDefault(1))
+                                            {
+                                                case 1:
+                                                    saveData.Style2 = 0;
+                                                    break;
+                                                case 2:
+                                                    saveData.Style2 = 1;
+                                                    break;
+                                                case 3:
+                                                    saveData.Style2 = 2;
+                                                    break;
+                                            }
+                                        }
                                         break;
                                     }
                                 default:
@@ -2950,11 +3538,20 @@ namespace NaviDoctor
             }
         }
 
-        private void btnSetPackQuantity_Click(object sender, EventArgs e)
+        private async void btnSetPackQuantity_Click(object sender, EventArgs e)
+        {
+            ShowLoading();
+            dgvPack.Enabled = false;
+            await Task.Run(() => UpdatePackQty());
+            dgvPack.Enabled = true;
+            HideLoading();
+        }
+
+        private void UpdatePackQty()
         {
             int packQuantity = (int)nudPackQuantity.Value;
 
-            foreach(DataGridViewRow chip in dgvPack.Rows)
+            foreach (DataGridViewRow chip in dgvPack.Rows)
             {
                 if ((int)chip.Cells[3].Value < packQuantity)
                 {

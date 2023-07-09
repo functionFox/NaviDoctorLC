@@ -169,6 +169,7 @@
   <ItemGroup>
     <Content Include="images\checkmark.png" />
     <Content Include="images\icon.ico" />
+    <Content Include="images\progspeen.gif" />
     <None Include="Resources\icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -15,6 +15,7 @@ namespace NaviDoctor
     public partial class StyleLoader : Form
     {
         private const int MAX_STYLE_BN2 = 2;
+        private const int MAX_STYLE_BN3 = 1;
         private int currentAddCount = 0;
         private GameTitle.Title _currentGame;
         private Style.Value _currentEquipStyle;
@@ -62,10 +63,6 @@ namespace NaviDoctor
                 }
                 styleSelect.EquipStyleChecked += (s, e) => EquipCheck(styleSelect);
                 styleSelect.AddStyleChecked += (s, e) => AddCheck();
-                if (_currentGame == GameTitle.Title.MegaManBattleNetwork3Blue || _currentGame == GameTitle.Title.MegaManBattleNetwork3White)
-                {
-                    styleSelect.ToggleAdd(false);
-                }
                 flpStyleChange.Controls.Add(styleSelect);
             }
         }
@@ -100,6 +97,15 @@ namespace NaviDoctor
                         style.AddStyle = false;
                         return;
                     } 
+                }                
+                else if (_currentGame == GameTitle.Title.MegaManBattleNetwork3White || _currentGame == GameTitle.Title.MegaManBattleNetwork3Blue)
+                {
+                    if (currentAddCount > MAX_STYLE_BN3)
+                    {
+                        MessageBox.Show($"You can only select {MAX_STYLE_BN3} styles to add.", "Error", MessageBoxButtons.OK);
+                        style.AddStyle = false;
+                        return;
+                    }
                 }
             }
         }
