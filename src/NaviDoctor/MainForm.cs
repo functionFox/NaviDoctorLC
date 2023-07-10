@@ -890,7 +890,7 @@ namespace NaviDoctor
             UpdateFolderCount();
         }
 
-        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // Check if a save file has been loaded
             if (saveData == null)
@@ -2511,1019 +2511,707 @@ namespace NaviDoctor
                                     {
                                         if (style.Equip.GetValueOrDefault(false))
                                         {
-                                            saveData.Style1 = 0;
-                                        }
-                                        else if (style.Add.GetValueOrDefault(false))
-                                        {
                                             saveData.EqStyle = 0;
                                         }
                                         break;
                                     }
                                 case Style.Value.AquaGuts:
                                     {
-                                        if (style.Equip.GetValueOrDefault(false))
+                                        if (style.Add.GetValueOrDefault(false))
                                         {
                                             saveData.Style1 = 11;
-                                            switch (style.Version.GetValueOrDefault(1))
-                                            {
-                                                case 1:
-                                                    saveData.Style2 = 0;
-                                                    break;
-                                                case 2:
-                                                    saveData.Style2 = 1;
-                                                    break;
-                                                case 3:
-                                                    saveData.Style2 = 2;
-                                                    break;
-                                            }
                                         }
-                                        else if (style.Add.GetValueOrDefault(false))
+                                        if (style.Equip.GetValueOrDefault(false))
                                         {
                                             saveData.EqStyle = 11;
-                                            switch (style.Version.GetValueOrDefault(1))
-                                            {
-                                                case 1:
-                                                    saveData.Style2 = 0;
-                                                    break;
-                                                case 2:
-                                                    saveData.Style2 = 1;
-                                                    break;
-                                                case 3:
-                                                    saveData.Style2 = 2;
-                                                    break;
-                                            }
+                                        }
+
+                                        switch (style.Version.GetValueOrDefault(1))
+                                        {
+                                            case 1:
+                                                saveData.Style2 = 0;
+                                                break;
+                                            case 2:
+                                                saveData.Style2 = 1;
+                                                break;
+                                            case 3:
+                                                saveData.Style2 = 2;
+                                                break;
                                         }
                                         break;
                                     }
                                 case Style.Value.WoodGuts:
                                     {
-                                        if (style.Equip.GetValueOrDefault(false))
+                                        if (style.Add.GetValueOrDefault(false))
                                         {
                                             saveData.Style1 = 12;
-                                            switch (style.Version.GetValueOrDefault(1))
-                                            {
-                                                case 1:
-                                                    saveData.Style2 = 0;
-                                                    break;
-                                                case 2:
-                                                    saveData.Style2 = 1;
-                                                    break;
-                                                case 3:
-                                                    saveData.Style2 = 2;
-                                                    break;
-                                            }
                                         }
-                                        else if (style.Add.GetValueOrDefault(false))
+                                        if (style.Equip.GetValueOrDefault(false))
                                         {
                                             saveData.EqStyle = 12;
-                                            switch (style.Version.GetValueOrDefault(1))
-                                            {
-                                                case 1:
-                                                    saveData.Style2 = 0;
-                                                    break;
-                                                case 2:
-                                                    saveData.Style2 = 1;
-                                                    break;
-                                                case 3:
-                                                    saveData.Style2 = 2;
-                                                    break;
-                                            }
+                                        }
+
+                                        switch (style.Version.GetValueOrDefault(1))
+                                        {
+                                            case 1:
+                                                saveData.Style2 = 0;
+                                                break;
+                                            case 2:
+                                                saveData.Style2 = 1;
+                                                break;
+                                            case 3:
+                                                saveData.Style2 = 2;
+                                                break;
                                         }
                                         break;
                                     }
                                 case Style.Value.HeatGuts:
                                     {
-                                        if (style.Equip.GetValueOrDefault(false))
+                                        if (style.Add.GetValueOrDefault(false))
                                         {
                                             saveData.Style1 = 10;
-                                            switch (style.Version.GetValueOrDefault(1))
-                                            {
-                                                case 1:
-                                                    saveData.Style2 = 0;
-                                                    break;
-                                                case 2:
-                                                    saveData.Style2 = 1;
-                                                    break;
-                                                case 3:
-                                                    saveData.Style2 = 2;
-                                                    break;
-                                            }
                                         }
-                                        else if (style.Add.GetValueOrDefault(false))
+                                        if (style.Equip.GetValueOrDefault(false))
                                         {
                                             saveData.EqStyle = 10;
-                                            switch (style.Version.GetValueOrDefault(1))
-                                            {
-                                                case 1:
-                                                    saveData.Style2 = 0;
-                                                    break;
-                                                case 2:
-                                                    saveData.Style2 = 1;
-                                                    break;
-                                                case 3:
-                                                    saveData.Style2 = 2;
-                                                    break;
-                                            }
+                                        }
+
+                                        switch (style.Version.GetValueOrDefault(1))
+                                        {
+                                            case 1:
+                                                saveData.Style2 = 0;
+                                                break;
+                                            case 2:
+                                                saveData.Style2 = 1;
+                                                break;
+                                            case 3:
+                                                saveData.Style2 = 2;
+                                                break;
                                         }
                                         break;
                                     }
                                 case Style.Value.ElecGuts:
                                     {
-                                        if (style.Equip.GetValueOrDefault(false))
+                                        if (style.Add.GetValueOrDefault(false))
                                         {
                                             saveData.Style1 = 9;
-                                            switch (style.Version.GetValueOrDefault(1))
-                                            {
-                                                case 1:
-                                                    saveData.Style2 = 0;
-                                                    break;
-                                                case 2:
-                                                    saveData.Style2 = 1;
-                                                    break;
-                                                case 3:
-                                                    saveData.Style2 = 2;
-                                                    break;
-                                            }
                                         }
-                                        else if (style.Add.GetValueOrDefault(false))
+                                        if (style.Equip.GetValueOrDefault(false))
                                         {
                                             saveData.EqStyle = 9;
-                                            switch (style.Version.GetValueOrDefault(1))
-                                            {
-                                                case 1:
-                                                    saveData.Style2 = 0;
-                                                    break;
-                                                case 2:
-                                                    saveData.Style2 = 1;
-                                                    break;
-                                                case 3:
-                                                    saveData.Style2 = 2;
-                                                    break;
-                                            }
+                                        }
+
+                                        switch (style.Version.GetValueOrDefault(1))
+                                        {
+                                            case 1:
+                                                saveData.Style2 = 0;
+                                                break;
+                                            case 2:
+                                                saveData.Style2 = 1;
+                                                break;
+                                            case 3:
+                                                saveData.Style2 = 2;
+                                                break;
                                         }
                                         break;
                                     }
                                 case Style.Value.AquaCust:
                                     {
-                                        if (style.Equip.GetValueOrDefault(false))
+                                        if (style.Add.GetValueOrDefault(false))
                                         {
                                             saveData.Style1 = 19;
-                                            switch (style.Version.GetValueOrDefault(1))
-                                            {
-                                                case 1:
-                                                    saveData.Style2 = 0;
-                                                    break;
-                                                case 2:
-                                                    saveData.Style2 = 1;
-                                                    break;
-                                                case 3:
-                                                    saveData.Style2 = 2;
-                                                    break;
-                                            }
                                         }
-                                        else if (style.Add.GetValueOrDefault(false))
+                                        if (style.Equip.GetValueOrDefault(false))
                                         {
                                             saveData.EqStyle = 19;
-                                            switch (style.Version.GetValueOrDefault(1))
-                                            {
-                                                case 1:
-                                                    saveData.Style2 = 0;
-                                                    break;
-                                                case 2:
-                                                    saveData.Style2 = 1;
-                                                    break;
-                                                case 3:
-                                                    saveData.Style2 = 2;
-                                                    break;
-                                            }
+                                        }
+
+                                        switch (style.Version.GetValueOrDefault(1))
+                                        {
+                                            case 1:
+                                                saveData.Style2 = 0;
+                                                break;
+                                            case 2:
+                                                saveData.Style2 = 1;
+                                                break;
+                                            case 3:
+                                                saveData.Style2 = 2;
+                                                break;
                                         }
                                         break;
                                     }
                                 case Style.Value.WoodCust:
                                     {
-                                        if (style.Equip.GetValueOrDefault(false))
+                                        if (style.Add.GetValueOrDefault(false))
                                         {
                                             saveData.Style1 = 20;
-                                            switch (style.Version.GetValueOrDefault(1))
-                                            {
-                                                case 1:
-                                                    saveData.Style2 = 0;
-                                                    break;
-                                                case 2:
-                                                    saveData.Style2 = 1;
-                                                    break;
-                                                case 3:
-                                                    saveData.Style2 = 2;
-                                                    break;
-                                            }
                                         }
-                                        else if (style.Add.GetValueOrDefault(false))
+                                        if (style.Equip.GetValueOrDefault(false))
                                         {
                                             saveData.EqStyle = 20;
-                                            switch (style.Version.GetValueOrDefault(1))
-                                            {
-                                                case 1:
-                                                    saveData.Style2 = 0;
-                                                    break;
-                                                case 2:
-                                                    saveData.Style2 = 1;
-                                                    break;
-                                                case 3:
-                                                    saveData.Style2 = 2;
-                                                    break;
-                                            }
+                                        }
+
+                                        switch (style.Version.GetValueOrDefault(1))
+                                        {
+                                            case 1:
+                                                saveData.Style2 = 0;
+                                                break;
+                                            case 2:
+                                                saveData.Style2 = 1;
+                                                break;
+                                            case 3:
+                                                saveData.Style2 = 2;
+                                                break;
                                         }
                                         break;
                                     }
                                 case Style.Value.HeatCust:
                                     {
-                                        if (style.Equip.GetValueOrDefault(false))
+                                        if (style.Add.GetValueOrDefault(false))
                                         {
                                             saveData.Style1 = 18;
-                                            switch (style.Version.GetValueOrDefault(1))
-                                            {
-                                                case 1:
-                                                    saveData.Style2 = 0;
-                                                    break;
-                                                case 2:
-                                                    saveData.Style2 = 1;
-                                                    break;
-                                                case 3:
-                                                    saveData.Style2 = 2;
-                                                    break;
-                                            }
                                         }
-                                        else if (style.Add.GetValueOrDefault(false))
+                                        if (style.Equip.GetValueOrDefault(false))
                                         {
                                             saveData.EqStyle = 18;
-                                            switch (style.Version.GetValueOrDefault(1))
-                                            {
-                                                case 1:
-                                                    saveData.Style2 = 0;
-                                                    break;
-                                                case 2:
-                                                    saveData.Style2 = 1;
-                                                    break;
-                                                case 3:
-                                                    saveData.Style2 = 2;
-                                                    break;
-                                            }
+                                        }
+
+                                        switch (style.Version.GetValueOrDefault(1))
+                                        {
+                                            case 1:
+                                                saveData.Style2 = 0;
+                                                break;
+                                            case 2:
+                                                saveData.Style2 = 1;
+                                                break;
+                                            case 3:
+                                                saveData.Style2 = 2;
+                                                break;
                                         }
                                         break;
                                     }
                                 case Style.Value.ElecCust:
                                     {
-                                        if (style.Equip.GetValueOrDefault(false))
+                                        if (style.Add.GetValueOrDefault(false))
                                         {
                                             saveData.Style1 = 17;
-                                            switch (style.Version.GetValueOrDefault(1))
-                                            {
-                                                case 1:
-                                                    saveData.Style2 = 0;
-                                                    break;
-                                                case 2:
-                                                    saveData.Style2 = 1;
-                                                    break;
-                                                case 3:
-                                                    saveData.Style2 = 2;
-                                                    break;
-                                            }
                                         }
-                                        else if (style.Add.GetValueOrDefault(false))
+                                        if (style.Equip.GetValueOrDefault(false))
                                         {
                                             saveData.EqStyle = 17;
-                                            switch (style.Version.GetValueOrDefault(1))
-                                            {
-                                                case 1:
-                                                    saveData.Style2 = 0;
-                                                    break;
-                                                case 2:
-                                                    saveData.Style2 = 1;
-                                                    break;
-                                                case 3:
-                                                    saveData.Style2 = 2;
-                                                    break;
-                                            }
+                                        }
+
+                                        switch (style.Version.GetValueOrDefault(1))
+                                        {
+                                            case 1:
+                                                saveData.Style2 = 0;
+                                                break;
+                                            case 2:
+                                                saveData.Style2 = 1;
+                                                break;
+                                            case 3:
+                                                saveData.Style2 = 2;
+                                                break;
                                         }
                                         break;
                                     }
                                 case Style.Value.AquaTeam:
                                     {
-                                        if (style.Equip.GetValueOrDefault(false))
+                                        if (style.Add.GetValueOrDefault(false))
                                         {
                                             saveData.Style1 = 27;
-                                            switch (style.Version.GetValueOrDefault(1))
-                                            {
-                                                case 1:
-                                                    saveData.Style2 = 0;
-                                                    break;
-                                                case 2:
-                                                    saveData.Style2 = 1;
-                                                    break;
-                                                case 3:
-                                                    saveData.Style2 = 2;
-                                                    break;
-                                            }
                                         }
-                                        else if (style.Add.GetValueOrDefault(false))
+                                        if (style.Equip.GetValueOrDefault(false))
                                         {
                                             saveData.EqStyle = 27;
-                                            switch (style.Version.GetValueOrDefault(1))
-                                            {
-                                                case 1:
-                                                    saveData.Style2 = 0;
-                                                    break;
-                                                case 2:
-                                                    saveData.Style2 = 1;
-                                                    break;
-                                                case 3:
-                                                    saveData.Style2 = 2;
-                                                    break;
-                                            }
+                                        }
+
+                                        switch (style.Version.GetValueOrDefault(1))
+                                        {
+                                            case 1:
+                                                saveData.Style2 = 0;
+                                                break;
+                                            case 2:
+                                                saveData.Style2 = 1;
+                                                break;
+                                            case 3:
+                                                saveData.Style2 = 2;
+                                                break;
                                         }
                                         break;
                                     }
                                 case Style.Value.WoodTeam:
                                     {
-                                        if (style.Equip.GetValueOrDefault(false))
+                                        if (style.Add.GetValueOrDefault(false))
                                         {
                                             saveData.Style1 = 28;
-                                            switch (style.Version.GetValueOrDefault(1))
-                                            {
-                                                case 1:
-                                                    saveData.Style2 = 0;
-                                                    break;
-                                                case 2:
-                                                    saveData.Style2 = 1;
-                                                    break;
-                                                case 3:
-                                                    saveData.Style2 = 2;
-                                                    break;
-                                            }
                                         }
-                                        else if (style.Add.GetValueOrDefault(false))
+                                        if (style.Equip.GetValueOrDefault(false))
                                         {
                                             saveData.EqStyle = 28;
-                                            switch (style.Version.GetValueOrDefault(1))
-                                            {
-                                                case 1:
-                                                    saveData.Style2 = 0;
-                                                    break;
-                                                case 2:
-                                                    saveData.Style2 = 1;
-                                                    break;
-                                                case 3:
-                                                    saveData.Style2 = 2;
-                                                    break;
-                                            }
+                                        }
+
+                                        switch (style.Version.GetValueOrDefault(1))
+                                        {
+                                            case 1:
+                                                saveData.Style2 = 0;
+                                                break;
+                                            case 2:
+                                                saveData.Style2 = 1;
+                                                break;
+                                            case 3:
+                                                saveData.Style2 = 2;
+                                                break;
                                         }
                                         break;
                                     }
                                 case Style.Value.HeatTeam:
                                     {
-                                        if (style.Equip.GetValueOrDefault(false))
+                                        if (style.Add.GetValueOrDefault(false))
                                         {
                                             saveData.Style1 = 26;
-                                            switch (style.Version.GetValueOrDefault(1))
-                                            {
-                                                case 1:
-                                                    saveData.Style2 = 0;
-                                                    break;
-                                                case 2:
-                                                    saveData.Style2 = 1;
-                                                    break;
-                                                case 3:
-                                                    saveData.Style2 = 2;
-                                                    break;
-                                            }
                                         }
-                                        else if (style.Add.GetValueOrDefault(false))
+                                        if (style.Equip.GetValueOrDefault(false))
                                         {
                                             saveData.EqStyle = 26;
-                                            switch (style.Version.GetValueOrDefault(1))
-                                            {
-                                                case 1:
-                                                    saveData.Style2 = 0;
-                                                    break;
-                                                case 2:
-                                                    saveData.Style2 = 1;
-                                                    break;
-                                                case 3:
-                                                    saveData.Style2 = 2;
-                                                    break;
-                                            }
+                                        }
+
+                                        switch (style.Version.GetValueOrDefault(1))
+                                        {
+                                            case 1:
+                                                saveData.Style2 = 0;
+                                                break;
+                                            case 2:
+                                                saveData.Style2 = 1;
+                                                break;
+                                            case 3:
+                                                saveData.Style2 = 2;
+                                                break;
                                         }
                                         break;
                                     }
                                 case Style.Value.ElecTeam:
                                     {
-                                        if (style.Equip.GetValueOrDefault(false))
+                                        if (style.Add.GetValueOrDefault(false))
                                         {
                                             saveData.Style1 = 25;
-                                            switch (style.Version.GetValueOrDefault(1))
-                                            {
-                                                case 1:
-                                                    saveData.Style2 = 0;
-                                                    break;
-                                                case 2:
-                                                    saveData.Style2 = 1;
-                                                    break;
-                                                case 3:
-                                                    saveData.Style2 = 2;
-                                                    break;
-                                            }
                                         }
-                                        else if (style.Add.GetValueOrDefault(false))
+                                        if (style.Equip.GetValueOrDefault(false))
                                         {
                                             saveData.EqStyle = 25;
-                                            switch (style.Version.GetValueOrDefault(1))
-                                            {
-                                                case 1:
-                                                    saveData.Style2 = 0;
-                                                    break;
-                                                case 2:
-                                                    saveData.Style2 = 1;
-                                                    break;
-                                                case 3:
-                                                    saveData.Style2 = 2;
-                                                    break;
-                                            }
+                                        }
+
+                                        switch (style.Version.GetValueOrDefault(1))
+                                        {
+                                            case 1:
+                                                saveData.Style2 = 0;
+                                                break;
+                                            case 2:
+                                                saveData.Style2 = 1;
+                                                break;
+                                            case 3:
+                                                saveData.Style2 = 2;
+                                                break;
                                         }
                                         break;
                                     }
                                 case Style.Value.AquaShield:
                                     {
-                                        if (style.Equip.GetValueOrDefault(false))
+                                        if (style.Add.GetValueOrDefault(false))
                                         {
                                             saveData.Style1 = 35;
-                                            switch (style.Version.GetValueOrDefault(1))
-                                            {
-                                                case 1:
-                                                    saveData.Style2 = 0;
-                                                    break;
-                                                case 2:
-                                                    saveData.Style2 = 1;
-                                                    break;
-                                                case 3:
-                                                    saveData.Style2 = 2;
-                                                    break;
-                                            }
                                         }
-                                        else if (style.Add.GetValueOrDefault(false))
+                                        if (style.Equip.GetValueOrDefault(false))
                                         {
                                             saveData.EqStyle = 35;
-                                            switch (style.Version.GetValueOrDefault(1))
-                                            {
-                                                case 1:
-                                                    saveData.Style2 = 0;
-                                                    break;
-                                                case 2:
-                                                    saveData.Style2 = 1;
-                                                    break;
-                                                case 3:
-                                                    saveData.Style2 = 2;
-                                                    break;
-                                            }
+                                        }
+
+                                        switch (style.Version.GetValueOrDefault(1))
+                                        {
+                                            case 1:
+                                                saveData.Style2 = 0;
+                                                break;
+                                            case 2:
+                                                saveData.Style2 = 1;
+                                                break;
+                                            case 3:
+                                                saveData.Style2 = 2;
+                                                break;
                                         }
                                         break;
                                     }
                                 case Style.Value.WoodShield:
                                     {
-                                        if (style.Equip.GetValueOrDefault(false))
+                                        if (style.Add.GetValueOrDefault(false))
                                         {
                                             saveData.Style1 = 36;
-                                            switch (style.Version.GetValueOrDefault(1))
-                                            {
-                                                case 1:
-                                                    saveData.Style2 = 0;
-                                                    break;
-                                                case 2:
-                                                    saveData.Style2 = 1;
-                                                    break;
-                                                case 3:
-                                                    saveData.Style2 = 2;
-                                                    break;
-                                            }
                                         }
-                                        else if (style.Add.GetValueOrDefault(false))
+                                        if (style.Equip.GetValueOrDefault(false))
                                         {
                                             saveData.EqStyle = 36;
-                                            switch (style.Version.GetValueOrDefault(1))
-                                            {
-                                                case 1:
-                                                    saveData.Style2 = 0;
-                                                    break;
-                                                case 2:
-                                                    saveData.Style2 = 1;
-                                                    break;
-                                                case 3:
-                                                    saveData.Style2 = 2;
-                                                    break;
-                                            }
+                                        }
+
+                                        switch (style.Version.GetValueOrDefault(1))
+                                        {
+                                            case 1:
+                                                saveData.Style2 = 0;
+                                                break;
+                                            case 2:
+                                                saveData.Style2 = 1;
+                                                break;
+                                            case 3:
+                                                saveData.Style2 = 2;
+                                                break;
                                         }
                                         break;
                                     }
                                 case Style.Value.HeatShield:
                                     {
-                                        if (style.Equip.GetValueOrDefault(false))
+                                        if (style.Add.GetValueOrDefault(false))
                                         {
                                             saveData.Style1 = 34;
-                                            switch (style.Version.GetValueOrDefault(1))
-                                            {
-                                                case 1:
-                                                    saveData.Style2 = 0;
-                                                    break;
-                                                case 2:
-                                                    saveData.Style2 = 1;
-                                                    break;
-                                                case 3:
-                                                    saveData.Style2 = 2;
-                                                    break;
-                                            }
                                         }
-                                        else if (style.Add.GetValueOrDefault(false))
+                                        if (style.Equip.GetValueOrDefault(false))
                                         {
                                             saveData.EqStyle = 34;
-                                            switch (style.Version.GetValueOrDefault(1))
-                                            {
-                                                case 1:
-                                                    saveData.Style2 = 0;
-                                                    break;
-                                                case 2:
-                                                    saveData.Style2 = 1;
-                                                    break;
-                                                case 3:
-                                                    saveData.Style2 = 2;
-                                                    break;
-                                            }
+                                        }
+
+                                        switch (style.Version.GetValueOrDefault(1))
+                                        {
+                                            case 1:
+                                                saveData.Style2 = 0;
+                                                break;
+                                            case 2:
+                                                saveData.Style2 = 1;
+                                                break;
+                                            case 3:
+                                                saveData.Style2 = 2;
+                                                break;
                                         }
                                         break;
                                     }
                                 case Style.Value.ElecShield:
                                     {
-                                        if (style.Equip.GetValueOrDefault(false))
+                                        if (style.Add.GetValueOrDefault(false))
                                         {
                                             saveData.Style1 = 33;
-                                            switch (style.Version.GetValueOrDefault(1))
-                                            {
-                                                case 1:
-                                                    saveData.Style2 = 0;
-                                                    break;
-                                                case 2:
-                                                    saveData.Style2 = 1;
-                                                    break;
-                                                case 3:
-                                                    saveData.Style2 = 2;
-                                                    break;
-                                            }
                                         }
-                                        else if (style.Add.GetValueOrDefault(false))
+                                        if (style.Equip.GetValueOrDefault(false))
                                         {
                                             saveData.EqStyle = 33;
-                                            switch (style.Version.GetValueOrDefault(1))
-                                            {
-                                                case 1:
-                                                    saveData.Style2 = 0;
-                                                    break;
-                                                case 2:
-                                                    saveData.Style2 = 1;
-                                                    break;
-                                                case 3:
-                                                    saveData.Style2 = 2;
-                                                    break;
-                                            }
+                                        }
+
+                                        switch (style.Version.GetValueOrDefault(1))
+                                        {
+                                            case 1:
+                                                saveData.Style2 = 0;
+                                                break;
+                                            case 2:
+                                                saveData.Style2 = 1;
+                                                break;
+                                            case 3:
+                                                saveData.Style2 = 2;
+                                                break;
                                         }
                                         break;
                                     }
                                 case Style.Value.AquaGround:
                                     {
-                                        if (style.Equip.GetValueOrDefault(false))
+                                        if (style.Add.GetValueOrDefault(false))
                                         {
                                             saveData.Style1 = 43;
-                                            switch (style.Version.GetValueOrDefault(1))
-                                            {
-                                                case 1:
-                                                    saveData.Style2 = 0;
-                                                    break;
-                                                case 2:
-                                                    saveData.Style2 = 1;
-                                                    break;
-                                                case 3:
-                                                    saveData.Style2 = 2;
-                                                    break;
-                                            }
                                         }
-                                        else if (style.Add.GetValueOrDefault(false))
+                                        if (style.Equip.GetValueOrDefault(false))
                                         {
                                             saveData.EqStyle = 43;
-                                            switch (style.Version.GetValueOrDefault(1))
-                                            {
-                                                case 1:
-                                                    saveData.Style2 = 0;
-                                                    break;
-                                                case 2:
-                                                    saveData.Style2 = 1;
-                                                    break;
-                                                case 3:
-                                                    saveData.Style2 = 2;
-                                                    break;
-                                            }
+                                        }
+
+                                        switch (style.Version.GetValueOrDefault(1))
+                                        {
+                                            case 1:
+                                                saveData.Style2 = 0;
+                                                break;
+                                            case 2:
+                                                saveData.Style2 = 1;
+                                                break;
+                                            case 3:
+                                                saveData.Style2 = 2;
+                                                break;
                                         }
                                         break;
                                     }
                                 case Style.Value.WoodGround:
                                     {
-                                        if (style.Equip.GetValueOrDefault(false))
+                                        if (style.Add.GetValueOrDefault(false))
                                         {
                                             saveData.Style1 = 44;
-                                            switch (style.Version.GetValueOrDefault(1))
-                                            {
-                                                case 1:
-                                                    saveData.Style2 = 0;
-                                                    break;
-                                                case 2:
-                                                    saveData.Style2 = 1;
-                                                    break;
-                                                case 3:
-                                                    saveData.Style2 = 2;
-                                                    break;
-                                            }
                                         }
-                                        else if (style.Add.GetValueOrDefault(false))
+                                        if (style.Equip.GetValueOrDefault(false))
                                         {
                                             saveData.EqStyle = 44;
-                                            switch (style.Version.GetValueOrDefault(1))
-                                            {
-                                                case 1:
-                                                    saveData.Style2 = 0;
-                                                    break;
-                                                case 2:
-                                                    saveData.Style2 = 1;
-                                                    break;
-                                                case 3:
-                                                    saveData.Style2 = 2;
-                                                    break;
-                                            }
+                                        }
+
+                                        switch (style.Version.GetValueOrDefault(1))
+                                        {
+                                            case 1:
+                                                saveData.Style2 = 0;
+                                                break;
+                                            case 2:
+                                                saveData.Style2 = 1;
+                                                break;
+                                            case 3:
+                                                saveData.Style2 = 2;
+                                                break;
                                         }
                                         break;
                                     }
                                 case Style.Value.HeatGround:
                                     {
-                                        if (style.Equip.GetValueOrDefault(false))
+                                        if (style.Add.GetValueOrDefault(false))
                                         {
                                             saveData.Style1 = 42;
-                                            switch (style.Version.GetValueOrDefault(1))
-                                            {
-                                                case 1:
-                                                    saveData.Style2 = 0;
-                                                    break;
-                                                case 2:
-                                                    saveData.Style2 = 1;
-                                                    break;
-                                                case 3:
-                                                    saveData.Style2 = 2;
-                                                    break;
-                                            }
                                         }
-                                        else if (style.Add.GetValueOrDefault(false))
+                                        if (style.Equip.GetValueOrDefault(false))
                                         {
                                             saveData.EqStyle = 42;
-                                            switch (style.Version.GetValueOrDefault(1))
-                                            {
-                                                case 1:
-                                                    saveData.Style2 = 0;
-                                                    break;
-                                                case 2:
-                                                    saveData.Style2 = 1;
-                                                    break;
-                                                case 3:
-                                                    saveData.Style2 = 2;
-                                                    break;
-                                            }
+                                        }
+
+                                        switch (style.Version.GetValueOrDefault(1))
+                                        {
+                                            case 1:
+                                                saveData.Style2 = 0;
+                                                break;
+                                            case 2:
+                                                saveData.Style2 = 1;
+                                                break;
+                                            case 3:
+                                                saveData.Style2 = 2;
+                                                break;
                                         }
                                         break;
                                     }
                                 case Style.Value.ElecGround:
                                     {
-                                        if (style.Equip.GetValueOrDefault(false))
+                                        if (style.Add.GetValueOrDefault(false))
                                         {
                                             saveData.Style1 = 41;
-                                            switch (style.Version.GetValueOrDefault(1))
-                                            {
-                                                case 1:
-                                                    saveData.Style2 = 0;
-                                                    break;
-                                                case 2:
-                                                    saveData.Style2 = 1;
-                                                    break;
-                                                case 3:
-                                                    saveData.Style2 = 2;
-                                                    break;
-                                            }
                                         }
-                                        else if (style.Add.GetValueOrDefault(false))
+                                        if (style.Equip.GetValueOrDefault(false))
                                         {
                                             saveData.EqStyle = 41;
-                                            switch (style.Version.GetValueOrDefault(1))
-                                            {
-                                                case 1:
-                                                    saveData.Style2 = 0;
-                                                    break;
-                                                case 2:
-                                                    saveData.Style2 = 1;
-                                                    break;
-                                                case 3:
-                                                    saveData.Style2 = 2;
-                                                    break;
-                                            }
+                                        }
+
+                                        switch (style.Version.GetValueOrDefault(1))
+                                        {
+                                            case 1:
+                                                saveData.Style2 = 0;
+                                                break;
+                                            case 2:
+                                                saveData.Style2 = 1;
+                                                break;
+                                            case 3:
+                                                saveData.Style2 = 2;
+                                                break;
                                         }
                                         break;
                                     }
                                 case Style.Value.AquaShadow:
                                     {
-                                        if (style.Equip.GetValueOrDefault(false))
+                                        if (style.Add.GetValueOrDefault(false))
                                         {
                                             saveData.Style1 = 51;
-                                            switch (style.Version.GetValueOrDefault(1))
-                                            {
-                                                case 1:
-                                                    saveData.Style2 = 0;
-                                                    break;
-                                                case 2:
-                                                    saveData.Style2 = 1;
-                                                    break;
-                                                case 3:
-                                                    saveData.Style2 = 2;
-                                                    break;
-                                            }
                                         }
-                                        else if (style.Add.GetValueOrDefault(false))
+                                        if (style.Equip.GetValueOrDefault(false))
                                         {
                                             saveData.EqStyle = 51;
-                                            switch (style.Version.GetValueOrDefault(1))
-                                            {
-                                                case 1:
-                                                    saveData.Style2 = 0;
-                                                    break;
-                                                case 2:
-                                                    saveData.Style2 = 1;
-                                                    break;
-                                                case 3:
-                                                    saveData.Style2 = 2;
-                                                    break;
-                                            }
+                                        }
+
+                                        switch (style.Version.GetValueOrDefault(1))
+                                        {
+                                            case 1:
+                                                saveData.Style2 = 0;
+                                                break;
+                                            case 2:
+                                                saveData.Style2 = 1;
+                                                break;
+                                            case 3:
+                                                saveData.Style2 = 2;
+                                                break;
                                         }
                                         break;
                                     }
                                 case Style.Value.WoodShadow:
                                     {
-                                        if (style.Equip.GetValueOrDefault(false))
+                                        if (style.Add.GetValueOrDefault(false))
                                         {
                                             saveData.Style1 = 52;
-                                            switch (style.Version.GetValueOrDefault(1))
-                                            {
-                                                case 1:
-                                                    saveData.Style2 = 0;
-                                                    break;
-                                                case 2:
-                                                    saveData.Style2 = 1;
-                                                    break;
-                                                case 3:
-                                                    saveData.Style2 = 2;
-                                                    break;
-                                            }
                                         }
-                                        else if (style.Add.GetValueOrDefault(false))
+                                        if (style.Equip.GetValueOrDefault(false))
                                         {
                                             saveData.EqStyle = 52;
-                                            switch (style.Version.GetValueOrDefault(1))
-                                            {
-                                                case 1:
-                                                    saveData.Style2 = 0;
-                                                    break;
-                                                case 2:
-                                                    saveData.Style2 = 1;
-                                                    break;
-                                                case 3:
-                                                    saveData.Style2 = 2;
-                                                    break;
-                                            }
+                                        }
+
+                                        switch (style.Version.GetValueOrDefault(1))
+                                        {
+                                            case 1:
+                                                saveData.Style2 = 0;
+                                                break;
+                                            case 2:
+                                                saveData.Style2 = 1;
+                                                break;
+                                            case 3:
+                                                saveData.Style2 = 2;
+                                                break;
                                         }
                                         break;
                                     }
                                 case Style.Value.HeatShadow:
                                     {
-                                        if (style.Equip.GetValueOrDefault(false))
+                                        if (style.Add.GetValueOrDefault(false))
                                         {
                                             saveData.Style1 = 50;
-                                            switch (style.Version.GetValueOrDefault(1))
-                                            {
-                                                case 1:
-                                                    saveData.Style2 = 0;
-                                                    break;
-                                                case 2:
-                                                    saveData.Style2 = 1;
-                                                    break;
-                                                case 3:
-                                                    saveData.Style2 = 2;
-                                                    break;
-                                            }
                                         }
-                                        else if (style.Add.GetValueOrDefault(false))
+                                        if (style.Equip.GetValueOrDefault(false))
                                         {
                                             saveData.EqStyle = 50;
-                                            switch (style.Version.GetValueOrDefault(1))
-                                            {
-                                                case 1:
-                                                    saveData.Style2 = 0;
-                                                    break;
-                                                case 2:
-                                                    saveData.Style2 = 1;
-                                                    break;
-                                                case 3:
-                                                    saveData.Style2 = 2;
-                                                    break;
-                                            }
+                                        }
+
+                                        switch (style.Version.GetValueOrDefault(1))
+                                        {
+                                            case 1:
+                                                saveData.Style2 = 0;
+                                                break;
+                                            case 2:
+                                                saveData.Style2 = 1;
+                                                break;
+                                            case 3:
+                                                saveData.Style2 = 2;
+                                                break;
                                         }
                                         break;
                                     }
                                 case Style.Value.ElecShadow:
                                     {
-                                        if (style.Equip.GetValueOrDefault(false))
+                                        if (style.Add.GetValueOrDefault(false))
                                         {
                                             saveData.Style1 = 49;
-                                            switch (style.Version.GetValueOrDefault(1))
-                                            {
-                                                case 1:
-                                                    saveData.Style2 = 0;
-                                                    break;
-                                                case 2:
-                                                    saveData.Style2 = 1;
-                                                    break;
-                                                case 3:
-                                                    saveData.Style2 = 2;
-                                                    break;
-                                            }
                                         }
-                                        else if (style.Add.GetValueOrDefault(false))
+                                        if (style.Equip.GetValueOrDefault(false))
                                         {
                                             saveData.EqStyle = 49;
-                                            switch (style.Version.GetValueOrDefault(1))
-                                            {
-                                                case 1:
-                                                    saveData.Style2 = 0;
-                                                    break;
-                                                case 2:
-                                                    saveData.Style2 = 1;
-                                                    break;
-                                                case 3:
-                                                    saveData.Style2 = 2;
-                                                    break;
-                                            }
+                                        }
+
+                                        switch (style.Version.GetValueOrDefault(1))
+                                        {
+                                            case 1:
+                                                saveData.Style2 = 0;
+                                                break;
+                                            case 2:
+                                                saveData.Style2 = 1;
+                                                break;
+                                            case 3:
+                                                saveData.Style2 = 2;
+                                                break;
                                         }
                                         break;
                                     }
                                 case Style.Value.AquaBug:
                                     {
-                                        if (style.Equip.GetValueOrDefault(false))
+                                        if (style.Add.GetValueOrDefault(false))
                                         {
                                             saveData.Style1 = 59;
-                                            switch (style.Version.GetValueOrDefault(1))
-                                            {
-                                                case 1:
-                                                    saveData.Style2 = 0;
-                                                    break;
-                                                case 2:
-                                                    saveData.Style2 = 1;
-                                                    break;
-                                                case 3:
-                                                    saveData.Style2 = 2;
-                                                    break;
-                                            }
                                         }
-                                        else if (style.Add.GetValueOrDefault(false))
+                                        if (style.Equip.GetValueOrDefault(false))
                                         {
                                             saveData.EqStyle = 59;
-                                            switch (style.Version.GetValueOrDefault(1))
-                                            {
-                                                case 1:
-                                                    saveData.Style2 = 0;
-                                                    break;
-                                                case 2:
-                                                    saveData.Style2 = 1;
-                                                    break;
-                                                case 3:
-                                                    saveData.Style2 = 2;
-                                                    break;
-                                            }
+                                        }
+
+                                        switch (style.Version.GetValueOrDefault(1))
+                                        {
+                                            case 1:
+                                                saveData.Style2 = 0;
+                                                break;
+                                            case 2:
+                                                saveData.Style2 = 1;
+                                                break;
+                                            case 3:
+                                                saveData.Style2 = 2;
+                                                break;
                                         }
                                         break;
                                     }
                                 case Style.Value.WoodBug:
                                     {
-                                        if (style.Equip.GetValueOrDefault(false))
+                                        if (style.Add.GetValueOrDefault(false))
                                         {
                                             saveData.Style1 = 60;
-                                            switch (style.Version.GetValueOrDefault(1))
-                                            {
-                                                case 1:
-                                                    saveData.Style2 = 0;
-                                                    break;
-                                                case 2:
-                                                    saveData.Style2 = 1;
-                                                    break;
-                                                case 3:
-                                                    saveData.Style2 = 2;
-                                                    break;
-                                            }
                                         }
-                                        else if (style.Add.GetValueOrDefault(false))
+                                        if (style.Equip.GetValueOrDefault(false))
                                         {
                                             saveData.EqStyle = 60;
-                                            switch (style.Version.GetValueOrDefault(1))
-                                            {
-                                                case 1:
-                                                    saveData.Style2 = 0;
-                                                    break;
-                                                case 2:
-                                                    saveData.Style2 = 1;
-                                                    break;
-                                                case 3:
-                                                    saveData.Style2 = 2;
-                                                    break;
-                                            }
+                                        }
+
+                                        switch (style.Version.GetValueOrDefault(1))
+                                        {
+                                            case 1:
+                                                saveData.Style2 = 0;
+                                                break;
+                                            case 2:
+                                                saveData.Style2 = 1;
+                                                break;
+                                            case 3:
+                                                saveData.Style2 = 2;
+                                                break;
                                         }
                                         break;
                                     }
                                 case Style.Value.HeatBug:
                                     {
-                                        if (style.Equip.GetValueOrDefault(false))
+                                        if (style.Add.GetValueOrDefault(false))
                                         {
                                             saveData.Style1 = 58;
-                                            switch (style.Version.GetValueOrDefault(1))
-                                            {
-                                                case 1:
-                                                    saveData.Style2 = 0;
-                                                    break;
-                                                case 2:
-                                                    saveData.Style2 = 1;
-                                                    break;
-                                                case 3:
-                                                    saveData.Style2 = 2;
-                                                    break;
-                                            }
                                         }
-                                        else if (style.Add.GetValueOrDefault(false))
+                                        if (style.Equip.GetValueOrDefault(false))
                                         {
                                             saveData.EqStyle = 58;
-                                            switch (style.Version.GetValueOrDefault(1))
-                                            {
-                                                case 1:
-                                                    saveData.Style2 = 0;
-                                                    break;
-                                                case 2:
-                                                    saveData.Style2 = 1;
-                                                    break;
-                                                case 3:
-                                                    saveData.Style2 = 2;
-                                                    break;
-                                            }
+                                        }
+
+                                        switch (style.Version.GetValueOrDefault(1))
+                                        {
+                                            case 1:
+                                                saveData.Style2 = 0;
+                                                break;
+                                            case 2:
+                                                saveData.Style2 = 1;
+                                                break;
+                                            case 3:
+                                                saveData.Style2 = 2;
+                                                break;
                                         }
                                         break;
                                     }
                                 case Style.Value.ElecBug:
                                     {
-                                        if (style.Equip.GetValueOrDefault(false))
+                                        if (style.Add.GetValueOrDefault(false))
                                         {
                                             saveData.Style1 = 57;
-                                            switch (style.Version.GetValueOrDefault(1))
-                                            {
-                                                case 1:
-                                                    saveData.Style2 = 0;
-                                                    break;
-                                                case 2:
-                                                    saveData.Style2 = 1;
-                                                    break;
-                                                case 3:
-                                                    saveData.Style2 = 2;
-                                                    break;
-                                            }
                                         }
-                                        else if (style.Add.GetValueOrDefault(false))
+                                        if (style.Equip.GetValueOrDefault(false))
                                         {
                                             saveData.EqStyle = 57;
-                                            switch (style.Version.GetValueOrDefault(1))
-                                            {
-                                                case 1:
-                                                    saveData.Style2 = 0;
-                                                    break;
-                                                case 2:
-                                                    saveData.Style2 = 1;
-                                                    break;
-                                                case 3:
-                                                    saveData.Style2 = 2;
-                                                    break;
-                                            }
+                                        }
+
+                                        switch (style.Version.GetValueOrDefault(1))
+                                        {
+                                            case 1:
+                                                saveData.Style2 = 0;
+                                                break;
+                                            case 2:
+                                                saveData.Style2 = 1;
+                                                break;
+                                            case 3:
+                                                saveData.Style2 = 2;
+                                                break;
                                         }
                                         break;
                                     }

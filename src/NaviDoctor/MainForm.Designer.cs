@@ -99,8 +99,8 @@ namespace NaviDoctor
             this.panel_MegamanStats = new System.Windows.Forms.Panel();
             this.pnl_MegamanHealth = new System.Windows.Forms.Panel();
             this.pnl_MainFill = new System.Windows.Forms.Panel();
-            this.pbx_Loading = new System.Windows.Forms.PictureBox();
             this.pnl_PackQuantity = new System.Windows.Forms.Panel();
+            this.pbx_Loading = new System.Windows.Forms.PictureBox();
             this.pnl_MainFooter = new System.Windows.Forms.Panel();
             this.lbl_Loading = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.attackStat)).BeginInit();
@@ -136,8 +136,8 @@ namespace NaviDoctor
             this.panel_MegamanStats.SuspendLayout();
             this.pnl_MegamanHealth.SuspendLayout();
             this.pnl_MainFill.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbx_Loading)).BeginInit();
             this.pnl_PackQuantity.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbx_Loading)).BeginInit();
             this.pnl_MainFooter.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -975,6 +975,15 @@ namespace NaviDoctor
             this.pnl_MainFill.Size = new System.Drawing.Size(870, 536);
             this.pnl_MainFill.TabIndex = 24;
             // 
+            // pnl_PackQuantity
+            // 
+            this.pnl_PackQuantity.Controls.Add(this.btnSetPackQuantity);
+            this.pnl_PackQuantity.Controls.Add(this.nudPackQuantity);
+            this.pnl_PackQuantity.Location = new System.Drawing.Point(692, 467);
+            this.pnl_PackQuantity.Name = "pnl_PackQuantity";
+            this.pnl_PackQuantity.Size = new System.Drawing.Size(166, 42);
+            this.pnl_PackQuantity.TabIndex = 23;
+            // 
             // pbx_Loading
             // 
             this.pbx_Loading.Dock = System.Windows.Forms.DockStyle.Left;
@@ -986,15 +995,6 @@ namespace NaviDoctor
             this.pbx_Loading.TabIndex = 24;
             this.pbx_Loading.TabStop = false;
             this.pbx_Loading.Visible = false;
-            // 
-            // pnl_PackQuantity
-            // 
-            this.pnl_PackQuantity.Controls.Add(this.btnSetPackQuantity);
-            this.pnl_PackQuantity.Controls.Add(this.nudPackQuantity);
-            this.pnl_PackQuantity.Location = new System.Drawing.Point(692, 467);
-            this.pnl_PackQuantity.Name = "pnl_PackQuantity";
-            this.pnl_PackQuantity.Size = new System.Drawing.Size(166, 42);
-            this.pnl_PackQuantity.TabIndex = 23;
             // 
             // pnl_MainFooter
             // 
@@ -1079,8 +1079,8 @@ namespace NaviDoctor
             this.pnl_MegamanHealth.PerformLayout();
             this.pnl_MainFill.ResumeLayout(false);
             this.pnl_MainFill.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbx_Loading)).EndInit();
             this.pnl_PackQuantity.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pbx_Loading)).EndInit();
             this.pnl_MainFooter.ResumeLayout(false);
             this.pnl_MainFooter.PerformLayout();
             this.ResumeLayout(false);

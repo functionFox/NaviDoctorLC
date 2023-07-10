@@ -43,7 +43,7 @@ namespace NaviDoctor
                     break;
                 case GameTitle.Title.MegaManBattleNetwork3Blue:
                 case GameTitle.Title.MegaManBattleNetwork3White:
-                    this.Height = 1100;
+                    this.Height = 900;
                     this.Width = 292;
                     break;
             }
@@ -54,6 +54,10 @@ namespace NaviDoctor
         {
             foreach(var style in _styles)
             {
+                if(null != style.VersionExclusive)
+                {
+                    if(style.VersionExclusive != _currentGame) { continue; }
+                }
                 var styleSelect = new StyleSelect(style, _currentGame);
                 styleSelect.EquipStyle = _styles.FirstOrDefault(x => x.Name == style.Name).Equip.GetValueOrDefault();
                 styleSelect.AddStyle = _styles.FirstOrDefault(x => x.Name == style.Name).Add.GetValueOrDefault();
@@ -62,7 +66,7 @@ namespace NaviDoctor
                     styleSelect.Version = _styles.FirstOrDefault(x => x.Name == style.Name).Version.GetValueOrDefault();
                 }
                 styleSelect.EquipStyleChecked += (s, e) => EquipCheck(styleSelect);
-                styleSelect.AddStyleChecked += (s, e) => AddCheck();
+                styleSelect.AddStyleChecked += (s, e) => AddCheck(styleSelect);
                 flpStyleChange.Controls.Add(styleSelect);
             }
         }
@@ -75,19 +79,43 @@ namespace NaviDoctor
 
             foreach (StyleSelect style in flpStyleChange.Controls)
             {
-                if(style.StyleValue != _currentEquipStyle)
+                if (style.StyleValue != _currentEquipStyle)
                 {
                     style.EquipStyle = false;
+                }
+                else if (style.StyleValue == _currentEquipStyle && (_currentGame == GameTitle.Title.MegaManBattleNetwork3Blue || _currentGame == GameTitle.Title.MegaManBattleNetwork3White))
+                {
+                    if (style.StyleValue != Style.Value.Normal)
+                    {
+                        foreach (StyleSelect style_ in flpStyleChange.Controls)
+                        {
+                            if (style_.StyleValue != Style.Value.Normal)
+                            {
+                                if (style_.StyleValue != _currentEquipStyle)
+                                {
+                                    style_.AddStyle = false;
+                                }
+                                else
+                                {
+                                    style_.AddStyle = true;
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
 
-        private void AddCheck()
+        private void AddCheck(StyleSelect styleSelect)
         {
             currentAddCount = 0;
+            
             foreach (StyleSelect style in flpStyleChange.Controls)
             {
-                if (style.AddStyle) currentAddCount++;
+                if (style.AddStyle)
+                {
+                    currentAddCount++;
+                }
 
                 if (_currentGame == GameTitle.Title.MegaManBattleNetwork2)
                 {
@@ -102,10 +130,21 @@ namespace NaviDoctor
                 {
                     if (currentAddCount > MAX_STYLE_BN3)
                     {
-                        MessageBox.Show($"You can only select {MAX_STYLE_BN3} styles to add.", "Error", MessageBoxButtons.OK);
-                        style.AddStyle = false;
-                        return;
+                        if (style.StyleValue != Style.Value.Normal)
+                        {
+                            foreach (StyleSelect style_ in flpStyleChange.Controls)
+                            {
+                                style_.EquipStyle = false;
+                                style_.AddStyle = false;
+                            }
+
+                            styleSelect.EquipStyle = true;
+                            styleSelect.AddStyle = true;
+
+                            return;
+                        }
                     }
+
                 }
             }
         }

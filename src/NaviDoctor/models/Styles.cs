@@ -82,6 +82,7 @@ namespace NaviDoctor.models
         public bool? Add { get; set; }
         public bool? Equip { get; set; }
         public int? Version { get; set; }
+        public GameTitle.Title? VersionExclusive { get; set; }
 
         public static List<Style> BN1 = new List<Style>
         {
@@ -133,14 +134,14 @@ namespace NaviDoctor.models
             new Style{Name = Value.WoodShield, Version = 1},
             new Style{Name = Value.HeatShield, Version = 1},
             new Style{Name = Value.ElecShield, Version = 1},
-            new Style{Name = Value.AquaGround, Version = 1},
-            new Style{Name = Value.WoodGround, Version = 1},
-            new Style{Name = Value.HeatGround, Version = 1},
-            new Style{Name = Value.ElecGround, Version = 1},
-            new Style{Name = Value.AquaShadow, Version = 1},
-            new Style{Name = Value.WoodShadow, Version = 1},
-            new Style{Name = Value.HeatShadow, Version = 1},
-            new Style{Name = Value.ElecShadow, Version = 1},
+            new Style{Name = Value.AquaGround, Version = 1, VersionExclusive = GameTitle.Title.MegaManBattleNetwork3White},
+            new Style{Name = Value.WoodGround, Version = 1, VersionExclusive = GameTitle.Title.MegaManBattleNetwork3White},
+            new Style{Name = Value.HeatGround, Version = 1, VersionExclusive = GameTitle.Title.MegaManBattleNetwork3White},
+            new Style{Name = Value.ElecGround, Version = 1, VersionExclusive = GameTitle.Title.MegaManBattleNetwork3White},
+            new Style{Name = Value.AquaShadow, Version = 1, VersionExclusive = GameTitle.Title.MegaManBattleNetwork3Blue},
+            new Style{Name = Value.WoodShadow, Version = 1, VersionExclusive = GameTitle.Title.MegaManBattleNetwork3Blue},
+            new Style{Name = Value.HeatShadow, Version = 1, VersionExclusive = GameTitle.Title.MegaManBattleNetwork3Blue},
+            new Style{Name = Value.ElecShadow, Version = 1, VersionExclusive = GameTitle.Title.MegaManBattleNetwork3Blue},
             new Style{Name = Value.AquaBug, Version = 1},
             new Style{Name = Value.WoodBug, Version = 1},
             new Style{Name = Value.HeatBug, Version = 1},
