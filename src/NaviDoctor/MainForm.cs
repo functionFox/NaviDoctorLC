@@ -1000,7 +1000,7 @@ namespace NaviDoctor
             {
                 case GameTitle.Title.MegaManBattleNetwork:
                     {
-                        _tempStyles = Style.BN1;
+                        _tempStyles = (Style.ResetStyleList(Style.BN1));
 
                         if (saveData.Style1 == 1)
                         {
@@ -1037,7 +1037,7 @@ namespace NaviDoctor
                     }
                 case GameTitle.Title.MegaManBattleNetwork2:
                     {
-                        _tempStyles = Style.BN2;
+                        _tempStyles = (Style.ResetStyleList(Style.BN2));
                         var index = 0;
 
                         foreach(var style in saveData.StyleTypes)
@@ -1615,8 +1615,8 @@ namespace NaviDoctor
                 case GameTitle.Title.MegaManBattleNetwork3Blue: //Style1 is the Style and Style2 is the Level
                 case GameTitle.Title.MegaManBattleNetwork3White:
                     {
-                        _tempStyles = Style.BN3;
-                        switch(saveData.EqStyle.ToString())
+                        _tempStyles = (Style.ResetStyleList(Style.BN3));
+                        switch (saveData.EqStyle.ToString())
                         {
                             case "0": //Normal
                                 break;

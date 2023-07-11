@@ -147,6 +147,18 @@ namespace NaviDoctor.models
             new Style{Name = Value.HeatBug, Version = 1},
             new Style{Name = Value.ElecBug, Version = 1},
         };
+
+        public static List<Style> ResetStyleList(List<Style> styleList)
+        {
+            foreach (var style in styleList)
+            {
+                style.Version = 1;
+                style.Equip = false;
+                style.Add = false;
+            }
+
+            return styleList;
+        }
     }
 
 }
