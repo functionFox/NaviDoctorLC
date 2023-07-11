@@ -890,7 +890,7 @@ namespace NaviDoctor
             UpdateFolderCount();
         }
 
-        private async void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // Check if a save file has been loaded
             if (saveData == null)
@@ -1622,115 +1622,115 @@ namespace NaviDoctor
                                 break;
                             case "9": //ElecGuts
                                 _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecGuts).Equip = true;
-                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecGuts).Version = saveData.Style2;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecGuts).Version = saveData.Style2 + 1;
                                 break;
                             case "10": //HeatGuts
                                 _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatGuts).Equip = true;
-                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatGuts).Version = saveData.Style2;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatGuts).Version = saveData.Style2 + 1;
                                 break;
                             case "11": //AquaGuts
                                 _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaGuts).Equip = true;
-                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaGuts).Version = saveData.Style2;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaGuts).Version = saveData.Style2 + 1;
                                 break;
                             case "12": //WoodGuts
                                 _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodGuts).Equip = true;
-                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodGuts).Version = saveData.Style2;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodGuts).Version = saveData.Style2 + 1;
                                 break;
                             case "17": //ElecCust
                                 _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecCust).Equip = true;
-                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecCust).Version = saveData.Style2;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecCust).Version = saveData.Style2 + 1;
                                 break;
                             case "18": //HeatCust
                                 _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatCust).Equip = true;
-                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatCust).Version = saveData.Style2;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatCust).Version = saveData.Style2 + 1;
                                 break;
                             case "19": //AquaCust
                                 _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaCust).Equip = true;
-                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaCust).Version = saveData.Style2;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaCust).Version = saveData.Style2 + 1;
                                 break;
                             case "20": //WoodCust
                                 _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodCust).Equip = true;
-                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodCust).Version = saveData.Style2;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodCust).Version = saveData.Style2 + 1;
                                 break;
                             case "25": //ElecTeam
                                 _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecTeam).Equip = true;
-                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecTeam).Version = saveData.Style2;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecTeam).Version = saveData.Style2 + 1;
                                 break;
                             case "26": //HeatTeam
                                 _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatTeam).Equip = true;
-                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatTeam).Version = saveData.Style2;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatTeam).Version = saveData.Style2 + 1;
                                 break;
                             case "27": //AquaTeam
                                 _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaTeam).Equip = true;
-                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaTeam).Version = saveData.Style2;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaTeam).Version = saveData.Style2 + 1;
                                 break;
                             case "28": //WoodTeam
                                 _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodTeam).Equip = true;
-                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodTeam).Version = saveData.Style2;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodTeam).Version = saveData.Style2 + 1;
                                 break;
                             case "33": //ElecShld
                                 _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecShield).Equip = true;
-                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecShield).Version = saveData.Style2;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecShield).Version = saveData.Style2 + 1;
                                 break;
                             case "34": //HeatShld
                                 _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatShield).Equip = true;
-                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatShield).Version = saveData.Style2;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatShield).Version = saveData.Style2 + 1;
                                 break;
                             case "35": //AquaShld
                                 _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaShield).Equip = true;
-                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaShield).Version = saveData.Style2;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaShield).Version = saveData.Style2 + 1;
                                 break;
                             case "36": //WoodShld
                                 _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodShield).Equip = true;
-                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodShield).Version = saveData.Style2;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodShield).Version = saveData.Style2 + 1;
                                 break;
                             case "41": //ElecGround
                                 _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecGround).Equip = true;
-                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecGround).Version = saveData.Style2;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecGround).Version = saveData.Style2 + 1;
                                 break;
                             case "42": //HeatGround
                                 _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatGround).Equip = true;
-                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatGround).Version = saveData.Style2;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatGround).Version = saveData.Style2 + 1;
                                 break;
                             case "43": //AquaGround
                                 _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaGround).Equip = true;
-                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaGround).Version = saveData.Style2;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaGround).Version = saveData.Style2 + 1;
                                 break;
                             case "44": //WoodGround
                                 _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodGround).Equip = true;
-                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodGround).Version = saveData.Style2;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodGround).Version = saveData.Style2 + 1;
                                 break;
                             case "49": //ElecShdw
                                 _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecShadow).Equip = true;
-                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecShadow).Version = saveData.Style2;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecShadow).Version = saveData.Style2 + 1;
                                 break;
                             case "50": //HeatShdw
                                 _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatShadow).Equip = true;
-                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatShadow).Version = saveData.Style2;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatShadow).Version = saveData.Style2 + 1;
                                 break;
                             case "51": //AquaShdw
                                 _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaShadow).Equip = true;
-                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaShadow).Version = saveData.Style2;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaShadow).Version = saveData.Style2 + 1;
                                 break;
                             case "52": //WoodShdw
                                 _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodShadow).Equip = true;
-                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodShadow).Version = saveData.Style2;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodShadow).Version = saveData.Style2 + 1;
                                 break;
                             case "57": //ElecBug
                                 _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecBug).Equip = true;
-                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecBug).Version = saveData.Style2;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecBug).Version = saveData.Style2 + 1;
                                 break;
                             case "58": //HeatBug
                                 _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatBug).Equip = true;
-                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatBug).Version = saveData.Style2;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatBug).Version = saveData.Style2 + 1;
                                 break;
                             case "59": //AquaBug
                                 _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaBug).Equip = true;
-                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaBug).Version = saveData.Style2;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaBug).Version = saveData.Style2 + 1;
                                 break;
                             case "60": //WoodBug
                                 _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodBug).Equip = true;
-                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodBug).Version = saveData.Style2;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodBug).Version = saveData.Style2 + 1;
                                 break;
                         }
                         
@@ -1740,115 +1740,115 @@ namespace NaviDoctor
                                 break;
                             case "9": //ElecGuts
                                 _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecGuts).Add = true;
-                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecGuts).Version = saveData.Style2;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecGuts).Version = saveData.Style2 + 1;
                                 break;
                             case "10": //HeatGuts
                                 _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatGuts).Add = true;
-                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatGuts).Version = saveData.Style2;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatGuts).Version = saveData.Style2 + 1;
                                 break;
                             case "11": //AquaGuts
                                 _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaGuts).Add = true;
-                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaGuts).Version = saveData.Style2;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaGuts).Version = saveData.Style2 + 1;
                                 break;
                             case "12": //WoodGuts
                                 _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodGuts).Add = true;
-                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodGuts).Version = saveData.Style2;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodGuts).Version = saveData.Style2 + 1;
                                 break;
                             case "17": //ElecCust
                                 _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecCust).Add = true;
-                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecCust).Version = saveData.Style2;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecCust).Version = saveData.Style2 + 1;
                                 break;
                             case "18": //HeatCust
                                 _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatCust).Add = true;
-                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatCust).Version = saveData.Style2;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatCust).Version = saveData.Style2 + 1;
                                 break;
                             case "19": //AquaCust
                                 _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaCust).Add = true;
-                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaCust).Version = saveData.Style2;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaCust).Version = saveData.Style2 + 1;
                                 break;
                             case "20": //WoodCust
                                 _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodCust).Add = true;
-                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodCust).Version = saveData.Style2;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodCust).Version = saveData.Style2 + 1;
                                 break;
                             case "25": //ElecTeam
                                 _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecTeam).Add = true;
-                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecTeam).Version = saveData.Style2;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecTeam).Version = saveData.Style2 + 1;
                                 break;
                             case "26": //HeatTeam
                                 _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatTeam).Add = true; 
-                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatTeam).Version = saveData.Style2;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatTeam).Version = saveData.Style2 + 1;
                                 break;
                             case "27": //AquaTeam
                                 _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaTeam).Add = true;
-                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaTeam).Version = saveData.Style2;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaTeam).Version = saveData.Style2 + 1;
                                 break;
                             case "28": //WoodTeam
                                 _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodTeam).Add = true;
-                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodTeam).Version = saveData.Style2;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodTeam).Version = saveData.Style2 + 1;
                                 break;
                             case "33": //ElecShld
                                 _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecShield).Add = true;
-                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecShield).Version = saveData.Style2;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecShield).Version = saveData.Style2 + 1;
                                 break;
                             case "34": //HeatShld
                                 _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatShield).Add = true;
-                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatShield).Version = saveData.Style2;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatShield).Version = saveData.Style2 + 1;
                                 break;
                             case "35": //AquaShld
                                 _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaShield).Add = true;
-                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaShield).Version = saveData.Style2;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaShield).Version = saveData.Style2 + 1;
                                 break;
                             case "36": //WoodShld
                                 _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodShield).Add = true;
-                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodShield).Version = saveData.Style2;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodShield).Version = saveData.Style2 + 1;
                                 break;
                             case "41": //ElecGround
                                 _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecGround).Add = true;
-                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecGround).Version = saveData.Style2;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecGround).Version = saveData.Style2 + 1;
                                 break;
                             case "42": //HeatGround
                                 _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatGround).Add = true;
-                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatGround).Version = saveData.Style2;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatGround).Version = saveData.Style2 + 1;
                                 break;
                             case "43": //AquaGround
                                 _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaGround).Add = true;
-                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaGround).Version = saveData.Style2;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaGround).Version = saveData.Style2 + 1;
                                 break;
                             case "44": //WoodGround
                                 _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodGround).Add = true;
-                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodGround).Version = saveData.Style2;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodGround).Version = saveData.Style2 + 1;
                                 break;
                             case "49": //ElecShdw
                                 _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecShadow).Add = true;
-                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecShadow).Version = saveData.Style2;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecShadow).Version = saveData.Style2 + 1;
                                 break;
                             case "50": //HeatShdw
                                 _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatShadow).Add = true;
-                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatShadow).Version = saveData.Style2;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatShadow).Version = saveData.Style2 + 1;
                                 break;
                             case "51": //AquaShdw
                                 _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaShadow).Add = true;
-                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaShadow).Version = saveData.Style2;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaShadow).Version = saveData.Style2 + 1;
                                 break;
                             case "52": //WoodShdw
                                 _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodShadow).Add = true;
-                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodShadow).Version = saveData.Style2;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodShadow).Version = saveData.Style2 + 1;
                                 break;
                             case "57": //ElecBug
                                 _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecBug).Add = true;
-                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecBug).Version = saveData.Style2;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.ElecBug).Version = saveData.Style2 + 1;
                                 break;
                             case "58": //HeatBug
                                 _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatBug).Add = true;
-                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatBug).Version = saveData.Style2;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.HeatBug).Version = saveData.Style2 + 1;
                                 break;
                             case "59": //AquaBug
                                 _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaBug).Add = true;
-                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaBug).Version = saveData.Style2;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.AquaBug).Version = saveData.Style2 + 1;
                                 break;
                             case "60": //WoodBug
                                 _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodBug).Add = true;
-                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodBug).Version = saveData.Style2;
+                                _tempStyles.FirstOrDefault(x => x.Name == Style.Value.WoodBug).Version = saveData.Style2 + 1;
                                 break;
                         }
                         _styles = _tempStyles;
@@ -2526,6 +2526,8 @@ namespace NaviDoctor
                                             saveData.EqStyle = 11;
                                         }
 
+                                        if(!style.Add.GetValueOrDefault(false) && !style.Equip.GetValueOrDefault(false)) {break;} 
+                                        
                                         switch (style.Version.GetValueOrDefault(1))
                                         {
                                             case 1:
@@ -2551,6 +2553,8 @@ namespace NaviDoctor
                                             saveData.EqStyle = 12;
                                         }
 
+                                        if(!style.Add.GetValueOrDefault(false) && !style.Equip.GetValueOrDefault(false)) {break;} 
+                                        
                                         switch (style.Version.GetValueOrDefault(1))
                                         {
                                             case 1:
@@ -2576,6 +2580,8 @@ namespace NaviDoctor
                                             saveData.EqStyle = 10;
                                         }
 
+                                        if(!style.Add.GetValueOrDefault(false) && !style.Equip.GetValueOrDefault(false)) {break;} 
+                                        
                                         switch (style.Version.GetValueOrDefault(1))
                                         {
                                             case 1:
@@ -2601,6 +2607,8 @@ namespace NaviDoctor
                                             saveData.EqStyle = 9;
                                         }
 
+                                        if(!style.Add.GetValueOrDefault(false) && !style.Equip.GetValueOrDefault(false)) {break;} 
+                                        
                                         switch (style.Version.GetValueOrDefault(1))
                                         {
                                             case 1:
@@ -2626,6 +2634,8 @@ namespace NaviDoctor
                                             saveData.EqStyle = 19;
                                         }
 
+                                        if(!style.Add.GetValueOrDefault(false) && !style.Equip.GetValueOrDefault(false)) {break;} 
+                                        
                                         switch (style.Version.GetValueOrDefault(1))
                                         {
                                             case 1:
@@ -2651,6 +2661,8 @@ namespace NaviDoctor
                                             saveData.EqStyle = 20;
                                         }
 
+                                        if(!style.Add.GetValueOrDefault(false) && !style.Equip.GetValueOrDefault(false)) {break;} 
+                                        
                                         switch (style.Version.GetValueOrDefault(1))
                                         {
                                             case 1:
@@ -2676,6 +2688,8 @@ namespace NaviDoctor
                                             saveData.EqStyle = 18;
                                         }
 
+                                        if(!style.Add.GetValueOrDefault(false) && !style.Equip.GetValueOrDefault(false)) {continue;}
+                                       
                                         switch (style.Version.GetValueOrDefault(1))
                                         {
                                             case 1:
@@ -2701,6 +2715,8 @@ namespace NaviDoctor
                                             saveData.EqStyle = 17;
                                         }
 
+                                        if(!style.Add.GetValueOrDefault(false) && !style.Equip.GetValueOrDefault(false)) {break;} 
+                                        
                                         switch (style.Version.GetValueOrDefault(1))
                                         {
                                             case 1:
@@ -2726,6 +2742,8 @@ namespace NaviDoctor
                                             saveData.EqStyle = 27;
                                         }
 
+                                        if(!style.Add.GetValueOrDefault(false) && !style.Equip.GetValueOrDefault(false)) {break;} 
+                                        
                                         switch (style.Version.GetValueOrDefault(1))
                                         {
                                             case 1:
@@ -2751,6 +2769,8 @@ namespace NaviDoctor
                                             saveData.EqStyle = 28;
                                         }
 
+                                        if(!style.Add.GetValueOrDefault(false) && !style.Equip.GetValueOrDefault(false)) {break;} 
+                                        
                                         switch (style.Version.GetValueOrDefault(1))
                                         {
                                             case 1:
@@ -2776,6 +2796,8 @@ namespace NaviDoctor
                                             saveData.EqStyle = 26;
                                         }
 
+                                        if(!style.Add.GetValueOrDefault(false) && !style.Equip.GetValueOrDefault(false)) {break;} 
+                                        
                                         switch (style.Version.GetValueOrDefault(1))
                                         {
                                             case 1:
@@ -2801,6 +2823,8 @@ namespace NaviDoctor
                                             saveData.EqStyle = 25;
                                         }
 
+                                        if(!style.Add.GetValueOrDefault(false) && !style.Equip.GetValueOrDefault(false)) {break;} 
+                                        
                                         switch (style.Version.GetValueOrDefault(1))
                                         {
                                             case 1:
@@ -2826,6 +2850,8 @@ namespace NaviDoctor
                                             saveData.EqStyle = 35;
                                         }
 
+                                        if(!style.Add.GetValueOrDefault(false) && !style.Equip.GetValueOrDefault(false)) {break;} 
+                                        
                                         switch (style.Version.GetValueOrDefault(1))
                                         {
                                             case 1:
@@ -2851,6 +2877,8 @@ namespace NaviDoctor
                                             saveData.EqStyle = 36;
                                         }
 
+                                        if(!style.Add.GetValueOrDefault(false) && !style.Equip.GetValueOrDefault(false)) {break;} 
+                                        
                                         switch (style.Version.GetValueOrDefault(1))
                                         {
                                             case 1:
@@ -2876,6 +2904,8 @@ namespace NaviDoctor
                                             saveData.EqStyle = 34;
                                         }
 
+                                        if(!style.Add.GetValueOrDefault(false) && !style.Equip.GetValueOrDefault(false)) {break;} 
+                                        
                                         switch (style.Version.GetValueOrDefault(1))
                                         {
                                             case 1:
@@ -2901,6 +2931,8 @@ namespace NaviDoctor
                                             saveData.EqStyle = 33;
                                         }
 
+                                        if(!style.Add.GetValueOrDefault(false) && !style.Equip.GetValueOrDefault(false)) {break;} 
+                                        
                                         switch (style.Version.GetValueOrDefault(1))
                                         {
                                             case 1:
@@ -2926,6 +2958,8 @@ namespace NaviDoctor
                                             saveData.EqStyle = 43;
                                         }
 
+                                        if(!style.Add.GetValueOrDefault(false) && !style.Equip.GetValueOrDefault(false)) {break;} 
+                                        
                                         switch (style.Version.GetValueOrDefault(1))
                                         {
                                             case 1:
@@ -2951,6 +2985,8 @@ namespace NaviDoctor
                                             saveData.EqStyle = 44;
                                         }
 
+                                        if(!style.Add.GetValueOrDefault(false) && !style.Equip.GetValueOrDefault(false)) {break;} 
+                                        
                                         switch (style.Version.GetValueOrDefault(1))
                                         {
                                             case 1:
@@ -2976,6 +3012,8 @@ namespace NaviDoctor
                                             saveData.EqStyle = 42;
                                         }
 
+                                        if(!style.Add.GetValueOrDefault(false) && !style.Equip.GetValueOrDefault(false)) {break;} 
+                                        
                                         switch (style.Version.GetValueOrDefault(1))
                                         {
                                             case 1:
@@ -3001,6 +3039,8 @@ namespace NaviDoctor
                                             saveData.EqStyle = 41;
                                         }
 
+                                        if(!style.Add.GetValueOrDefault(false) && !style.Equip.GetValueOrDefault(false)) {break;} 
+                                        
                                         switch (style.Version.GetValueOrDefault(1))
                                         {
                                             case 1:
@@ -3026,6 +3066,8 @@ namespace NaviDoctor
                                             saveData.EqStyle = 51;
                                         }
 
+                                        if(!style.Add.GetValueOrDefault(false) && !style.Equip.GetValueOrDefault(false)) {break;} 
+                                        
                                         switch (style.Version.GetValueOrDefault(1))
                                         {
                                             case 1:
@@ -3051,6 +3093,8 @@ namespace NaviDoctor
                                             saveData.EqStyle = 52;
                                         }
 
+                                        if(!style.Add.GetValueOrDefault(false) && !style.Equip.GetValueOrDefault(false)) {break;} 
+                                        
                                         switch (style.Version.GetValueOrDefault(1))
                                         {
                                             case 1:
@@ -3076,6 +3120,8 @@ namespace NaviDoctor
                                             saveData.EqStyle = 50;
                                         }
 
+                                        if(!style.Add.GetValueOrDefault(false) && !style.Equip.GetValueOrDefault(false)) {break;} 
+                                        
                                         switch (style.Version.GetValueOrDefault(1))
                                         {
                                             case 1:
@@ -3101,6 +3147,8 @@ namespace NaviDoctor
                                             saveData.EqStyle = 49;
                                         }
 
+                                        if(!style.Add.GetValueOrDefault(false) && !style.Equip.GetValueOrDefault(false)) {break;} 
+                                        
                                         switch (style.Version.GetValueOrDefault(1))
                                         {
                                             case 1:
@@ -3126,6 +3174,8 @@ namespace NaviDoctor
                                             saveData.EqStyle = 59;
                                         }
 
+                                        if(!style.Add.GetValueOrDefault(false) && !style.Equip.GetValueOrDefault(false)) {break;} 
+                                        
                                         switch (style.Version.GetValueOrDefault(1))
                                         {
                                             case 1:
@@ -3151,6 +3201,8 @@ namespace NaviDoctor
                                             saveData.EqStyle = 60;
                                         }
 
+                                        if(!style.Add.GetValueOrDefault(false) && !style.Equip.GetValueOrDefault(false)) {break;} 
+                                        
                                         switch (style.Version.GetValueOrDefault(1))
                                         {
                                             case 1:
@@ -3176,6 +3228,8 @@ namespace NaviDoctor
                                             saveData.EqStyle = 58;
                                         }
 
+                                        if(!style.Add.GetValueOrDefault(false) && !style.Equip.GetValueOrDefault(false)) {break;} 
+                                        
                                         switch (style.Version.GetValueOrDefault(1))
                                         {
                                             case 1:
@@ -3201,6 +3255,8 @@ namespace NaviDoctor
                                             saveData.EqStyle = 57;
                                         }
 
+                                        if(!style.Add.GetValueOrDefault(false) && !style.Equip.GetValueOrDefault(false)) {break;} 
+                                        
                                         switch (style.Version.GetValueOrDefault(1))
                                         {
                                             case 1:

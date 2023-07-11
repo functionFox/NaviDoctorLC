@@ -61,9 +61,9 @@ namespace NaviDoctor
                 var styleSelect = new StyleSelect(style, _currentGame);
                 styleSelect.EquipStyle = _styles.FirstOrDefault(x => x.Name == style.Name).Equip.GetValueOrDefault();
                 styleSelect.AddStyle = _styles.FirstOrDefault(x => x.Name == style.Name).Add.GetValueOrDefault();
-                if (_currentGame == GameTitle.Title.MegaManBattleNetwork2 && style.Name != Style.Value.Normal)
+                if (_currentGame != GameTitle.Title.MegaManBattleNetwork && style.Name != Style.Value.Normal)
                 {
-                    styleSelect.Version = _styles.FirstOrDefault(x => x.Name == style.Name).Version.GetValueOrDefault();
+                    styleSelect.Version = _styles.FirstOrDefault(x => x.Name == style.Name).Version.GetValueOrDefault(1);
                 }
                 styleSelect.EquipStyleChecked += (s, e) => EquipCheck(styleSelect);
                 styleSelect.AddStyleChecked += (s, e) => AddCheck(styleSelect);
@@ -134,8 +134,11 @@ namespace NaviDoctor
                         {
                             foreach (StyleSelect style_ in flpStyleChange.Controls)
                             {
-                                style_.EquipStyle = false;
-                                style_.AddStyle = false;
+                                if (style_.StyleValue != Style.Value.Normal)
+                                {
+                                    style_.EquipStyle = false;
+                                }
+                                    style_.AddStyle = false;
                             }
 
                             styleSelect.EquipStyle = true;
@@ -155,7 +158,7 @@ namespace NaviDoctor
             {
                 _styles.FirstOrDefault(x => x.Name == style.StyleValue).Equip = style.EquipStyle;
                 _styles.FirstOrDefault(x => x.Name == style.StyleValue).Add = style.AddStyle;
-                if (_currentGame == GameTitle.Title.MegaManBattleNetwork2) { _styles.FirstOrDefault(x => x.Name == style.StyleValue).Version = style.Version; }
+                if (_currentGame != GameTitle.Title.MegaManBattleNetwork) { _styles.FirstOrDefault(x => x.Name == style.StyleValue).Version = style.Version; }
             }
         }
 
