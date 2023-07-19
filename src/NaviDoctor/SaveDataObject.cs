@@ -48,10 +48,13 @@ namespace NaviDoctor
         public List<byte> LibraryData { get; set; } = new List<byte>();
         public List<byte> PALibraryData { get; set; } = new List<byte>(); // Not used in BN1
         public byte CustSize { get; set; } // BN3+
+        public bool isCustBugged { get; set; } // BN3+
         public List<byte> NCPInventory { get; set; } = new List<byte>();   // BN3+
         public List<byte> Compression { get; set; } = new List<byte>();    // BN3+
         public List<byte[]> NCPGrid { get; set; } = new List<byte[]>();  // BN3+
         public byte[,] GridPosData { get; set; } = new byte[5,5]; // BN3+
+        public List<byte> CustEffects { get; set; } = new List<byte>(); // BN3+
+        public List<byte> CustBugs { get; set; } = new List<byte>(); // BN3+
         public byte ModCode { get; set; } // BN3 only
         public byte MegaLimit { get; set; } // BN3+
         public byte GigaLimit { get; set; } // BN3+

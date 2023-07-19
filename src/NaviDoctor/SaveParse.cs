@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 using NaviDoctor.models;
 
@@ -35,11 +36,14 @@ namespace NaviDoctor
         private int CustInvOffset;
         private int CompressOffset;
         private int GridPartsOffset;
+        private int CustEffectsOffset;
+        private int CustBugsOffset;
         private int CustGridOffset;
         private int ModOffset;
         private int LimitsOffset;
         private int StyleOffset;
         private int RegMemOffset;
+        private int isBuggedOffset;
         private int RegChip1Offset;
         private int RegChip2Offset;
         private int RegChip3Offset;
@@ -194,6 +198,7 @@ namespace NaviDoctor
                     BattleOffsetEnd = 0x1215;
                     NaviOffsetStart = 0x1222; // Mega and Giga chips
                     NaviOffsetEnd = 0x1A01;
+                    isBuggedOffset = 0x1A8B;
                     CompressOffset = 0x1D60;
                     LibraryOffsetStart = 0x1D80; // All Standard, Mega, and Giga chips
                     LibraryOffsetEnd = 0x1DA7;
@@ -201,6 +206,8 @@ namespace NaviDoctor
                     PALibEnd = 0x1DAB;
                     GridPartsOffset = 0x4D40;
                     CustGridOffset = 0x4E10;
+                    CustEffectsOffset = 0x4E61;
+                    CustBugsOffset = 0x52E1;
                     ModOffset = 0x4E50;
                     AttackOffset = 0x4E68;
                     RapidOffset = 0x4E69;
@@ -456,6 +463,17 @@ namespace NaviDoctor
                         {
                             saveDataObject.NaviChips.Add(saveData[i]);
                         }
+                    }
+
+                    saveDataObject.isCustBugged = (saveData[isBuggedOffset] >> 7) == 1;
+
+                    for (int i = CustEffectsOffset; i < 0x4E8C; i++)
+                    {
+                        saveDataObject.CustEffects.Add(saveData[i]);
+                    }
+                    for (int i = CustBugsOffset; i <= 0x52EF; i++)
+                    {
+                        saveDataObject.CustBugs.Add(saveData[i]);
                     }
                     break;
             }
@@ -746,6 +764,23 @@ namespace NaviDoctor
                     {
                         byte[] gridParts = new byte[] { saveDataObject.NCPGrid[i][0], 0, saveDataObject.NCPGrid[i][1], saveDataObject.NCPGrid[i][2], saveDataObject.NCPGrid[i][3], 0, 0, 0 };
                         Buffer.BlockCopy(gridParts, 0, saveData, GridPartsOffset + (i * 8), 8);
+                    }
+
+                    saveData[isBuggedOffset] = (byte)(saveDataObject.isCustBugged ? saveData[isBuggedOffset] | 0x80 : saveData[isBuggedOffset] & 0x7F);
+
+                    int[] exclude = new int[] { AttackOffset, RapidOffset, ChargeOffset, CShotPowerOffset, LimitsOffset, LimitsOffset + 1 };
+
+                    for (int i = CustEffectsOffset; i < 0x4E8C; i++)
+                    {
+                        if (exclude.Contains(i))
+                            continue;
+
+                        saveData[i] = saveDataObject.CustEffects[i - CustEffectsOffset];
+                    }
+
+                    for (int i = CustBugsOffset; i <= 0x52EF; i++)
+                    {
+                        saveData[i] = saveDataObject.CustBugs[i - CustBugsOffset];
                     }
 
                     break;

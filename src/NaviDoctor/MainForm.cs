@@ -814,7 +814,7 @@ namespace NaviDoctor
             OpenFileDialog openFile = new OpenFileDialog();
             openFile.Title = "Open MMBN Save File...";
             openFile.InitialDirectory = @"C:\Program Files (x86)\Steam\userdata";
-            openFile.Filter = "Legacy Collection Save File|*save_0.bin|MMBN1 Save File|exe1_save_0.bin|MMBN2 Save File|exe2j_save_0.bin|exe3?_save_0.bin|MMBN3 Save File|All Files|*.*";
+            openFile.Filter = "Legacy Collection Save File|*save_0.bin|MMBN1 Save File|exe1_save_0.bin|MMBN2 Save File|exe2j_save_0.bin|MMBN3 Save File|exe3?_save_0.bin|All Files|*.*";
             openFile.RestoreDirectory = true;
             if (openFile.ShowDialog() == DialogResult.OK)
             {
@@ -3320,10 +3320,12 @@ namespace NaviDoctor
                     panelBugFragRegMem.Visible = false;
                     panelSubChips.Visible = false;
                     programAdvanceMemoToolStripMenuItem.Enabled = false;
+                    customizeToolStripMenuItem.Enabled = false;
                     panel_MegamanStats.Visible = true;
                     break;
                 case GameTitle.Title.MegaManBattleNetwork2:
                     programAdvanceMemoToolStripMenuItem.Enabled = true;
+                    customizeToolStripMenuItem.Enabled = false;
                     switch (saveData.Folders)
                     {
                         case 1:
@@ -3349,6 +3351,7 @@ namespace NaviDoctor
                 case GameTitle.Title.MegaManBattleNetwork3White:
                 case GameTitle.Title.MegaManBattleNetwork3Blue:
                     programAdvanceMemoToolStripMenuItem.Enabled = true;
+                    customizeToolStripMenuItem.Enabled = true;
                     switch (saveData.Folders)
                     {
                         case 1:
@@ -3502,6 +3505,21 @@ namespace NaviDoctor
         {
             var aboutPage = new AboutUs();
             aboutPage.ShowDialog();
+        }
+
+        private void customizeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (saveData == null)
+            {
+                MessageBox.Show("Please load a save file first.");
+                return; // Exit the event handler
+            }
+
+            var ncpEdit = new NaviCustEdit();
+            if (ncpEdit.ShowDialog() == DialogResult.OK)
+            {
+
+            }
         }
     }
 }

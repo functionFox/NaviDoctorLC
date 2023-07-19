@@ -58,6 +58,11 @@ namespace NaviDoctor.customControls
                     nudVersion.Visible = false;
                     break;
                 case GameTitle.Title.MegaManBattleNetwork2:
+                    nudVersion.Maximum = 3;
+                    break;
+                case GameTitle.Title.MegaManBattleNetwork3White:
+                case GameTitle.Title.MegaManBattleNetwork3Blue:
+                    nudVersion.Maximum = 4;
                     break;
 
             }
