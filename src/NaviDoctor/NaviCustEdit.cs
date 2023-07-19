@@ -30,7 +30,7 @@ namespace NaviDoctor
         private byte _megaLimit;
         private byte _gigaLimit;
         private short _bonusHP;
-        private List<string> _colors = new List<string> { "white", "pink", "yellow" };
+        private List<string> _colors = new List<string> { "White", "Pink", "Yellow" };
         public NaviCustEdit()
         {
             InitializeComponent();
