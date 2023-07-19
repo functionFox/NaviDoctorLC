@@ -970,6 +970,18 @@ namespace NaviDoctor
                 case GameTitle.Title.MegaManBattleNetwork2:
                 case GameTitle.Title.MegaManBattleNetwork3White:
                 case GameTitle.Title.MegaManBattleNetwork3Blue:
+                    foreach (var style in _styles)
+                    {
+                        switch (style.Name)
+                        {
+                            case Style.Value.Hub:
+                                saveData.MaxHP = (short)(maxHPStat.Value / 2);
+                                saveData.CurrHP = (short)(maxHPStat.Value / 2);
+                                break;
+                            default:
+                                break;
+                        }
+                    }
                     UpdateStyles(saveData);
                     saveData.BugFrags = (int)nudBugFrag.Value; 
                     saveData.RegMem = (byte)nudRegMem.Value;
