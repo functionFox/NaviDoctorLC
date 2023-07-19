@@ -493,12 +493,12 @@ ID = 0x136, Name = "AlphArm Omega", Size = 97, Type = 4
 ID = 0x137, Name = "Bass+", Size = 98, Type = 4
 ID = 0x138, Name = "BassGS", Size = 99, Type = 2
 ID = 0x139, Name = "39" // Glitch chips
-ID = 0x139, Name = "3A"
-ID = 0x139, Name = "3B"
-ID = 0x139, Name = "3C"
-ID = 0x139, Name = "3D"
-ID = 0x139, Name = "3E"
-ID = 0x139, Name = "3F"
+ID = 0x13A, Name = "3A"
+ID = 0x13B, Name = "3B"
+ID = 0x13C, Name = "3C"
+ID = 0x13D, Name = "3D"
+ID = 0x13E, Name = "3E"
+ID = 0x13F, Name = "3F"
 // PAs
 ID = 0x140, Name = "Z-Canon1", Size = 99
 ID = 0x141, Name = "Z-Canon2", Size = 99
@@ -532,6 +532,9 @@ ID = 0x15C, Name = "DeuxHero", Size = 99
 ID = 0x15D, Name = "MomQuake", Size = 99
 ID = 0x15E, Name = "PrixPowr", Size = 99
 ID = 0x15F, Name = "MstrStyl", Size = 99
+
+0x1A8B: 58 => D8 (highest bit 0 => 1) isNaviCustBugged flag?
+(Note: the lowest 6 bits of this address are to determine which viruses you have captured)
 
 0x1D60 - 0x1D79: NaviCust Parts Compression
 NOTE 1: Compression is stored similarly to how libraries are stored, though each part ID has four colors. Seeing as how compressing one program color in-game compresses all colors (whether you have it or not), it might as well be a set of nybbles (they could have saved SO much space). Otherwise, the bit order from left to right is for White (or Orange for some parts, like BrakChrg and HubBatc), Pink, Yellow, and Special (red/green/purple/etc, depending on the part). 0x1D60's value in particular is for the NONE program placeholder and SprArmor (side note: SprArmor has only one valid color, red), so that value will be 0x00 (0b00000000) or 0x0F (0b00001111) by the game's design, though realistically, it could be set to 01 (00000001) and nobody'd be the wiser. HOWEVER, if a compressable program has multiple colors, and one color is uncompressed and another color IS compressed via editing, you can't compress the color that's uncompressed while in the game. There's no benefit (that I can discern) to uncompressing only one color of a series while compressing others, and a big drawback to it, so just stick to setting values as 00, 0F, F0, or FF, as it will mirror the game's intended functionality.
@@ -614,15 +617,85 @@ The grid shows which parts were placed in what order.
 40: MegaChip+5
 41: GigaChip+1
 
-0x4E68: Attack Power
-0x4E69: Speed Power
-0x4E6A: Charge Power
-0x4E6D: Charge Shot Power
+===Stats and Effects===
+0x4E61: SuperArmor equipped?
+0x4E62: ShdwShoe(0x01)/FlotShoe(0x02) equipped?
+0x4E63: AirShoes equipped?
+0x4E64: UnderShirt equipped?
 
+0x4E66: BrakBust equipped?
+0x4E67: Shot misfire (02: Lv1, 04: Lv2, 00: Lv0/3)
+0x4E68: Attack Power (max: 04 [Guts Style max: 09])
+0x4E69: Speed Power (max: 04)
+0x4E6A: Charge Power (max: 04)
+0x4E6B: Shot misfire Lv3 (00: off, 0F: on)
+0x4E6C: C.Shot modification (1: Rock Cube, 2: Water Gun, 3: Flower)
+0x4E6D: Charge Shot Power
+0x4E6E: BrakChrg equipped?
+0x4E6F: Left+B Equipped
+[ 02: Block
+  04: Shield
+  06: Reflect
+  08: Anti-Damage ]
+0x4E70: Player Movement bug type (4: up, 8: down, C: confused)
+0x4E71: Battle HP Bug strength (00: None, 1F: Lv1, 0F: Lv2, 07: Lv3)
+0x4E72: Bonus RegMem
+0x4E73: Custom Size (Default: 5, max: 10 [0x0A])
 0x4E74: MegaChip limit (Max: 10 [0x0A])
 0x4E75: GigaChip limit (Max: 2)
+0x4E76: Custom HP Bug strength (00: None, 1F: Lv1, 0F: Lv2, 07: Lv3)
+0x4E77: SetPanel type
+[ 13: Cracked
+  14: Swamp
+  19: SetHoly
+  35: SetMetal
+  36: SetGreen
+  37: SetIce
+  38: SetLava
+  3A: SetSand  ]
+0x4E78: FastGauge equipped (0: no, 1: yes, 2: yes, but bugged)
+0x4E79: SneakRun/Attractor NCP bugged?
+0x4E7A: SneakRun equipped?
+0x4E7B: Attractor NCP equipped
+[ 01: Battery
+  02: OilBody
+  03: Fish
+  04: Jungle
+  FF: None ]
+0x4E7C: Support equipped (0: none, 1: Rush, 2: Beat, 3: Tango)
+0x4E7D: Collect equipped (0: no, 1: yes, but bugged, 2: yes)
+0x4E7E: BustrMAX equipped? (0 or 1)
+0x4E7F: GigFldr1 equipped? (0 or 1)
+0x4E80: DarkLcns equipped? (0 or 1)
+0x4E81: BlckMind equipped? (0 or 1)
+0x4E82: Humor equipped? (0 or 1)
+0x4E83: BugStop equipped? (0 or 1)
+0x4E84: EngyChng equipped? (0 or 1)
+0x4E85: Alpha equipped? (0 or 1)
 
+0x4E88: Press equipped? (0 or 1)
+
+0x4E8B: HubBatc equipped? (0 or 1)
 0x4E8C: HP Redundancy (16-bit value) (Note: They tried to get tricky with this. The formula is ((100+(20*HPMem))+NCP+Mod)/5), or more simply put, the Max HP value divided by five.
+
+
+
+==[NaviCust Bugs]==
+0x52E1: Player movement bug level
+0x52E2: Battle HP drain bug level
+0x52E3: Custom HP drain bug level
+0x52E4: Battle Panel bug level
+0x52E5: Custom Gauge bug level
+0x52E6: Encounter bug level
+0x52E7: Buster bug level
+0x52E8: Support bug level
+0x52E9: Modified C.Shot bug level
+0x52EA: Battle Result bug level
+0x52EB: BustrMAX bug level
+0x52EC: GigFldr1 bug level
+0x52ED: HubBatch bug level
+0x52EE: DarkLcns bug level
+0x52EF: ModTools bug (will only be 0 or 1, but does not specify which is bugged, probably will be based on the ModTool code supplied)
 
 0x5430: Library checksum
 
