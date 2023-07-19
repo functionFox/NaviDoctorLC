@@ -975,8 +975,11 @@ namespace NaviDoctor
                         switch (style.Name)
                         {
                             case Style.Value.Hub:
-                                saveData.MaxHP = (short)(maxHPStat.Value / 2);
-                                saveData.CurrHP = (short)(maxHPStat.Value / 2);
+                                if (style.Equip == true)
+                                {
+                                    saveData.MaxHP = (short)(maxHPStat.Value / 2);
+                                    saveData.CurrHP = (short)(maxHPStat.Value / 2);
+                                }
                                 break;
                             default:
                                 break;
