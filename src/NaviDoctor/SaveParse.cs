@@ -673,8 +673,16 @@ namespace NaviDoctor
                 case GameTitle.Title.MegaManBattleNetwork3Blue:
                     // HP is calculated a little differently
                     basehp = Math.Min((short)((saveDataObject.HPUp * 20) + 100), max);
-                    saveDataObject.CurrHP = (short)(basehp + saveDataObject.BonusHP);
-                    saveDataObject.MaxHP = (short)(basehp + saveDataObject.BonusHP);
+                    int hpmod = 1;
+                    foreach (byte[] ncp in saveDataObject.NCPGrid)
+                    {
+                        if (ncp[0] == 0xC4) // Check if HubBatc is in the NaviCust
+                        {
+                            hpmod = 2;
+                        }
+                    }
+                    saveDataObject.CurrHP = (short)((basehp + saveDataObject.BonusHP)/hpmod);
+                    saveDataObject.MaxHP = (short)((basehp + saveDataObject.BonusHP)/hpmod);
                     Buffer.BlockCopy(BitConverter.GetBytes(saveDataObject.CurrHP), 0, saveData, CurrHPOffset, 2);
                     Buffer.BlockCopy(BitConverter.GetBytes(saveDataObject.MaxHP), 0, saveData, MaxHPOffset, 2);
                     Buffer.BlockCopy(BitConverter.GetBytes(saveDataObject.MaxHP), 0, saveData, HPRedundancy1, 2);
