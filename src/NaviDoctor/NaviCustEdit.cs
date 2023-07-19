@@ -13,6 +13,8 @@ namespace NaviDoctor
 {
     public partial class NaviCustEdit : Form
     {
+        private int _maxHP;
+        private int _hpUp;
         private int _custSize;
         private int _atkBonus;
         private int _spdBonus;
@@ -38,6 +40,7 @@ namespace NaviDoctor
         {
             InitializeComponent();
             imgRunLine.Parent = imgCustGrid;
+            _hpUp = save.HPUp;
             _custSize = save.CustSize;
             _atkBonus = save.AttackPower;
             _spdBonus = save.RapidPower;
@@ -62,12 +65,13 @@ namespace NaviDoctor
             }
             if (hubBatch) // if HubBatc is equipped, MaxHP will be halved, so we've got to double it.
             {
-                _bonusHP = (short)((2 * save.MaxHP) - (save.HPUp * 20) - 100);
+                _maxHP = 2 * save.MaxHP;
             }
             else
             {
-                _bonusHP = (short)(save.MaxHP - (save.HPUp * 20) - 100);
+                _maxHP = save.MaxHP;
             }
+            _bonusHP = (short)(_maxHP - (_hpUp * 20) - 100);
             switch (style.Name)
             {
                 case Style.Value.HeatGuts:

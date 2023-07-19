@@ -672,7 +672,7 @@ namespace NaviDoctor
                 case GameTitle.Title.MegaManBattleNetwork3White:
                 case GameTitle.Title.MegaManBattleNetwork3Blue:
                     // HP is calculated a little differently
-                    basehp = Math.Min((short)((saveDataObject.HPUp * 20) + 100), max);
+                    basehp = Math.Min((short)(saveDataObject.MaxHP - saveDataObject.BonusHP), max);
                     int hpmod = 1;
                     foreach (byte[] ncp in saveDataObject.NCPGrid)
                     {
@@ -682,11 +682,11 @@ namespace NaviDoctor
                         }
                     }
                     saveDataObject.CurrHP = (short)((basehp + saveDataObject.BonusHP)/hpmod);
-                    saveDataObject.MaxHP = (short)((basehp + saveDataObject.BonusHP)/hpmod);
+                    saveDataObject.MaxHP = saveDataObject.CurrHP;
                     Buffer.BlockCopy(BitConverter.GetBytes(saveDataObject.CurrHP), 0, saveData, CurrHPOffset, 2);
                     Buffer.BlockCopy(BitConverter.GetBytes(saveDataObject.MaxHP), 0, saveData, MaxHPOffset, 2);
                     Buffer.BlockCopy(BitConverter.GetBytes(saveDataObject.MaxHP), 0, saveData, HPRedundancy1, 2);
-                    saveData[HPRedundancy2] = (byte)((basehp + saveDataObject.BonusHP) / 5);
+                    saveData[HPRedundancy2] = (byte)(saveDataObject.MaxHP / 5);
                     saveData[HPUpOffset] = (byte)((basehp - 100) / 20);
                     saveData[StyleOffset] = saveDataObject.Style1;
                     saveData[StyleOffset + 1] = saveDataObject.Style2;
