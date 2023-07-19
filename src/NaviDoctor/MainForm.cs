@@ -3530,7 +3530,9 @@ namespace NaviDoctor
                 return; // Exit the event handler
             }
 
-            var ncpEdit = new NaviCustEdit();
+            Style style = _styles.FirstOrDefault(x => x.Equip == true);
+
+            var ncpEdit = new NaviCustEdit(saveData, style);
             if (ncpEdit.ShowDialog() == DialogResult.OK)
             {
 
