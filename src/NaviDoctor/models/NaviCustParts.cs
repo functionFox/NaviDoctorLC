@@ -18,7 +18,7 @@ namespace NaviDoctor.models
             "MegaChip+4", "MegaChip+5", "GigaChip+1"
         };
 
-        public void BN3NCPMap()
+        public List<NCPListing> BN3NCPMap()
             // bool canCompress = ncpList[1].ncpData.ContainsKey(true); // example of querying if the NCP can be compressed.
             // int[,] ncpShape = ncpList[1].ncpData.FirstOrDefault(e => e.Key == true).Value;  
             // Example of how to get the grid shape of ID 1's (SprArmor's) compressed version.
@@ -891,6 +891,7 @@ namespace NaviDoctor.models
                     {0, 0, 0, 0, 0}
                 }
             });
+            return ncpList;
         }
         public void AddPart(string name, List<string> colors, Dictionary<bool, int[,]> data)
         {
@@ -909,5 +910,10 @@ namespace NaviDoctor.models
         public string ncpName { get; set; }
         public List<string> ncpColors { get; set; }
         public Dictionary<bool, int[,]> ncpData { get; set; } = new Dictionary<bool, int[,]>();
+        public int QuantityCol1 { get; set; } = 0;
+        public int QuantityCol2 { get; set; } = 0;
+        public int QuantityCol3 { get; set; } = 0;
+        public int QuantityCol4 { get; set; } = 0;
+        public bool isCompressed { get; set; } = false;
     }
 }

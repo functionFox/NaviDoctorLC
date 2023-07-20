@@ -105,6 +105,11 @@
     <Compile Include="models\BattleChipData.cs" />
     <Compile Include="models\NaviCustParts.cs" />
     <Compile Include="models\GameTitle.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="SaveParse.cs" />
     <Compile Include="SaveDataObject.cs" />
     <Compile Include="MainForm.cs">
@@ -137,14 +142,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <EmbeddedResource Include="StyleLoader.resx">
       <DependentUpon>StyleLoader.cs</DependentUpon>
     </EmbeddedResource>
@@ -176,13 +176,27 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <EmbeddedResource Include="images\blank.png" />
     <Content Include="images\checkmark.png" />
     <Content Include="images\icon.ico" />
-    <Content Include="images\NCPblock.png" />
-    <Content Include="images\NCPGrid4x4.png" />
-    <Content Include="images\NCPGrid4x5.png" />
-    <Content Include="images\NCPGrid5x5.png" />
-    <Content Include="images\NCPplusblock.png" />
+    <Content Include="images\NCPblockBlue.png" />
+    <Content Include="images\NCPblockDark.png" />
+    <Content Include="images\NCPblockGreen.png" />
+    <Content Include="images\NCPblockOrange.png" />
+    <Content Include="images\NCPblockPink.png" />
+    <Content Include="images\NCPblockPurple.png" />
+    <Content Include="images\NCPblockRed.png" />
+    <Content Include="images\NCPblockWhite.png" />
+    <Content Include="images\NCPblockYellow.png" />
+    <Content Include="images\NCPGrid.png" />
+    <Content Include="images\NCPGridRunLine.png" />
+    <Content Include="images\NCPOffGrid.png" />
+    <Content Include="images\NCPplusblockBlue.png" />
+    <Content Include="images\NCPplusblockGreen.png" />
+    <Content Include="images\NCPplusblockPink.png" />
+    <Content Include="images\NCPplusblockRed.png" />
+    <Content Include="images\NCPplusblockWhite.png" />
+    <Content Include="images\NCPplusblockYellow.png" />
     <Content Include="images\progspeen.gif" />
     <None Include="Resources\icon.ico" />
   </ItemGroup>

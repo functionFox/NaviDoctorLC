@@ -422,7 +422,7 @@ namespace NaviDoctor
                             index += 1;
                     }
 
-                    for (int i = CompressOffset; i < 20; i++)
+                    for (int i = CompressOffset; i < CompressOffset + 26; i++)
                     {
                         switch (saveData[i])
                         {
