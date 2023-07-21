@@ -60,12 +60,22 @@ Note: The purpose of the levels is to determine your NCP reward. I'm uncertain w
 0x0086: Folders Unlocked (WARNING: Do not edit!)
 NOTE: The order of the folders unlocked in BN3 is Folder 1 (value: 0x1), Extra Folder (0x2), and *then* Folder 2 (0x3).
 0x0094: Temporary HP
-Note: This is used to keep track when adjusting HP values via NCPs. For example, if you have 800 base HP, and boost it to 1500, but take 400 damage, this will stay 1100, even if you reduce the amount of HP via NCPs and then increase it again past the amount you had damage for. For the prior example, if you were to raise it back to 1200 after removing all NCPs and mod codes, it would still remain 1100, accounting for the damage you had previously taken.
+Note: This is used to keep track when adjusting HP values via NCPs.
+ For example, if you have 800 base HP, and boost it to 1500, but
+ take 400 damage, this will stay 1100, even if you reduce the amount
+ of HP via NCPs and then increase it again past the amount you had
+ damage for. For the prior example, if you were to raise it back to
+ 1200 after removing all NCPs and mod codes, it would still remain
+ 1100, accounting for the damage you had previously taken.
 0x00A0: Time
 0x00A8: Checksum
 0x00D0: Save Game version
 0x00D4: Save Game version
-Note: These are seemingly 32-bit values that differ between game version, and they're in ASCII text. White version's read "3W.." (33 57 00 00) and "Exe3" (45 78 65 33) while blue's reads "3B.." (33 42 00 00) and "3W.." (33 57 00 00). It may be possible to convert a Blue save to a White save and vice versa by changing these values.
+Note: These are seemingly 32-bit values that differ between game
+ version, and they're in ASCII text. White version's read "3W.." (33
+ 57 00 00) and "Exe3" (45 78 65 33) while blue's reads "3B.." (33 42
+ 00 00) and "3W.." (33 57 00 00). It may be possible to convert a
+ Blue save to a White save and vice versa by changing these values.
 0x00E0: Steam ID
 
 ===NaviCust Key Items===
@@ -173,13 +183,19 @@ Address=NCP Name=Color====ID=Color+ID Hex
 0x0278: DarkLcns (Dark)   50   C8 (occupies white table)
 
 0x0290 - 0x0307: Folder 1 Data 
-Note: These seems to be formatted identically to how it was in BN2, as pairs of 16-bit values representing Chip ID and Letter Code (0x00=A, 0x19=Z, 0x1A = *). Given the length of each folder appears to be the same, it might be possible to edit the Extra Folder.
+Note: These seems to be formatted identically to how it was in BN2,
+ as pairs of 16-bit values representing Chip ID and Letter Code
+ (0x00=A, 0x19=Z, 0x1A = *). Given the length of each folder appears
+ to be the same, it might be possible to edit the Extra Folder.
 0x0308 - 0x037F: Extra Folder Data
 0x0380 - 0x03F7: Folder 2 Data
 
 0x0412 - 0x1A73: Pack Chips data. It is formatted identically to how it was in BN2, with sets of six bytes indicating the quantity of each code, the sixth slot always being * code.
 
-NOTE: You cannot simply add values here. The game does not like it when you add chips to your pack that are not also listed in your library. If you add a value here, you'll have to set the corresponding Library flag and edit the Library checksum.
+NOTE: You cannot simply add values here. The game does not like it
+ when you add chips to your pack that are not also listed in your
+ library. If you add a value here, you'll have to set the
+ corresponding Library flag and edit the Library checksum.
 
 // Standard Chips
 ID = 0x01, Name = "Cannon", Size = 12, Type = 0
@@ -540,8 +556,32 @@ ID = 0x15F, Name = "MstrStyl", Size = 99
 (Note: the lowest 6 bits of this address are to determine which viruses you have captured)
 
 0x1D60 - 0x1D79: NaviCust Parts Compression
-NOTE 1: Compression is stored similarly to how libraries are stored, though each part ID has four colors. Seeing as how compressing one program color in-game compresses all colors (whether you have it or not), it might as well be a set of nybbles (they could have saved SO much space). Otherwise, the bit order from left to right is for White (or Orange for some parts, like BrakChrg and HubBatc), Pink, Yellow, and Special (red/green/purple/etc, depending on the part). 0x1D60's value in particular is for the NONE program placeholder and SprArmor (side note: SprArmor has only one valid color, red), so that value will be 0x00 (0b00000000) or 0x0F (0b00001111) by the game's design, though realistically, it could be set to 01 (00000001) and nobody'd be the wiser. HOWEVER, if a compressable program has multiple colors, and one color is uncompressed and another color IS compressed via editing, you can't compress the color that's uncompressed while in the game. There's no benefit (that I can discern) to uncompressing only one color of a series while compressing others, and a big drawback to it, so just stick to setting values as 00, 0F, F0, or FF, as it will mirror the game's intended functionality.
-NOTE 2: These are in order by ID, leaving DarkLcns by itself at 0x1D79 with F0. Interestingly, there are slots present for NCPs that don't have compression codes and NCP plus parts. Setting everything to F doesn't cause any crashes or bugs; in fact, program parts without compression codes CAN be compressed, and plus parts remain unaffected. NCPs without compression codes: Press, EngyChng, Alpha, all plus parts.
+NOTE 1: Compression is stored similarly to how libraries are stored,
+ though each part ID has four colors. Seeing as how compressing one
+ program color in-game compresses all colors (whether you have it or
+ not), it might as well be a set of nybbles (they could have saved
+ SO much space). Otherwise, the bit order from left to right is for
+ White (or Orange for some parts, like BrakChrg and HubBatc), Pink,
+ Yellow, and Special (red/green/purple/etc, depending on the part).
+ 0x1D60's value in particular is for the NONE program placeholder
+ and SprArmor (side note: SprArmor has only one valid color, red),
+ so that value will be 0x00 (0b00000000) or 0x0F (0b00001111) by the
+ game's design, though realistically, it could be set to 01
+ (00000001) and nobody'd be the wiser. HOWEVER, if a compressable
+ program has multiple colors, and one color is uncompressed and
+ another color IS compressed via editing, you can't compress the
+ color that's uncompressed while in the game. There's no benefit
+ (that I can discern) to uncompressing only one color of a series
+ while compressing others, and a big drawback to it, so just stick
+ to setting values as 00, 0F, F0, or FF, as it will mirror the
+ game's intended functionality.
+NOTE 2: These are in order by ID, leaving DarkLcns by itself at
+ 0x1D79 with F0. Interestingly, there are slots present for NCPs
+ that don't have compression codes and NCP plus parts. Setting
+ everything to F doesn't cause any crashes or bugs; in fact, program
+ parts without compression codes CAN be compressed, and plus parts
+ remain unaffected. NCPs without compression codes: Press, EngyChng,
+ Alpha, all plus parts.
 (Fully compressed sequence would be: 
     0F FF FF FF FF FF FF FF FF FF 00 0F FF FF FF FF 
     FF F0 00 00 00 00 FF FF FF F0)
@@ -557,7 +597,9 @@ Note: This follows the same rules as the above Library, and is added into the li
     FF FF FF FF
 
 0x4D40: NaviCust Part ID + Color
-Note: These are actually parsed with the upper 6 bits noting the ID in binary, and the lower 2 bits acting as the table for color (00 = white/orange/purple/dark, 01 = pink, 10 = yellow, 11 = red/green/blue).
+Note: These are actually parsed with the upper 6 bits noting the ID
+ in binary, and the lower 2 bits acting as the table for color 
+ (00 = white/orange/purple/dark, 01 = pink, 10 = yellow, 11 = red/green/blue).
 (Example C# code to parse the byte for ID and color, where variable ncp is the byte's hex value at this address:
 	byte[] bytes = BitConverter.GetBytes(ncp);
 	int color = bytes[0] & 0x3;
@@ -565,7 +607,10 @@ Note: These are actually parsed with the upper 6 bits noting the ID in binary, a
 0x4D42: Part's pivot X grid position (00 = leftmost column)
 0x4D43: Part's pivot Y grid position (00 = topmost row)
 0x4D44: Part Rotation (Note: value increases by 1 with each clockwise rotation. 00 = no rotation)
-Note: Every 8 bytes represents one part, and there is a maximum of 25 slots (technically 26, but that last one's probably invalid). To find the address just add (0x8*(0xN-0x1)) to 0x4D40, where N = the part # on the grid you want to find, converted to hex.
+Note: Every 8 bytes represents one part, and there is a maximum of
+ 25 slots (technically 26, but that last one's probably invalid). To
+ find the address just add (0x8*(0xN-0x1)) to 0x4D40, where N = the
+ part # on the grid you want to find, converted to hex.
 
 0x4E10 - 0x4E28: NaviCust Grid
 
@@ -687,8 +732,6 @@ Index Address Effect
  (42) 0x4E8B: HubBatc equipped? (0 or 1)
 (N/A) 0x4E8C: HP Redundancy (16-bit value) (Note: They tried to get tricky with this. The formula is ((100+(20*HPMem))+NCP+Mod)/5), or more simply put, the Max HP value divided by five.
 
-
-
 ==[NaviCust Bugs]==
 Index Address Effect
  (00) 0x52E1: Player movement bug level
@@ -709,4 +752,10 @@ Index Address Effect
 
 0x5430: Library checksum
 
-NOTE: Library checksum is probably the biggest pain in the butt problem when it comes to BN3. Fortunately, it's easier in LC than it is for the original GBA. First, you will add up all of the values of the libraries by starting at the first address in the series (0x1D80) and add all of the values from there to 0x1DAF (for a length of 0x40 values). From there, you negate the value and set it as a 16-bit value. That's it.
+NOTE: Library checksum is probably the biggest pain in the butt
+ problem when it comes to BN3. Fortunately, it's easier in LC than
+ it is for the original GBA. First, you will add up all of the
+ values of the libraries by starting at the first address in the
+ series (0x1D80) and add all of the values from there to 0x1DAF (for
+ a length of 0x40 values). From there, you negate the value and set
+ it as a 16-bit value. That's it.
