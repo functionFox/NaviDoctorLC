@@ -42,12 +42,23 @@
   3B: AquaBug
   3C: WoodBug
   
-  NOTE 1: It would appear that even though you can only store one style, if you have a style equipped outside the one you have stored, the default option to change into becomes "Normal Style" (except for the "Elemental Normal Styles") in the MegaMan menu. This may have been a failsafe to address what would have caused a crash or softlock in BN2. 
+  NOTE 1: It would appear that even though you can only store one
+  style, if you have a style equipped outside the one you have
+  stored, the default option to change into becomes "Normal Style"
+  (except for the "Elemental Normal Styles") in the MegaMan menu.
+  This may have been a failsafe to address what would have caused a
+  crash or softlock in BN2. 
   NOTE 2: It appears that the styles wrap around every 0x40 values, but this is definitely an 8-bit value.
   The cap appears to be confirmed at 3C, WoodBug Style (which I literally just grinded for, just happened to get Wood).  ]
 0x0014: Stored Style (See Style list above)
 0x0015: Style Level (00 = Lv.1, 03 = Lv.4)
-Note: The purpose of the levels is to determine your NCP reward. I'm uncertain what sort of effects occur when you edit this as I haven't currently tested it. Even if you can reobtain rewards this way, there seems to be little point in resetting a level as each reward (outside of Custom1/2, MegFldr1/2, etc) can only be run once without bugging out the NaviCust, and I intend on implementing a NaviCust parts editor anyway. Just give yourself the parts you want.
+Note: The purpose of the levels is to determine your NCP reward. I'm
+ uncertain what sort of effects occur when you edit this as I
+ haven't currently tested it. Even if you can reobtain rewards this
+ way, there seems to be little point in resetting a level as each
+ reward (outside of Custom1/2, MegFldr1/2, etc) can only be run once
+ without bugging out the NaviCust, and I intend on implementing a
+ NaviCust parts editor anyway. Just give yourself the parts you want.
 0x0017: RegMem
 0x001D: Reg Chip 1 (FF = off)
 0x001F: Reg Chip 2 (FF = off)
