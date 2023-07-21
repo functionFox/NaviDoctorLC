@@ -176,7 +176,6 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <EmbeddedResource Include="images\blank.png" />
     <Content Include="images\checkmark.png" />
     <Content Include="images\icon.ico" />
     <Content Include="images\NCPblockBlue.png" />

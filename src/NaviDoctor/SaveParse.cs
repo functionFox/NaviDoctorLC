@@ -43,6 +43,7 @@ namespace NaviDoctor
         private int LimitsOffset;
         private int StyleOffset;
         private int RegMemOffset;
+        private int RegUpOffset;
         private int isBuggedOffset;
         private int RegChip1Offset;
         private int RegChip2Offset;
@@ -164,58 +165,59 @@ namespace NaviDoctor
                     {
                         throw new Exception("Invalid save file data.\nPlease load a valid Battle\nNetwork 3 save file.");
                     }
-                    EqStyleOffset = 0x0001;
-                    StyleOffset = 0x0014;
-                    RegMemOffset = 0x0017;
-                    RegChip1Offset = 0x001D;
-                    RegChip2Offset = 0x001F;
-                    CurrHPOffset = 0x0020;
-                    MaxHPOffset = 0x0022;
-                    ZennyOffset = 0x0074;
-                    BugfragOffset = 0x0078;
-                    FoldersOffset = 0x0086;
-                    HPRedundancy1 = 0x0094; // Temporary HP tracker
-                    TimeOffset = 0x00A0;
-                    ChecksumOffset = 0x00A8;
-                    SteamOffset = 0x00E0;
-                    HPUpOffset = 0x0150;
-                    CustSizeOffset = 0x0151;
-                    SubMaxOffset = 0x0155;
-                    SubMiniOffset = 0x0160;
-                    SubFullOffset = 0x0161;
-                    SubSneakOffset = 0x0162;
-                    SubUntrapOffset = 0x0163;
-                    SubLocEnOffset = 0x0164;
-                    SubUnlockerOffset = 0x0165;
-                    CustInvOffset = 0x01B7;
-                    FolderOffsetStart = 0x0290;
-                    FolderOffsetEnd = 0x0307;
+                    EqStyleOffset =      0x0001;
+                    StyleOffset =        0x0014;
+                    RegMemOffset =       0x0017;
+                    RegChip1Offset =     0x001D;
+                    RegChip2Offset =     0x001F;
+                    CurrHPOffset =       0x0020;
+                    MaxHPOffset =        0x0022;
+                    ZennyOffset =        0x0074;
+                    BugfragOffset =      0x0078;
+                    FoldersOffset =      0x0086;
+                    HPRedundancy1 =      0x0094; // Temporary HP tracker
+                    TimeOffset =         0x00A0;
+                    ChecksumOffset =     0x00A8;
+                    SteamOffset =        0x00E0;
+                    HPUpOffset =         0x0150;
+                    CustSizeOffset =     0x0151;
+                    RegUpOffset =        0x0152;
+                    SubMaxOffset =       0x0155;
+                    SubMiniOffset =      0x0160;
+                    SubFullOffset =      0x0161;
+                    SubSneakOffset =     0x0162;
+                    SubUntrapOffset =    0x0163;
+                    SubLocEnOffset =     0x0164;
+                    SubUnlockerOffset =  0x0165;
+                    CustInvOffset =      0x01B7;
+                    FolderOffsetStart =  0x0290;
+                    FolderOffsetEnd =    0x0307;
                     Folder2OffsetStart = 0x0308; // Xtra Folder
-                    Folder2OffsetEnd = 0x037F;
+                    Folder2OffsetEnd =   0x037F;
                     Folder3OffsetStart = 0x0380; // Folder 2
-                    Folder3OffsetEnd = 0x03F7; // Trust me, it makes sense.
-                    BattleOffsetStart = 0x0412;
-                    BattleOffsetEnd = 0x1215;
-                    NaviOffsetStart = 0x1222; // Mega and Giga chips
-                    NaviOffsetEnd = 0x1A01;
-                    isBuggedOffset = 0x1A8B;
-                    CompressOffset = 0x1D60;
+                    Folder3OffsetEnd =   0x03F7; // Trust me, it makes sense.
+                    BattleOffsetStart =  0x0412;
+                    BattleOffsetEnd =    0x1215;
+                    NaviOffsetStart =    0x1222; // Mega and Giga chips
+                    NaviOffsetEnd =      0x1A01;
+                    isBuggedOffset =     0x1A8B;
+                    CompressOffset =     0x1D60;
                     LibraryOffsetStart = 0x1D80; // All Standard, Mega, and Giga chips
-                    LibraryOffsetEnd = 0x1DA7;
-                    PALibStart = 0x1DA8;
-                    PALibEnd = 0x1DAB;
-                    GridPartsOffset = 0x4D40;
-                    CustGridOffset = 0x4E10;
-                    CustEffectsOffset = 0x4E61;
-                    CustBugsOffset = 0x52E1;
-                    ModOffset = 0x4E50;
-                    AttackOffset = 0x4E68;
-                    RapidOffset = 0x4E69;
-                    ChargeOffset = 0x4E6A;
-                    CShotPowerOffset = 0x4E6D;
-                    LimitsOffset = 0x4E74;
-                    HPRedundancy2 = 0x4E8C; // Max HP divided by five
-                    LibChecksumOffset = 0x5430;
+                    LibraryOffsetEnd =   0x1DA7;
+                    PALibStart =         0x1DA8;
+                    PALibEnd =           0x1DAB;
+                    GridPartsOffset =    0x4D40;
+                    CustGridOffset =     0x4E10;
+                    CustEffectsOffset =  0x4E61;
+                    CustBugsOffset =     0x52E1;
+                    ModOffset =          0x4E50;
+                    AttackOffset =       0x4E68;
+                    RapidOffset =        0x4E69;
+                    ChargeOffset =       0x4E6A;
+                    CShotPowerOffset =   0x4E6D;
+                    LimitsOffset =       0x4E74;
+                    HPRedundancy2 =      0x4E8C; // Max HP divided by five
+                    LibChecksumOffset =  0x5430;
                 }
                 else
                 {
@@ -394,7 +396,10 @@ namespace NaviDoctor
                     saveDataObject.GigaLimit = saveData[LimitsOffset + 1];
                     saveDataObject.BugFrags = BitConverter.ToUInt16(saveData, BugfragOffset);
                     saveDataObject.BonusHP = (short)((saveData[HPRedundancy2] * 5) - (saveDataObject.HPUp * 20) - 100);
-
+                    for (int i = 0; i < 3; i++)
+                    {
+                        saveDataObject.RegUpList.Add(saveData[RegUpOffset + i]);
+                    }
                     int index = CustInvOffset;
                     Dictionary<int, int> indexMap = new Dictionary<int, int>()
                     {
@@ -583,7 +588,7 @@ namespace NaviDoctor
                 saveDataObject.MaxHP = Math.Min(saveDataObject.MaxHP, max);
                 Buffer.BlockCopy(BitConverter.GetBytes(saveDataObject.CurrHP), 0, saveData, CurrHPOffset, 2);
                 Buffer.BlockCopy(BitConverter.GetBytes(saveDataObject.MaxHP), 0, saveData, MaxHPOffset, 2);
-                saveData[HPUpOffset] = (byte)((saveDataObject.MaxHP - 100) / 20);
+                saveData[HPUpOffset] = saveDataObject.HPUp;
             }
 
             switch (saveDataObject.GameName)
@@ -672,7 +677,7 @@ namespace NaviDoctor
                 case GameTitle.Title.MegaManBattleNetwork3White:
                 case GameTitle.Title.MegaManBattleNetwork3Blue:
                     // HP is calculated a little differently
-                    basehp = Math.Min((short)(saveDataObject.MaxHP - saveDataObject.BonusHP), max);
+                    basehp = Math.Min((short)(saveDataObject.HPUp * 20 + 100), max);
                     int hpmod = 1;
                     foreach (byte[] ncp in saveDataObject.NCPGrid)
                     {
@@ -681,13 +686,13 @@ namespace NaviDoctor
                             hpmod = 2;
                         }
                     }
-                    saveDataObject.CurrHP = (short)((basehp + saveDataObject.BonusHP)/hpmod);
+                    saveDataObject.CurrHP = (short)(saveDataObject.CurrHP/hpmod);
                     saveDataObject.MaxHP = saveDataObject.CurrHP;
                     Buffer.BlockCopy(BitConverter.GetBytes(saveDataObject.CurrHP), 0, saveData, CurrHPOffset, 2);
                     Buffer.BlockCopy(BitConverter.GetBytes(saveDataObject.MaxHP), 0, saveData, MaxHPOffset, 2);
                     Buffer.BlockCopy(BitConverter.GetBytes(saveDataObject.MaxHP), 0, saveData, HPRedundancy1, 2);
                     saveData[HPRedundancy2] = (byte)(saveDataObject.MaxHP / 5);
-                    saveData[HPUpOffset] = (byte)((basehp - 100) / 20);
+                    saveData[HPUpOffset] = saveDataObject.HPUp;
                     saveData[StyleOffset] = saveDataObject.Style1;
                     saveData[StyleOffset + 1] = saveDataObject.Style2;
                     saveData[ModOffset] = saveDataObject.ModCode;
@@ -696,7 +701,33 @@ namespace NaviDoctor
                     saveData[LimitsOffset + 1] = saveDataObject.GigaLimit;
 
                     Buffer.BlockCopy(BitConverter.GetBytes(saveDataObject.BugFrags), 0, saveData, BugfragOffset, 2);
-
+                    int regmem = saveDataObject.RegMem - 4;
+                    int maxreg;
+                    for (int i = 2; i >= 0; i--)
+                    {
+                        switch (i)
+                        {
+                            case 2:
+                                maxreg = 4;
+                                break;
+                            case 1:
+                                maxreg = 12;
+                                break;
+                            default:
+                                maxreg = 10;
+                                break;
+                        }
+                        if (saveDataObject.RegUpList[i] > maxreg)
+                        {
+                            saveDataObject.RegUpList[i] = (byte)maxreg;
+                        }
+                        maxreg -= saveDataObject.RegUpList[i];
+                        int value = (regmem / (i + 1));
+                        value = Math.Min(value, maxreg);
+                        regmem -= value * (i + 1);
+                        saveDataObject.RegUpList[i] += (byte)value;
+                        saveData[RegUpOffset + i] = saveDataObject.RegUpList[i];
+                    }
                     int mapIndex = CustInvOffset;
                     Dictionary<int, int> indexMap = new Dictionary<int, int>()
                     {

@@ -47,6 +47,7 @@ namespace NaviDoctor
         public List<byte> SecretChips { get; set; } = new List<byte>(); // Not used in BN1
         public List<byte> LibraryData { get; set; } = new List<byte>();
         public List<byte> PALibraryData { get; set; } = new List<byte>(); // Not used in BN1
+        public List<byte> RegUpList { get; set; } = new List<byte>();
         public byte CustSize { get; set; } // BN3+
         public bool isCustBugged { get; set; } // BN3+
         public List<byte> NCPInventory { get; set; } = new List<byte>();   // BN3+

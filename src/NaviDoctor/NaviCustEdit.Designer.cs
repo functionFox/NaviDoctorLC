@@ -56,7 +56,6 @@ namespace NaviDoctor
             this.imgCustGrid43 = new System.Windows.Forms.PictureBox();
             this.imgCustGrid44 = new System.Windows.Forms.PictureBox();
             this.imgCustGrid05 = new System.Windows.Forms.PictureBox();
-            this.imgCustGrid06 = new System.Windows.Forms.PictureBox();
             this.imgCustGrid15 = new System.Windows.Forms.PictureBox();
             this.imgCustGrid16 = new System.Windows.Forms.PictureBox();
             this.imgCustGrid25 = new System.Windows.Forms.PictureBox();
@@ -71,14 +70,33 @@ namespace NaviDoctor
             this.imgCustGrid53 = new System.Windows.Forms.PictureBox();
             this.imgCustGrid54 = new System.Windows.Forms.PictureBox();
             this.imgCustGrid55 = new System.Windows.Forms.PictureBox();
-            this.imgCustGrid60 = new System.Windows.Forms.PictureBox();
             this.imgCustGrid56 = new System.Windows.Forms.PictureBox();
             this.imgCustGrid61 = new System.Windows.Forms.PictureBox();
             this.imgCustGrid62 = new System.Windows.Forms.PictureBox();
             this.imgCustGrid63 = new System.Windows.Forms.PictureBox();
             this.imgCustGrid64 = new System.Windows.Forms.PictureBox();
             this.imgCustGrid65 = new System.Windows.Forms.PictureBox();
-            this.imgCustGrid66 = new System.Windows.Forms.PictureBox();
+            this.imgRunLine = new System.Windows.Forms.PictureBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.labelHPTotal = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.labelAttack = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.labelSpeed = new System.Windows.Forms.Label();
+            this.labelCharge = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.labelCShot = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.labelRegMem = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.labelMegaLimit = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.labelGigaLimit = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.labelCustHandSize = new System.Windows.Forms.Label();
+            this.cBoxModCode = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.imgCustGrid00)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgCustGrid01)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgCustGrid02)).BeginInit();
@@ -105,7 +123,6 @@ namespace NaviDoctor
             ((System.ComponentModel.ISupportInitialize)(this.imgCustGrid43)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgCustGrid44)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgCustGrid05)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.imgCustGrid06)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgCustGrid15)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgCustGrid16)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgCustGrid25)).BeginInit();
@@ -120,14 +137,13 @@ namespace NaviDoctor
             ((System.ComponentModel.ISupportInitialize)(this.imgCustGrid53)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgCustGrid54)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgCustGrid55)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.imgCustGrid60)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgCustGrid56)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgCustGrid61)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgCustGrid62)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgCustGrid63)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgCustGrid64)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgCustGrid65)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.imgCustGrid66)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imgRunLine)).BeginInit();
             this.SuspendLayout();
             // 
             // imgCustGrid00
@@ -139,6 +155,8 @@ namespace NaviDoctor
             this.imgCustGrid00.Size = new System.Drawing.Size(75, 75);
             this.imgCustGrid00.TabIndex = 0;
             this.imgCustGrid00.TabStop = false;
+            this.imgCustGrid00.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
+            this.imgCustGrid00.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
             // imgCustGrid01
             // 
@@ -149,6 +167,8 @@ namespace NaviDoctor
             this.imgCustGrid01.Size = new System.Drawing.Size(75, 75);
             this.imgCustGrid01.TabIndex = 0;
             this.imgCustGrid01.TabStop = false;
+            this.imgCustGrid01.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
+            this.imgCustGrid01.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
             // imgCustGrid02
             // 
@@ -159,6 +179,8 @@ namespace NaviDoctor
             this.imgCustGrid02.Size = new System.Drawing.Size(75, 75);
             this.imgCustGrid02.TabIndex = 0;
             this.imgCustGrid02.TabStop = false;
+            this.imgCustGrid02.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
+            this.imgCustGrid02.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
             // imgCustGrid03
             // 
@@ -169,6 +191,8 @@ namespace NaviDoctor
             this.imgCustGrid03.Size = new System.Drawing.Size(75, 75);
             this.imgCustGrid03.TabIndex = 0;
             this.imgCustGrid03.TabStop = false;
+            this.imgCustGrid03.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
+            this.imgCustGrid03.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
             // imgCustGrid04
             // 
@@ -179,6 +203,8 @@ namespace NaviDoctor
             this.imgCustGrid04.Size = new System.Drawing.Size(75, 75);
             this.imgCustGrid04.TabIndex = 0;
             this.imgCustGrid04.TabStop = false;
+            this.imgCustGrid04.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
+            this.imgCustGrid04.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
             // imgCustGrid10
             // 
@@ -189,6 +215,8 @@ namespace NaviDoctor
             this.imgCustGrid10.Size = new System.Drawing.Size(75, 75);
             this.imgCustGrid10.TabIndex = 0;
             this.imgCustGrid10.TabStop = false;
+            this.imgCustGrid10.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
+            this.imgCustGrid10.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
             // imgCustGrid11
             // 
@@ -199,6 +227,8 @@ namespace NaviDoctor
             this.imgCustGrid11.Size = new System.Drawing.Size(75, 75);
             this.imgCustGrid11.TabIndex = 0;
             this.imgCustGrid11.TabStop = false;
+            this.imgCustGrid11.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
+            this.imgCustGrid11.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
             // imgCustGrid12
             // 
@@ -209,6 +239,8 @@ namespace NaviDoctor
             this.imgCustGrid12.Size = new System.Drawing.Size(75, 75);
             this.imgCustGrid12.TabIndex = 0;
             this.imgCustGrid12.TabStop = false;
+            this.imgCustGrid12.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
+            this.imgCustGrid12.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
             // imgCustGrid13
             // 
@@ -219,6 +251,8 @@ namespace NaviDoctor
             this.imgCustGrid13.Size = new System.Drawing.Size(75, 75);
             this.imgCustGrid13.TabIndex = 0;
             this.imgCustGrid13.TabStop = false;
+            this.imgCustGrid13.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
+            this.imgCustGrid13.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
             // imgCustGrid14
             // 
@@ -229,6 +263,8 @@ namespace NaviDoctor
             this.imgCustGrid14.Size = new System.Drawing.Size(75, 75);
             this.imgCustGrid14.TabIndex = 0;
             this.imgCustGrid14.TabStop = false;
+            this.imgCustGrid14.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
+            this.imgCustGrid14.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
             // imgCustGrid20
             // 
@@ -239,6 +275,8 @@ namespace NaviDoctor
             this.imgCustGrid20.Size = new System.Drawing.Size(75, 75);
             this.imgCustGrid20.TabIndex = 0;
             this.imgCustGrid20.TabStop = false;
+            this.imgCustGrid20.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
+            this.imgCustGrid20.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
             // imgCustGrid21
             // 
@@ -249,6 +287,8 @@ namespace NaviDoctor
             this.imgCustGrid21.Size = new System.Drawing.Size(75, 75);
             this.imgCustGrid21.TabIndex = 0;
             this.imgCustGrid21.TabStop = false;
+            this.imgCustGrid21.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
+            this.imgCustGrid21.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
             // imgCustGrid22
             // 
@@ -260,6 +300,8 @@ namespace NaviDoctor
             this.imgCustGrid22.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.imgCustGrid22.TabIndex = 0;
             this.imgCustGrid22.TabStop = false;
+            this.imgCustGrid22.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
+            this.imgCustGrid22.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
             // imgCustGrid23
             // 
@@ -270,6 +312,8 @@ namespace NaviDoctor
             this.imgCustGrid23.Size = new System.Drawing.Size(75, 75);
             this.imgCustGrid23.TabIndex = 0;
             this.imgCustGrid23.TabStop = false;
+            this.imgCustGrid23.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
+            this.imgCustGrid23.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
             // imgCustGrid24
             // 
@@ -280,6 +324,8 @@ namespace NaviDoctor
             this.imgCustGrid24.Size = new System.Drawing.Size(75, 75);
             this.imgCustGrid24.TabIndex = 0;
             this.imgCustGrid24.TabStop = false;
+            this.imgCustGrid24.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
+            this.imgCustGrid24.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
             // imgCustGrid30
             // 
@@ -290,6 +336,8 @@ namespace NaviDoctor
             this.imgCustGrid30.Size = new System.Drawing.Size(75, 75);
             this.imgCustGrid30.TabIndex = 0;
             this.imgCustGrid30.TabStop = false;
+            this.imgCustGrid30.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
+            this.imgCustGrid30.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
             // imgCustGrid31
             // 
@@ -300,6 +348,8 @@ namespace NaviDoctor
             this.imgCustGrid31.Size = new System.Drawing.Size(75, 75);
             this.imgCustGrid31.TabIndex = 0;
             this.imgCustGrid31.TabStop = false;
+            this.imgCustGrid31.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
+            this.imgCustGrid31.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
             // imgCustGrid32
             // 
@@ -310,6 +360,8 @@ namespace NaviDoctor
             this.imgCustGrid32.Size = new System.Drawing.Size(75, 75);
             this.imgCustGrid32.TabIndex = 0;
             this.imgCustGrid32.TabStop = false;
+            this.imgCustGrid32.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
+            this.imgCustGrid32.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
             // imgCustGrid33
             // 
@@ -320,6 +372,8 @@ namespace NaviDoctor
             this.imgCustGrid33.Size = new System.Drawing.Size(75, 75);
             this.imgCustGrid33.TabIndex = 0;
             this.imgCustGrid33.TabStop = false;
+            this.imgCustGrid33.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
+            this.imgCustGrid33.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
             // imgCustGrid34
             // 
@@ -330,6 +384,8 @@ namespace NaviDoctor
             this.imgCustGrid34.Size = new System.Drawing.Size(75, 75);
             this.imgCustGrid34.TabIndex = 0;
             this.imgCustGrid34.TabStop = false;
+            this.imgCustGrid34.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
+            this.imgCustGrid34.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
             // imgCustGrid40
             // 
@@ -340,6 +396,8 @@ namespace NaviDoctor
             this.imgCustGrid40.Size = new System.Drawing.Size(75, 75);
             this.imgCustGrid40.TabIndex = 0;
             this.imgCustGrid40.TabStop = false;
+            this.imgCustGrid40.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
+            this.imgCustGrid40.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
             // imgCustGrid41
             // 
@@ -350,6 +408,8 @@ namespace NaviDoctor
             this.imgCustGrid41.Size = new System.Drawing.Size(75, 75);
             this.imgCustGrid41.TabIndex = 0;
             this.imgCustGrid41.TabStop = false;
+            this.imgCustGrid41.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
+            this.imgCustGrid41.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
             // imgCustGrid42
             // 
@@ -360,6 +420,8 @@ namespace NaviDoctor
             this.imgCustGrid42.Size = new System.Drawing.Size(75, 75);
             this.imgCustGrid42.TabIndex = 0;
             this.imgCustGrid42.TabStop = false;
+            this.imgCustGrid42.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
+            this.imgCustGrid42.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
             // imgCustGrid43
             // 
@@ -370,6 +432,8 @@ namespace NaviDoctor
             this.imgCustGrid43.Size = new System.Drawing.Size(75, 75);
             this.imgCustGrid43.TabIndex = 0;
             this.imgCustGrid43.TabStop = false;
+            this.imgCustGrid43.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
+            this.imgCustGrid43.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
             // imgCustGrid44
             // 
@@ -380,6 +444,8 @@ namespace NaviDoctor
             this.imgCustGrid44.Size = new System.Drawing.Size(75, 75);
             this.imgCustGrid44.TabIndex = 0;
             this.imgCustGrid44.TabStop = false;
+            this.imgCustGrid44.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
+            this.imgCustGrid44.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
             // imgCustGrid05
             // 
@@ -390,16 +456,8 @@ namespace NaviDoctor
             this.imgCustGrid05.Size = new System.Drawing.Size(75, 75);
             this.imgCustGrid05.TabIndex = 0;
             this.imgCustGrid05.TabStop = false;
-            // 
-            // imgCustGrid06
-            // 
-            this.imgCustGrid06.Image = global::NaviDoctor.Properties.Resources.blank;
-            this.imgCustGrid06.Location = new System.Drawing.Point(733, 9);
-            this.imgCustGrid06.Margin = new System.Windows.Forms.Padding(0);
-            this.imgCustGrid06.Name = "imgCustGrid06";
-            this.imgCustGrid06.Size = new System.Drawing.Size(75, 75);
-            this.imgCustGrid06.TabIndex = 0;
-            this.imgCustGrid06.TabStop = false;
+            this.imgCustGrid05.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
+            this.imgCustGrid05.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
             // imgCustGrid15
             // 
@@ -410,6 +468,8 @@ namespace NaviDoctor
             this.imgCustGrid15.Size = new System.Drawing.Size(75, 75);
             this.imgCustGrid15.TabIndex = 0;
             this.imgCustGrid15.TabStop = false;
+            this.imgCustGrid15.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
+            this.imgCustGrid15.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
             // imgCustGrid16
             // 
@@ -420,6 +480,8 @@ namespace NaviDoctor
             this.imgCustGrid16.Size = new System.Drawing.Size(75, 75);
             this.imgCustGrid16.TabIndex = 0;
             this.imgCustGrid16.TabStop = false;
+            this.imgCustGrid16.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
+            this.imgCustGrid16.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
             // imgCustGrid25
             // 
@@ -430,6 +492,8 @@ namespace NaviDoctor
             this.imgCustGrid25.Size = new System.Drawing.Size(75, 75);
             this.imgCustGrid25.TabIndex = 0;
             this.imgCustGrid25.TabStop = false;
+            this.imgCustGrid25.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
+            this.imgCustGrid25.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
             // imgCustGrid26
             // 
@@ -440,6 +504,8 @@ namespace NaviDoctor
             this.imgCustGrid26.Size = new System.Drawing.Size(75, 75);
             this.imgCustGrid26.TabIndex = 0;
             this.imgCustGrid26.TabStop = false;
+            this.imgCustGrid26.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
+            this.imgCustGrid26.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
             // imgCustGrid35
             // 
@@ -450,6 +516,8 @@ namespace NaviDoctor
             this.imgCustGrid35.Size = new System.Drawing.Size(75, 75);
             this.imgCustGrid35.TabIndex = 0;
             this.imgCustGrid35.TabStop = false;
+            this.imgCustGrid35.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
+            this.imgCustGrid35.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
             // imgCustGrid36
             // 
@@ -460,6 +528,8 @@ namespace NaviDoctor
             this.imgCustGrid36.Size = new System.Drawing.Size(75, 75);
             this.imgCustGrid36.TabIndex = 0;
             this.imgCustGrid36.TabStop = false;
+            this.imgCustGrid36.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
+            this.imgCustGrid36.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
             // imgCustGrid45
             // 
@@ -470,6 +540,8 @@ namespace NaviDoctor
             this.imgCustGrid45.Size = new System.Drawing.Size(75, 75);
             this.imgCustGrid45.TabIndex = 0;
             this.imgCustGrid45.TabStop = false;
+            this.imgCustGrid45.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
+            this.imgCustGrid45.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
             // imgCustGrid46
             // 
@@ -480,6 +552,8 @@ namespace NaviDoctor
             this.imgCustGrid46.Size = new System.Drawing.Size(75, 75);
             this.imgCustGrid46.TabIndex = 0;
             this.imgCustGrid46.TabStop = false;
+            this.imgCustGrid46.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
+            this.imgCustGrid46.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
             // imgCustGrid50
             // 
@@ -490,6 +564,8 @@ namespace NaviDoctor
             this.imgCustGrid50.Size = new System.Drawing.Size(75, 75);
             this.imgCustGrid50.TabIndex = 0;
             this.imgCustGrid50.TabStop = false;
+            this.imgCustGrid50.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
+            this.imgCustGrid50.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
             // imgCustGrid51
             // 
@@ -500,6 +576,8 @@ namespace NaviDoctor
             this.imgCustGrid51.Size = new System.Drawing.Size(75, 75);
             this.imgCustGrid51.TabIndex = 0;
             this.imgCustGrid51.TabStop = false;
+            this.imgCustGrid51.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
+            this.imgCustGrid51.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
             // imgCustGrid52
             // 
@@ -510,6 +588,8 @@ namespace NaviDoctor
             this.imgCustGrid52.Size = new System.Drawing.Size(75, 75);
             this.imgCustGrid52.TabIndex = 0;
             this.imgCustGrid52.TabStop = false;
+            this.imgCustGrid52.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
+            this.imgCustGrid52.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
             // imgCustGrid53
             // 
@@ -520,6 +600,8 @@ namespace NaviDoctor
             this.imgCustGrid53.Size = new System.Drawing.Size(75, 75);
             this.imgCustGrid53.TabIndex = 0;
             this.imgCustGrid53.TabStop = false;
+            this.imgCustGrid53.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
+            this.imgCustGrid53.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
             // imgCustGrid54
             // 
@@ -530,6 +612,8 @@ namespace NaviDoctor
             this.imgCustGrid54.Size = new System.Drawing.Size(75, 75);
             this.imgCustGrid54.TabIndex = 0;
             this.imgCustGrid54.TabStop = false;
+            this.imgCustGrid54.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
+            this.imgCustGrid54.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
             // imgCustGrid55
             // 
@@ -540,16 +624,8 @@ namespace NaviDoctor
             this.imgCustGrid55.Size = new System.Drawing.Size(75, 75);
             this.imgCustGrid55.TabIndex = 0;
             this.imgCustGrid55.TabStop = false;
-            // 
-            // imgCustGrid60
-            // 
-            this.imgCustGrid60.Image = global::NaviDoctor.Properties.Resources.blank;
-            this.imgCustGrid60.Location = new System.Drawing.Point(283, 459);
-            this.imgCustGrid60.Margin = new System.Windows.Forms.Padding(0);
-            this.imgCustGrid60.Name = "imgCustGrid60";
-            this.imgCustGrid60.Size = new System.Drawing.Size(75, 75);
-            this.imgCustGrid60.TabIndex = 0;
-            this.imgCustGrid60.TabStop = false;
+            this.imgCustGrid55.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
+            this.imgCustGrid55.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
             // imgCustGrid56
             // 
@@ -560,6 +636,8 @@ namespace NaviDoctor
             this.imgCustGrid56.Size = new System.Drawing.Size(75, 75);
             this.imgCustGrid56.TabIndex = 0;
             this.imgCustGrid56.TabStop = false;
+            this.imgCustGrid56.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
+            this.imgCustGrid56.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
             // imgCustGrid61
             // 
@@ -570,6 +648,8 @@ namespace NaviDoctor
             this.imgCustGrid61.Size = new System.Drawing.Size(75, 75);
             this.imgCustGrid61.TabIndex = 0;
             this.imgCustGrid61.TabStop = false;
+            this.imgCustGrid61.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
+            this.imgCustGrid61.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
             // imgCustGrid62
             // 
@@ -580,6 +660,8 @@ namespace NaviDoctor
             this.imgCustGrid62.Size = new System.Drawing.Size(75, 75);
             this.imgCustGrid62.TabIndex = 0;
             this.imgCustGrid62.TabStop = false;
+            this.imgCustGrid62.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
+            this.imgCustGrid62.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
             // imgCustGrid63
             // 
@@ -590,6 +672,8 @@ namespace NaviDoctor
             this.imgCustGrid63.Size = new System.Drawing.Size(75, 75);
             this.imgCustGrid63.TabIndex = 0;
             this.imgCustGrid63.TabStop = false;
+            this.imgCustGrid63.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
+            this.imgCustGrid63.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
             // imgCustGrid64
             // 
@@ -600,6 +684,8 @@ namespace NaviDoctor
             this.imgCustGrid64.Size = new System.Drawing.Size(75, 75);
             this.imgCustGrid64.TabIndex = 0;
             this.imgCustGrid64.TabStop = false;
+            this.imgCustGrid64.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
+            this.imgCustGrid64.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
             // imgCustGrid65
             // 
@@ -610,24 +696,260 @@ namespace NaviDoctor
             this.imgCustGrid65.Size = new System.Drawing.Size(75, 75);
             this.imgCustGrid65.TabIndex = 0;
             this.imgCustGrid65.TabStop = false;
+            this.imgCustGrid65.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
+            this.imgCustGrid65.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
-            // imgCustGrid66
+            // imgRunLine
             // 
-            this.imgCustGrid66.Image = global::NaviDoctor.Properties.Resources.blank;
-            this.imgCustGrid66.Location = new System.Drawing.Point(733, 459);
-            this.imgCustGrid66.Margin = new System.Windows.Forms.Padding(0);
-            this.imgCustGrid66.Name = "imgCustGrid66";
-            this.imgCustGrid66.Size = new System.Drawing.Size(75, 75);
-            this.imgCustGrid66.TabIndex = 0;
-            this.imgCustGrid66.TabStop = false;
+            this.imgRunLine.Image = global::NaviDoctor.Properties.Resources.NCPGridRunLine;
+            this.imgRunLine.Location = new System.Drawing.Point(217, 159);
+            this.imgRunLine.Name = "imgRunLine";
+            this.imgRunLine.Size = new System.Drawing.Size(497, 75);
+            this.imgRunLine.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.imgRunLine.TabIndex = 1;
+            this.imgRunLine.TabStop = false;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(13, 13);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(49, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "HP Total";
+            // 
+            // labelHPTotal
+            // 
+            this.labelHPTotal.AutoSize = true;
+            this.labelHPTotal.Location = new System.Drawing.Point(83, 13);
+            this.labelHPTotal.Name = "labelHPTotal";
+            this.labelHPTotal.Size = new System.Drawing.Size(25, 13);
+            this.labelHPTotal.TabIndex = 3;
+            this.labelHPTotal.Text = "100";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(13, 39);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(38, 13);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Attack";
+            // 
+            // labelAttack
+            // 
+            this.labelAttack.AutoSize = true;
+            this.labelAttack.Location = new System.Drawing.Point(83, 39);
+            this.labelAttack.Name = "labelAttack";
+            this.labelAttack.Size = new System.Drawing.Size(13, 13);
+            this.labelAttack.TabIndex = 3;
+            this.labelAttack.Text = "1";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(13, 61);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(38, 13);
+            this.label5.TabIndex = 2;
+            this.label5.Text = "Speed";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(13, 84);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(41, 13);
+            this.label6.TabIndex = 2;
+            this.label6.Text = "Charge";
+            // 
+            // labelSpeed
+            // 
+            this.labelSpeed.AutoSize = true;
+            this.labelSpeed.Location = new System.Drawing.Point(83, 61);
+            this.labelSpeed.Name = "labelSpeed";
+            this.labelSpeed.Size = new System.Drawing.Size(13, 13);
+            this.labelSpeed.TabIndex = 3;
+            this.labelSpeed.Text = "1";
+            // 
+            // labelCharge
+            // 
+            this.labelCharge.AutoSize = true;
+            this.labelCharge.Location = new System.Drawing.Point(83, 84);
+            this.labelCharge.Name = "labelCharge";
+            this.labelCharge.Size = new System.Drawing.Size(13, 13);
+            this.labelCharge.TabIndex = 3;
+            this.labelCharge.Text = "1";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(13, 107);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(39, 13);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "C.Shot";
+            // 
+            // labelCShot
+            // 
+            this.labelCShot.AutoSize = true;
+            this.labelCShot.Location = new System.Drawing.Point(83, 107);
+            this.labelCShot.Name = "labelCShot";
+            this.labelCShot.Size = new System.Drawing.Size(13, 13);
+            this.labelCShot.TabIndex = 5;
+            this.labelCShot.Text = "1";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(12, 129);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(50, 13);
+            this.label4.TabIndex = 6;
+            this.label4.Text = "RegMem";
+            // 
+            // labelRegMem
+            // 
+            this.labelRegMem.AutoSize = true;
+            this.labelRegMem.Location = new System.Drawing.Point(83, 129);
+            this.labelRegMem.Name = "labelRegMem";
+            this.labelRegMem.Size = new System.Drawing.Size(13, 13);
+            this.labelRegMem.TabIndex = 7;
+            this.labelRegMem.Text = "1";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(100, 129);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(23, 13);
+            this.label7.TabIndex = 8;
+            this.label7.Text = "MB";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(12, 150);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(60, 13);
+            this.label8.TabIndex = 9;
+            this.label8.Text = "MegaChips";
+            // 
+            // labelMegaLimit
+            // 
+            this.labelMegaLimit.AutoSize = true;
+            this.labelMegaLimit.Location = new System.Drawing.Point(83, 150);
+            this.labelMegaLimit.Name = "labelMegaLimit";
+            this.labelMegaLimit.Size = new System.Drawing.Size(13, 13);
+            this.labelMegaLimit.TabIndex = 10;
+            this.labelMegaLimit.Text = "5";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(13, 172);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(55, 13);
+            this.label9.TabIndex = 11;
+            this.label9.Text = "GigaChips";
+            // 
+            // labelGigaLimit
+            // 
+            this.labelGigaLimit.AutoSize = true;
+            this.labelGigaLimit.Location = new System.Drawing.Point(83, 172);
+            this.labelGigaLimit.Name = "labelGigaLimit";
+            this.labelGigaLimit.Size = new System.Drawing.Size(13, 13);
+            this.labelGigaLimit.TabIndex = 12;
+            this.labelGigaLimit.Text = "1";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(13, 194);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(51, 13);
+            this.label10.TabIndex = 13;
+            this.label10.Text = "Cust Size";
+            // 
+            // labelCustHandSize
+            // 
+            this.labelCustHandSize.AutoSize = true;
+            this.labelCustHandSize.Location = new System.Drawing.Point(83, 194);
+            this.labelCustHandSize.Name = "labelCustHandSize";
+            this.labelCustHandSize.Size = new System.Drawing.Size(13, 13);
+            this.labelCustHandSize.TabIndex = 14;
+            this.labelCustHandSize.Text = "5";
+            // 
+            // cBoxModCode
+            // 
+            this.cBoxModCode.FormattingEnabled = true;
+            this.cBoxModCode.Items.AddRange(new object[] {
+            "None",
+            "HP+100",
+            "HP+150",
+            "HP+200",
+            "HP+250",
+            "HP+300",
+            "HP+350",
+            "HP+400",
+            "HP+450",
+            "HP+500",
+            "HP+550",
+            "HP+600",
+            "HP+700",
+            "HP+800",
+            "HP+900",
+            "HP+1000",
+            "Equip Super Armor",
+            "Equip Break Buster",
+            "Equip Break Charge",
+            "Equip Shadow Shoes",
+            "Equip Air Shoes",
+            "Equip UnderShirt",
+            "Equip Block (Left+B)",
+            "Equip Shield (Left+B)",
+            "Equip Reflect (Left+B)",
+            "Equip Anti-Damage (Left+B)",
+            "Activate FastGauge",
+            "Activate SneakRun",
+            "Activate Humor",
+            "MegaChip +1",
+            "MegaChip +2",
+            "MegaChip +3",
+            "MegaChip +4",
+            "MegaChip +5",
+            "GigaChip +1"});
+            this.cBoxModCode.Location = new System.Drawing.Point(12, 251);
+            this.cBoxModCode.Name = "cBoxModCode";
+            this.cBoxModCode.Size = new System.Drawing.Size(251, 21);
+            this.cBoxModCode.TabIndex = 15;
             // 
             // NaviCustEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1151, 619);
+            this.Controls.Add(this.cBoxModCode);
+            this.Controls.Add(this.labelCustHandSize);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.labelGigaLimit);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.labelMegaLimit);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.labelRegMem);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.labelCShot);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.labelCharge);
+            this.Controls.Add(this.labelAttack);
+            this.Controls.Add(this.labelSpeed);
+            this.Controls.Add(this.labelHPTotal);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.imgCustGrid21);
-            this.Controls.Add(this.imgCustGrid66);
             this.Controls.Add(this.imgCustGrid65);
             this.Controls.Add(this.imgCustGrid46);
             this.Controls.Add(this.imgCustGrid64);
@@ -640,7 +962,6 @@ namespace NaviDoctor
             this.Controls.Add(this.imgCustGrid42);
             this.Controls.Add(this.imgCustGrid56);
             this.Controls.Add(this.imgCustGrid41);
-            this.Controls.Add(this.imgCustGrid60);
             this.Controls.Add(this.imgCustGrid36);
             this.Controls.Add(this.imgCustGrid55);
             this.Controls.Add(this.imgCustGrid40);
@@ -666,7 +987,6 @@ namespace NaviDoctor
             this.Controls.Add(this.imgCustGrid13);
             this.Controls.Add(this.imgCustGrid12);
             this.Controls.Add(this.imgCustGrid11);
-            this.Controls.Add(this.imgCustGrid06);
             this.Controls.Add(this.imgCustGrid10);
             this.Controls.Add(this.imgCustGrid05);
             this.Controls.Add(this.imgCustGrid04);
@@ -675,9 +995,11 @@ namespace NaviDoctor
             this.Controls.Add(this.imgCustGrid01);
             this.Controls.Add(this.imgCustGrid00);
             this.Controls.Add(this.imgCustGrid22);
+            this.Controls.Add(this.imgRunLine);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "NaviCustEdit";
             this.Text = "NaviCust Editor";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.NaviCustEdit_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.imgCustGrid00)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgCustGrid01)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgCustGrid02)).EndInit();
@@ -704,7 +1026,6 @@ namespace NaviDoctor
             ((System.ComponentModel.ISupportInitialize)(this.imgCustGrid43)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgCustGrid44)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgCustGrid05)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.imgCustGrid06)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgCustGrid15)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgCustGrid16)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgCustGrid25)).EndInit();
@@ -719,15 +1040,15 @@ namespace NaviDoctor
             ((System.ComponentModel.ISupportInitialize)(this.imgCustGrid53)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgCustGrid54)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgCustGrid55)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.imgCustGrid60)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgCustGrid56)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgCustGrid61)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgCustGrid62)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgCustGrid63)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgCustGrid64)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgCustGrid65)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.imgCustGrid66)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imgRunLine)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -759,7 +1080,6 @@ namespace NaviDoctor
         private System.Windows.Forms.PictureBox imgCustGrid43;
         private System.Windows.Forms.PictureBox imgCustGrid44;
         private System.Windows.Forms.PictureBox imgCustGrid05;
-        private System.Windows.Forms.PictureBox imgCustGrid06;
         private System.Windows.Forms.PictureBox imgCustGrid15;
         private System.Windows.Forms.PictureBox imgCustGrid16;
         private System.Windows.Forms.PictureBox imgCustGrid25;
@@ -774,13 +1094,32 @@ namespace NaviDoctor
         private System.Windows.Forms.PictureBox imgCustGrid53;
         private System.Windows.Forms.PictureBox imgCustGrid54;
         private System.Windows.Forms.PictureBox imgCustGrid55;
-        private System.Windows.Forms.PictureBox imgCustGrid60;
         private System.Windows.Forms.PictureBox imgCustGrid56;
         private System.Windows.Forms.PictureBox imgCustGrid61;
         private System.Windows.Forms.PictureBox imgCustGrid62;
         private System.Windows.Forms.PictureBox imgCustGrid63;
         private System.Windows.Forms.PictureBox imgCustGrid64;
         private System.Windows.Forms.PictureBox imgCustGrid65;
-        private System.Windows.Forms.PictureBox imgCustGrid66;
+        private System.Windows.Forms.PictureBox imgRunLine;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label labelHPTotal;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label labelAttack;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label labelSpeed;
+        private System.Windows.Forms.Label labelCharge;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label labelCShot;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label labelRegMem;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label labelMegaLimit;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label labelGigaLimit;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label labelCustHandSize;
+        private System.Windows.Forms.ComboBox cBoxModCode;
     }
 }

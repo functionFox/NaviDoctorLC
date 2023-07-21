@@ -83,7 +83,10 @@ Note: These are seemingly 32-bit values that differ between game version, and th
 0x0150: HP memories applied
 0x0151: NaviCust size (0: 4x4, 1: 4x5, 2: 5x5)
 WARNING: NaviCust size values greater than 2 breaks NaviCust!
-0x0152: RegMem found? Unclear. Even if it is, it's kinda unneccessary to modify this as RegMem value should take care of the correct total
+0x0152: RegUp1s found (Max: 10)
+0x0153: RegUp2s found (Max: 12)
+0x0154: RegUp3s found (Max: 4)
+NOTE: If these aren't updated, it doesn't matter what you set 0x17 to. The game will recalculate RegMem.
 0x0155: SubChip maximum (SubMem)
 
 ===SUBCHIPS===
@@ -618,84 +621,91 @@ The grid shows which parts were placed in what order.
 41: GigaChip+1
 
 ===Stats and Effects===
-0x4E61: SuperArmor equipped?
-0x4E62: ShdwShoe(0x01)/FlotShoe(0x02) equipped?
-0x4E63: AirShoes equipped?
-0x4E64: UnderShirt equipped?
-
-0x4E66: BrakBust equipped?
-0x4E67: Shot misfire (02: Lv1, 04: Lv2, 00: Lv0/3)
-0x4E68: Attack Power (max: 04 [Guts Style max: 09])
-0x4E69: Speed Power (max: 04)
-0x4E6A: Charge Power (max: 04)
-0x4E6B: Shot misfire Lv3 (00: off, 0F: on)
-0x4E6C: C.Shot modification (1: Rock Cube, 2: Water Gun, 3: Flower)
-0x4E6D: Charge Shot Power
-0x4E6E: BrakChrg equipped?
-0x4E6F: Left+B Equipped
-[ 02: Block
-  04: Shield
-  06: Reflect
-  08: Anti-Damage ]
-0x4E70: Player Movement bug type (4: up, 8: down, C: confused)
-0x4E71: Battle HP Bug strength (00: None, 1F: Lv1, 0F: Lv2, 07: Lv3)
-0x4E72: Bonus RegMem
-0x4E73: Custom Size (Default: 5, max: 10 [0x0A])
-0x4E74: MegaChip limit (Max: 10 [0x0A])
-0x4E75: GigaChip limit (Max: 2)
-0x4E76: Custom HP Bug strength (00: None, 1F: Lv1, 0F: Lv2, 07: Lv3)
-0x4E77: SetPanel type
-[ 13: Cracked
-  14: Swamp
-  19: SetHoly
-  35: SetMetal
-  36: SetGreen
-  37: SetIce
-  38: SetLava
-  3A: SetSand  ]
-0x4E78: FastGauge equipped (0: no, 1: yes, 2: yes, but bugged)
-0x4E79: SneakRun/Attractor NCP bugged?
-0x4E7A: SneakRun equipped?
-0x4E7B: Attractor NCP equipped
-[ 01: Battery
-  02: OilBody
-  03: Fish
-  04: Jungle
-  FF: None ]
-0x4E7C: Support equipped (0: none, 1: Rush, 2: Beat, 3: Tango)
-0x4E7D: Collect equipped (0: no, 1: yes, but bugged, 2: yes)
-0x4E7E: BustrMAX equipped? (0 or 1)
-0x4E7F: GigFldr1 equipped? (0 or 1)
-0x4E80: DarkLcns equipped? (0 or 1)
-0x4E81: BlckMind equipped? (0 or 1)
-0x4E82: Humor equipped? (0 or 1)
-0x4E83: BugStop equipped? (0 or 1)
-0x4E84: EngyChng equipped? (0 or 1)
-0x4E85: Alpha equipped? (0 or 1)
-
-0x4E88: Press equipped? (0 or 1)
-
-0x4E8B: HubBatc equipped? (0 or 1)
-0x4E8C: HP Redundancy (16-bit value) (Note: They tried to get tricky with this. The formula is ((100+(20*HPMem))+NCP+Mod)/5), or more simply put, the Max HP value divided by five.
+Index Address Effect
+ (00) 0x4E61: SuperArmor equipped?
+ (01) 0x4E62: ShdwShoe(0x01)/FlotShoe(0x02) equipped?
+ (02) 0x4E63: AirShoes equipped?
+ (03) 0x4E64: UnderShirt equipped?
+ (04) 0x4E65: ????
+ (05) 0x4E66: BrakBust equipped?
+ (06) 0x4E67: Shot misfire (02: Lv1, 04: Lv2, 00: Lv0/3)
+ (07) 0x4E68: Attack Power (max: 04 [Guts Style max: 09])
+ (08) 0x4E69: Speed Power (max: 04)
+ (09) 0x4E6A: Charge Power (max: 04)
+ (10) 0x4E6B: Shot misfire Lv3 (00: off, 0F: on)
+ (11) 0x4E6C: C.Shot modification (1: Rock Cube, 2: Water Gun, 
+                                   3: Flower)
+ (12) 0x4E6D: Charge Shot Power
+ (13) 0x4E6E: BrakChrg equipped?
+ (14) 0x4E6F: Left+B Equipped
+			[ 02: Block
+			  04: Shield
+			  06: Reflect
+			  08: Anti-Damage ]
+ (15) 0x4E70: Player Movement bug type (4: up, 8: down, C: confused)
+ (16) 0x4E71: Battle HP Bug strength (00: None, 1F: Lv1, 0F: Lv2,
+									  07: Lv3)
+ (17) 0x4E72: Bonus RegMem
+ (18) 0x4E73: Custom Size (Default: 5, max: 10 [0x0A])
+ (19) 0x4E74: MegaChip limit (Max: 10 [0x0A])
+ (20) 0x4E75: GigaChip limit (Max: 2)
+ (21) 0x4E76: Custom HP Bug strength (00: None, 1F: Lv1, 0F: Lv2,
+									  07: Lv3)
+ (22) 0x4E77: SetPanel type
+			[ 13: Cracked
+			  14: Swamp
+			  19: SetHoly
+			  35: SetMetal
+			  36: SetGreen
+			  37: SetIce
+			  38: SetLava
+			  3A: SetSand  ]
+ (23) 0x4E78: FastGauge equipped (0: no, 1: yes, 2: yes, but bugged)
+ (24) 0x4E79: SneakRun/Attractor NCP bugged?
+ (25) 0x4E7A: SneakRun equipped?
+ (26) 0x4E7B: Attractor NCP equipped
+			[ 01: Battery
+			  02: OilBody
+			  03: Fish
+			  04: Jungle
+			  FF: None ]
+ (27) 0x4E7C: Support equipped (0: none, 1: Rush, 2: Beat, 3: Tango)
+ (28) 0x4E7D: Collect equipped (0: no, 1: yes, but bugged, 2: yes)
+ (29) 0x4E7E: BustrMAX equipped? (0 or 1)
+ (30) 0x4E7F: GigFldr1 equipped? (0 or 1)
+ (31) 0x4E80: DarkLcns equipped? (0 or 1)
+ (32) 0x4E81: BlckMind equipped? (0 or 1)
+ (33) 0x4E82: Humor equipped? (0 or 1)
+ (34) 0x4E83: BugStop equipped? (0 or 1)
+ (35) 0x4E84: EngyChng equipped? (0 or 1)
+ (36) 0x4E85: Alpha equipped? (0 or 1)
+ (37) 0x4E86: ????
+ (38) 0x4E87: ????
+ (39) 0x4E88: Press equipped? (0 or 1)
+ (40) 0x4E89: ????
+ (41) 0x4E8A: ????
+ (42) 0x4E8B: HubBatc equipped? (0 or 1)
+(N/A) 0x4E8C: HP Redundancy (16-bit value) (Note: They tried to get tricky with this. The formula is ((100+(20*HPMem))+NCP+Mod)/5), or more simply put, the Max HP value divided by five.
 
 
 
 ==[NaviCust Bugs]==
-0x52E1: Player movement bug level
-0x52E2: Battle HP drain bug level
-0x52E3: Custom HP drain bug level
-0x52E4: Battle Panel bug level
-0x52E5: Custom Gauge bug level
-0x52E6: Encounter bug level
-0x52E7: Buster bug level
-0x52E8: Support bug level
-0x52E9: Modified C.Shot bug level
-0x52EA: Battle Result bug level
-0x52EB: BustrMAX bug level
-0x52EC: GigFldr1 bug level
-0x52ED: HubBatch bug level
-0x52EE: DarkLcns bug level
-0x52EF: ModTools bug (will only be 0 or 1, but does not specify which is bugged, probably will be based on the ModTool code supplied)
+Index Address Effect
+ (00) 0x52E1: Player movement bug level
+ (01) 0x52E2: Battle HP drain bug level
+ (02) 0x52E3: Custom HP drain bug level
+ (03) 0x52E4: Battle Panel bug level
+ (04) 0x52E5: Custom Gauge bug level
+ (05) 0x52E6: Encounter bug level
+ (06) 0x52E7: Buster bug level
+ (07) 0x52E8: Support bug level
+ (08) 0x52E9: Modified C.Shot bug level
+ (09) 0x52EA: Battle Result bug level
+ (10) 0x52EB: BustrMAX bug level
+ (11) 0x52EC: GigFldr1 bug level
+ (12) 0x52ED: HubBatch bug level
+ (13) 0x52EE: DarkLcns bug level
+ (14) 0x52EF: ModTools bug (will only be 0 or 1, but does not specify which is bugged, probably will be based on the ModTool code supplied)
 
 0x5430: Library checksum
 

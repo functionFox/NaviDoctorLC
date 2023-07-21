@@ -839,8 +839,8 @@ namespace NaviDoctor
             PopulateDataGridView(battleChipData, saveData);
 
             LoadFolderData(saveData);
-
-            maxHPStat.Value = saveData.HPUp * 20 + 100; // Calculate base HP based on how many HP ups were obtained.
+            saveData.BonusHP = 0;
+            maxHPStat.Value = (saveData.HPUp * 20) + 100; // Calculate base HP based on how many HP ups were obtained.
             if (saveData.GameName == GameTitle.Title.MegaManBattleNetwork || saveData.GameName == GameTitle.Title.MegaManBattleNetwork2)
             {
                 attackStat.Value = saveData.AttackPower + 1;
@@ -853,7 +853,7 @@ namespace NaviDoctor
             switch (saveData.GameName)
             {
                 case GameTitle.Title.MegaManBattleNetwork:
-                    LoadStyles(saveData); // This is loaded by all Vol.1 games, but not Vol.2 games.
+                    LoadStyles(saveData);
                     nudBugFrag.Value = 0; // It bothered me seeing my BugFrags and RegMem from BN2 when I loaded BN1 over it.
                     nudRegMem.Value = 0;  // So they're 0 now.
                     break;
@@ -872,7 +872,22 @@ namespace NaviDoctor
                     break;
                 case GameTitle.Title.MegaManBattleNetwork3White:
                 case GameTitle.Title.MegaManBattleNetwork3Blue:
+                    saveData.BonusHP = (short)(saveData.MaxHP - maxHPStat.Value);
+                    saveData.AttackPower += 1;
                     LoadStyles(saveData);
+                        string equipstyle = _styles.FirstOrDefault(x => x.Equip == true).Name.ToString();
+                        if (equipstyle.Contains("Guts"))
+                        {
+                            saveData.AttackPower = (byte)(saveData.AttackPower / 2);
+                        }
+                        else if (equipstyle.Contains("Team"))
+                        {
+                            saveData.MegaLimit -= 1;
+                        }
+                        else if (equipstyle.Contains("Cust"))
+                        {
+                            saveData.CustEffects[18] -= 1;
+                        }
                     nudBugFrag.Value = saveData.BugFrags;
                     nudRegMem.Value = saveData.RegMem;
                     nudSubChipMax.Value = saveData.SubChipMax;
@@ -945,10 +960,11 @@ namespace NaviDoctor
 
         private void SaveFile(SaveParse saveParse)
         {
-            saveData.MaxHP = (short)maxHPStat.Value;
-            saveData.CurrHP = (short)maxHPStat.Value;
-            if(saveData.GameName == GameTitle.Title.MegaManBattleNetwork || saveData.GameName == GameTitle.Title.MegaManBattleNetwork2)
+            saveData.HPUp = (byte)((maxHPStat.Value - 100) / 20);
+            if (saveData.GameName == GameTitle.Title.MegaManBattleNetwork || saveData.GameName == GameTitle.Title.MegaManBattleNetwork2)
             {
+                saveData.MaxHP = (short)maxHPStat.Value;
+                saveData.CurrHP = (short)maxHPStat.Value;
                 saveData.AttackPower = (byte)(attackStat.Value - 1);
                 saveData.RapidPower = (byte)(rapidStat.Value - 1);
                 saveData.ChargePower = (byte)(chargeStat.Value - 1);
@@ -956,6 +972,11 @@ namespace NaviDoctor
             if (saveData.GameName == GameTitle.Title.MegaManBattleNetwork2)
             {
                 nudBugFrag.Value = Math.Min(nudBugFrag.Value, 32);
+            }
+            if (saveData.GameName == GameTitle.Title.MegaManBattleNetwork3White || saveData.GameName == GameTitle.Title.MegaManBattleNetwork3Blue)
+            {
+                saveData.MaxHP = (short)(maxHPStat.Value + saveData.BonusHP);
+                saveData.CurrHP = saveData.MaxHP;
             }
             saveData.Zenny = (int)zennyBox.Value;
             saveData.SteamID = (int)steamID.Value;
@@ -966,26 +987,27 @@ namespace NaviDoctor
                 case GameTitle.Title.MegaManBattleNetwork:
                     UpdateStyles(saveData);
                     break;
-
                 case GameTitle.Title.MegaManBattleNetwork2:
                 case GameTitle.Title.MegaManBattleNetwork3White:
                 case GameTitle.Title.MegaManBattleNetwork3Blue:
-                    foreach (var style in _styles)
+                    UpdateStyles(saveData);
+                    if (saveData.GameName != GameTitle.Title.MegaManBattleNetwork2)
                     {
-                        switch (style.Name)
+                        string equipstyle = _styles.FirstOrDefault(x => x.Equip == true).Name.ToString();
+                        if (equipstyle.Contains("Guts"))
                         {
-                            case Style.Value.Hub:
-                                if (style.Equip == true)
-                                {
-                                    saveData.MaxHP = (short)(maxHPStat.Value / 2);
-                                    saveData.CurrHP = (short)(maxHPStat.Value / 2);
-                                }
-                                break;
-                            default:
-                                break;
+                            saveData.AttackPower = (byte)(saveData.AttackPower * 2);
+                        }
+                        else if (equipstyle.Contains("Team"))
+                        {
+                            saveData.MegaLimit += 1;
+                        }
+                        else if (equipstyle.Contains("Cust"))
+                        {
+                            saveData.CustEffects[18] += 1;
                         }
                     }
-                    UpdateStyles(saveData);
+                    saveData.AttackPower -= 1;
                     saveData.BugFrags = (int)nudBugFrag.Value; 
                     saveData.RegMem = (byte)nudRegMem.Value;
                     saveData.SubChipMax = (byte)nudSubChipMax.Value;
@@ -2510,7 +2532,6 @@ namespace NaviDoctor
                                     }
                                 default:
                                     break;
-
                             }
                         }
                         break;
@@ -3529,9 +3550,10 @@ namespace NaviDoctor
                 MessageBox.Show("Please load a save file first.");
                 return; // Exit the event handler
             }
-
             Style style = _styles.FirstOrDefault(x => x.Equip == true);
-
+            saveData.HPUp = (byte)((maxHPStat.Value - 100) / 20); // Recalculate HP like we're saving
+            saveData.MaxHP = (short)(maxHPStat.Value + saveData.BonusHP);
+            saveData.RegMem = (int)nudRegMem.Value; // update RegMem
             var ncpEdit = new NaviCustEdit(saveData, style);
             if (ncpEdit.ShowDialog() == DialogResult.OK)
             {

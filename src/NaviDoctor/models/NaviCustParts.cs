@@ -669,7 +669,7 @@ namespace NaviDoctor.models
                     {0, 0, 0, 0, 0},
                     {0, 0, 0, 0, 0}
                 }
-            });
+            }, false);
             AddPart("HP+100", new List<string> { "White", "Pink", "Yellow", "None" }, new Dictionary<bool, int[,]>()
             {
                 [false] = new int[,]
@@ -680,7 +680,7 @@ namespace NaviDoctor.models
                     {0, 0, 0, 0, 0},
                     {0, 0, 0, 0, 0}
                 }
-            });
+            }, false);
             AddPart("HP+200", new List<string> { "White", "Pink", "Yellow", "None" }, new Dictionary<bool, int[,]>()
             {
                 [false] = new int[,]
@@ -691,7 +691,7 @@ namespace NaviDoctor.models
                     {0, 0, 0, 0, 0},
                     {0, 0, 0, 0, 0}
                 }
-            });
+            }, false);
             AddPart("HP+300", new List<string> { "White", "Pink", "Yellow", "None" }, new Dictionary<bool, int[,]>()
             {
                 [false] = new int[,]
@@ -702,7 +702,7 @@ namespace NaviDoctor.models
                     {0, 0, 0, 0, 0},
                     {0, 0, 0, 0, 0}
                 }
-            });
+            }, false);
             AddPart("HP+500", new List<string> { "White", "Pink", "Yellow", "None" }, new Dictionary<bool, int[,]>()
             {
                 [false] = new int[,]
@@ -713,7 +713,7 @@ namespace NaviDoctor.models
                     {1, 0, 1, 1, 1},
                     {0, 0, 0, 0, 0}
                 }
-            });
+            }, false);
             AddPart("Reg+5", new List<string> { "White", "Pink", "Yellow", "None" }, new Dictionary<bool, int[,]>()
             {
                 [false] = new int[,]
@@ -724,7 +724,7 @@ namespace NaviDoctor.models
                     {0, 0, 0, 0, 0},
                     {0, 0, 0, 0, 0}
                 }
-            });
+            }, false);
             AddPart("Atk+1", new List<string> { "White", "Pink", "Yellow", "None" }, new Dictionary<bool, int[,]>()
             {
                 [false] = new int[,]
@@ -735,7 +735,7 @@ namespace NaviDoctor.models
                     {0, 0, 0, 0, 0},
                     {0, 0, 0, 0, 0}
                 }
-            });
+            }, false);
             AddPart("Speed+1", new List<string> { "White", "Pink", "Yellow", "None" }, new Dictionary<bool, int[,]>()
             {
                 [false] = new int[,]
@@ -746,7 +746,7 @@ namespace NaviDoctor.models
                     {0, 0, 0, 0, 0},
                     {0, 0, 0, 0, 0}
                 }
-            });
+            }, false);
             AddPart("Charge+1", new List<string> { "White", "Pink", "Yellow", "None" }, new Dictionary<bool, int[,]>()
             {
                 [false] = new int[,]
@@ -757,7 +757,7 @@ namespace NaviDoctor.models
                     {0, 0, 0, 0, 0},
                     {0, 0, 0, 0, 0}
                 }
-            });
+            }, false);
             AddPart("BugStop", new List<string> { "White", "None", "None", "None" }, new Dictionary<bool, int[,]>()
             {
                 [false] = new int[,]
@@ -893,13 +893,14 @@ namespace NaviDoctor.models
             });
             return ncpList;
         }
-        public void AddPart(string name, List<string> colors, Dictionary<bool, int[,]> data)
+        public void AddPart(string name, List<string> colors, Dictionary<bool, int[,]> data, bool isProg = true)
         {
             ncpList.Add(new NCPListing()
             {
                 ncpName = name,
                 ncpColors = colors,
-                ncpData = data
+                ncpData = data,
+                isProg = isProg // Set to true by default, only plus parts need to specify false
             });
         }
     }
@@ -915,5 +916,6 @@ namespace NaviDoctor.models
         public int QuantityCol3 { get; set; } = 0;
         public int QuantityCol4 { get; set; } = 0;
         public bool isCompressed { get; set; } = false;
+        public bool isProg { get; set; }
     }
 }
