@@ -42,10 +42,32 @@ namespace NaviDoctor
         private bool isCust = false;
         private bool isTeam = false;
         private List<string> _colors = new List<string> { "White", "Pink", "Yellow" };
+        private Dictionary<int, string> modCodeDict = new Dictionary<int, string>() 
+        { 
+            { 0x00, "None" }, { 0x1E, "HP+100" }, { 0x1F, "HP+150" }, { 0x20, "HP+200" }, { 0x21, "HP+250" }, { 0x22, "HP+300" }, 
+            { 0x23, "HP+350" }, { 0x24, "HP+400" }, { 0x25, "HP+450" }, { 0x26, "HP+500" }, { 0x27, "HP+550" }, { 0x28, "HP+600" }, 
+            { 0x29, "HP+650" }, { 0x2A, "HP+700" }, { 0x2B, "Equip Super Armor" }, { 0x2C, "Equip Break Buster" }, 
+            { 0x2D, "Equip Break Charge" }, { 0x2E, "Equip Shadow Shoes" }, { 0x2F, "Equip Float Shoes" }, { 0x30, "Equip Air Shoes" }, 
+            { 0x31, "Equip UnderShirt" }, { 0x32, "Equip Block (Left+B)" }, { 0x33, "Equip Shield (Left+B)" }, 
+            { 0x34, "Equip Reflect (Left+B)" }, { 0x35, "Equip Anti-Damage (Left+B)" }, { 0x36, "MegaChip +1" }, { 0x37, "MegaChip +2" }, 
+            { 0x38, "Activate FastGauge" }, { 0x39, "Activate SneakRun" }, { 0x3A, "Activate Humor" }, { 0x3B, "HP+800" }, 
+            { 0x3C, "HP+900" }, { 0x3D, "HP+1000" }, { 0x3E, "MegaChip +3" }, { 0x3F, "MegaChip +4" }, { 0x40, "MegaChip +5" }, 
+            { 0x41, "GigaChip +1" }, { 0xA1, "Error A1: SuprArmr" }, { 0xA2, "Error A2: BrakBstr" }, { 0xA3, "Error A3: BrakChrg" },
+            { 0xB1, "Error B1: SetGreen" }, { 0xB2, "Error B2: SetIce" }, { 0xB3, "Error B3: SetLava" }, { 0xB4, "Error B4: SetSand" },
+            { 0xB5, "Error B5: SetMetal" }, { 0xB6, "Error B6: SetHoly" }, { 0xC1, "Error C1: Custom1" }, { 0xC2, "Error C2: Custom2" },
+            { 0xE1, "Error E1: MegFldr1" }, { 0xE2, "Error E2: MegFldr2" }, { 0xF1, "Error F1: Block" }, { 0xF2, "Error F2: Shield" },
+            { 0xF3, "Error F3: Reflect" }, { 0x100, "Error H1: ShdwShoe" }, { 0x101, "Error H2: FlotShoe" }, { 0x103, "Error H3: AntiDmg" },
+            { 0x104, "Error G2G: GigFldr1 (Normal/Bug Style)" }, { 0x105, "Error G2S: GigFldr1 (Guts/Shield/Shadow Style)" },
+            { 0x106, "Error G2C: GigFldr1 (Custom/Team/Ground Style)" }, { 0x107, "Error D2G: DarkLcns (Normal Style)" },
+            { 0x108, "Error D2S: DarkLcns (Guts/Shield/Shadow Style)" }, { 0x109, "Error D2C: DarkLcns (Custom/Team/Ground Style)" },
+            { 0x10A, "Error S2G: HubBatc (Normal/Bug Style)" }, { 0x10B, "Error S2S: HubBatc (Guts/Shield/Shadow Style)" },
+            { 0x10C, "Error S2C: HubBatc (Custom/Team/Ground Style)" }
+        };
         private SaveDataObject _initialSave;
         private Style _style;
         private List<NCPListing> ncpMapList;
         private NaviCustGrid[,] naviCustGrid;
+        private List<PictureBox> pictureBoxList;
         
         public NaviCustEdit()
         {
@@ -57,12 +79,116 @@ namespace NaviDoctor
             _initialSave = save;
             _style = style;
             InitializeStats();
+            InitializeModCode();
             ReadInventory();
             ReadCompression();
             InitializeGrid();
+            ReadGrid();
             ReadStats();
             // ColorTest();
+            PopulateGrid();
 
+        }
+        public void PopulateGrid()
+        {
+            int index = 0;
+            for (int i = 0; i < 5; i++)
+            {
+                for (int j = 0; j < 5; j++)
+                {
+                    switch (naviCustGrid[i, j].BlockType)
+                    {
+                        case 1:
+                            switch (naviCustGrid[i, j].Color)
+                            {
+                                case "White":
+                                    pictureBoxList[index].Image = Properties.Resources.NCPblockWhite;
+                                    break;
+                                case "Red":
+                                    pictureBoxList[index].Image = Properties.Resources.NCPblockRed;
+                                    break;
+                                case "Pink":
+                                    pictureBoxList[index].Image = Properties.Resources.NCPblockPink;
+                                    break;
+                                case "Orange":
+                                    pictureBoxList[index].Image = Properties.Resources.NCPblockOrange;
+                                    break;
+                                case "Yellow":
+                                    pictureBoxList[index].Image = Properties.Resources.NCPblockYellow;
+                                    break;
+                                case "Green":
+                                    pictureBoxList[index].Image = Properties.Resources.NCPblockGreen;
+                                    break;
+                                case "Blue":
+                                    pictureBoxList[index].Image = Properties.Resources.NCPblockBlue;
+                                    break;
+                                case "Purple":
+                                    pictureBoxList[index].Image = Properties.Resources.NCPblockPurple;
+                                    break;
+                                case "Dark":
+                                    pictureBoxList[index].Image = Properties.Resources.NCPblockDark;
+                                    break;
+                                default:
+                                    break;
+                            }
+                            break;
+                        case 2:
+                            switch (naviCustGrid[i, j].Color)
+                            {
+                                case "White":
+                                    pictureBoxList[index].Image = Properties.Resources.NCPplusblockWhite;
+                                    break;
+                                case "Red":
+                                    pictureBoxList[index].Image = Properties.Resources.NCPplusblockRed;
+                                    break;
+                                case "Pink":
+                                    pictureBoxList[index].Image = Properties.Resources.NCPplusblockPink;
+                                    break;
+                                case "Yellow":
+                                    pictureBoxList[index].Image = Properties.Resources.NCPplusblockYellow;
+                                    break;
+                                case "Green":
+                                    pictureBoxList[index].Image = Properties.Resources.NCPplusblockGreen;
+                                    break;
+                                case "Blue":
+                                    pictureBoxList[index].Image = Properties.Resources.NCPplusblockBlue;
+                                    break;
+                                default:
+                                    break;
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                    pictureBoxList[index].Tag = naviCustGrid[i, j].PartName;
+                    index++;
+                }
+            }
+        }
+        public void ReadGrid()
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                for (int j = 0; j < 5; j++)
+                {
+                    naviCustGrid[i, j].Index = _gridPos[i, j];
+                    if (naviCustGrid[i, j].Index == 0) continue; // If the space is 0, there's no data to gather here.
+                    List<int> ColorID = ParseIDandColor(_ncpGrid[naviCustGrid[i, j].Index - 1][0]); // ColorID[0] is color, ColorID[1] is ID
+                    naviCustGrid[i, j].PartName = ncpMapList[ColorID[1]].ncpName;
+                    naviCustGrid[i, j].Color = ncpMapList[ColorID[1]].ncpColors[ColorID[0]];
+                    naviCustGrid[i, j].BlockType = ncpMapList[ColorID[1]].isProg ? 1 : 2;
+                    naviCustGrid[i, j].PivotX = _ncpGrid[naviCustGrid[i, j].Index - 1][1];
+                    naviCustGrid[i, j].PivotY = _ncpGrid[naviCustGrid[i, j].Index - 1][2];
+                    naviCustGrid[i, j].Rotation = _ncpGrid[naviCustGrid[i, j].Index - 1][3];
+                }
+            }
+        }
+        public List<int> ParseIDandColor(int ncp)
+        {
+            byte[] bytes = BitConverter.GetBytes(ncp);
+            int color = bytes[0] & 0x3;
+            int id = bytes[0] >> 2;
+            return new List<int>() { color, id };
         }
         public void InitializeModCode()
         {
@@ -221,7 +347,11 @@ namespace NaviDoctor
                     _modGiga = 1;
                     break;
                 default:
-                    cBoxModCode.SelectedItem = "None";
+                    cBoxModCode.SelectedItem = "None"; 
+                    // Insert check for Error Codes here!
+                    // cBoxModCode.Items.Add("Error A1: Super Armor");
+                    // cBoxModCode.SelectedItem = "Error A1: Super Armor";
+                    // cBoxModCode.Enabled = false;
                     break;
             }
         }
@@ -280,14 +410,20 @@ namespace NaviDoctor
                             imgCustGrid42.Visible = false;
                             imgCustGrid43.Visible = false;
                             imgCustGrid44.Visible = false;
+                            pictureBoxList = new List<PictureBox>()
+                            {
+                                imgCustGrid00, imgCustGrid01, imgCustGrid02, imgCustGrid03, imgCustGrid10, imgCustGrid11, imgCustGrid12,
+                                imgCustGrid13, imgCustGrid20, imgCustGrid21, imgCustGrid22, imgCustGrid23, imgCustGrid30, imgCustGrid31,
+                                imgCustGrid32, imgCustGrid33
+                            };
                             for (int i = 0; i < 5; i++)
                             {
                                 for (int j = 0; j < 5; j++)
                                 {
                                     NaviCustGrid ncg = new NaviCustGrid();
                                     ncg.BlockType = 0;
-                                    ncg.CoordX = i;
-                                    ncg.CoordY = j;
+                                    ncg.PivotX = i;
+                                    ncg.PivotY = j;
                                     if (i == 4 || j == 4)
                                     {
                                         ncg.BlockType = -1;
@@ -302,18 +438,44 @@ namespace NaviDoctor
                             imgCustGrid42.Visible = false;
                             imgCustGrid43.Visible = false;
                             imgCustGrid44.Visible = false;
-                            for(int i = 0; i < 5; i++)
+                            pictureBoxList = new List<PictureBox>()
+                            {
+                                imgCustGrid00, imgCustGrid01, imgCustGrid02, imgCustGrid03, imgCustGrid04, imgCustGrid10, imgCustGrid11, 
+                                imgCustGrid12, imgCustGrid13, imgCustGrid14, imgCustGrid20, imgCustGrid21, imgCustGrid22, imgCustGrid23, 
+                                imgCustGrid24, imgCustGrid30, imgCustGrid31, imgCustGrid32, imgCustGrid33, imgCustGrid34
+                            };
+                            for (int i = 0; i < 5; i++)
                             {
                                 for (int j = 0; j < 5; j++)
                                 {
                                     NaviCustGrid ncg = new NaviCustGrid();
                                     ncg.BlockType = 0;
-                                    ncg.CoordX = i;
-                                    ncg.CoordY = j;
+                                    ncg.PivotX = i;
+                                    ncg.PivotY = j;
                                     if (j == 4)
                                     {
                                         ncg.BlockType = -1;
                                     }
+                                    naviCustGrid[i, j] = ncg;
+                                }
+                            }
+                            break;
+                        case 2:
+                            pictureBoxList = new List<PictureBox>()
+                            {
+                                imgCustGrid00, imgCustGrid01, imgCustGrid02, imgCustGrid03, imgCustGrid04, imgCustGrid10, imgCustGrid11,
+                                imgCustGrid12, imgCustGrid13, imgCustGrid14, imgCustGrid20, imgCustGrid21, imgCustGrid22, imgCustGrid23,
+                                imgCustGrid24, imgCustGrid30, imgCustGrid31, imgCustGrid32, imgCustGrid33, imgCustGrid34, imgCustGrid40,
+                                imgCustGrid41, imgCustGrid42, imgCustGrid43, imgCustGrid44
+                            };
+                            for (int i = 0; i < 5; i++)
+                            {
+                                for (int j = 0; j < 5; j++)
+                                {
+                                    NaviCustGrid ncg = new NaviCustGrid();
+                                    ncg.BlockType = 0;
+                                    ncg.PivotX = i;
+                                    ncg.PivotY = j;
                                     naviCustGrid[i, j] = ncg;
                                 }
                             }
@@ -506,20 +668,10 @@ namespace NaviDoctor
                 box.Image.Dispose();
             }
         }
-        private class NaviCustGrid
-        {
-            public int BlockType { get; set; } // Empty Grid space, Program part, or Plus part. -1 is transparent.
-            public string Color { get; set; } = "White"; // White is no overlay because the pieces are already white.
-            public string PartName { get; set; } = ""; // No name should pop up on a blank grid space.
-            public int CoordX { get; set; } // Might have to track which square coordinate it is.
-            public int CoordY { get; set; }
-            public int Index { get; set; } = 0; // This is for GridPosData. Keep track of the order of placement.
-        }
         private void NaviCustEdit_FormClosed(object sender, FormClosedEventArgs e)
         {
             Cleanup();
         }
-
         private void imgCustGrid_MouseHover(object sender, EventArgs e)
         {
             PictureBox image = (PictureBox)sender;
@@ -530,13 +682,22 @@ namespace NaviDoctor
                 toolTip.Active = true;
             }
         }
-
         private void imgCustGrid_MouseLeave(object sender, EventArgs e)
         {
             PictureBox image = (PictureBox)sender;
             ToolTip toolTip = new ToolTip();
             toolTip.SetToolTip(image, "");
             toolTip.Active = false;
+        }
+        private class NaviCustGrid
+        {
+            public int BlockType { get; set; } // Empty Grid space, Program part, or Plus part. -1 is void.
+            public string Color { get; set; } = ""; // Color of the piece
+            public string PartName { get; set; } = ""; // No name should pop up on a blank grid space.
+            public int PivotX { get; set; } = 0; // Where the piece's center is anchored
+            public int PivotY { get; set; } = 0;
+            public int Rotation { get; set; } = 0; // 0 = No rotation. Each increase is one clockwise rotation
+            public int Index { get; set; } = 0; // This is for GridPosData. Keep track of the order of placement.
         }
     }
 }

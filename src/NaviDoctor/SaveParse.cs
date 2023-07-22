@@ -717,15 +717,10 @@ namespace NaviDoctor
                                 maxreg = 10;
                                 break;
                         }
-                        if (saveDataObject.RegUpList[i] > maxreg)
-                        {
-                            saveDataObject.RegUpList[i] = (byte)maxreg;
-                        }
-                        maxreg -= saveDataObject.RegUpList[i];
                         int value = (regmem / (i + 1));
                         value = Math.Min(value, maxreg);
                         regmem -= value * (i + 1);
-                        saveDataObject.RegUpList[i] += (byte)value;
+                        saveDataObject.RegUpList[i] = (byte)value;
                         saveData[RegUpOffset + i] = saveDataObject.RegUpList[i];
                     }
                     int mapIndex = CustInvOffset;

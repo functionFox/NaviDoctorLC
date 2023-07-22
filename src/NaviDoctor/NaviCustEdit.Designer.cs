@@ -97,6 +97,7 @@ namespace NaviDoctor
             this.label10 = new System.Windows.Forms.Label();
             this.labelCustHandSize = new System.Windows.Forms.Label();
             this.cBoxModCode = new System.Windows.Forms.ComboBox();
+            this.label11 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.imgCustGrid00)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgCustGrid01)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgCustGrid02)).BeginInit();
@@ -882,6 +883,8 @@ namespace NaviDoctor
             // 
             // cBoxModCode
             // 
+            this.cBoxModCode.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.cBoxModCode.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cBoxModCode.FormattingEnabled = true;
             this.cBoxModCode.Items.AddRange(new object[] {
             "None",
@@ -924,11 +927,21 @@ namespace NaviDoctor
             this.cBoxModCode.Size = new System.Drawing.Size(251, 21);
             this.cBoxModCode.TabIndex = 15;
             // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(13, 232);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(82, 13);
+            this.label11.TabIndex = 16;
+            this.label11.Text = "ModTool Codes";
+            // 
             // NaviCustEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1151, 619);
+            this.Controls.Add(this.label11);
             this.Controls.Add(this.cBoxModCode);
             this.Controls.Add(this.labelCustHandSize);
             this.Controls.Add(this.label10);
@@ -1121,5 +1134,6 @@ namespace NaviDoctor
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label labelCustHandSize;
         private System.Windows.Forms.ComboBox cBoxModCode;
+        private System.Windows.Forms.Label label11;
     }
 }
