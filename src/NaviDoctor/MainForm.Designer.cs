@@ -29,10 +29,10 @@ namespace NaviDoctor
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -101,6 +101,10 @@ namespace NaviDoctor
             this.panel_MegamanStats = new System.Windows.Forms.Panel();
             this.pnl_MegamanHealth = new System.Windows.Forms.Panel();
             this.pnl_MainFill = new System.Windows.Forms.Panel();
+            this.panelRegChip = new System.Windows.Forms.Panel();
+            this.cbxRegChip = new System.Windows.Forms.ComboBox();
+            this.btnSetRegChip = new System.Windows.Forms.Button();
+            this.label18 = new System.Windows.Forms.Label();
             this.pnl_PackQuantity = new System.Windows.Forms.Panel();
             this.pbx_Loading = new System.Windows.Forms.PictureBox();
             this.pnl_MainFooter = new System.Windows.Forms.Panel();
@@ -138,6 +142,7 @@ namespace NaviDoctor
             this.panel_MegamanStats.SuspendLayout();
             this.pnl_MegamanHealth.SuspendLayout();
             this.pnl_MainFill.SuspendLayout();
+            this.panelRegChip.SuspendLayout();
             this.pnl_PackQuantity.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbx_Loading)).BeginInit();
             this.pnl_MainFooter.SuspendLayout();
@@ -290,14 +295,14 @@ namespace NaviDoctor
             this.dgvPack.AllowUserToDeleteRows = false;
             this.dgvPack.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvPack.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvPack.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvPack.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgvPack.Location = new System.Drawing.Point(436, 51);
             this.dgvPack.Name = "dgvPack";
             this.dgvPack.RowHeadersWidth = 62;
@@ -503,14 +508,14 @@ namespace NaviDoctor
             this.dgvFolder1.AllowUserToDeleteRows = false;
             this.dgvFolder1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvFolder1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvFolder1.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvFolder1.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvFolder1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvFolder1.Location = new System.Drawing.Point(3, 3);
             this.dgvFolder1.Name = "dgvFolder1";
@@ -537,14 +542,14 @@ namespace NaviDoctor
             this.dgvFolder2.AllowUserToDeleteRows = false;
             this.dgvFolder2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvFolder2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvFolder2.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvFolder2.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvFolder2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvFolder2.Location = new System.Drawing.Point(3, 3);
             this.dgvFolder2.Name = "dgvFolder2";
@@ -571,14 +576,14 @@ namespace NaviDoctor
             this.dgvFolder3.AllowUserToDeleteRows = false;
             this.dgvFolder3.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvFolder3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvFolder3.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvFolder3.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgvFolder3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvFolder3.Location = new System.Drawing.Point(3, 3);
             this.dgvFolder3.Name = "dgvFolder3";
@@ -926,7 +931,7 @@ namespace NaviDoctor
             this.cbx_EditSteamID.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbx_EditSteamID.Location = new System.Drawing.Point(8, 74);
             this.cbx_EditSteamID.Name = "cbx_EditSteamID";
-            this.cbx_EditSteamID.Size = new System.Drawing.Size(132, 20);
+            this.cbx_EditSteamID.Size = new System.Drawing.Size(131, 20);
             this.cbx_EditSteamID.TabIndex = 16;
             this.cbx_EditSteamID.Text = "Change Steam ID";
             this.cbx_EditSteamID.UseVisualStyleBackColor = true;
@@ -980,6 +985,7 @@ namespace NaviDoctor
             // 
             // pnl_MainFill
             // 
+            this.pnl_MainFill.Controls.Add(this.panelRegChip);
             this.pnl_MainFill.Controls.Add(this.pnl_PackQuantity);
             this.pnl_MainFill.Controls.Add(this.tabsFolders);
             this.pnl_MainFill.Controls.Add(this.dgvPack);
@@ -992,6 +998,45 @@ namespace NaviDoctor
             this.pnl_MainFill.Name = "pnl_MainFill";
             this.pnl_MainFill.Size = new System.Drawing.Size(870, 536);
             this.pnl_MainFill.TabIndex = 24;
+            // 
+            // panelRegChip
+            // 
+            this.panelRegChip.Controls.Add(this.cbxRegChip);
+            this.panelRegChip.Controls.Add(this.btnSetRegChip);
+            this.panelRegChip.Controls.Add(this.label18);
+            this.panelRegChip.Location = new System.Drawing.Point(6, 494);
+            this.panelRegChip.Name = "panelRegChip";
+            this.panelRegChip.Size = new System.Drawing.Size(406, 39);
+            this.panelRegChip.TabIndex = 24;
+            // 
+            // cbxRegChip
+            // 
+            this.cbxRegChip.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.cbxRegChip.FormattingEnabled = true;
+            this.cbxRegChip.Location = new System.Drawing.Point(75, 4);
+            this.cbxRegChip.Name = "cbxRegChip";
+            this.cbxRegChip.Size = new System.Drawing.Size(236, 24);
+            this.cbxRegChip.TabIndex = 2;
+            // 
+            // btnSetRegChip
+            // 
+            this.btnSetRegChip.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.btnSetRegChip.Location = new System.Drawing.Point(317, 4);
+            this.btnSetRegChip.Name = "btnSetRegChip";
+            this.btnSetRegChip.Size = new System.Drawing.Size(67, 25);
+            this.btnSetRegChip.TabIndex = 1;
+            this.btnSetRegChip.Text = "Set";
+            this.btnSetRegChip.UseVisualStyleBackColor = true;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label18.Location = new System.Drawing.Point(3, 4);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(66, 17);
+            this.label18.TabIndex = 0;
+            this.label18.Text = "RegChip:";
             // 
             // pnl_PackQuantity
             // 
@@ -1097,6 +1142,8 @@ namespace NaviDoctor
             this.pnl_MegamanHealth.PerformLayout();
             this.pnl_MainFill.ResumeLayout(false);
             this.pnl_MainFill.PerformLayout();
+            this.panelRegChip.ResumeLayout(false);
+            this.panelRegChip.PerformLayout();
             this.pnl_PackQuantity.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbx_Loading)).EndInit();
             this.pnl_MainFooter.ResumeLayout(false);
@@ -1178,6 +1225,10 @@ namespace NaviDoctor
         private System.Windows.Forms.Label lbl_Loading;
         private System.Windows.Forms.ToolStripMenuItem naviCustToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem customizeToolStripMenuItem;
+        private System.Windows.Forms.Panel panelRegChip;
+        private System.Windows.Forms.Button btnSetRegChip;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.ComboBox cbxRegChip;
     }
 }
 
