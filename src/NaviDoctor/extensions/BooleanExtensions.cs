@@ -10,7 +10,7 @@ namespace NaviDoctor.extensions
     {
         public static byte ToByte(this bool? value)
         {
-            return value.Value ? (byte)1 : (byte)0;
+            return value.GetValueOrDefault(false) ? (byte)1 : (byte)0;
         }
     }
 }

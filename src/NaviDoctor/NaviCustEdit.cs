@@ -42,6 +42,7 @@ namespace NaviDoctor
         private bool isCust = false;
         private bool isTeam = false;
         private List<string> _colors = new List<string> { "White", "Pink", "Yellow" };
+        private List<PictureBox> _colorBox;
         private Dictionary<int, string> modCodeDict = new Dictionary<int, string>() 
         { 
             { 0x00, "None" }, { 0x1E, "HP+100" }, { 0x1F, "HP+150" }, { 0x20, "HP+200" }, { 0x21, "HP+250" }, { 0x22, "HP+300" }, 
@@ -79,6 +80,7 @@ namespace NaviDoctor
             _initialSave = save;
             _style = style;
             InitializeStats();
+            InitializeColorBox();
             InitializeModCode();
             ReadInventory();
             ReadCompression();
@@ -87,7 +89,48 @@ namespace NaviDoctor
             ReadStats();
             // ColorTest();
             PopulateGrid();
-
+        }
+        public void InitializeColorBox()
+        {
+            _colorBox = new List<PictureBox> { imgColorBox1, imgColorBox2, imgColorBox3, imgColorBox4, imgColorBox5, imgColorBox6 };
+            for (int i = 0; i < _colors.Count; i++)
+            {
+                switch (_colors[i])
+                {
+                    case "White":
+                        _colorBox[i].BackColor = Color.White;
+                        break;
+                    case "Pink":
+                        _colorBox[i].BackColor = Color.Pink;
+                        break;
+                    case "Yellow":
+                        _colorBox[i].BackColor = Color.Yellow;
+                        break;
+                    case "Red":
+                        _colorBox[i].BackColor = Color.Red;
+                        break;
+                    case "Orange":
+                        _colorBox[i].BackColor = Color.Orange;
+                        break;
+                    case "Green":
+                        _colorBox[i].BackColor = Color.Green;
+                        break;
+                    case "Blue":
+                        _colorBox[i].BackColor = Color.Blue;
+                        break;
+                    case "Purple":
+                        _colorBox[i].BackColor = Color.Purple;
+                        break;
+                    case "Dark":
+                        _colorBox[i].BackColor = Color.DarkGray;
+                        break;
+                    default:
+                        _colorBox[i].BackColor = Color.Transparent;
+                        break;
+                }
+                _colorBox[i].BorderStyle = BorderStyle.FixedSingle;
+                _colorBox[i].Visible = true;
+            }
         }
         public void PopulateGrid()
         {
@@ -192,6 +235,9 @@ namespace NaviDoctor
         }
         public void InitializeModCode()
         {
+            ToolTip tooltip = new ToolTip();
+            tooltip.SetToolTip(cBoxModCode, cBoxModCode.Tag.ToString());
+            tooltip.Active = true;
             switch (_modCode)
             {
                 case 0x1E:
@@ -225,37 +271,37 @@ namespace NaviDoctor
                     _bonusHP -= 350;
                     break;
                 case 0x24:
-                    cBoxModCode.SelectedItem = "HP+400";
+                    cBoxModCode.SelectedItem = "HP+400 *";
                     _modHP = 400;
                     _bonusHP -= 400;
                     break;
                 case 0x25:
-                    cBoxModCode.SelectedItem = "HP+450";
+                    cBoxModCode.SelectedItem = "HP+450 *";
                     _modHP = 450;
                     _bonusHP -= 450;
                     break;
                 case 0x26:
-                    cBoxModCode.SelectedItem = "HP+500";
+                    cBoxModCode.SelectedItem = "HP+500 *";
                     _modHP = 500;
                     _bonusHP -= 500;
                     break;
                 case 0x27:
-                    cBoxModCode.SelectedItem = "HP+550";
+                    cBoxModCode.SelectedItem = "HP+550 *";
                     _modHP = 550;
                     _bonusHP -= 550;
                     break;
                 case 0x28:
-                    cBoxModCode.SelectedItem = "HP+600";
+                    cBoxModCode.SelectedItem = "HP+600 *";
                     _modHP = 600;
                     _bonusHP -= 600;
                     break;
                 case 0x29:
-                    cBoxModCode.SelectedItem = "HP+650";
+                    cBoxModCode.SelectedItem = "HP+650 *";
                     _modHP = 650;
                     _bonusHP -= 650;
                     break;
                 case 0x2A:
-                    cBoxModCode.SelectedItem = "HP+700";
+                    cBoxModCode.SelectedItem = "HP+700 *";
                     _modHP = 700;
                     _bonusHP -= 700;
                     break;
@@ -263,10 +309,10 @@ namespace NaviDoctor
                     cBoxModCode.SelectedItem = "Equip Super Armor";
                     break;
                 case 0x2C:
-                    cBoxModCode.SelectedItem = "Equip Break Buster";
+                    cBoxModCode.SelectedItem = "Equip Break Buster *";
                     break;
                 case 0x2D:
-                    cBoxModCode.SelectedItem = "Equip Break Charge";
+                    cBoxModCode.SelectedItem = "Equip Break Charge *";
                     break;
                 case 0x2E:
                     cBoxModCode.SelectedItem = "Equip Shadow Shoes";
@@ -275,7 +321,7 @@ namespace NaviDoctor
                     cBoxModCode.SelectedItem = "Equip Float Shoes";
                     break;
                 case 0x30:
-                    cBoxModCode.SelectedItem = "Equip Air Shoes";
+                    cBoxModCode.SelectedItem = "Equip Air Shoes *";
                     break;
                 case 0x31:
                     cBoxModCode.SelectedItem = "Equip UnderShirt";
@@ -287,10 +333,10 @@ namespace NaviDoctor
                     cBoxModCode.SelectedItem = "Equip Shield (Left+B)";
                     break;
                 case 0x34:
-                    cBoxModCode.SelectedItem = "Equip Reflect (Left+B)";
+                    cBoxModCode.SelectedItem = "Equip Reflect (Left+B) *";
                     break;
                 case 0x35:
-                    cBoxModCode.SelectedItem = "Equip Anti-Damage (Left+B)";
+                    cBoxModCode.SelectedItem = "Equip Anti-Damage (Left+B) *";
                     break;
                 case 0x36:
                     cBoxModCode.SelectedItem = "MegaChip +1";
@@ -298,12 +344,12 @@ namespace NaviDoctor
                     _modMega = 1;
                     break;
                 case 0x37:
-                    cBoxModCode.SelectedItem = "MegaChip +2";
+                    cBoxModCode.SelectedItem = "MegaChip +2 *";
                     _megaLimit -= 2;
                     _modMega = 2;
                     break;
                 case 0x38:
-                    cBoxModCode.SelectedItem = "Activate FastGauge";
+                    cBoxModCode.SelectedItem = "Activate FastGauge *";
                     break;
                 case 0x39:
                     cBoxModCode.SelectedItem = "Activate SneakRun";
@@ -312,37 +358,37 @@ namespace NaviDoctor
                     cBoxModCode.SelectedItem = "Activate Humor";
                     break;
                 case 0x3B:
-                    cBoxModCode.SelectedItem = "HP+800";
+                    cBoxModCode.SelectedItem = "HP+800 *";
                     _modHP = 800;
                     _bonusHP -= 800;
                     break;
                 case 0x3C:
-                    cBoxModCode.SelectedItem = "HP+900";
+                    cBoxModCode.SelectedItem = "HP+900 *";
                     _modHP = 900;
                     _bonusHP -= 900;
                     break;
                 case 0x3D:
-                    cBoxModCode.SelectedItem = "HP+1000";
+                    cBoxModCode.SelectedItem = "HP+1000 *";
                     _modHP = 1000;
                     _bonusHP -= 1000;
                     break;
                 case 0x3E:
-                    cBoxModCode.SelectedItem = "MegaChip +3";
+                    cBoxModCode.SelectedItem = "MegaChip +3 *";
                     _megaLimit -= 3;
                     _modMega = 3;
                     break;
                 case 0x3F:
-                    cBoxModCode.SelectedItem = "MegaChip +4";
+                    cBoxModCode.SelectedItem = "MegaChip +4 *";
                     _megaLimit -= 4;
                     _modMega = 4;
                     break;
                 case 0x40:
-                    cBoxModCode.SelectedItem = "MegaChip +5";
+                    cBoxModCode.SelectedItem = "MegaChip +5 *";
                     _megaLimit -= 5;
                     _modMega = 5;
                     break;
                 case 0x41:
-                    cBoxModCode.SelectedItem = "GigaChip +1";
+                    cBoxModCode.SelectedItem = "GigaChip +1 *";
                     _gigaLimit -= 1;
                     _modGiga = 1;
                     break;
@@ -551,7 +597,8 @@ namespace NaviDoctor
             _megaLimit = _initialSave.MegaLimit;
             _gigaLimit = _initialSave.GigaLimit;
             isBugged = _initialSave.isCustBugged;
-            
+
+            labelStyleName.Text = _style.Name.ToString() + " Style";
             
             switch (_style.Name)
             {
