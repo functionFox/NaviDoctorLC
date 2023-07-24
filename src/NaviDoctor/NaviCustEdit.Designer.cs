@@ -105,7 +105,6 @@ namespace NaviDoctor
             this.imgColorBox5 = new System.Windows.Forms.PictureBox();
             this.imgColorBox6 = new System.Windows.Forms.PictureBox();
             this.labelStyleName = new System.Windows.Forms.Label();
-            this.imgSelect22 = new System.Windows.Forms.PictureBox();
             this.imgSelect00 = new System.Windows.Forms.PictureBox();
             this.imgSelect01 = new System.Windows.Forms.PictureBox();
             this.imgSelect02 = new System.Windows.Forms.PictureBox();
@@ -132,6 +131,7 @@ namespace NaviDoctor
             this.imgSelect21 = new System.Windows.Forms.PictureBox();
             this.btnRotCCW = new System.Windows.Forms.Button();
             this.btnRotCW = new System.Windows.Forms.Button();
+            this.imgSelect22 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.imgCustGrid00)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgCustGrid01)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgCustGrid02)).BeginInit();
@@ -185,7 +185,6 @@ namespace NaviDoctor
             ((System.ComponentModel.ISupportInitialize)(this.imgColorBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgColorBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgColorBox6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.imgSelect22)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgSelect00)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgSelect01)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgSelect02)).BeginInit();
@@ -210,6 +209,7 @@ namespace NaviDoctor
             ((System.ComponentModel.ISupportInitialize)(this.imgSelect43)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgSelect44)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgSelect21)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imgSelect22)).BeginInit();
             this.SuspendLayout();
             // 
             // imgCustGrid00
@@ -363,7 +363,6 @@ namespace NaviDoctor
             this.imgCustGrid22.Margin = new System.Windows.Forms.Padding(0);
             this.imgCustGrid22.Name = "imgCustGrid22";
             this.imgCustGrid22.Size = new System.Drawing.Size(75, 75);
-            this.imgCustGrid22.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.imgCustGrid22.TabIndex = 0;
             this.imgCustGrid22.TabStop = false;
             this.imgCustGrid22.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
@@ -1069,23 +1068,11 @@ namespace NaviDoctor
             this.labelStyleName.TabIndex = 19;
             this.labelStyleName.Text = "Style";
             // 
-            // imgSelect22
-            // 
-            this.imgSelect22.Image = ((System.Drawing.Image)(resources.GetObject("imgSelect22.Image")));
-            this.imgSelect22.Location = new System.Drawing.Point(852, 39);
-            this.imgSelect22.Margin = new System.Windows.Forms.Padding(0);
-            this.imgSelect22.Name = "imgSelect22";
-            this.imgSelect22.Size = new System.Drawing.Size(15, 15);
-            this.imgSelect22.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.imgSelect22.TabIndex = 0;
-            this.imgSelect22.TabStop = false;
-            this.imgSelect22.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
-            this.imgSelect22.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
-            // 
             // imgSelect00
             // 
-            this.imgSelect00.Image = ((System.Drawing.Image)(resources.GetObject("imgSelect00.Image")));
-            this.imgSelect00.Location = new System.Drawing.Point(822, 9);
+            this.imgSelect00.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.imgSelect00.Image = global::NaviDoctor.Properties.Resources.NCPGrid;
+            this.imgSelect00.Location = new System.Drawing.Point(949, 3);
             this.imgSelect00.Margin = new System.Windows.Forms.Padding(0);
             this.imgSelect00.Name = "imgSelect00";
             this.imgSelect00.Size = new System.Drawing.Size(15, 15);
@@ -1096,8 +1083,9 @@ namespace NaviDoctor
             // 
             // imgSelect01
             // 
-            this.imgSelect01.Image = ((System.Drawing.Image)(resources.GetObject("imgSelect01.Image")));
-            this.imgSelect01.Location = new System.Drawing.Point(837, 9);
+            this.imgSelect01.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.imgSelect01.Image = global::NaviDoctor.Properties.Resources.NCPGrid;
+            this.imgSelect01.Location = new System.Drawing.Point(964, 3);
             this.imgSelect01.Margin = new System.Windows.Forms.Padding(0);
             this.imgSelect01.Name = "imgSelect01";
             this.imgSelect01.Size = new System.Drawing.Size(15, 15);
@@ -1108,8 +1096,9 @@ namespace NaviDoctor
             // 
             // imgSelect02
             // 
-            this.imgSelect02.Image = ((System.Drawing.Image)(resources.GetObject("imgSelect02.Image")));
-            this.imgSelect02.Location = new System.Drawing.Point(852, 9);
+            this.imgSelect02.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.imgSelect02.Image = global::NaviDoctor.Properties.Resources.NCPGrid;
+            this.imgSelect02.Location = new System.Drawing.Point(979, 3);
             this.imgSelect02.Margin = new System.Windows.Forms.Padding(0);
             this.imgSelect02.Name = "imgSelect02";
             this.imgSelect02.Size = new System.Drawing.Size(15, 15);
@@ -1120,8 +1109,9 @@ namespace NaviDoctor
             // 
             // imgSelect03
             // 
-            this.imgSelect03.Image = ((System.Drawing.Image)(resources.GetObject("imgSelect03.Image")));
-            this.imgSelect03.Location = new System.Drawing.Point(867, 9);
+            this.imgSelect03.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.imgSelect03.Image = global::NaviDoctor.Properties.Resources.NCPGrid;
+            this.imgSelect03.Location = new System.Drawing.Point(994, 3);
             this.imgSelect03.Margin = new System.Windows.Forms.Padding(0);
             this.imgSelect03.Name = "imgSelect03";
             this.imgSelect03.Size = new System.Drawing.Size(15, 15);
@@ -1132,8 +1122,9 @@ namespace NaviDoctor
             // 
             // imgSelect04
             // 
-            this.imgSelect04.Image = ((System.Drawing.Image)(resources.GetObject("imgSelect04.Image")));
-            this.imgSelect04.Location = new System.Drawing.Point(882, 9);
+            this.imgSelect04.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.imgSelect04.Image = global::NaviDoctor.Properties.Resources.NCPGrid;
+            this.imgSelect04.Location = new System.Drawing.Point(1009, 3);
             this.imgSelect04.Margin = new System.Windows.Forms.Padding(0);
             this.imgSelect04.Name = "imgSelect04";
             this.imgSelect04.Size = new System.Drawing.Size(15, 15);
@@ -1144,8 +1135,9 @@ namespace NaviDoctor
             // 
             // imgSelect10
             // 
-            this.imgSelect10.Image = ((System.Drawing.Image)(resources.GetObject("imgSelect10.Image")));
-            this.imgSelect10.Location = new System.Drawing.Point(822, 24);
+            this.imgSelect10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.imgSelect10.Image = global::NaviDoctor.Properties.Resources.NCPGrid;
+            this.imgSelect10.Location = new System.Drawing.Point(949, 18);
             this.imgSelect10.Margin = new System.Windows.Forms.Padding(0);
             this.imgSelect10.Name = "imgSelect10";
             this.imgSelect10.Size = new System.Drawing.Size(15, 15);
@@ -1156,8 +1148,9 @@ namespace NaviDoctor
             // 
             // imgSelect11
             // 
-            this.imgSelect11.Image = ((System.Drawing.Image)(resources.GetObject("imgSelect11.Image")));
-            this.imgSelect11.Location = new System.Drawing.Point(837, 24);
+            this.imgSelect11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.imgSelect11.Image = global::NaviDoctor.Properties.Resources.NCPGrid;
+            this.imgSelect11.Location = new System.Drawing.Point(964, 18);
             this.imgSelect11.Margin = new System.Windows.Forms.Padding(0);
             this.imgSelect11.Name = "imgSelect11";
             this.imgSelect11.Size = new System.Drawing.Size(15, 15);
@@ -1168,8 +1161,9 @@ namespace NaviDoctor
             // 
             // imgSelect12
             // 
-            this.imgSelect12.Image = ((System.Drawing.Image)(resources.GetObject("imgSelect12.Image")));
-            this.imgSelect12.Location = new System.Drawing.Point(852, 24);
+            this.imgSelect12.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.imgSelect12.Image = global::NaviDoctor.Properties.Resources.NCPGrid;
+            this.imgSelect12.Location = new System.Drawing.Point(979, 18);
             this.imgSelect12.Margin = new System.Windows.Forms.Padding(0);
             this.imgSelect12.Name = "imgSelect12";
             this.imgSelect12.Size = new System.Drawing.Size(15, 15);
@@ -1180,8 +1174,9 @@ namespace NaviDoctor
             // 
             // imgSelect13
             // 
-            this.imgSelect13.Image = ((System.Drawing.Image)(resources.GetObject("imgSelect13.Image")));
-            this.imgSelect13.Location = new System.Drawing.Point(867, 24);
+            this.imgSelect13.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.imgSelect13.Image = global::NaviDoctor.Properties.Resources.NCPGrid;
+            this.imgSelect13.Location = new System.Drawing.Point(994, 18);
             this.imgSelect13.Margin = new System.Windows.Forms.Padding(0);
             this.imgSelect13.Name = "imgSelect13";
             this.imgSelect13.Size = new System.Drawing.Size(15, 15);
@@ -1192,8 +1187,9 @@ namespace NaviDoctor
             // 
             // imgSelect14
             // 
-            this.imgSelect14.Image = ((System.Drawing.Image)(resources.GetObject("imgSelect14.Image")));
-            this.imgSelect14.Location = new System.Drawing.Point(882, 24);
+            this.imgSelect14.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.imgSelect14.Image = global::NaviDoctor.Properties.Resources.NCPGrid;
+            this.imgSelect14.Location = new System.Drawing.Point(1009, 18);
             this.imgSelect14.Margin = new System.Windows.Forms.Padding(0);
             this.imgSelect14.Name = "imgSelect14";
             this.imgSelect14.Size = new System.Drawing.Size(15, 15);
@@ -1204,8 +1200,9 @@ namespace NaviDoctor
             // 
             // imgSelect20
             // 
-            this.imgSelect20.Image = ((System.Drawing.Image)(resources.GetObject("imgSelect20.Image")));
-            this.imgSelect20.Location = new System.Drawing.Point(822, 39);
+            this.imgSelect20.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.imgSelect20.Image = global::NaviDoctor.Properties.Resources.NCPGrid;
+            this.imgSelect20.Location = new System.Drawing.Point(949, 33);
             this.imgSelect20.Margin = new System.Windows.Forms.Padding(0);
             this.imgSelect20.Name = "imgSelect20";
             this.imgSelect20.Size = new System.Drawing.Size(15, 15);
@@ -1216,8 +1213,9 @@ namespace NaviDoctor
             // 
             // imgSelect23
             // 
-            this.imgSelect23.Image = ((System.Drawing.Image)(resources.GetObject("imgSelect23.Image")));
-            this.imgSelect23.Location = new System.Drawing.Point(867, 39);
+            this.imgSelect23.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.imgSelect23.Image = global::NaviDoctor.Properties.Resources.NCPGrid;
+            this.imgSelect23.Location = new System.Drawing.Point(994, 33);
             this.imgSelect23.Margin = new System.Windows.Forms.Padding(0);
             this.imgSelect23.Name = "imgSelect23";
             this.imgSelect23.Size = new System.Drawing.Size(15, 15);
@@ -1228,8 +1226,9 @@ namespace NaviDoctor
             // 
             // imgSelect24
             // 
-            this.imgSelect24.Image = ((System.Drawing.Image)(resources.GetObject("imgSelect24.Image")));
-            this.imgSelect24.Location = new System.Drawing.Point(882, 39);
+            this.imgSelect24.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.imgSelect24.Image = global::NaviDoctor.Properties.Resources.NCPGrid;
+            this.imgSelect24.Location = new System.Drawing.Point(1009, 33);
             this.imgSelect24.Margin = new System.Windows.Forms.Padding(0);
             this.imgSelect24.Name = "imgSelect24";
             this.imgSelect24.Size = new System.Drawing.Size(15, 15);
@@ -1240,8 +1239,9 @@ namespace NaviDoctor
             // 
             // imgSelect30
             // 
-            this.imgSelect30.Image = ((System.Drawing.Image)(resources.GetObject("imgSelect30.Image")));
-            this.imgSelect30.Location = new System.Drawing.Point(822, 54);
+            this.imgSelect30.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.imgSelect30.Image = global::NaviDoctor.Properties.Resources.NCPGrid;
+            this.imgSelect30.Location = new System.Drawing.Point(949, 48);
             this.imgSelect30.Margin = new System.Windows.Forms.Padding(0);
             this.imgSelect30.Name = "imgSelect30";
             this.imgSelect30.Size = new System.Drawing.Size(15, 15);
@@ -1252,8 +1252,9 @@ namespace NaviDoctor
             // 
             // imgSelect31
             // 
-            this.imgSelect31.Image = ((System.Drawing.Image)(resources.GetObject("imgSelect31.Image")));
-            this.imgSelect31.Location = new System.Drawing.Point(837, 54);
+            this.imgSelect31.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.imgSelect31.Image = global::NaviDoctor.Properties.Resources.NCPGrid;
+            this.imgSelect31.Location = new System.Drawing.Point(964, 48);
             this.imgSelect31.Margin = new System.Windows.Forms.Padding(0);
             this.imgSelect31.Name = "imgSelect31";
             this.imgSelect31.Size = new System.Drawing.Size(15, 15);
@@ -1264,8 +1265,9 @@ namespace NaviDoctor
             // 
             // imgSelect32
             // 
-            this.imgSelect32.Image = ((System.Drawing.Image)(resources.GetObject("imgSelect32.Image")));
-            this.imgSelect32.Location = new System.Drawing.Point(852, 54);
+            this.imgSelect32.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.imgSelect32.Image = global::NaviDoctor.Properties.Resources.NCPGrid;
+            this.imgSelect32.Location = new System.Drawing.Point(979, 48);
             this.imgSelect32.Margin = new System.Windows.Forms.Padding(0);
             this.imgSelect32.Name = "imgSelect32";
             this.imgSelect32.Size = new System.Drawing.Size(15, 15);
@@ -1276,8 +1278,9 @@ namespace NaviDoctor
             // 
             // imgSelect33
             // 
-            this.imgSelect33.Image = ((System.Drawing.Image)(resources.GetObject("imgSelect33.Image")));
-            this.imgSelect33.Location = new System.Drawing.Point(867, 54);
+            this.imgSelect33.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.imgSelect33.Image = global::NaviDoctor.Properties.Resources.NCPGrid;
+            this.imgSelect33.Location = new System.Drawing.Point(994, 48);
             this.imgSelect33.Margin = new System.Windows.Forms.Padding(0);
             this.imgSelect33.Name = "imgSelect33";
             this.imgSelect33.Size = new System.Drawing.Size(15, 15);
@@ -1288,8 +1291,9 @@ namespace NaviDoctor
             // 
             // imgSelect34
             // 
-            this.imgSelect34.Image = ((System.Drawing.Image)(resources.GetObject("imgSelect34.Image")));
-            this.imgSelect34.Location = new System.Drawing.Point(882, 54);
+            this.imgSelect34.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.imgSelect34.Image = global::NaviDoctor.Properties.Resources.NCPGrid;
+            this.imgSelect34.Location = new System.Drawing.Point(1009, 48);
             this.imgSelect34.Margin = new System.Windows.Forms.Padding(0);
             this.imgSelect34.Name = "imgSelect34";
             this.imgSelect34.Size = new System.Drawing.Size(15, 15);
@@ -1300,8 +1304,9 @@ namespace NaviDoctor
             // 
             // imgSelect40
             // 
-            this.imgSelect40.Image = ((System.Drawing.Image)(resources.GetObject("imgSelect40.Image")));
-            this.imgSelect40.Location = new System.Drawing.Point(822, 69);
+            this.imgSelect40.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.imgSelect40.Image = global::NaviDoctor.Properties.Resources.NCPGrid;
+            this.imgSelect40.Location = new System.Drawing.Point(949, 63);
             this.imgSelect40.Margin = new System.Windows.Forms.Padding(0);
             this.imgSelect40.Name = "imgSelect40";
             this.imgSelect40.Size = new System.Drawing.Size(15, 15);
@@ -1312,8 +1317,9 @@ namespace NaviDoctor
             // 
             // imgSelect41
             // 
-            this.imgSelect41.Image = ((System.Drawing.Image)(resources.GetObject("imgSelect41.Image")));
-            this.imgSelect41.Location = new System.Drawing.Point(837, 69);
+            this.imgSelect41.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.imgSelect41.Image = global::NaviDoctor.Properties.Resources.NCPGrid;
+            this.imgSelect41.Location = new System.Drawing.Point(964, 63);
             this.imgSelect41.Margin = new System.Windows.Forms.Padding(0);
             this.imgSelect41.Name = "imgSelect41";
             this.imgSelect41.Size = new System.Drawing.Size(15, 15);
@@ -1324,8 +1330,9 @@ namespace NaviDoctor
             // 
             // imgSelect42
             // 
-            this.imgSelect42.Image = ((System.Drawing.Image)(resources.GetObject("imgSelect42.Image")));
-            this.imgSelect42.Location = new System.Drawing.Point(852, 69);
+            this.imgSelect42.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.imgSelect42.Image = global::NaviDoctor.Properties.Resources.NCPGrid;
+            this.imgSelect42.Location = new System.Drawing.Point(979, 63);
             this.imgSelect42.Margin = new System.Windows.Forms.Padding(0);
             this.imgSelect42.Name = "imgSelect42";
             this.imgSelect42.Size = new System.Drawing.Size(15, 15);
@@ -1336,8 +1343,9 @@ namespace NaviDoctor
             // 
             // imgSelect43
             // 
-            this.imgSelect43.Image = ((System.Drawing.Image)(resources.GetObject("imgSelect43.Image")));
-            this.imgSelect43.Location = new System.Drawing.Point(867, 69);
+            this.imgSelect43.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.imgSelect43.Image = global::NaviDoctor.Properties.Resources.NCPGrid;
+            this.imgSelect43.Location = new System.Drawing.Point(994, 63);
             this.imgSelect43.Margin = new System.Windows.Forms.Padding(0);
             this.imgSelect43.Name = "imgSelect43";
             this.imgSelect43.Size = new System.Drawing.Size(15, 15);
@@ -1348,8 +1356,9 @@ namespace NaviDoctor
             // 
             // imgSelect44
             // 
-            this.imgSelect44.Image = ((System.Drawing.Image)(resources.GetObject("imgSelect44.Image")));
-            this.imgSelect44.Location = new System.Drawing.Point(882, 69);
+            this.imgSelect44.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.imgSelect44.Image = global::NaviDoctor.Properties.Resources.NCPGrid;
+            this.imgSelect44.Location = new System.Drawing.Point(1009, 63);
             this.imgSelect44.Margin = new System.Windows.Forms.Padding(0);
             this.imgSelect44.Name = "imgSelect44";
             this.imgSelect44.Size = new System.Drawing.Size(15, 15);
@@ -1360,8 +1369,9 @@ namespace NaviDoctor
             // 
             // imgSelect21
             // 
-            this.imgSelect21.Image = ((System.Drawing.Image)(resources.GetObject("imgSelect21.Image")));
-            this.imgSelect21.Location = new System.Drawing.Point(837, 39);
+            this.imgSelect21.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.imgSelect21.Image = global::NaviDoctor.Properties.Resources.NCPGrid;
+            this.imgSelect21.Location = new System.Drawing.Point(964, 33);
             this.imgSelect21.Margin = new System.Windows.Forms.Padding(0);
             this.imgSelect21.Name = "imgSelect21";
             this.imgSelect21.Size = new System.Drawing.Size(15, 15);
@@ -1373,7 +1383,7 @@ namespace NaviDoctor
             // btnRotCCW
             // 
             this.btnRotCCW.Image = global::NaviDoctor.Properties.Resources.rotateCCW30;
-            this.btnRotCCW.Location = new System.Drawing.Point(771, 24);
+            this.btnRotCCW.Location = new System.Drawing.Point(898, 18);
             this.btnRotCCW.Name = "btnRotCCW";
             this.btnRotCCW.Size = new System.Drawing.Size(48, 48);
             this.btnRotCCW.TabIndex = 20;
@@ -1382,11 +1392,24 @@ namespace NaviDoctor
             // btnRotCW
             // 
             this.btnRotCW.Image = global::NaviDoctor.Properties.Resources.rotateCW30;
-            this.btnRotCW.Location = new System.Drawing.Point(900, 24);
+            this.btnRotCW.Location = new System.Drawing.Point(1027, 18);
             this.btnRotCW.Name = "btnRotCW";
             this.btnRotCW.Size = new System.Drawing.Size(48, 48);
             this.btnRotCW.TabIndex = 21;
             this.btnRotCW.UseVisualStyleBackColor = true;
+            // 
+            // imgSelect22
+            // 
+            this.imgSelect22.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.imgSelect22.Image = global::NaviDoctor.Properties.Resources.NCPGrid;
+            this.imgSelect22.Location = new System.Drawing.Point(979, 33);
+            this.imgSelect22.Margin = new System.Windows.Forms.Padding(0);
+            this.imgSelect22.Name = "imgSelect22";
+            this.imgSelect22.Size = new System.Drawing.Size(15, 15);
+            this.imgSelect22.TabIndex = 0;
+            this.imgSelect22.TabStop = false;
+            this.imgSelect22.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
+            this.imgSelect22.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
             // NaviCustEdit
             // 
@@ -1423,6 +1446,7 @@ namespace NaviDoctor
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.imgSelect22);
             this.Controls.Add(this.imgSelect21);
             this.Controls.Add(this.imgCustGrid21);
             this.Controls.Add(this.imgCustGrid65);
@@ -1491,7 +1515,6 @@ namespace NaviDoctor
             this.Controls.Add(this.imgCustGrid02);
             this.Controls.Add(this.imgSelect00);
             this.Controls.Add(this.imgCustGrid01);
-            this.Controls.Add(this.imgSelect22);
             this.Controls.Add(this.imgCustGrid00);
             this.Controls.Add(this.imgCustGrid22);
             this.Controls.Add(this.imgRunLine);
@@ -1552,7 +1575,6 @@ namespace NaviDoctor
             ((System.ComponentModel.ISupportInitialize)(this.imgColorBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgColorBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgColorBox6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.imgSelect22)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgSelect00)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgSelect01)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgSelect02)).EndInit();
@@ -1577,6 +1599,7 @@ namespace NaviDoctor
             ((System.ComponentModel.ISupportInitialize)(this.imgSelect43)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgSelect44)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgSelect21)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imgSelect22)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1659,7 +1682,6 @@ namespace NaviDoctor
         private System.Windows.Forms.PictureBox imgColorBox5;
         private System.Windows.Forms.PictureBox imgColorBox6;
         private System.Windows.Forms.Label labelStyleName;
-        private System.Windows.Forms.PictureBox imgSelect22;
         private System.Windows.Forms.PictureBox imgSelect00;
         private System.Windows.Forms.PictureBox imgSelect01;
         private System.Windows.Forms.PictureBox imgSelect02;
@@ -1686,5 +1708,6 @@ namespace NaviDoctor
         private System.Windows.Forms.PictureBox imgSelect21;
         private System.Windows.Forms.Button btnRotCCW;
         private System.Windows.Forms.Button btnRotCW;
+        private System.Windows.Forms.PictureBox imgSelect22;
     }
 }

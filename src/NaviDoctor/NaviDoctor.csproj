@@ -198,9 +198,7 @@
     <Content Include="images\NCPplusblockYellow.png" />
     <Content Include="images\progspeen.gif" />
     <None Include="images\rotateCCW30.png" />
-    <Content Include="images\rotateCW.png" />
     <None Include="images\rotateCW30.png" />
-    <None Include="Resources\rotateCW.bmp" />
     <None Include="Resources\icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
