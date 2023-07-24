@@ -371,6 +371,7 @@ namespace NaviDoctor
                                     break;
                             }
                         }
+                        PopulateRegChipCombobox();
                         break;
                     }
                 case GameTitle.Title.MegaManBattleNetwork3White:
@@ -399,6 +400,7 @@ namespace NaviDoctor
                                     break;
                             }
                         }
+                        PopulateRegChipCombobox();
                         break;
                     }
             }
@@ -475,6 +477,64 @@ namespace NaviDoctor
 
             dgvFolder.Columns["Name"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dgvFolder.RowHeadersWidth = 30;
+
+        }
+
+        private void PopulateRegChipCombobox()
+        {
+            var chipData = new List<BattleChipData>();
+            List<Tuple<int, int>> folderSaveData = null;
+            List<BattleChipData> chipNameMap;
+
+            switch (saveData.GameName)
+            {
+                case GameTitle.Title.MegaManBattleNetwork:
+                    chipNameMap = BattleChipData.BN1ChipNameMap;
+                    break;
+                case GameTitle.Title.MegaManBattleNetwork2:
+                    chipNameMap = BattleChipData.BN2ChipNameMap;
+                    break;
+                case GameTitle.Title.MegaManBattleNetwork3White:
+                case GameTitle.Title.MegaManBattleNetwork3Blue:
+                    chipNameMap = BattleChipData.BN3ChipNameMap;
+                    break;
+                default:
+                    return;
+            }
+
+
+            switch (tabsFolders.SelectedIndex)
+            {
+                case 0:
+                    folderSaveData = saveData.FolderData;
+                    break;
+                case 1:
+                    folderSaveData = saveData.Folder2Data;
+                    break;
+                case 2:
+                    folderSaveData = saveData.Folder3Data;
+                    break;
+                default:
+                    break;
+            }
+
+            foreach (var folderData in folderSaveData)
+            {
+                int chipID = folderData.Item1;
+                int chipCode = folderData.Item2;
+
+                string chipCodeLetter = GetAlphabeticalCode(chipCode);
+
+                var bcd = BattleChipData.GetChipNameByID(chipNameMap, chipID);
+                bcd.AlphabeticalCode = chipCodeLetter;
+                chipData.Add(bcd);
+            }
+
+            //TODO - for some reason the code isn't right
+
+            cbxRegChip.DataSource = chipData;
+            cbxRegChip.DisplayMember = "RegChipDisplayMember";
+            cbxRegChip.ValueMember = "ID";
         }
 
         private void btnRemoveChip_Click(object sender, EventArgs e)
@@ -3358,10 +3418,12 @@ namespace NaviDoctor
                     programAdvanceMemoToolStripMenuItem.Enabled = false;
                     customizeToolStripMenuItem.Enabled = false;
                     panel_MegamanStats.Visible = true;
+                    panelRegChip.Visible = false;
                     break;
                 case GameTitle.Title.MegaManBattleNetwork2:
                     programAdvanceMemoToolStripMenuItem.Enabled = true;
                     customizeToolStripMenuItem.Enabled = false;
+                    panelRegChip.Visible = true;
                     switch (saveData.Folders)
                     {
                         case 1:
@@ -3388,6 +3450,7 @@ namespace NaviDoctor
                 case GameTitle.Title.MegaManBattleNetwork3Blue:
                     programAdvanceMemoToolStripMenuItem.Enabled = true;
                     customizeToolStripMenuItem.Enabled = true;
+                    panelRegChip.Visible = true;
                     switch (saveData.Folders)
                     {
                         case 1:
@@ -3434,6 +3497,7 @@ namespace NaviDoctor
         private void tabsFolders_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateFolderCount();
+            PopulateRegChipCombobox();
         }
 
         private void UpdateFolderCount()
@@ -3559,6 +3623,11 @@ namespace NaviDoctor
             {
 
             }
+        }
+
+        private void btnSetRegChip_Click(object sender, EventArgs e)
+        {
+            //TODO set reg chip here
         }
     }
 }
