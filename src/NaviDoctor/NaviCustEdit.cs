@@ -64,6 +64,7 @@ namespace NaviDoctor
             { 0x10A, "Error S2G: HubBatc (Normal/Bug Style)" }, { 0x10B, "Error S2S: HubBatc (Guts/Shield/Shadow Style)" },
             { 0x10C, "Error S2C: HubBatc (Custom/Team/Ground Style)" }
         };
+        private Dictionary<int, string> gridIndex = new Dictionary<int, string>();
         private SaveDataObject _initialSave;
         private Style _style;
         private List<NCPListing> ncpMapList;
@@ -89,6 +90,43 @@ namespace NaviDoctor
             ReadStats();
             // ColorTest();
             PopulateGrid();
+            ReadEffects();
+        }
+        public void ReadEffects()
+        {
+            Dictionary<string, int> effects = new Dictionary<string, int>
+            {
+                { "HP", _bonusHP },
+                { "Attack", (_atkBonus / (isGuts ? 2 : 1)) - 1 },
+                { "Speed", _spdBonus },
+                { "Charge", _chrgBonus },
+                { "WeapLvl", _cShotBonus - 1 },
+                { "RegMem", _bonusRegMem },
+                { "MegaChip", _modMega },
+                { "GigaChip", _modGiga },
+                { "Custom", _customSize - 5 }
+            };
+
+            foreach (KeyValuePair<string, int> effect in effects)
+            {
+                if (effect.Value > 0)
+                    dgvEffects.Rows.Add($"{effect.Key}+{effect.Value}");
+            }
+
+            List<string> parts = new List<string>();
+            List<string> excludes = new List<string> { "HP+100", "HP+200", "HP+300", "HP+500", "Reg+5", "Atk+1", "Speed+1", "Charge+1", "WeapLvl+1", "Custom1", "Custom2", "MegFldr1", "MegFldr2", "GigFldr1" };
+            for (int i = 1; i < gridIndex.Count; i++)
+            {
+                if (!parts.Any(x => x == gridIndex[i]) && !excludes.Any(x => x == gridIndex[i]))
+                {
+                    parts.Add(gridIndex[i]);
+                    dgvEffects.Rows.Add(gridIndex[i]);
+                }
+            }
+            if (_modCode < 0x42 && _modCode > 0)
+            {
+                dgvEffects.Rows.Add($"ModTools: " + modCodeDict[_modCode]);
+            }
         }
         public void InitializeColorBox()
         {
@@ -223,6 +261,10 @@ namespace NaviDoctor
                     naviCustGrid[i, j].PivotX = _ncpGrid[naviCustGrid[i, j].Index - 1][1];
                     naviCustGrid[i, j].PivotY = _ncpGrid[naviCustGrid[i, j].Index - 1][2];
                     naviCustGrid[i, j].Rotation = _ncpGrid[naviCustGrid[i, j].Index - 1][3];
+                    if (!gridIndex.ContainsKey(naviCustGrid[i, j].Index))
+                    {
+                        gridIndex.Add(naviCustGrid[i, j].Index, naviCustGrid[i, j].PartName);
+                    }
                 }
             }
         }
@@ -528,6 +570,33 @@ namespace NaviDoctor
                             break;
                         default:
                             break;
+                    }
+                    foreach (PictureBox box in pictureBoxList)
+                    {
+                        int xPos = box.Location.X;
+                        int yPos = box.Location.Y;
+                        switch (3-_custSize)
+                        {
+                            case 1:
+                            case 2:
+                                xPos += 75;
+                                yPos += 75;
+                                break;
+                            case 3:
+                                xPos += 112;
+                                yPos += 75;
+                                break;
+                            default:
+                                break;
+                        }
+                        box.Location = new Point(xPos, yPos);
+                    }
+                    List<PictureBox> colorBoxes = new List<PictureBox> { imgColorBox1, imgColorBox2, imgColorBox3, imgColorBox4 };
+                    imgRunLine.Location = new Point(imgRunLine.Location.X, imgRunLine.Location.Y + 75);
+                    labelStyleName.Location = new Point(labelStyleName.Location.X, labelStyleName.Location.Y + 75);
+                    foreach (PictureBox box in colorBoxes)
+                    {
+                        box.Location = new Point(box.Location.X, box.Location.Y + 75);
                     }
                     break;
             }
