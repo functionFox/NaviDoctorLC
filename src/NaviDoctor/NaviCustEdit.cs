@@ -13,63 +13,10 @@ namespace NaviDoctor
 {
     public partial class NaviCustEdit : Form
     {
-        private int _hpUp;
-        private int _baseHP;
-        private int _bonusHP;
-        private int _custSize;
-        private int _atkBonus;
-        private int _spdBonus;
-        private int _chrgBonus;
-        private int _cShotBonus;
-        private List<byte> _ncpInv;
-        private List<byte> _compression;
-        private List<byte[]> _ncpGrid;
-        private byte[,] _gridPos;
-        private List<byte> _effects;
-        private List<byte> _bugs;
-        private int _modHP = 0;
-        private byte _modCode;
-        private int _regMem;
-        private byte _bonusRegMem;
-        private byte _megaLimit;
-        private byte _modMega = 0;
-        private byte _gigaLimit;
-        private byte _modGiga = 0;
-        private byte _customSize;
-        private byte _modCustom = 0;
-        private bool isBugged = false;
-        private bool isGuts = false;
-        private bool isCust = false;
-        private bool isTeam = false;
-        private List<string> _colors = new List<string> { "White", "Pink", "Yellow" };
-        private List<PictureBox> _colorBox;
-        private Dictionary<int, string> modCodeDict = new Dictionary<int, string>() 
-        { 
-            { 0x00, "None" }, { 0x1E, "HP+100" }, { 0x1F, "HP+150" }, { 0x20, "HP+200" }, { 0x21, "HP+250" }, { 0x22, "HP+300" }, 
-            { 0x23, "HP+350" }, { 0x24, "HP+400" }, { 0x25, "HP+450" }, { 0x26, "HP+500" }, { 0x27, "HP+550" }, { 0x28, "HP+600" }, 
-            { 0x29, "HP+650" }, { 0x2A, "HP+700" }, { 0x2B, "Equip Super Armor" }, { 0x2C, "Equip Break Buster" }, 
-            { 0x2D, "Equip Break Charge" }, { 0x2E, "Equip Shadow Shoes" }, { 0x2F, "Equip Float Shoes" }, { 0x30, "Equip Air Shoes" }, 
-            { 0x31, "Equip UnderShirt" }, { 0x32, "Equip Block (Left+B)" }, { 0x33, "Equip Shield (Left+B)" }, 
-            { 0x34, "Equip Reflect (Left+B)" }, { 0x35, "Equip Anti-Damage (Left+B)" }, { 0x36, "MegaChip +1" }, { 0x37, "MegaChip +2" }, 
-            { 0x38, "Activate FastGauge" }, { 0x39, "Activate SneakRun" }, { 0x3A, "Activate Humor" }, { 0x3B, "HP+800" }, 
-            { 0x3C, "HP+900" }, { 0x3D, "HP+1000" }, { 0x3E, "MegaChip +3" }, { 0x3F, "MegaChip +4" }, { 0x40, "MegaChip +5" }, 
-            { 0x41, "GigaChip +1" }, { 0xA1, "Error A1: SuprArmr" }, { 0xA2, "Error A2: BrakBstr" }, { 0xA3, "Error A3: BrakChrg" },
-            { 0xB1, "Error B1: SetGreen" }, { 0xB2, "Error B2: SetIce" }, { 0xB3, "Error B3: SetLava" }, { 0xB4, "Error B4: SetSand" },
-            { 0xB5, "Error B5: SetMetal" }, { 0xB6, "Error B6: SetHoly" }, { 0xC1, "Error C1: Custom1" }, { 0xC2, "Error C2: Custom2" },
-            { 0xE1, "Error E1: MegFldr1" }, { 0xE2, "Error E2: MegFldr2" }, { 0xF1, "Error F1: Block" }, { 0xF2, "Error F2: Shield" },
-            { 0xF3, "Error F3: Reflect" }, { 0x100, "Error H1: ShdwShoe" }, { 0x101, "Error H2: FlotShoe" }, { 0x103, "Error H3: AntiDmg" },
-            { 0x104, "Error G2G: GigFldr1 (Normal/Bug Style)" }, { 0x105, "Error G2S: GigFldr1 (Guts/Shield/Shadow Style)" },
-            { 0x106, "Error G2C: GigFldr1 (Custom/Team/Ground Style)" }, { 0x107, "Error D2G: DarkLcns (Normal Style)" },
-            { 0x108, "Error D2S: DarkLcns (Guts/Shield/Shadow Style)" }, { 0x109, "Error D2C: DarkLcns (Custom/Team/Ground Style)" },
-            { 0x10A, "Error S2G: HubBatc (Normal/Bug Style)" }, { 0x10B, "Error S2S: HubBatc (Guts/Shield/Shadow Style)" },
-            { 0x10C, "Error S2C: HubBatc (Custom/Team/Ground Style)" }
-        };
-        private Dictionary<int, string> gridIndex = new Dictionary<int, string>();
+        private NaviCust naviCust = new NaviCust();
+        private NaviCustGrid[,] naviCustGrid;
         private SaveDataObject _initialSave;
         private Style _style;
-        private List<NCPListing> ncpMapList;
-        private NaviCustGrid[,] naviCustGrid;
-        private List<PictureBox> pictureBoxList;
         
         public NaviCustEdit()
         {
@@ -96,15 +43,15 @@ namespace NaviDoctor
         {
             Dictionary<string, int> effects = new Dictionary<string, int>
             {
-                { "HP", _bonusHP },
-                { "Attack", (_atkBonus / (isGuts ? 2 : 1)) - 1 },
-                { "Speed", _spdBonus },
-                { "Charge", _chrgBonus },
-                { "WeapLvl", _cShotBonus - 1 },
-                { "RegMem", _bonusRegMem },
-                { "MegaChip", _modMega },
-                { "GigaChip", _modGiga },
-                { "Custom", _customSize - 5 }
+                { "HP", naviCust.BonusHP },
+                { "Attack", (naviCust.AtkBonus / (naviCust.IsGuts ? 2 : 1)) - 1 },
+                { "Speed", naviCust.SpdBonus },
+                { "Charge", naviCust.ChrgBonus },
+                { "WeapLvl", naviCust.CShotBonus - 1 },
+                { "RegMem", naviCust.BonusRegMem },
+                { "MegaChip", naviCust.ModMega },
+                { "GigaChip", naviCust.ModGiga },
+                { "Custom", naviCust.CustomSize - 5 }
             };
 
             foreach (KeyValuePair<string, int> effect in effects)
@@ -115,59 +62,59 @@ namespace NaviDoctor
 
             List<string> parts = new List<string>();
             List<string> excludes = new List<string> { "HP+100", "HP+200", "HP+300", "HP+500", "Reg+5", "Atk+1", "Speed+1", "Charge+1", "WeapLvl+1", "Custom1", "Custom2", "MegFldr1", "MegFldr2", "GigFldr1" };
-            for (int i = 1; i < gridIndex.Count; i++)
+            for (int i = 1; i < naviCust.GridIndex.Count; i++)
             {
-                if (!parts.Any(x => x == gridIndex[i]) && !excludes.Any(x => x == gridIndex[i]))
+                if (!parts.Any(x => x == naviCust.GridIndex[i]) && !excludes.Any(x => x == naviCust.GridIndex[i]))
                 {
-                    parts.Add(gridIndex[i]);
-                    dgvEffects.Rows.Add(gridIndex[i]);
+                    parts.Add(naviCust.GridIndex[i]);
+                    dgvEffects.Rows.Add(naviCust.GridIndex[i]);
                 }
             }
-            if (_modCode < 0x42 && _modCode > 0)
+            if (naviCust.ModCode < 0x42 && naviCust.ModCode > 0)
             {
-                dgvEffects.Rows.Add($"ModTools: " + modCodeDict[_modCode]);
+                dgvEffects.Rows.Add($"ModTools: " + naviCust.ModCodeDict[naviCust.ModCode]);
             }
         }
         public void InitializeColorBox()
         {
-            _colorBox = new List<PictureBox> { imgColorBox1, imgColorBox2, imgColorBox3, imgColorBox4, imgColorBox5, imgColorBox6 };
-            for (int i = 0; i < _colors.Count; i++)
+            naviCust.ColorBox = new List<PictureBox> { imgColorBox1, imgColorBox2, imgColorBox3, imgColorBox4, imgColorBox5, imgColorBox6 };
+            for (int i = 0; i < naviCust.ColorsList.Count; i++)
             {
-                switch (_colors[i])
+                switch (naviCust.ColorsList[i])
                 {
                     case "White":
-                        _colorBox[i].BackColor = Color.White;
+                        naviCust.ColorBox[i].BackColor = Color.White;
                         break;
                     case "Pink":
-                        _colorBox[i].BackColor = Color.Pink;
+                        naviCust.ColorBox[i].BackColor = Color.Pink;
                         break;
                     case "Yellow":
-                        _colorBox[i].BackColor = Color.Yellow;
+                        naviCust.ColorBox[i].BackColor = Color.Yellow;
                         break;
                     case "Red":
-                        _colorBox[i].BackColor = Color.Red;
+                        naviCust.ColorBox[i].BackColor = Color.Red;
                         break;
                     case "Orange":
-                        _colorBox[i].BackColor = Color.Orange;
+                        naviCust.ColorBox[i].BackColor = Color.Orange;
                         break;
                     case "Green":
-                        _colorBox[i].BackColor = Color.Green;
+                        naviCust.ColorBox[i].BackColor = Color.Green;
                         break;
                     case "Blue":
-                        _colorBox[i].BackColor = Color.Blue;
+                        naviCust.ColorBox[i].BackColor = Color.Blue;
                         break;
                     case "Purple":
-                        _colorBox[i].BackColor = Color.Purple;
+                        naviCust.ColorBox[i].BackColor = Color.Purple;
                         break;
                     case "Dark":
-                        _colorBox[i].BackColor = Color.DarkGray;
+                        naviCust.ColorBox[i].BackColor = Color.DarkGray;
                         break;
                     default:
-                        _colorBox[i].BackColor = Color.Transparent;
+                        naviCust.ColorBox[i].BackColor = Color.Transparent;
                         break;
                 }
-                _colorBox[i].BorderStyle = BorderStyle.FixedSingle;
-                _colorBox[i].Visible = true;
+                naviCust.ColorBox[i].BorderStyle = BorderStyle.FixedSingle;
+                naviCust.ColorBox[i].Visible = true;
             }
         }
         public void PopulateGrid()
@@ -183,31 +130,31 @@ namespace NaviDoctor
                             switch (naviCustGrid[i, j].Color)
                             {
                                 case "White":
-                                    pictureBoxList[index].Image = Properties.Resources.NCPblockWhite;
+                                    naviCust.PictureBoxList[index].Image = Properties.Resources.NCPblockWhite;
                                     break;
                                 case "Red":
-                                    pictureBoxList[index].Image = Properties.Resources.NCPblockRed;
+                                    naviCust.PictureBoxList[index].Image = Properties.Resources.NCPblockRed;
                                     break;
                                 case "Pink":
-                                    pictureBoxList[index].Image = Properties.Resources.NCPblockPink;
+                                    naviCust.PictureBoxList[index].Image = Properties.Resources.NCPblockPink;
                                     break;
                                 case "Orange":
-                                    pictureBoxList[index].Image = Properties.Resources.NCPblockOrange;
+                                    naviCust.PictureBoxList[index].Image = Properties.Resources.NCPblockOrange;
                                     break;
                                 case "Yellow":
-                                    pictureBoxList[index].Image = Properties.Resources.NCPblockYellow;
+                                    naviCust.PictureBoxList[index].Image = Properties.Resources.NCPblockYellow;
                                     break;
                                 case "Green":
-                                    pictureBoxList[index].Image = Properties.Resources.NCPblockGreen;
+                                    naviCust.PictureBoxList[index].Image = Properties.Resources.NCPblockGreen;
                                     break;
                                 case "Blue":
-                                    pictureBoxList[index].Image = Properties.Resources.NCPblockBlue;
+                                    naviCust.PictureBoxList[index].Image = Properties.Resources.NCPblockBlue;
                                     break;
                                 case "Purple":
-                                    pictureBoxList[index].Image = Properties.Resources.NCPblockPurple;
+                                    naviCust.PictureBoxList[index].Image = Properties.Resources.NCPblockPurple;
                                     break;
                                 case "Dark":
-                                    pictureBoxList[index].Image = Properties.Resources.NCPblockDark;
+                                    naviCust.PictureBoxList[index].Image = Properties.Resources.NCPblockDark;
                                     break;
                                 default:
                                     break;
@@ -217,22 +164,22 @@ namespace NaviDoctor
                             switch (naviCustGrid[i, j].Color)
                             {
                                 case "White":
-                                    pictureBoxList[index].Image = Properties.Resources.NCPplusblockWhite;
+                                    naviCust.PictureBoxList[index].Image = Properties.Resources.NCPplusblockWhite;
                                     break;
                                 case "Red":
-                                    pictureBoxList[index].Image = Properties.Resources.NCPplusblockRed;
+                                    naviCust.PictureBoxList[index].Image = Properties.Resources.NCPplusblockRed;
                                     break;
                                 case "Pink":
-                                    pictureBoxList[index].Image = Properties.Resources.NCPplusblockPink;
+                                    naviCust.PictureBoxList[index].Image = Properties.Resources.NCPplusblockPink;
                                     break;
                                 case "Yellow":
-                                    pictureBoxList[index].Image = Properties.Resources.NCPplusblockYellow;
+                                    naviCust.PictureBoxList[index].Image = Properties.Resources.NCPplusblockYellow;
                                     break;
                                 case "Green":
-                                    pictureBoxList[index].Image = Properties.Resources.NCPplusblockGreen;
+                                    naviCust.PictureBoxList[index].Image = Properties.Resources.NCPplusblockGreen;
                                     break;
                                 case "Blue":
-                                    pictureBoxList[index].Image = Properties.Resources.NCPplusblockBlue;
+                                    naviCust.PictureBoxList[index].Image = Properties.Resources.NCPplusblockBlue;
                                     break;
                                 default:
                                     break;
@@ -241,7 +188,7 @@ namespace NaviDoctor
                         default:
                             break;
                     }
-                    pictureBoxList[index].Tag = naviCustGrid[i, j].PartName;
+                    naviCust.PictureBoxList[index].Tag = naviCustGrid[i, j].PartName;
                     index++;
                 }
             }
@@ -252,18 +199,18 @@ namespace NaviDoctor
             {
                 for (int j = 0; j < 5; j++)
                 {
-                    naviCustGrid[i, j].Index = _gridPos[i, j];
+                    naviCustGrid[i, j].Index = naviCust.GridPos[i, j];
                     if (naviCustGrid[i, j].Index == 0) continue; // If the space is 0, there's no data to gather here.
-                    List<int> ColorID = ParseIDandColor(_ncpGrid[naviCustGrid[i, j].Index - 1][0]); // ColorID[0] is color, ColorID[1] is ID
-                    naviCustGrid[i, j].PartName = ncpMapList[ColorID[1]].ncpName;
-                    naviCustGrid[i, j].Color = ncpMapList[ColorID[1]].ncpColors[ColorID[0]];
-                    naviCustGrid[i, j].BlockType = ncpMapList[ColorID[1]].isProg ? 1 : 2;
-                    naviCustGrid[i, j].PivotX = _ncpGrid[naviCustGrid[i, j].Index - 1][1];
-                    naviCustGrid[i, j].PivotY = _ncpGrid[naviCustGrid[i, j].Index - 1][2];
-                    naviCustGrid[i, j].Rotation = _ncpGrid[naviCustGrid[i, j].Index - 1][3];
-                    if (!gridIndex.ContainsKey(naviCustGrid[i, j].Index))
+                    List<int> ColorID = ParseIDandColor(naviCust.NcpGrid[naviCustGrid[i, j].Index - 1][0]); // ColorID[0] is color, ColorID[1] is ID
+                    naviCustGrid[i, j].PartName = naviCust.NcpMapList[ColorID[1]].ncpName;
+                    naviCustGrid[i, j].Color = naviCust.NcpMapList[ColorID[1]].ncpColors[ColorID[0]];
+                    naviCustGrid[i, j].BlockType = naviCust.NcpMapList[ColorID[1]].isProg ? 1 : 2;
+                    naviCustGrid[i, j].PivotX = naviCust.NcpGrid[naviCustGrid[i, j].Index - 1][1];
+                    naviCustGrid[i, j].PivotY = naviCust.NcpGrid[naviCustGrid[i, j].Index - 1][2];
+                    naviCustGrid[i, j].Rotation = naviCust.NcpGrid[naviCustGrid[i, j].Index - 1][3];
+                    if (!naviCust.GridIndex.ContainsKey(naviCustGrid[i, j].Index))
                     {
-                        gridIndex.Add(naviCustGrid[i, j].Index, naviCustGrid[i, j].PartName);
+                        naviCust.GridIndex.Add(naviCustGrid[i, j].Index, naviCustGrid[i, j].PartName);
                     }
                 }
             }
@@ -271,7 +218,7 @@ namespace NaviDoctor
         public List<int> ParseIDandColor(int ncp)
         {
             byte[] bytes = BitConverter.GetBytes(ncp);
-            int color = bytes[0] & 0x3;
+            int color = bytes[0] & 3;
             int id = bytes[0] >> 2;
             return new List<int>() { color, id };
         }
@@ -280,72 +227,72 @@ namespace NaviDoctor
             ToolTip tooltip = new ToolTip();
             tooltip.SetToolTip(cBoxModCode, cBoxModCode.Tag.ToString());
             tooltip.Active = true;
-            switch (_modCode)
+            switch (naviCust.ModCode)
             {
                 case 0x1E:
                     cBoxModCode.SelectedItem = "HP+100";
-                    _modHP = 100;
-                    _bonusHP -= 100;
+                    naviCust.ModHP = 100;
+                    naviCust.BonusHP -= 100;
                     break;
                 case 0x1F:
                     cBoxModCode.SelectedItem = "HP+150";
-                    _modHP = 150;
-                    _bonusHP -= 150;
+                    naviCust.ModHP = 150;
+                    naviCust.BonusHP -= 150;
                     break;
                 case 0x20:
                     cBoxModCode.SelectedItem = "HP+200";
-                    _modHP = 200;
-                    _bonusHP -= 200;
+                    naviCust.ModHP = 200;
+                    naviCust.BonusHP -= 200;
                     break;
                 case 0x21:
                     cBoxModCode.SelectedItem = "HP+250";
-                    _modHP = 250;
-                    _bonusHP -= 250;
+                    naviCust.ModHP = 250;
+                    naviCust.BonusHP -= 250;
                     break;
                 case 0x22:
                     cBoxModCode.SelectedItem = "HP+300";
-                    _modHP = 300;
-                    _bonusHP -= 300;
+                    naviCust.ModHP = 300;
+                    naviCust.BonusHP -= 300;
                     break;
                 case 0x23:
                     cBoxModCode.SelectedItem = "HP+350";
-                    _modHP = 350;
-                    _bonusHP -= 350;
+                    naviCust.ModHP = 350;
+                    naviCust.BonusHP -= 350;
                     break;
                 case 0x24:
                     cBoxModCode.SelectedItem = "HP+400 *";
-                    _modHP = 400;
-                    _bonusHP -= 400;
+                    naviCust.ModHP = 400;
+                    naviCust.BonusHP -= 400;
                     break;
                 case 0x25:
                     cBoxModCode.SelectedItem = "HP+450 *";
-                    _modHP = 450;
-                    _bonusHP -= 450;
+                    naviCust.ModHP = 450;
+                    naviCust.BonusHP -= 450;
                     break;
                 case 0x26:
                     cBoxModCode.SelectedItem = "HP+500 *";
-                    _modHP = 500;
-                    _bonusHP -= 500;
+                    naviCust.ModHP = 500;
+                    naviCust.BonusHP -= 500;
                     break;
                 case 0x27:
                     cBoxModCode.SelectedItem = "HP+550 *";
-                    _modHP = 550;
-                    _bonusHP -= 550;
+                    naviCust.ModHP = 550;
+                    naviCust.BonusHP -= 550;
                     break;
                 case 0x28:
                     cBoxModCode.SelectedItem = "HP+600 *";
-                    _modHP = 600;
-                    _bonusHP -= 600;
+                    naviCust.ModHP = 600;
+                    naviCust.BonusHP -= 600;
                     break;
                 case 0x29:
                     cBoxModCode.SelectedItem = "HP+650 *";
-                    _modHP = 650;
-                    _bonusHP -= 650;
+                    naviCust.ModHP = 650;
+                    naviCust.BonusHP -= 650;
                     break;
                 case 0x2A:
                     cBoxModCode.SelectedItem = "HP+700 *";
-                    _modHP = 700;
-                    _bonusHP -= 700;
+                    naviCust.ModHP = 700;
+                    naviCust.BonusHP -= 700;
                     break;
                 case 0x2B:
                     cBoxModCode.SelectedItem = "Equip Super Armor";
@@ -382,13 +329,13 @@ namespace NaviDoctor
                     break;
                 case 0x36:
                     cBoxModCode.SelectedItem = "MegaChip +1";
-                    _megaLimit -= 1;
-                    _modMega = 1;
+                    naviCust.MegaLimit -= 1;
+                    naviCust.ModMega = 1;
                     break;
                 case 0x37:
                     cBoxModCode.SelectedItem = "MegaChip +2 *";
-                    _megaLimit -= 2;
-                    _modMega = 2;
+                    naviCust.MegaLimit -= 2;
+                    naviCust.ModMega = 2;
                     break;
                 case 0x38:
                     cBoxModCode.SelectedItem = "Activate FastGauge *";
@@ -401,38 +348,38 @@ namespace NaviDoctor
                     break;
                 case 0x3B:
                     cBoxModCode.SelectedItem = "HP+800 *";
-                    _modHP = 800;
-                    _bonusHP -= 800;
+                    naviCust.ModHP = 800;
+                    naviCust.BonusHP -= 800;
                     break;
                 case 0x3C:
                     cBoxModCode.SelectedItem = "HP+900 *";
-                    _modHP = 900;
-                    _bonusHP -= 900;
+                    naviCust.ModHP = 900;
+                    naviCust.BonusHP -= 900;
                     break;
                 case 0x3D:
                     cBoxModCode.SelectedItem = "HP+1000 *";
-                    _modHP = 1000;
-                    _bonusHP -= 1000;
+                    naviCust.ModHP = 1000;
+                    naviCust.BonusHP -= 1000;
                     break;
                 case 0x3E:
                     cBoxModCode.SelectedItem = "MegaChip +3 *";
-                    _megaLimit -= 3;
-                    _modMega = 3;
+                    naviCust.MegaLimit -= 3;
+                    naviCust.ModMega = 3;
                     break;
                 case 0x3F:
                     cBoxModCode.SelectedItem = "MegaChip +4 *";
-                    _megaLimit -= 4;
-                    _modMega = 4;
+                    naviCust.MegaLimit -= 4;
+                    naviCust.ModMega = 4;
                     break;
                 case 0x40:
                     cBoxModCode.SelectedItem = "MegaChip +5 *";
-                    _megaLimit -= 5;
-                    _modMega = 5;
+                    naviCust.MegaLimit -= 5;
+                    naviCust.ModMega = 5;
                     break;
                 case 0x41:
                     cBoxModCode.SelectedItem = "GigaChip +1 *";
-                    _gigaLimit -= 1;
-                    _modGiga = 1;
+                    naviCust.GigaLimit -= 1;
+                    naviCust.ModGiga = 1;
                     break;
                 default:
                     cBoxModCode.SelectedItem = "None"; 
@@ -445,18 +392,18 @@ namespace NaviDoctor
         }
         public void ReadStats()
         {
-            int gutsMod = isGuts ? 2 : 1;
-            int custMod = isCust ? 1 : 0;
-            int teamMod = isTeam ? 1 : 0;
-            labelHPTotal.Text = (_baseHP + _bonusHP + _modHP).ToString();
-            labelAttack.Text = (Math.Min(_atkBonus, 5) * gutsMod).ToString();
-            labelSpeed.Text = (Math.Min(_spdBonus, 5) + 1).ToString();
-            labelCharge.Text = (Math.Min(_chrgBonus, 5) + 1).ToString();
-            labelCShot.Text = Math.Min(_cShotBonus, 3).ToString();
-            labelRegMem.Text = (_regMem + _bonusRegMem).ToString();
-            labelMegaLimit.Text = (_megaLimit + teamMod + _modMega).ToString();
-            labelGigaLimit.Text = (_gigaLimit + _modGiga).ToString();
-            labelCustHandSize.Text = (_customSize + custMod + _modCustom).ToString();
+            int gutsMod = naviCust.IsGuts ? 2 : 1;
+            int custMod = naviCust.IsCust ? 1 : 0;
+            int teamMod = naviCust.IsTeam ? 1 : 0;
+            labelHPTotal.Text = (naviCust.BaseHP + naviCust.BonusHP + naviCust.ModHP).ToString();
+            labelAttack.Text = (Math.Min(naviCust.AtkBonus, 5) * gutsMod).ToString();
+            labelSpeed.Text = (Math.Min(naviCust.SpdBonus, 5) + 1).ToString();
+            labelCharge.Text = (Math.Min(naviCust.ChrgBonus, 5) + 1).ToString();
+            labelCShot.Text = Math.Min(naviCust.CShotBonus, 3).ToString();
+            labelRegMem.Text = (naviCust.RegMem + naviCust.BonusRegMem).ToString();
+            labelMegaLimit.Text = (naviCust.MegaLimit + teamMod + naviCust.ModMega).ToString();
+            labelGigaLimit.Text = (naviCust.GigaLimit + naviCust.ModGiga).ToString();
+            labelCustHandSize.Text = (naviCust.CustomSize + custMod + naviCust.ModCustom).ToString();
         }
         public void InitializeGrid()
         {
@@ -486,19 +433,16 @@ namespace NaviDoctor
                 case GameTitle.Title.MegaManBattleNetwork6CybeastFalzar:
                     break;
                 default:
-                    switch (_custSize)
+                    List<PictureBox> exclusions = new List<PictureBox>();
+                    switch (naviCust.CustSize)
                     {
                         case 0:
-                            imgCustGrid04.Visible = false;
-                            imgCustGrid14.Visible = false;
-                            imgCustGrid24.Visible = false;
-                            imgCustGrid34.Visible = false;
-                            imgCustGrid40.Visible = false;
-                            imgCustGrid41.Visible = false;
-                            imgCustGrid42.Visible = false;
-                            imgCustGrid43.Visible = false;
-                            imgCustGrid44.Visible = false;
-                            pictureBoxList = new List<PictureBox>()
+                            exclusions = new List<PictureBox> { imgCustGrid04, imgCustGrid14, imgCustGrid24, imgCustGrid34, imgCustGrid40, imgCustGrid41, imgCustGrid42, imgCustGrid43, imgCustGrid44 };
+                            foreach (PictureBox image in exclusions)
+                            {
+                                image.Visible = false;
+                            }
+                            naviCust.PictureBoxList = new List<PictureBox>()
                             {
                                 imgCustGrid00, imgCustGrid01, imgCustGrid02, imgCustGrid03, imgCustGrid10, imgCustGrid11, imgCustGrid12,
                                 imgCustGrid13, imgCustGrid20, imgCustGrid21, imgCustGrid22, imgCustGrid23, imgCustGrid30, imgCustGrid31,
@@ -521,12 +465,12 @@ namespace NaviDoctor
                             }
                             break;
                         case 1:
-                            imgCustGrid40.Visible = false;
-                            imgCustGrid41.Visible = false;
-                            imgCustGrid42.Visible = false;
-                            imgCustGrid43.Visible = false;
-                            imgCustGrid44.Visible = false;
-                            pictureBoxList = new List<PictureBox>()
+                            exclusions = new List<PictureBox> { imgCustGrid40, imgCustGrid41, imgCustGrid42, imgCustGrid43, imgCustGrid44 };
+                            foreach (PictureBox image in exclusions)
+                            {
+                                image.Visible = false;
+                            }
+                            naviCust.PictureBoxList = new List<PictureBox>()
                             {
                                 imgCustGrid00, imgCustGrid01, imgCustGrid02, imgCustGrid03, imgCustGrid04, imgCustGrid10, imgCustGrid11, 
                                 imgCustGrid12, imgCustGrid13, imgCustGrid14, imgCustGrid20, imgCustGrid21, imgCustGrid22, imgCustGrid23, 
@@ -549,7 +493,7 @@ namespace NaviDoctor
                             }
                             break;
                         case 2:
-                            pictureBoxList = new List<PictureBox>()
+                            naviCust.PictureBoxList = new List<PictureBox>()
                             {
                                 imgCustGrid00, imgCustGrid01, imgCustGrid02, imgCustGrid03, imgCustGrid04, imgCustGrid10, imgCustGrid11,
                                 imgCustGrid12, imgCustGrid13, imgCustGrid14, imgCustGrid20, imgCustGrid21, imgCustGrid22, imgCustGrid23,
@@ -571,11 +515,11 @@ namespace NaviDoctor
                         default:
                             break;
                     }
-                    foreach (PictureBox box in pictureBoxList)
+                    foreach (PictureBox box in naviCust.PictureBoxList)
                     {
                         int xPos = box.Location.X;
                         int yPos = box.Location.Y;
-                        switch (3-_custSize)
+                        switch (3 - naviCust.CustSize)
                         {
                             case 1:
                             case 2:
@@ -603,15 +547,15 @@ namespace NaviDoctor
         }
         public void ReadCompression()
         {
-            for (int i = 0; i < ncpMapList.Count; i++)
+            for (int i = 0; i < naviCust.NcpMapList.Count; i++)
             {
-                ncpMapList[i].isCompressed = _compression[i] == 1;
+                naviCust.NcpMapList[i].isCompressed = naviCust.Compression[i] == 1;
             }
         }
         public void ReadInventory()
         {
             int index = 0;
-            foreach (NCPListing part in ncpMapList)
+            foreach (NCPListing part in naviCust.NcpMapList)
             {
                 if (part.ncpName == "None")
                     continue;
@@ -626,16 +570,16 @@ namespace NaviDoctor
                     switch (colorIndex)
                     {
                         case 0:
-                            part.QuantityCol1 = _ncpInv[index];
+                            part.QuantityCol1 = naviCust.NcpInv[index];
                             break;
                         case 1:
-                            part.QuantityCol2 = _ncpInv[index];
+                            part.QuantityCol2 = naviCust.NcpInv[index];
                             break;
                         case 2:
-                            part.QuantityCol3 = _ncpInv[index];
+                            part.QuantityCol3 = naviCust.NcpInv[index];
                             break;
                         default:
-                            part.QuantityCol4 = _ncpInv[index];
+                            part.QuantityCol4 = naviCust.NcpInv[index];
                             break;
                     }
                     colorIndex++;
@@ -645,27 +589,27 @@ namespace NaviDoctor
         }
         public void InitializeStats()
         {
-            _hpUp = _initialSave.HPUp;
-            _baseHP = (_hpUp * 20) + 100;
-            _bonusHP = _initialSave.BonusHP;
-            _regMem = _initialSave.RegMem;
-            _custSize = _initialSave.CustSize;
-            _atkBonus = _initialSave.AttackPower;
-            _spdBonus = _initialSave.RapidPower;
-            _chrgBonus = _initialSave.ChargePower;
-            _bonusRegMem = _initialSave.CustEffects[17];
-            _customSize = _initialSave.CustEffects[18];
-            _cShotBonus = _initialSave.CShotPower;
-            _ncpInv = _initialSave.NCPInventory;
-            _compression = _initialSave.Compression;
-            _ncpGrid = _initialSave.NCPGrid;
-            _gridPos = _initialSave.GridPosData;
-            _effects = _initialSave.CustEffects;
-            _bugs = _initialSave.CustBugs;
-            _modCode = _initialSave.ModCode;
-            _megaLimit = _initialSave.MegaLimit;
-            _gigaLimit = _initialSave.GigaLimit;
-            isBugged = _initialSave.isCustBugged;
+            naviCust.HpUp = _initialSave.HPUp;
+            naviCust.BaseHP = (naviCust.HpUp * 20) + 100;
+            naviCust.BonusHP = _initialSave.BonusHP;
+            naviCust.RegMem = _initialSave.RegMem;
+            naviCust.CustSize = _initialSave.CustSize;
+            naviCust.AtkBonus = _initialSave.AttackPower;
+            naviCust.SpdBonus = _initialSave.RapidPower;
+            naviCust.ChrgBonus = _initialSave.ChargePower;
+            naviCust.BonusRegMem = _initialSave.CustEffects[17];
+            naviCust.CustomSize = _initialSave.CustEffects[18];
+            naviCust.CShotBonus = _initialSave.CShotPower;
+            naviCust.NcpInv = _initialSave.NCPInventory;
+            naviCust.Compression = _initialSave.Compression;
+            naviCust.NcpGrid = _initialSave.NCPGrid;
+            naviCust.GridPos = _initialSave.GridPosData;
+            naviCust.Effects = _initialSave.CustEffects;
+            naviCust.Bugs = _initialSave.CustBugs;
+            naviCust.ModCode = _initialSave.ModCode;
+            naviCust.MegaLimit = _initialSave.MegaLimit;
+            naviCust.GigaLimit = _initialSave.GigaLimit;
+            naviCust.IsBugged = _initialSave.isCustBugged;
 
             labelStyleName.Text = _style.Name.ToString() + " Style";
             
@@ -675,19 +619,19 @@ namespace NaviDoctor
                 case Style.Value.AquaGuts:
                 case Style.Value.ElecGuts:
                 case Style.Value.WoodGuts:
-                    isGuts = true;
+                    naviCust.IsGuts = true;
                     break;
                 case Style.Value.HeatCust:
                 case Style.Value.AquaCust:
                 case Style.Value.ElecCust:
                 case Style.Value.WoodCust:
-                    isCust = true;
+                    naviCust.IsCust = true;
                     break;
                 case Style.Value.HeatTeam:
                 case Style.Value.AquaTeam:
                 case Style.Value.ElecTeam:
                 case Style.Value.WoodTeam:
-                    isTeam = true;
+                    naviCust.IsTeam = true;
                     break;
                 default:
                     break;
@@ -702,7 +646,7 @@ namespace NaviDoctor
                 case Style.Value.AquaShadow:
                 case Style.Value.ElecShadow:
                 case Style.Value.WoodShadow:
-                    _colors.Add("Red");
+                    naviCust.ColorsList.Add("Red");
                     break;
                 case Style.Value.HeatShield:
                 case Style.Value.AquaShield:
@@ -712,7 +656,7 @@ namespace NaviDoctor
                 case Style.Value.AquaCust:
                 case Style.Value.ElecCust:
                 case Style.Value.WoodCust:
-                    _colors.Add("Blue");
+                    naviCust.ColorsList.Add("Blue");
                     break;
                 case Style.Value.HeatTeam:
                 case Style.Value.AquaTeam:
@@ -722,13 +666,13 @@ namespace NaviDoctor
                 case Style.Value.AquaGround:
                 case Style.Value.ElecGround:
                 case Style.Value.WoodGround:
-                    _colors.Add("Green");
+                    naviCust.ColorsList.Add("Green");
                     break;
                 case Style.Value.HeatBug:
                 case Style.Value.AquaBug:
                 case Style.Value.ElecBug:
                 case Style.Value.WoodBug:
-                    _colors.Add("Dark");
+                    naviCust.ColorsList.Add("Dark");
                     break;
                 default:
                     break;
@@ -737,7 +681,7 @@ namespace NaviDoctor
             {
                 case GameTitle.Title.MegaManBattleNetwork3White:
                 case GameTitle.Title.MegaManBattleNetwork3Blue:
-                    ncpMapList = new NaviCustParts().BN3NCPMap();
+                    naviCust.NcpMapList = new NaviCustParts().BN3NCPMap();
                     break;
                 default:
                     break;

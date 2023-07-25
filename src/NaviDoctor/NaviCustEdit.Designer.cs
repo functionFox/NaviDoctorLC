@@ -140,10 +140,10 @@ namespace NaviDoctor
             this.btnRunOK = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.dgvEffects = new System.Windows.Forms.DataGridView();
+            this.Effects = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvBugs = new System.Windows.Forms.DataGridView();
             this.Bugs = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Lv = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Effects = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.imgCustGrid00)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgCustGrid01)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgCustGrid02)).BeginInit();
@@ -1093,8 +1093,6 @@ namespace NaviDoctor
             this.imgSelect00.Size = new System.Drawing.Size(15, 15);
             this.imgSelect00.TabIndex = 0;
             this.imgSelect00.TabStop = false;
-            this.imgSelect00.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
-            this.imgSelect00.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
             // imgSelect01
             // 
@@ -1106,8 +1104,6 @@ namespace NaviDoctor
             this.imgSelect01.Size = new System.Drawing.Size(15, 15);
             this.imgSelect01.TabIndex = 0;
             this.imgSelect01.TabStop = false;
-            this.imgSelect01.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
-            this.imgSelect01.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
             // imgSelect02
             // 
@@ -1119,8 +1115,6 @@ namespace NaviDoctor
             this.imgSelect02.Size = new System.Drawing.Size(15, 15);
             this.imgSelect02.TabIndex = 0;
             this.imgSelect02.TabStop = false;
-            this.imgSelect02.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
-            this.imgSelect02.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
             // imgSelect03
             // 
@@ -1132,8 +1126,6 @@ namespace NaviDoctor
             this.imgSelect03.Size = new System.Drawing.Size(15, 15);
             this.imgSelect03.TabIndex = 0;
             this.imgSelect03.TabStop = false;
-            this.imgSelect03.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
-            this.imgSelect03.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
             // imgSelect04
             // 
@@ -1145,8 +1137,6 @@ namespace NaviDoctor
             this.imgSelect04.Size = new System.Drawing.Size(15, 15);
             this.imgSelect04.TabIndex = 0;
             this.imgSelect04.TabStop = false;
-            this.imgSelect04.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
-            this.imgSelect04.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
             // imgSelect10
             // 
@@ -1158,8 +1148,6 @@ namespace NaviDoctor
             this.imgSelect10.Size = new System.Drawing.Size(15, 15);
             this.imgSelect10.TabIndex = 0;
             this.imgSelect10.TabStop = false;
-            this.imgSelect10.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
-            this.imgSelect10.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
             // imgSelect11
             // 
@@ -1171,8 +1159,6 @@ namespace NaviDoctor
             this.imgSelect11.Size = new System.Drawing.Size(15, 15);
             this.imgSelect11.TabIndex = 0;
             this.imgSelect11.TabStop = false;
-            this.imgSelect11.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
-            this.imgSelect11.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
             // imgSelect12
             // 
@@ -1184,8 +1170,6 @@ namespace NaviDoctor
             this.imgSelect12.Size = new System.Drawing.Size(15, 15);
             this.imgSelect12.TabIndex = 0;
             this.imgSelect12.TabStop = false;
-            this.imgSelect12.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
-            this.imgSelect12.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
             // imgSelect13
             // 
@@ -1197,8 +1181,6 @@ namespace NaviDoctor
             this.imgSelect13.Size = new System.Drawing.Size(15, 15);
             this.imgSelect13.TabIndex = 0;
             this.imgSelect13.TabStop = false;
-            this.imgSelect13.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
-            this.imgSelect13.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
             // imgSelect14
             // 
@@ -1210,8 +1192,6 @@ namespace NaviDoctor
             this.imgSelect14.Size = new System.Drawing.Size(15, 15);
             this.imgSelect14.TabIndex = 0;
             this.imgSelect14.TabStop = false;
-            this.imgSelect14.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
-            this.imgSelect14.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
             // imgSelect20
             // 
@@ -1223,8 +1203,6 @@ namespace NaviDoctor
             this.imgSelect20.Size = new System.Drawing.Size(15, 15);
             this.imgSelect20.TabIndex = 0;
             this.imgSelect20.TabStop = false;
-            this.imgSelect20.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
-            this.imgSelect20.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
             // imgSelect23
             // 
@@ -1236,8 +1214,6 @@ namespace NaviDoctor
             this.imgSelect23.Size = new System.Drawing.Size(15, 15);
             this.imgSelect23.TabIndex = 0;
             this.imgSelect23.TabStop = false;
-            this.imgSelect23.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
-            this.imgSelect23.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
             // imgSelect24
             // 
@@ -1249,8 +1225,6 @@ namespace NaviDoctor
             this.imgSelect24.Size = new System.Drawing.Size(15, 15);
             this.imgSelect24.TabIndex = 0;
             this.imgSelect24.TabStop = false;
-            this.imgSelect24.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
-            this.imgSelect24.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
             // imgSelect30
             // 
@@ -1262,8 +1236,6 @@ namespace NaviDoctor
             this.imgSelect30.Size = new System.Drawing.Size(15, 15);
             this.imgSelect30.TabIndex = 0;
             this.imgSelect30.TabStop = false;
-            this.imgSelect30.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
-            this.imgSelect30.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
             // imgSelect31
             // 
@@ -1275,8 +1247,6 @@ namespace NaviDoctor
             this.imgSelect31.Size = new System.Drawing.Size(15, 15);
             this.imgSelect31.TabIndex = 0;
             this.imgSelect31.TabStop = false;
-            this.imgSelect31.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
-            this.imgSelect31.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
             // imgSelect32
             // 
@@ -1288,8 +1258,6 @@ namespace NaviDoctor
             this.imgSelect32.Size = new System.Drawing.Size(15, 15);
             this.imgSelect32.TabIndex = 0;
             this.imgSelect32.TabStop = false;
-            this.imgSelect32.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
-            this.imgSelect32.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
             // imgSelect33
             // 
@@ -1301,8 +1269,6 @@ namespace NaviDoctor
             this.imgSelect33.Size = new System.Drawing.Size(15, 15);
             this.imgSelect33.TabIndex = 0;
             this.imgSelect33.TabStop = false;
-            this.imgSelect33.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
-            this.imgSelect33.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
             // imgSelect34
             // 
@@ -1314,8 +1280,6 @@ namespace NaviDoctor
             this.imgSelect34.Size = new System.Drawing.Size(15, 15);
             this.imgSelect34.TabIndex = 0;
             this.imgSelect34.TabStop = false;
-            this.imgSelect34.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
-            this.imgSelect34.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
             // imgSelect40
             // 
@@ -1327,8 +1291,6 @@ namespace NaviDoctor
             this.imgSelect40.Size = new System.Drawing.Size(15, 15);
             this.imgSelect40.TabIndex = 0;
             this.imgSelect40.TabStop = false;
-            this.imgSelect40.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
-            this.imgSelect40.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
             // imgSelect41
             // 
@@ -1340,8 +1302,6 @@ namespace NaviDoctor
             this.imgSelect41.Size = new System.Drawing.Size(15, 15);
             this.imgSelect41.TabIndex = 0;
             this.imgSelect41.TabStop = false;
-            this.imgSelect41.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
-            this.imgSelect41.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
             // imgSelect42
             // 
@@ -1353,8 +1313,6 @@ namespace NaviDoctor
             this.imgSelect42.Size = new System.Drawing.Size(15, 15);
             this.imgSelect42.TabIndex = 0;
             this.imgSelect42.TabStop = false;
-            this.imgSelect42.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
-            this.imgSelect42.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
             // imgSelect43
             // 
@@ -1366,8 +1324,6 @@ namespace NaviDoctor
             this.imgSelect43.Size = new System.Drawing.Size(15, 15);
             this.imgSelect43.TabIndex = 0;
             this.imgSelect43.TabStop = false;
-            this.imgSelect43.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
-            this.imgSelect43.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
             // imgSelect44
             // 
@@ -1379,8 +1335,6 @@ namespace NaviDoctor
             this.imgSelect44.Size = new System.Drawing.Size(15, 15);
             this.imgSelect44.TabIndex = 0;
             this.imgSelect44.TabStop = false;
-            this.imgSelect44.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
-            this.imgSelect44.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
             // imgSelect21
             // 
@@ -1392,8 +1346,6 @@ namespace NaviDoctor
             this.imgSelect21.Size = new System.Drawing.Size(15, 15);
             this.imgSelect21.TabIndex = 0;
             this.imgSelect21.TabStop = false;
-            this.imgSelect21.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
-            this.imgSelect21.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
             // btnRotCCW
             // 
@@ -1423,8 +1375,6 @@ namespace NaviDoctor
             this.imgSelect22.Size = new System.Drawing.Size(15, 15);
             this.imgSelect22.TabIndex = 0;
             this.imgSelect22.TabStop = false;
-            this.imgSelect22.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
-            this.imgSelect22.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
             // dgvNCPInv
             // 
@@ -1502,6 +1452,19 @@ namespace NaviDoctor
             this.dgvEffects.Size = new System.Drawing.Size(215, 110);
             this.dgvEffects.TabIndex = 28;
             // 
+            // Effects
+            // 
+            this.Effects.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Green;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.Effects.DefaultCellStyle = dataGridViewCellStyle1;
+            this.Effects.HeaderText = "Effects";
+            this.Effects.Name = "Effects";
+            this.Effects.ReadOnly = true;
+            this.Effects.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
             // dgvBugs
             // 
             this.dgvBugs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -1529,19 +1492,6 @@ namespace NaviDoctor
             this.Lv.ReadOnly = true;
             this.Lv.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.Lv.Width = 25;
-            // 
-            // Effects
-            // 
-            this.Effects.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Green;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.Effects.DefaultCellStyle = dataGridViewCellStyle1;
-            this.Effects.HeaderText = "Effects";
-            this.Effects.Name = "Effects";
-            this.Effects.ReadOnly = true;
-            this.Effects.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
             // NaviCustEdit
             // 
