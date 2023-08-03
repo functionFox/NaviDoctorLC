@@ -30,7 +30,9 @@ namespace NaviDoctor
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NaviCustEdit));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.imgCustGrid00 = new System.Windows.Forms.PictureBox();
             this.imgCustGrid01 = new System.Windows.Forms.PictureBox();
             this.imgCustGrid02 = new System.Windows.Forms.PictureBox();
@@ -988,10 +990,10 @@ namespace NaviDoctor
             "Equip Shadow Shoes",
             "Equip Air Shoes *",
             "Equip UnderShirt",
-            "Equip Block (Left+B)",
-            "Equip Shield (Left+B)",
-            "Equip Reflect (Left+B) *",
-            "Equip Anti-Damage (Left+B) *",
+            "Equip Block (B+Left)",
+            "Equip Shield (B+Left)",
+            "Equip Reflect (B+Left) *",
+            "Equip Anti-Damage (B+Left) *",
             "Activate FastGauge *",
             "Activate SneakRun",
             "Activate Humor",
@@ -1455,11 +1457,11 @@ namespace NaviDoctor
             // Effects
             // 
             this.Effects.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Green;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.Effects.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.Green;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.Effects.DefaultCellStyle = dataGridViewCellStyle4;
             this.Effects.HeaderText = "Effects";
             this.Effects.Name = "Effects";
             this.Effects.ReadOnly = true;
@@ -1467,6 +1469,10 @@ namespace NaviDoctor
             // 
             // dgvBugs
             // 
+            this.dgvBugs.AllowUserToAddRows = false;
+            this.dgvBugs.AllowUserToDeleteRows = false;
+            this.dgvBugs.AllowUserToResizeColumns = false;
+            this.dgvBugs.AllowUserToResizeRows = false;
             this.dgvBugs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvBugs.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Bugs,
@@ -1480,6 +1486,11 @@ namespace NaviDoctor
             // Bugs
             // 
             this.Bugs.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.Maroon;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.Bugs.DefaultCellStyle = dataGridViewCellStyle5;
             this.Bugs.HeaderText = "Bugs";
             this.Bugs.Name = "Bugs";
             this.Bugs.ReadOnly = true;
@@ -1487,6 +1498,11 @@ namespace NaviDoctor
             // 
             // Lv
             // 
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.Maroon;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.Lv.DefaultCellStyle = dataGridViewCellStyle6;
             this.Lv.HeaderText = "Lv";
             this.Lv.Name = "Lv";
             this.Lv.ReadOnly = true;
@@ -1811,8 +1827,8 @@ namespace NaviDoctor
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.DataGridView dgvEffects;
         private System.Windows.Forms.DataGridView dgvBugs;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Effects;
         private System.Windows.Forms.DataGridViewTextBoxColumn Bugs;
         private System.Windows.Forms.DataGridViewTextBoxColumn Lv;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Effects;
     }
 }

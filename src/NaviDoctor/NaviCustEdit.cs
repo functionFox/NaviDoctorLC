@@ -38,6 +38,130 @@ namespace NaviDoctor
             // ColorTest();
             PopulateGrid();
             ReadEffects();
+            ReadBugs();
+        }
+        public void ReadBugs()
+        {
+            string bugEffect;
+            int bugLevel;
+            for (int i = 0; i < naviCust.Bugs.Count; i++)
+            {
+                switch (i)
+                {
+                    case 0:
+                        bugEffect = "Player Movement: ";
+                        switch (naviCust.Effects[15])
+                        {
+                            case 4:
+                                bugEffect = bugEffect + "Up";
+                                break;
+                            case 8:
+                                bugEffect = bugEffect + "Down";
+                                break;
+                            case 12:
+                                bugEffect = bugEffect + "Confused";
+                                break;
+                            default:
+                                bugEffect = "Error";
+                                break;
+                        }
+                        break;
+                    case 1:
+                        bugEffect = "Battle HP Drain";
+                        break;
+                    case 2:
+                        bugEffect = "Custom HP Drain";
+                        break;
+                    case 3:
+                        bugEffect = "Battle Panel: ";
+                        bugEffect = naviCust.Bugs[3] == 13 ? bugEffect + "Cracked" : naviCust.Bugs[3] == 14 ? bugEffect + "Swamp" : "Error";
+                        break;
+                    case 4:
+                        bugEffect = "SlowGauge";
+                        break;
+                    case 5:
+                        bugEffect = "Increased Encounters";
+                        break;
+                    case 6:
+                        bugEffect = "Buster Misfire";
+                        break;
+                    case 7:
+                        bugEffect = "Support Disabled";
+                        break;
+                    case 8:
+                        bugEffect = "Modified C. Shot: ";
+                        switch (naviCust.Effects[11])
+                        {
+                            case 1:
+                                bugEffect = bugEffect + "Rock Cube";
+                                break;
+                            case 2:
+                                bugEffect = bugEffect + "Water Gun";
+                                break;
+                            case 3:
+                                bugEffect = bugEffect + "Flower";
+                                break;
+                            default:
+                                bugEffect = "Error";
+                                break;
+                        }
+                        break;
+                    case 9:
+                        bugEffect = "Battle Result: Zenny";
+                        break;
+                    case 10:
+                        bugEffect = "AutoBug: BustrMAX";
+                        break;
+                    case 11:
+                        bugEffect = "AutoBug: GigFldr1";
+                        break;
+                    case 12:
+                        bugEffect = "AutoBug: HubBatch";
+                        break;
+                    case 13:
+                        bugEffect = "AutoBug: DarkLcns";
+                        break;
+                    case 14:
+                        bugEffect = "ModTools: ";
+                        switch (naviCust.ModCode)
+                        {
+                            case 0x24:
+                            case 0x25:
+                            case 0x26:
+                            case 0x27:
+                            case 0x2D:
+                            case 0x34:
+                            case 0x35:
+                                bugEffect = bugEffect + "Custom -1";
+                                break;
+                            case 0x28:
+                            case 0x29:
+                            case 0x2A:
+                            case 0x2C:
+                            case 0x38:
+                                bugEffect = bugEffect + "Custom -2";
+                                break;
+                            case 0x3E:
+                            case 0x3F:
+                            case 0x40:
+                            case 0x41:
+                                bugEffect = bugEffect + "Swamp Step";
+                                break;
+                            default:
+                                bugEffect = "Error";
+                                break;
+                        }
+                        break;
+                    default:
+                        bugEffect = "Error";
+                        break;
+                }
+                bugLevel = naviCust.Bugs[i];
+                if (bugLevel > 0)
+                {
+                    dgvBugs.Rows.Add(bugEffect, bugLevel);
+                }
+            }
         }
         public void ReadEffects()
         {
@@ -316,16 +440,16 @@ namespace NaviDoctor
                     cBoxModCode.SelectedItem = "Equip UnderShirt";
                     break;
                 case 0x32:
-                    cBoxModCode.SelectedItem = "Equip Block (Left+B)";
+                    cBoxModCode.SelectedItem = "Equip Block (B+Left)";
                     break;
                 case 0x33:
-                    cBoxModCode.SelectedItem = "Equip Shield (Left+B)";
+                    cBoxModCode.SelectedItem = "Equip Shield (B+Left)";
                     break;
                 case 0x34:
-                    cBoxModCode.SelectedItem = "Equip Reflect (Left+B) *";
+                    cBoxModCode.SelectedItem = "Equip Reflect (B+Left) *";
                     break;
                 case 0x35:
-                    cBoxModCode.SelectedItem = "Equip Anti-Damage (Left+B) *";
+                    cBoxModCode.SelectedItem = "Equip Anti-Damage (B+Left) *";
                     break;
                 case 0x36:
                     cBoxModCode.SelectedItem = "MegaChip +1";
