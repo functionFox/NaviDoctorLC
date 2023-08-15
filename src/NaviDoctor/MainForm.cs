@@ -559,6 +559,52 @@ namespace NaviDoctor
             cbxRegChip.DataSource = chipData;
             cbxRegChip.DisplayMember = "RegChipDisplayMember";
             cbxRegChip.ValueMember = "ID";
+            var currentRegChipIndex = 0;
+
+            switch (saveData.GameName)
+            {
+                case GameTitle.Title.MegaManBattleNetwork:
+                case GameTitle.Title.MegaManBattleNetwork2:
+                    switch (tabsFolders.SelectedIndex)
+                    {
+                        case 0:
+                            currentRegChipIndex = chipData.IndexOf(BattleChipData.GetChipNameByID(chipNameMap, saveData.RegChip1));
+                            break;
+                        case 1:
+                            currentRegChipIndex = chipData.IndexOf(BattleChipData.GetChipNameByID(chipNameMap, saveData.RegChip2));
+                            break;
+                        case 2:
+                            currentRegChipIndex = chipData.IndexOf(BattleChipData.GetChipNameByID(chipNameMap, saveData.RegChip3));
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                case GameTitle.Title.MegaManBattleNetwork3White:
+                case GameTitle.Title.MegaManBattleNetwork3Blue:
+                    switch (tabsFolders.SelectedIndex)
+                    {
+                        case 0:
+                            currentRegChipIndex = chipData.IndexOf(BattleChipData.GetChipNameByID(chipNameMap, saveData.RegChip1));
+                            break;
+                        case 1:
+                            currentRegChipIndex = chipData.IndexOf(BattleChipData.GetChipNameByID(chipNameMap, saveData.RegChip3));
+                            break;
+                        case 2:
+                            currentRegChipIndex = chipData.IndexOf(BattleChipData.GetChipNameByID(chipNameMap, saveData.RegChip2));
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                default:
+                    return;
+            }
+
+            if (currentRegChipIndex != -1)
+            {
+                cbxRegChip.SelectedIndex = currentRegChipIndex;
+            }
         }
 
         private void btnRemoveChip_Click(object sender, EventArgs e)
@@ -3651,7 +3697,76 @@ namespace NaviDoctor
 
         private void btnSetRegChip_Click(object sender, EventArgs e)
         {
-            //TODO set reg chip here
+            var regChip = (int)cbxRegChip.SelectedValue;
+            List<BattleChipData> chipNameMap;
+
+            switch (saveData.GameName)
+            {
+                case GameTitle.Title.MegaManBattleNetwork:
+                    chipNameMap = BattleChipData.BN1ChipNameMap;
+                    break;
+                case GameTitle.Title.MegaManBattleNetwork2:
+                    chipNameMap = BattleChipData.BN2ChipNameMap;
+                    break;
+                case GameTitle.Title.MegaManBattleNetwork3White:
+                case GameTitle.Title.MegaManBattleNetwork3Blue:
+                    chipNameMap = BattleChipData.BN3ChipNameMap;
+                    break;
+                default:
+                    return;
+            }
+
+            var bcd = BattleChipData.GetChipNameByID(chipNameMap, regChip);
+
+            if(bcd.Size > nudRegMem.Value)
+            {
+                MessageBox.Show("Not enough RegMem for this chip.");
+                return;
+            }
+
+
+            //This is because of the way Extra Folder is saved into Folder2Data
+            switch (saveData.GameName)
+            {
+                case GameTitle.Title.MegaManBattleNetwork:
+                case GameTitle.Title.MegaManBattleNetwork2:
+                    switch (tabsFolders.SelectedIndex)
+                    {
+                        case 0:
+                            saveData.RegChip1 = regChip;
+                            break;
+                        case 1:
+                            saveData.RegChip2 = regChip;
+                            break;
+                        case 2:
+                            saveData.RegChip3 = regChip;
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                case GameTitle.Title.MegaManBattleNetwork3White:
+                case GameTitle.Title.MegaManBattleNetwork3Blue:
+                    switch (tabsFolders.SelectedIndex)
+                    {
+                        case 0:
+                            saveData.RegChip1 = regChip;
+                            break;
+                        case 1:
+                            saveData.RegChip3 = regChip;
+                            break;
+                        case 2:
+                            saveData.RegChip2 = regChip;
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                default:
+                    return;
+            }
+
+            MessageBox.Show($"RegChip set to {bcd.Name} [{bcd.AlphabeticalCode}]!");
         }
     }
 }
