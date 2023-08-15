@@ -502,20 +502,45 @@ namespace NaviDoctor
                     return;
             }
 
-
-            switch (tabsFolders.SelectedIndex)
+            //This is because of the way Extra Folder is saved into Folder2Data
+            switch (saveData.GameName)
             {
-                case 0:
-                    folderSaveData = saveData.FolderData;
+                case GameTitle.Title.MegaManBattleNetwork:
+                case GameTitle.Title.MegaManBattleNetwork2:
+                    switch (tabsFolders.SelectedIndex)
+                    {
+                        case 0:
+                            folderSaveData = saveData.FolderData;
+                            break;
+                        case 1:
+                            folderSaveData = saveData.Folder2Data;
+                            break;
+                        case 2:
+                            folderSaveData = saveData.Folder3Data;
+                            break;
+                        default:
+                            break;
+                    }
                     break;
-                case 1:
-                    folderSaveData = saveData.Folder2Data;
-                    break;
-                case 2:
-                    folderSaveData = saveData.Folder3Data;
+                case GameTitle.Title.MegaManBattleNetwork3White:
+                case GameTitle.Title.MegaManBattleNetwork3Blue:
+                    switch (tabsFolders.SelectedIndex)
+                    {
+                        case 0:
+                            folderSaveData = saveData.FolderData;
+                            break;
+                        case 1:
+                            folderSaveData = saveData.Folder3Data;
+                            break;
+                        case 2:
+                            folderSaveData = saveData.Folder2Data;
+                            break;
+                        default:
+                            break;
+                    }
                     break;
                 default:
-                    break;
+                    return;
             }
 
             foreach (var folderData in folderSaveData)
@@ -530,7 +555,6 @@ namespace NaviDoctor
                 chipData.Add(bcd);
             }
 
-            //TODO - for some reason the code isn't right
 
             cbxRegChip.DataSource = chipData;
             cbxRegChip.DisplayMember = "RegChipDisplayMember";
