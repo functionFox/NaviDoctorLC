@@ -17,6 +17,8 @@ namespace NaviDoctor
         private NaviCustGrid[,] naviCustGrid;
         private SaveDataObject _initialSave;
         private Style _style;
+        private List<PictureBox> preview;
+        private int rotator = 0;
         
         public NaviCustEdit()
         {
@@ -39,6 +41,41 @@ namespace NaviDoctor
             PopulateGrid();
             ReadEffects();
             ReadBugs();
+            PopulateNCPList();
+        }
+        public void PopulateNCPList()
+        {
+            int qty;
+            foreach (NCPListing part in naviCust.NcpMapList)
+            {
+                if (part.ncpName == "None") continue;
+                foreach (string color in part.ncpColors)
+                {
+                    if (color == "None") continue;
+                    else
+                    {
+                        switch (part.ncpColors.IndexOf(color))
+                            {
+                            case 0:
+                                qty = part.QuantityCol1;
+                                break;
+                            case 1:
+                                qty = part.QuantityCol2;
+                                break;
+                            case 2:
+                                qty = part.QuantityCol3;
+                                break;
+                            case 3:
+                                qty = part.QuantityCol4;
+                                break;
+                            default:
+                                qty = 69420;
+                                break;
+                        }
+                        dgvNCPInv.Rows.Add(part.ncpName, part.isCompressed, color, qty);
+                    }
+                }
+            }
         }
         public void ReadBugs()
         {
@@ -531,6 +568,9 @@ namespace NaviDoctor
         }
         public void InitializeGrid()
         {
+            preview = new List<PictureBox>
+            { imgSelect00, imgSelect01, imgSelect02, imgSelect03, imgSelect04, imgSelect10, imgSelect11, imgSelect12, imgSelect13, imgSelect14, imgSelect20, imgSelect21, imgSelect22, imgSelect23, imgSelect24, imgSelect30, imgSelect31, imgSelect32, imgSelect33, imgSelect34, imgSelect40, imgSelect41, imgSelect42, imgSelect43, imgSelect44
+            };
             switch (_initialSave.GameName)
             {
                 case GameTitle.Title.MegaManBattleNetwork6CybeastGregar:
@@ -847,6 +887,10 @@ namespace NaviDoctor
         public void Cleanup()
         {
             List<PictureBox> pictureBoxes = new List<PictureBox> { imgCustGrid00, imgCustGrid01, imgCustGrid02, imgCustGrid03, imgCustGrid04, imgCustGrid05, imgCustGrid10, imgCustGrid11, imgCustGrid12, imgCustGrid13, imgCustGrid14, imgCustGrid15, imgCustGrid16, imgCustGrid20, imgCustGrid21, imgCustGrid22, imgCustGrid23, imgCustGrid24, imgCustGrid25, imgCustGrid26, imgCustGrid30, imgCustGrid31, imgCustGrid32, imgCustGrid33, imgCustGrid34, imgCustGrid35, imgCustGrid36, imgCustGrid40, imgCustGrid41, imgCustGrid42, imgCustGrid43, imgCustGrid44, imgCustGrid45, imgCustGrid46, imgCustGrid50, imgCustGrid51, imgCustGrid52, imgCustGrid53, imgCustGrid54, imgCustGrid55, imgCustGrid56, imgCustGrid61, imgCustGrid62, imgCustGrid63, imgCustGrid64, imgCustGrid65, imgRunLine };
+            foreach (PictureBox box in preview)
+            {
+                pictureBoxes.Append(box);
+            }
             foreach (PictureBox box in pictureBoxes)
             {
                 box.Image.Dispose();
@@ -882,6 +926,129 @@ namespace NaviDoctor
             public int PivotY { get; set; } = 0;
             public int Rotation { get; set; } = 0; // 0 = No rotation. Each increase is one clockwise rotation
             public int Index { get; set; } = 0; // This is for GridPosData. Keep track of the order of placement.
+        }
+
+        private void dgvNCPInv_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            Dictionary<Image, int[,]> partPackage = setupPreview();
+            Image part = partPackage.Keys.FirstOrDefault();
+            int[,] shape = partPackage.Values.FirstOrDefault();
+            displayPreview(part, shape);
+        }
+        private Dictionary<Image, int[,]> setupPreview()
+        {
+            DataGridView dgv = dgvNCPInv;
+            dgv.CurrentRow.Selected = true;
+            DataGridViewCellCollection currentRow = dgv.CurrentRow.Cells;
+            dgv.CurrentCell = currentRow[0]; // Set the current cell to the leftmost position
+            NaviCustGrid selectedPart = new NaviCustGrid();
+            selectedPart.PartName = currentRow[0].Value.ToString();
+            selectedPart.Color = currentRow[2].Value.ToString();
+            NCPListing partData = naviCust.NcpMapList.FirstOrDefault(x => x.ncpName == selectedPart.PartName);
+            Image partPic = picSetup(selectedPart.Color, partData.isProg);
+            int[,] shape = shapeSetup(selectedPart.PartName, currentRow[1].Value.ToString());
+            return new Dictionary<Image, int[,]> { { partPic, shape } };
+        }
+        private void displayPreview(Image pic, int[,] shape)
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                for (int j = 0; j < 5; j++)
+                {
+                    preview[i * 5 + j].Image = shape[i, j] == 1 ? pic : Properties.Resources.NCPGrid;
+                }
+            }
+            Cleanup();
+        }
+        private int[,] shapeSetup(string partName, string isCom)
+        {
+            List<NCPListing> map = naviCust.NcpMapList;
+            bool isCompressed = isCom == "True" ? true : false;
+            int partId = map.IndexOf(map.FirstOrDefault(e => e.ncpName == partName));
+            int[,] shape = map[partId].ncpData.FirstOrDefault(e => e.Key == isCompressed).Value;
+            return shape;
+        }
+        static int[,] rotateShape(int[,] a)
+        {
+            int N = 5;
+            for (int i = 0; i < N / 2; i++)
+            {
+                for (int j = i; j < N - i - 1; j++)
+                {
+
+                    // Swap elements of each cycle
+                    // in clockwise direction
+                    int temp = a[i, j];
+                    a[i, j] = a[N - 1 - j, i];
+                    a[N - 1 - j, i] = a[N - 1 - i, N - 1 - j];
+                    a[N - 1 - i, N - 1 - j] = a[j, N - 1 - i];
+                    a[j, N - 1 - i] = temp;
+                }
+            }
+            return a;
+        }
+        private Image picSetup(string color, bool isProg) 
+        {
+            Image partPic = Properties.Resources.NCPGrid;
+            switch (color)
+            {
+                case "White":
+                    // partPic = isProg ? Properties.Resources.NCPblockWhite : Properties.Resources.NCPplusblockWhite;
+                    if (isProg)
+                    { partPic = Properties.Resources.NCPblockWhite; }
+                    else
+                    { partPic = Properties.Resources.NCPplusblockWhite; };
+                    break;
+                case "Red":
+                    partPic = isProg ? Properties.Resources.NCPblockRed : Properties.Resources.NCPplusblockRed;
+                    break;
+                case "Pink":
+                    partPic = isProg ? Properties.Resources.NCPblockPink : Properties.Resources.NCPplusblockPink;
+                    break;
+                case "Orange":
+                    partPic = Properties.Resources.NCPblockOrange;
+                    break;
+                case "Yellow":
+                    partPic = isProg ? Properties.Resources.NCPblockYellow : Properties.Resources.NCPplusblockYellow;
+                    break;
+                case "Green":
+                    partPic = isProg ? Properties.Resources.NCPblockGreen : Properties.Resources.NCPplusblockGreen;
+                    break;
+                case "Blue":
+                    partPic = isProg ? Properties.Resources.NCPblockBlue : Properties.Resources.NCPplusblockBlue;
+                    break;
+                case "Purple":
+                    partPic = Properties.Resources.NCPblockPurple;
+                    break;
+                case "Dark":
+                    partPic = Properties.Resources.NCPblockDark;
+                    break;
+                default:
+                    break;
+            }
+            return partPic;
+        }
+
+        private void btnRotCW_Click(object sender, EventArgs e)
+        {
+            rotator++;
+            if (rotator > 3) rotator = 0;
+            Dictionary<Image, int[,]> partPackage = setupPreview();
+            Image part = partPackage.Keys.FirstOrDefault();
+            int[,] shape = partPackage.Values.FirstOrDefault();
+            shape = rotateShape(shape);
+            displayPreview(part, shape);
+        }
+
+        private void btnRotCCW_Click(object sender, EventArgs e)
+        {
+            rotator--;
+            if (rotator < 0) rotator = 3;
+            Dictionary<Image, int[,]> partPackage = setupPreview();
+            Image part = partPackage.Keys.FirstOrDefault();
+            int[,] shape = partPackage.Values.FirstOrDefault();
+            shape = rotateShape(rotateShape(rotateShape(shape)));
+            displayPreview(part, shape);
         }
     }
 }
