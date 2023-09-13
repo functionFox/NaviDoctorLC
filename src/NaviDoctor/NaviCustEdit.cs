@@ -931,6 +931,10 @@ namespace NaviDoctor
         private void dgvNCPInv_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             rotator = 0;
+            initPreview();
+        }
+        private void initPreview()
+        {
             Dictionary<Image, int[,]> partPackage = setupPreview();
             Image part = partPackage.Keys.FirstOrDefault();
             int[,] shape = partPackage.Values.FirstOrDefault();
@@ -1031,25 +1035,36 @@ namespace NaviDoctor
             }
             return partPic;
         }
-
         private void btnRotCW_Click(object sender, EventArgs e)
         {
             rotator++;
             if (rotator > 3) rotator = 0;
-            Dictionary<Image, int[,]> partPackage = setupPreview();
-            Image part = partPackage.Keys.FirstOrDefault();
-            int[,] shape = partPackage.Values.FirstOrDefault();
-            displayPreview(part, shape);
+            initPreview();
         }
 
         private void btnRotCCW_Click(object sender, EventArgs e)
         {
             rotator--;
             if (rotator < 0) rotator = 3;
-            Dictionary<Image, int[,]> partPackage = setupPreview();
-            Image part = partPackage.Keys.FirstOrDefault();
-            int[,] shape = partPackage.Values.FirstOrDefault();
-            displayPreview(part, shape);
+            initPreview();
+        }
+
+        private void btnCompress_Click(object sender, EventArgs e)
+        {
+            DataGridViewCellCollection cell = dgvNCPInv.CurrentRow.Cells;
+            NCPListing part = naviCust.NcpMapList.FirstOrDefault(x => x.ncpName == cell[0].Value.ToString());
+            if (part.ncpData.ContainsKey(true))
+            {
+                bool newValue = !(bool)cell[1].Value;
+                foreach (DataGridViewRow row in dgvNCPInv.Rows)
+                {
+                    if (row.Cells[0].Value == cell[0].Value)
+                    {
+                        row.Cells[1].Value = newValue;
+                    }
+                }
+                initPreview();
+             }
         }
     }
 }
