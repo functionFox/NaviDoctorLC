@@ -930,6 +930,7 @@ namespace NaviDoctor
 
         private void dgvNCPInv_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            rotator = 0;
             Dictionary<Image, int[,]> partPackage = setupPreview();
             Image part = partPackage.Keys.FirstOrDefault();
             int[,] shape = partPackage.Values.FirstOrDefault();
@@ -947,6 +948,10 @@ namespace NaviDoctor
             NCPListing partData = naviCust.NcpMapList.FirstOrDefault(x => x.ncpName == selectedPart.PartName);
             Image partPic = picSetup(selectedPart.Color, partData.isProg);
             int[,] shape = shapeSetup(selectedPart.PartName, currentRow[1].Value.ToString());
+            for (int i = 0; i < rotator; i++)
+            {
+                shape = rotateShape(shape);
+            }
             return new Dictionary<Image, int[,]> { { partPic, shape } };
         }
         private void displayPreview(Image pic, int[,] shape)
@@ -965,27 +970,25 @@ namespace NaviDoctor
             List<NCPListing> map = naviCust.NcpMapList;
             bool isCompressed = isCom == "True" ? true : false;
             int partId = map.IndexOf(map.FirstOrDefault(e => e.ncpName == partName));
-            int[,] shape = map[partId].ncpData.FirstOrDefault(e => e.Key == isCompressed).Value;
+            int[,] shape = (int[,]) map[partId].ncpData.FirstOrDefault(e => e.Key == isCompressed).Value.Clone();
             return shape;
         }
-        static int[,] rotateShape(int[,] a)
+        static int[,] rotateShape(int[,] shape)
         {
-            int N = 5;
-            for (int i = 0; i < N / 2; i++)
+            for (int i = 0; i < 5 / 2; i++)
             {
-                for (int j = i; j < N - i - 1; j++)
+                for (int j = i; j < 5 - i - 1; j++)
                 {
-
                     // Swap elements of each cycle
                     // in clockwise direction
-                    int temp = a[i, j];
-                    a[i, j] = a[N - 1 - j, i];
-                    a[N - 1 - j, i] = a[N - 1 - i, N - 1 - j];
-                    a[N - 1 - i, N - 1 - j] = a[j, N - 1 - i];
-                    a[j, N - 1 - i] = temp;
+                    int temp = shape[i, j];
+                    shape[i, j] = shape[4 - j, i];
+                    shape[4 - j, i] = shape[4 - i, 4 - j];
+                    shape[4 - i, 4 - j] = shape[j, 4 - i];
+                    shape[j, 4 - i] = temp;
                 }
             }
-            return a;
+            return shape;
         }
         private Image picSetup(string color, bool isProg) 
         {
@@ -1036,7 +1039,6 @@ namespace NaviDoctor
             Dictionary<Image, int[,]> partPackage = setupPreview();
             Image part = partPackage.Keys.FirstOrDefault();
             int[,] shape = partPackage.Values.FirstOrDefault();
-            shape = rotateShape(shape);
             displayPreview(part, shape);
         }
 
@@ -1047,7 +1049,6 @@ namespace NaviDoctor
             Dictionary<Image, int[,]> partPackage = setupPreview();
             Image part = partPackage.Keys.FirstOrDefault();
             int[,] shape = partPackage.Values.FirstOrDefault();
-            shape = rotateShape(rotateShape(rotateShape(shape)));
             displayPreview(part, shape);
         }
     }
