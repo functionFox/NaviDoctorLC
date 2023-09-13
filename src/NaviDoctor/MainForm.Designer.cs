@@ -926,7 +926,7 @@ namespace NaviDoctor
             this.cbx_EditSteamID.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbx_EditSteamID.Location = new System.Drawing.Point(8, 74);
             this.cbx_EditSteamID.Name = "cbx_EditSteamID";
-            this.cbx_EditSteamID.Size = new System.Drawing.Size(132, 20);
+            this.cbx_EditSteamID.Size = new System.Drawing.Size(131, 20);
             this.cbx_EditSteamID.TabIndex = 16;
             this.cbx_EditSteamID.Text = "Change Steam ID";
             this.cbx_EditSteamID.UseVisualStyleBackColor = true;

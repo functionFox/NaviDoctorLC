@@ -931,32 +931,23 @@ namespace NaviDoctor
         private void dgvNCPInv_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             rotator = 0;
-            initPreview();
+            setupPreview();
         }
-        private void initPreview()
+        private void setupPreview()
         {
-            Dictionary<Image, int[,]> partPackage = setupPreview();
-            Image part = partPackage.Keys.FirstOrDefault();
-            int[,] shape = partPackage.Values.FirstOrDefault();
-            displayPreview(part, shape);
-        }
-        private Dictionary<Image, int[,]> setupPreview()
-        {
-            DataGridView dgv = dgvNCPInv;
-            dgv.CurrentRow.Selected = true;
-            DataGridViewCellCollection currentRow = dgv.CurrentRow.Cells;
-            dgv.CurrentCell = currentRow[0]; // Set the current cell to the leftmost position
-            NaviCustGrid selectedPart = new NaviCustGrid();
-            selectedPart.PartName = currentRow[0].Value.ToString();
-            selectedPart.Color = currentRow[2].Value.ToString();
-            NCPListing partData = naviCust.NcpMapList.FirstOrDefault(x => x.ncpName == selectedPart.PartName);
-            Image partPic = picSetup(selectedPart.Color, partData.isProg);
-            int[,] shape = shapeSetup(selectedPart.PartName, currentRow[1].Value.ToString());
+            DataGridViewRow dgv = dgvNCPInv.CurrentRow;
+            dgv.Selected = true;
+            DataGridViewCellCollection currentCells = dgv.Cells;
+            string partName = (string)currentCells[0].Value;
+            string color = (string)currentCells[2].Value;
+            bool isProg = naviCust.NcpMapList.FirstOrDefault(x => x.ncpName == partName).isProg;
+            Image partPic = picSetup(color, isProg);
+            int[,] shape = shapeSetup(partName, (string)currentCells[1].Value);
             for (int i = 0; i < rotator; i++)
             {
                 shape = rotateShape(shape);
             }
-            return new Dictionary<Image, int[,]> { { partPic, shape } };
+            displayPreview(partPic, shape);
         }
         private void displayPreview(Image pic, int[,] shape)
         {
@@ -974,7 +965,7 @@ namespace NaviDoctor
             List<NCPListing> map = naviCust.NcpMapList;
             bool isCompressed = isCom == "True" ? true : false;
             int partId = map.IndexOf(map.FirstOrDefault(e => e.ncpName == partName));
-            int[,] shape = (int[,]) map[partId].ncpData.FirstOrDefault(e => e.Key == isCompressed).Value.Clone();
+            int[,] shape = (int[,]) map[partId].ncpData.FirstOrDefault(e => e.Key == isCompressed).Value.Clone(); // Clone so we don't transform the original data
             return shape;
         }
         static int[,] rotateShape(int[,] shape)
@@ -1000,11 +991,7 @@ namespace NaviDoctor
             switch (color)
             {
                 case "White":
-                    // partPic = isProg ? Properties.Resources.NCPblockWhite : Properties.Resources.NCPplusblockWhite;
-                    if (isProg)
-                    { partPic = Properties.Resources.NCPblockWhite; }
-                    else
-                    { partPic = Properties.Resources.NCPplusblockWhite; };
+                    partPic = isProg ? Properties.Resources.NCPblockWhite : Properties.Resources.NCPplusblockWhite;
                     break;
                 case "Red":
                     partPic = isProg ? Properties.Resources.NCPblockRed : Properties.Resources.NCPplusblockRed;
@@ -1039,31 +1026,30 @@ namespace NaviDoctor
         {
             rotator++;
             if (rotator > 3) rotator = 0;
-            initPreview();
+            setupPreview();
         }
 
         private void btnRotCCW_Click(object sender, EventArgs e)
         {
             rotator--;
             if (rotator < 0) rotator = 3;
-            initPreview();
+            setupPreview();
         }
 
         private void btnCompress_Click(object sender, EventArgs e)
         {
             DataGridViewCellCollection cell = dgvNCPInv.CurrentRow.Cells;
-            NCPListing part = naviCust.NcpMapList.FirstOrDefault(x => x.ncpName == cell[0].Value.ToString());
-            if (part.ncpData.ContainsKey(true))
+            NCPListing part = naviCust.NcpMapList.FirstOrDefault(x => x.ncpName == (string)cell[0].Value);
+            if (part.ncpData.ContainsKey(true)) // if it can't compress, you must acquit
             {
-                bool newValue = !(bool)cell[1].Value;
-                foreach (DataGridViewRow row in dgvNCPInv.Rows)
+                foreach (DataGridViewRow row in dgvNCPInv.Rows) // Some parts have multiple colors, this will change the value for all with the same name
                 {
                     if (row.Cells[0].Value == cell[0].Value)
                     {
-                        row.Cells[1].Value = newValue;
+                        row.Cells[1].Value = !(bool)cell[1].Value; // Flip the value to the reverse.
                     }
                 }
-                initPreview();
+                setupPreview();
              }
         }
     }
