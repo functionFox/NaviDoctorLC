@@ -942,7 +942,7 @@ namespace NaviDoctor
             string color = (string)currentCells[2].Value;
             bool isProg = naviCust.NcpMapList.FirstOrDefault(x => x.ncpName == partName).isProg;
             Image partPic = picSetup(color, isProg);
-            int[,] shape = shapeSetup(partName, (string)currentCells[1].Value);
+            int[,] shape = shapeSetup(partName, currentCells[1].Value.ToString());
             for (int i = 0; i < rotator; i++)
             {
                 shape = rotateShape(shape);
@@ -1051,6 +1051,52 @@ namespace NaviDoctor
                 }
                 setupPreview();
              }
+        }
+        private void jumpToNCP (NaviCustGrid selection)
+        {
+            rotator = selection.Rotation;
+            foreach (DataGridViewRow row in dgvNCPInv.Rows)
+            {
+                if (row.Cells[0].Value.ToString() == selection.PartName && row.Cells[2].Value.ToString() == selection.Color)
+                {
+                    dgvNCPInv.CurrentCell = row.Cells[0];
+                    break;
+                }
+            }
+            setupPreview();
+        }
+        private void highlightNCP(int index)
+        {
+            ControlPaint.DrawBorder(naviCust.PictureBoxList[index].CreateGraphics(), naviCust.PictureBoxList[index].ClientRectangle, Color.White, ButtonBorderStyle.Dashed);
+        }
+        private void custGrid_Click(object sender, EventArgs e)
+        {
+            PictureBox box = (PictureBox)sender;
+            int index = naviCust.PictureBoxList.IndexOf(box);
+            int indX = naviCustGrid.GetLength(0);
+            int indY = naviCustGrid.GetLength(1);
+            NaviCustGrid selection = naviCustGrid[index / indX, index % indY];
+            if (selection.Index != 0)
+            {
+                for (int i = 0; i < indX; i++)
+                {
+                    for (int j = 0; j < indY; j++)
+                    {
+                        if (naviCustGrid[i, j].Index == selection.Index)
+                        {
+                            highlightNCP(i * indX + j);
+                            // Don't .Dispose() here! Let cleanup() take care of it. The entire piece will disappear if you try it.
+                        }
+                    }
+                }
+                jumpToNCP(selection);
+                lblSelected.Enabled = true;
+                lblSelected.Text = selection.PartName;
+                lblSelectedHeader.Enabled = true;
+                btnMove.Enabled = true;
+                btnRemove.Enabled = true;
+                lblMessage.Visible = true;
+            }
         }
     }
 }
