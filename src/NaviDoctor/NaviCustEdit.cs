@@ -7,19 +7,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Threading;
 using NaviDoctor.models;
+using System.Reflection;
 
 namespace NaviDoctor
 {
     public partial class NaviCustEdit : Form
     {
-        private NaviCust naviCust = new NaviCust();
+        public static NaviCust naviCust = new NaviCust();
         private NaviCustGrid[,] naviCustGrid;
         private SaveDataObject _initialSave;
         private Style _style;
         private List<PictureBox> preview;
         private int rotator = 0;
-        
+
         public NaviCustEdit()
         {
             InitializeComponent();
@@ -1065,30 +1067,30 @@ namespace NaviDoctor
             }
             setupPreview();
         }
-        private void highlightNCP(int index)
+        private void resetGridBorder()
         {
-            ControlPaint.DrawBorder(naviCust.PictureBoxList[index].CreateGraphics(), naviCust.PictureBoxList[index].ClientRectangle, Color.White, ButtonBorderStyle.Dashed);
+            lblSelected.Enabled = false;
+            lblSelected.Text = "";
+            lblSelectedHeader.Enabled = false;
+            btnMove.Enabled = false;
+            btnRemove.Enabled = false;
+            lblMessage.Visible = false;
+            naviCust.PictureBoxList.ForEach(p => ControlPaint.DrawBorder(p.CreateGraphics(), p.ClientRectangle, Color.FromArgb(0, 0, 0), ButtonBorderStyle.Solid));
         }
         private void custGrid_Click(object sender, EventArgs e)
         {
+            int r = 50;
+            int g = 220;
+            int b = 255;
             PictureBox box = (PictureBox)sender;
             int index = naviCust.PictureBoxList.IndexOf(box);
             int indX = naviCustGrid.GetLength(0);
             int indY = naviCustGrid.GetLength(1);
+            List<int> indexList = new List<int>();
             NaviCustGrid selection = naviCustGrid[index / indX, index % indY];
+            resetGridBorder();
             if (selection.Index != 0)
             {
-                for (int i = 0; i < indX; i++)
-                {
-                    for (int j = 0; j < indY; j++)
-                    {
-                        if (naviCustGrid[i, j].Index == selection.Index)
-                        {
-                            highlightNCP(i * indX + j);
-                            // Don't .Dispose() here! Let cleanup() take care of it. The entire piece will disappear if you try it.
-                        }
-                    }
-                }
                 jumpToNCP(selection);
                 lblSelected.Enabled = true;
                 lblSelected.Text = selection.PartName;
@@ -1096,6 +1098,20 @@ namespace NaviDoctor
                 btnMove.Enabled = true;
                 btnRemove.Enabled = true;
                 lblMessage.Visible = true;
+                for (int i = 0; i < indX; i++)
+                {
+                    for (int j = 0; j < indY; j++)
+                    {
+                        if (naviCustGrid[i, j].Index == selection.Index)
+                        {
+                            indexList.Add(i * indX + j);
+                        }
+                    }
+                }
+                for (int i = 0; i <= 255; i+=10)
+                {
+                    indexList.ForEach(p => ControlPaint.DrawBorder(naviCust.PictureBoxList[p].CreateGraphics(), naviCust.PictureBoxList[p].ClientRectangle, Color.FromArgb(Math.Min(i, r), Math.Min(i, g), Math.Min(i, b)), ButtonBorderStyle.Dashed));
+                } // Don't .Dispose() here! Let cleanup() take care of it.
             }
         }
     }

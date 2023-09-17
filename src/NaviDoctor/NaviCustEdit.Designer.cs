@@ -1813,7 +1813,7 @@ namespace NaviDoctor
             this.Controls.Add(this.imgCustGrid22);
             this.Controls.Add(this.imgRunLine);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "NaviCustEdit";
             this.Text = "NaviCust Editor";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.NaviCustEdit_FormClosed);
