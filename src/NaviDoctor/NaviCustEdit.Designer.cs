@@ -248,6 +248,7 @@ namespace NaviDoctor
             this.imgCustGrid00.TabIndex = 0;
             this.imgCustGrid00.TabStop = false;
             this.imgCustGrid00.Click += new System.EventHandler(this.custGrid_Click);
+            this.imgCustGrid00.MouseEnter += new System.EventHandler(this.imgCustGrid_MouseEnter);
             this.imgCustGrid00.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
             this.imgCustGrid00.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
@@ -261,6 +262,7 @@ namespace NaviDoctor
             this.imgCustGrid01.TabIndex = 0;
             this.imgCustGrid01.TabStop = false;
             this.imgCustGrid01.Click += new System.EventHandler(this.custGrid_Click);
+            this.imgCustGrid01.MouseEnter += new System.EventHandler(this.imgCustGrid_MouseEnter);
             this.imgCustGrid01.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
             this.imgCustGrid01.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
@@ -274,6 +276,7 @@ namespace NaviDoctor
             this.imgCustGrid02.TabIndex = 0;
             this.imgCustGrid02.TabStop = false;
             this.imgCustGrid02.Click += new System.EventHandler(this.custGrid_Click);
+            this.imgCustGrid02.MouseEnter += new System.EventHandler(this.imgCustGrid_MouseEnter);
             this.imgCustGrid02.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
             this.imgCustGrid02.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
@@ -287,6 +290,7 @@ namespace NaviDoctor
             this.imgCustGrid03.TabIndex = 0;
             this.imgCustGrid03.TabStop = false;
             this.imgCustGrid03.Click += new System.EventHandler(this.custGrid_Click);
+            this.imgCustGrid03.MouseEnter += new System.EventHandler(this.imgCustGrid_MouseEnter);
             this.imgCustGrid03.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
             this.imgCustGrid03.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
@@ -300,6 +304,7 @@ namespace NaviDoctor
             this.imgCustGrid04.TabIndex = 0;
             this.imgCustGrid04.TabStop = false;
             this.imgCustGrid04.Click += new System.EventHandler(this.custGrid_Click);
+            this.imgCustGrid04.MouseEnter += new System.EventHandler(this.imgCustGrid_MouseEnter);
             this.imgCustGrid04.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
             this.imgCustGrid04.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
@@ -313,6 +318,7 @@ namespace NaviDoctor
             this.imgCustGrid10.TabIndex = 0;
             this.imgCustGrid10.TabStop = false;
             this.imgCustGrid10.Click += new System.EventHandler(this.custGrid_Click);
+            this.imgCustGrid10.MouseEnter += new System.EventHandler(this.imgCustGrid_MouseEnter);
             this.imgCustGrid10.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
             this.imgCustGrid10.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
@@ -326,6 +332,7 @@ namespace NaviDoctor
             this.imgCustGrid11.TabIndex = 0;
             this.imgCustGrid11.TabStop = false;
             this.imgCustGrid11.Click += new System.EventHandler(this.custGrid_Click);
+            this.imgCustGrid11.MouseEnter += new System.EventHandler(this.imgCustGrid_MouseEnter);
             this.imgCustGrid11.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
             this.imgCustGrid11.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
@@ -339,6 +346,7 @@ namespace NaviDoctor
             this.imgCustGrid12.TabIndex = 0;
             this.imgCustGrid12.TabStop = false;
             this.imgCustGrid12.Click += new System.EventHandler(this.custGrid_Click);
+            this.imgCustGrid12.MouseEnter += new System.EventHandler(this.imgCustGrid_MouseEnter);
             this.imgCustGrid12.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
             this.imgCustGrid12.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
@@ -352,6 +360,7 @@ namespace NaviDoctor
             this.imgCustGrid13.TabIndex = 0;
             this.imgCustGrid13.TabStop = false;
             this.imgCustGrid13.Click += new System.EventHandler(this.custGrid_Click);
+            this.imgCustGrid13.MouseEnter += new System.EventHandler(this.imgCustGrid_MouseEnter);
             this.imgCustGrid13.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
             this.imgCustGrid13.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
@@ -365,6 +374,7 @@ namespace NaviDoctor
             this.imgCustGrid14.TabIndex = 0;
             this.imgCustGrid14.TabStop = false;
             this.imgCustGrid14.Click += new System.EventHandler(this.custGrid_Click);
+            this.imgCustGrid14.MouseEnter += new System.EventHandler(this.imgCustGrid_MouseEnter);
             this.imgCustGrid14.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
             this.imgCustGrid14.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
@@ -378,6 +388,7 @@ namespace NaviDoctor
             this.imgCustGrid20.TabIndex = 0;
             this.imgCustGrid20.TabStop = false;
             this.imgCustGrid20.Click += new System.EventHandler(this.custGrid_Click);
+            this.imgCustGrid20.MouseEnter += new System.EventHandler(this.imgCustGrid_MouseEnter);
             this.imgCustGrid20.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
             this.imgCustGrid20.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
@@ -391,6 +402,7 @@ namespace NaviDoctor
             this.imgCustGrid21.TabIndex = 0;
             this.imgCustGrid21.TabStop = false;
             this.imgCustGrid21.Click += new System.EventHandler(this.custGrid_Click);
+            this.imgCustGrid21.MouseEnter += new System.EventHandler(this.imgCustGrid_MouseEnter);
             this.imgCustGrid21.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
             this.imgCustGrid21.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
@@ -404,6 +416,7 @@ namespace NaviDoctor
             this.imgCustGrid22.TabIndex = 0;
             this.imgCustGrid22.TabStop = false;
             this.imgCustGrid22.Click += new System.EventHandler(this.custGrid_Click);
+            this.imgCustGrid22.MouseEnter += new System.EventHandler(this.imgCustGrid_MouseEnter);
             this.imgCustGrid22.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
             this.imgCustGrid22.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
@@ -417,6 +430,7 @@ namespace NaviDoctor
             this.imgCustGrid23.TabIndex = 0;
             this.imgCustGrid23.TabStop = false;
             this.imgCustGrid23.Click += new System.EventHandler(this.custGrid_Click);
+            this.imgCustGrid23.MouseEnter += new System.EventHandler(this.imgCustGrid_MouseEnter);
             this.imgCustGrid23.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
             this.imgCustGrid23.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
@@ -430,6 +444,7 @@ namespace NaviDoctor
             this.imgCustGrid24.TabIndex = 0;
             this.imgCustGrid24.TabStop = false;
             this.imgCustGrid24.Click += new System.EventHandler(this.custGrid_Click);
+            this.imgCustGrid24.MouseEnter += new System.EventHandler(this.imgCustGrid_MouseEnter);
             this.imgCustGrid24.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
             this.imgCustGrid24.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
@@ -443,6 +458,7 @@ namespace NaviDoctor
             this.imgCustGrid30.TabIndex = 0;
             this.imgCustGrid30.TabStop = false;
             this.imgCustGrid30.Click += new System.EventHandler(this.custGrid_Click);
+            this.imgCustGrid30.MouseEnter += new System.EventHandler(this.imgCustGrid_MouseEnter);
             this.imgCustGrid30.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
             this.imgCustGrid30.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
@@ -456,6 +472,7 @@ namespace NaviDoctor
             this.imgCustGrid31.TabIndex = 0;
             this.imgCustGrid31.TabStop = false;
             this.imgCustGrid31.Click += new System.EventHandler(this.custGrid_Click);
+            this.imgCustGrid31.MouseEnter += new System.EventHandler(this.imgCustGrid_MouseEnter);
             this.imgCustGrid31.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
             this.imgCustGrid31.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
@@ -469,6 +486,7 @@ namespace NaviDoctor
             this.imgCustGrid32.TabIndex = 0;
             this.imgCustGrid32.TabStop = false;
             this.imgCustGrid32.Click += new System.EventHandler(this.custGrid_Click);
+            this.imgCustGrid32.MouseEnter += new System.EventHandler(this.imgCustGrid_MouseEnter);
             this.imgCustGrid32.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
             this.imgCustGrid32.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
@@ -482,6 +500,7 @@ namespace NaviDoctor
             this.imgCustGrid33.TabIndex = 0;
             this.imgCustGrid33.TabStop = false;
             this.imgCustGrid33.Click += new System.EventHandler(this.custGrid_Click);
+            this.imgCustGrid33.MouseEnter += new System.EventHandler(this.imgCustGrid_MouseEnter);
             this.imgCustGrid33.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
             this.imgCustGrid33.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
@@ -495,6 +514,7 @@ namespace NaviDoctor
             this.imgCustGrid34.TabIndex = 0;
             this.imgCustGrid34.TabStop = false;
             this.imgCustGrid34.Click += new System.EventHandler(this.custGrid_Click);
+            this.imgCustGrid34.MouseEnter += new System.EventHandler(this.imgCustGrid_MouseEnter);
             this.imgCustGrid34.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
             this.imgCustGrid34.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
@@ -508,6 +528,7 @@ namespace NaviDoctor
             this.imgCustGrid40.TabIndex = 0;
             this.imgCustGrid40.TabStop = false;
             this.imgCustGrid40.Click += new System.EventHandler(this.custGrid_Click);
+            this.imgCustGrid40.MouseEnter += new System.EventHandler(this.imgCustGrid_MouseEnter);
             this.imgCustGrid40.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
             this.imgCustGrid40.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
@@ -521,6 +542,7 @@ namespace NaviDoctor
             this.imgCustGrid41.TabIndex = 0;
             this.imgCustGrid41.TabStop = false;
             this.imgCustGrid41.Click += new System.EventHandler(this.custGrid_Click);
+            this.imgCustGrid41.MouseEnter += new System.EventHandler(this.imgCustGrid_MouseEnter);
             this.imgCustGrid41.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
             this.imgCustGrid41.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
@@ -534,6 +556,7 @@ namespace NaviDoctor
             this.imgCustGrid42.TabIndex = 0;
             this.imgCustGrid42.TabStop = false;
             this.imgCustGrid42.Click += new System.EventHandler(this.custGrid_Click);
+            this.imgCustGrid42.MouseEnter += new System.EventHandler(this.imgCustGrid_MouseEnter);
             this.imgCustGrid42.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
             this.imgCustGrid42.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
@@ -547,6 +570,7 @@ namespace NaviDoctor
             this.imgCustGrid43.TabIndex = 0;
             this.imgCustGrid43.TabStop = false;
             this.imgCustGrid43.Click += new System.EventHandler(this.custGrid_Click);
+            this.imgCustGrid43.MouseEnter += new System.EventHandler(this.imgCustGrid_MouseEnter);
             this.imgCustGrid43.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
             this.imgCustGrid43.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
@@ -560,6 +584,7 @@ namespace NaviDoctor
             this.imgCustGrid44.TabIndex = 0;
             this.imgCustGrid44.TabStop = false;
             this.imgCustGrid44.Click += new System.EventHandler(this.custGrid_Click);
+            this.imgCustGrid44.MouseEnter += new System.EventHandler(this.imgCustGrid_MouseEnter);
             this.imgCustGrid44.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
             this.imgCustGrid44.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
@@ -573,6 +598,7 @@ namespace NaviDoctor
             this.imgCustGrid05.TabIndex = 0;
             this.imgCustGrid05.TabStop = false;
             this.imgCustGrid05.Click += new System.EventHandler(this.custGrid_Click);
+            this.imgCustGrid05.MouseEnter += new System.EventHandler(this.imgCustGrid_MouseEnter);
             this.imgCustGrid05.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
             this.imgCustGrid05.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
@@ -586,6 +612,7 @@ namespace NaviDoctor
             this.imgCustGrid15.TabIndex = 0;
             this.imgCustGrid15.TabStop = false;
             this.imgCustGrid15.Click += new System.EventHandler(this.custGrid_Click);
+            this.imgCustGrid15.MouseEnter += new System.EventHandler(this.imgCustGrid_MouseEnter);
             this.imgCustGrid15.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
             this.imgCustGrid15.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
@@ -599,6 +626,7 @@ namespace NaviDoctor
             this.imgCustGrid16.TabIndex = 0;
             this.imgCustGrid16.TabStop = false;
             this.imgCustGrid16.Click += new System.EventHandler(this.custGrid_Click);
+            this.imgCustGrid16.MouseEnter += new System.EventHandler(this.imgCustGrid_MouseEnter);
             this.imgCustGrid16.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
             this.imgCustGrid16.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
@@ -612,6 +640,7 @@ namespace NaviDoctor
             this.imgCustGrid25.TabIndex = 0;
             this.imgCustGrid25.TabStop = false;
             this.imgCustGrid25.Click += new System.EventHandler(this.custGrid_Click);
+            this.imgCustGrid25.MouseEnter += new System.EventHandler(this.imgCustGrid_MouseEnter);
             this.imgCustGrid25.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
             this.imgCustGrid25.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
@@ -625,6 +654,7 @@ namespace NaviDoctor
             this.imgCustGrid26.TabIndex = 0;
             this.imgCustGrid26.TabStop = false;
             this.imgCustGrid26.Click += new System.EventHandler(this.custGrid_Click);
+            this.imgCustGrid26.MouseEnter += new System.EventHandler(this.imgCustGrid_MouseEnter);
             this.imgCustGrid26.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
             this.imgCustGrid26.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
@@ -638,6 +668,7 @@ namespace NaviDoctor
             this.imgCustGrid35.TabIndex = 0;
             this.imgCustGrid35.TabStop = false;
             this.imgCustGrid35.Click += new System.EventHandler(this.custGrid_Click);
+            this.imgCustGrid35.MouseEnter += new System.EventHandler(this.imgCustGrid_MouseEnter);
             this.imgCustGrid35.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
             this.imgCustGrid35.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
@@ -651,6 +682,7 @@ namespace NaviDoctor
             this.imgCustGrid36.TabIndex = 0;
             this.imgCustGrid36.TabStop = false;
             this.imgCustGrid36.Click += new System.EventHandler(this.custGrid_Click);
+            this.imgCustGrid36.MouseEnter += new System.EventHandler(this.imgCustGrid_MouseEnter);
             this.imgCustGrid36.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
             this.imgCustGrid36.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
@@ -664,6 +696,7 @@ namespace NaviDoctor
             this.imgCustGrid45.TabIndex = 0;
             this.imgCustGrid45.TabStop = false;
             this.imgCustGrid45.Click += new System.EventHandler(this.custGrid_Click);
+            this.imgCustGrid45.MouseEnter += new System.EventHandler(this.imgCustGrid_MouseEnter);
             this.imgCustGrid45.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
             this.imgCustGrid45.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
@@ -677,6 +710,7 @@ namespace NaviDoctor
             this.imgCustGrid46.TabIndex = 0;
             this.imgCustGrid46.TabStop = false;
             this.imgCustGrid46.Click += new System.EventHandler(this.custGrid_Click);
+            this.imgCustGrid46.MouseEnter += new System.EventHandler(this.imgCustGrid_MouseEnter);
             this.imgCustGrid46.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
             this.imgCustGrid46.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
@@ -690,6 +724,7 @@ namespace NaviDoctor
             this.imgCustGrid50.TabIndex = 0;
             this.imgCustGrid50.TabStop = false;
             this.imgCustGrid50.Click += new System.EventHandler(this.custGrid_Click);
+            this.imgCustGrid50.MouseEnter += new System.EventHandler(this.imgCustGrid_MouseEnter);
             this.imgCustGrid50.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
             this.imgCustGrid50.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
@@ -703,6 +738,7 @@ namespace NaviDoctor
             this.imgCustGrid51.TabIndex = 0;
             this.imgCustGrid51.TabStop = false;
             this.imgCustGrid51.Click += new System.EventHandler(this.custGrid_Click);
+            this.imgCustGrid51.MouseEnter += new System.EventHandler(this.imgCustGrid_MouseEnter);
             this.imgCustGrid51.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
             this.imgCustGrid51.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
@@ -716,6 +752,7 @@ namespace NaviDoctor
             this.imgCustGrid52.TabIndex = 0;
             this.imgCustGrid52.TabStop = false;
             this.imgCustGrid52.Click += new System.EventHandler(this.custGrid_Click);
+            this.imgCustGrid52.MouseEnter += new System.EventHandler(this.imgCustGrid_MouseEnter);
             this.imgCustGrid52.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
             this.imgCustGrid52.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
@@ -729,6 +766,7 @@ namespace NaviDoctor
             this.imgCustGrid53.TabIndex = 0;
             this.imgCustGrid53.TabStop = false;
             this.imgCustGrid53.Click += new System.EventHandler(this.custGrid_Click);
+            this.imgCustGrid53.MouseEnter += new System.EventHandler(this.imgCustGrid_MouseEnter);
             this.imgCustGrid53.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
             this.imgCustGrid53.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
@@ -742,6 +780,7 @@ namespace NaviDoctor
             this.imgCustGrid54.TabIndex = 0;
             this.imgCustGrid54.TabStop = false;
             this.imgCustGrid54.Click += new System.EventHandler(this.custGrid_Click);
+            this.imgCustGrid54.MouseEnter += new System.EventHandler(this.imgCustGrid_MouseEnter);
             this.imgCustGrid54.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
             this.imgCustGrid54.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
@@ -755,6 +794,7 @@ namespace NaviDoctor
             this.imgCustGrid55.TabIndex = 0;
             this.imgCustGrid55.TabStop = false;
             this.imgCustGrid55.Click += new System.EventHandler(this.custGrid_Click);
+            this.imgCustGrid55.MouseEnter += new System.EventHandler(this.imgCustGrid_MouseEnter);
             this.imgCustGrid55.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
             this.imgCustGrid55.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
@@ -768,6 +808,7 @@ namespace NaviDoctor
             this.imgCustGrid56.TabIndex = 0;
             this.imgCustGrid56.TabStop = false;
             this.imgCustGrid56.Click += new System.EventHandler(this.custGrid_Click);
+            this.imgCustGrid56.MouseEnter += new System.EventHandler(this.imgCustGrid_MouseEnter);
             this.imgCustGrid56.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
             this.imgCustGrid56.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
@@ -781,6 +822,7 @@ namespace NaviDoctor
             this.imgCustGrid61.TabIndex = 0;
             this.imgCustGrid61.TabStop = false;
             this.imgCustGrid61.Click += new System.EventHandler(this.custGrid_Click);
+            this.imgCustGrid61.MouseEnter += new System.EventHandler(this.imgCustGrid_MouseEnter);
             this.imgCustGrid61.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
             this.imgCustGrid61.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
@@ -794,6 +836,7 @@ namespace NaviDoctor
             this.imgCustGrid62.TabIndex = 0;
             this.imgCustGrid62.TabStop = false;
             this.imgCustGrid62.Click += new System.EventHandler(this.custGrid_Click);
+            this.imgCustGrid62.MouseEnter += new System.EventHandler(this.imgCustGrid_MouseEnter);
             this.imgCustGrid62.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
             this.imgCustGrid62.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
@@ -807,6 +850,7 @@ namespace NaviDoctor
             this.imgCustGrid63.TabIndex = 0;
             this.imgCustGrid63.TabStop = false;
             this.imgCustGrid63.Click += new System.EventHandler(this.custGrid_Click);
+            this.imgCustGrid63.MouseEnter += new System.EventHandler(this.imgCustGrid_MouseEnter);
             this.imgCustGrid63.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
             this.imgCustGrid63.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
@@ -820,6 +864,7 @@ namespace NaviDoctor
             this.imgCustGrid64.TabIndex = 0;
             this.imgCustGrid64.TabStop = false;
             this.imgCustGrid64.Click += new System.EventHandler(this.custGrid_Click);
+            this.imgCustGrid64.MouseEnter += new System.EventHandler(this.imgCustGrid_MouseEnter);
             this.imgCustGrid64.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
             this.imgCustGrid64.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
@@ -833,6 +878,7 @@ namespace NaviDoctor
             this.imgCustGrid65.TabIndex = 0;
             this.imgCustGrid65.TabStop = false;
             this.imgCustGrid65.Click += new System.EventHandler(this.custGrid_Click);
+            this.imgCustGrid65.MouseEnter += new System.EventHandler(this.imgCustGrid_MouseEnter);
             this.imgCustGrid65.MouseLeave += new System.EventHandler(this.imgCustGrid_MouseLeave);
             this.imgCustGrid65.MouseHover += new System.EventHandler(this.imgCustGrid_MouseHover);
             // 
@@ -1517,6 +1563,7 @@ namespace NaviDoctor
             this.btnPlacePart.TabIndex = 23;
             this.btnPlacePart.Text = "Place Part";
             this.btnPlacePart.UseVisualStyleBackColor = true;
+            this.btnPlacePart.Click += new System.EventHandler(this.btnPlacePart_Click);
             // 
             // btnCompress
             // 
@@ -1680,6 +1727,7 @@ namespace NaviDoctor
             this.btnRemove.TabIndex = 32;
             this.btnRemove.Text = "Remove";
             this.btnRemove.UseVisualStyleBackColor = true;
+            this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
             // 
             // lblMessage
             // 
@@ -1813,7 +1861,7 @@ namespace NaviDoctor
             this.Controls.Add(this.imgCustGrid22);
             this.Controls.Add(this.imgRunLine);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "NaviCustEdit";
             this.Text = "NaviCust Editor";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.NaviCustEdit_FormClosed);

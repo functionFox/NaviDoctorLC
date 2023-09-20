@@ -20,7 +20,9 @@ namespace NaviDoctor
         private SaveDataObject _initialSave;
         private Style _style;
         private List<PictureBox> preview;
+        private int[] selectedPart;
         private int rotator = 0;
+        private bool _placement_mode = false;
 
         public NaviCustEdit()
         {
@@ -45,198 +47,105 @@ namespace NaviDoctor
             ReadBugs();
             PopulateNCPList();
         }
-        public void PopulateNCPList()
+        public void InitializeStats()
         {
-            int qty;
-            foreach (NCPListing part in naviCust.NcpMapList)
-            {
-                if (part.ncpName == "None") continue;
-                foreach (string color in part.ncpColors)
-                {
-                    if (color == "None") continue;
-                    else
-                    {
-                        switch (part.ncpColors.IndexOf(color))
-                            {
-                            case 0:
-                                qty = part.QuantityCol1;
-                                break;
-                            case 1:
-                                qty = part.QuantityCol2;
-                                break;
-                            case 2:
-                                qty = part.QuantityCol3;
-                                break;
-                            case 3:
-                                qty = part.QuantityCol4;
-                                break;
-                            default:
-                                qty = 69420;
-                                break;
-                        }
-                        dgvNCPInv.Rows.Add(part.ncpName, part.isCompressed, color, qty);
-                    }
-                }
-            }
-        }
-        public void ReadBugs()
-        {
-            string bugEffect;
-            int bugLevel;
-            for (int i = 0; i < naviCust.Bugs.Count; i++)
-            {
-                switch (i)
-                {
-                    case 0:
-                        bugEffect = "Player Movement: ";
-                        switch (naviCust.Effects[15])
-                        {
-                            case 4:
-                                bugEffect = bugEffect + "Up";
-                                break;
-                            case 8:
-                                bugEffect = bugEffect + "Down";
-                                break;
-                            case 12:
-                                bugEffect = bugEffect + "Confused";
-                                break;
-                            default:
-                                bugEffect = "Error";
-                                break;
-                        }
-                        break;
-                    case 1:
-                        bugEffect = "Battle HP Drain";
-                        break;
-                    case 2:
-                        bugEffect = "Custom HP Drain";
-                        break;
-                    case 3:
-                        bugEffect = "Battle Panel: ";
-                        bugEffect = naviCust.Bugs[3] == 13 ? bugEffect + "Cracked" : naviCust.Bugs[3] == 14 ? bugEffect + "Swamp" : "Error";
-                        break;
-                    case 4:
-                        bugEffect = "SlowGauge";
-                        break;
-                    case 5:
-                        bugEffect = "Increased Encounters";
-                        break;
-                    case 6:
-                        bugEffect = "Buster Misfire";
-                        break;
-                    case 7:
-                        bugEffect = "Support Disabled";
-                        break;
-                    case 8:
-                        bugEffect = "Modified C. Shot: ";
-                        switch (naviCust.Effects[11])
-                        {
-                            case 1:
-                                bugEffect = bugEffect + "Rock Cube";
-                                break;
-                            case 2:
-                                bugEffect = bugEffect + "Water Gun";
-                                break;
-                            case 3:
-                                bugEffect = bugEffect + "Flower";
-                                break;
-                            default:
-                                bugEffect = "Error";
-                                break;
-                        }
-                        break;
-                    case 9:
-                        bugEffect = "Battle Result: Zenny";
-                        break;
-                    case 10:
-                        bugEffect = "AutoBug: BustrMAX";
-                        break;
-                    case 11:
-                        bugEffect = "AutoBug: GigFldr1";
-                        break;
-                    case 12:
-                        bugEffect = "AutoBug: HubBatch";
-                        break;
-                    case 13:
-                        bugEffect = "AutoBug: DarkLcns";
-                        break;
-                    case 14:
-                        bugEffect = "ModTools: ";
-                        switch (naviCust.ModCode)
-                        {
-                            case 0x24:
-                            case 0x25:
-                            case 0x26:
-                            case 0x27:
-                            case 0x2D:
-                            case 0x34:
-                            case 0x35:
-                                bugEffect = bugEffect + "Custom -1";
-                                break;
-                            case 0x28:
-                            case 0x29:
-                            case 0x2A:
-                            case 0x2C:
-                            case 0x38:
-                                bugEffect = bugEffect + "Custom -2";
-                                break;
-                            case 0x3E:
-                            case 0x3F:
-                            case 0x40:
-                            case 0x41:
-                                bugEffect = bugEffect + "Swamp Step";
-                                break;
-                            default:
-                                bugEffect = "Error";
-                                break;
-                        }
-                        break;
-                    default:
-                        bugEffect = "Error";
-                        break;
-                }
-                bugLevel = naviCust.Bugs[i];
-                if (bugLevel > 0)
-                {
-                    dgvBugs.Rows.Add(bugEffect, bugLevel);
-                }
-            }
-        }
-        public void ReadEffects()
-        {
-            Dictionary<string, int> effects = new Dictionary<string, int>
-            {
-                { "HP", naviCust.BonusHP },
-                { "Attack", (naviCust.AtkBonus / (naviCust.IsGuts ? 2 : 1)) - 1 },
-                { "Speed", naviCust.SpdBonus },
-                { "Charge", naviCust.ChrgBonus },
-                { "WeapLvl", naviCust.CShotBonus - 1 },
-                { "RegMem", naviCust.BonusRegMem },
-                { "MegaChip", naviCust.ModMega },
-                { "GigaChip", naviCust.ModGiga },
-                { "Custom", naviCust.CustomSize - 5 }
-            };
+            naviCust.HpUp = _initialSave.HPUp;
+            naviCust.BaseHP = (naviCust.HpUp * 20) + 100;
+            naviCust.BonusHP = _initialSave.BonusHP;
+            naviCust.RegMem = _initialSave.RegMem;
+            naviCust.CustSize = _initialSave.CustSize;
+            naviCust.AtkBonus = _initialSave.AttackPower;
+            naviCust.SpdBonus = _initialSave.RapidPower;
+            naviCust.ChrgBonus = _initialSave.ChargePower;
+            naviCust.BonusRegMem = _initialSave.CustEffects[17];
+            naviCust.CustomSize = _initialSave.CustEffects[18];
+            naviCust.CShotBonus = _initialSave.CShotPower;
+            naviCust.NcpInv = _initialSave.NCPInventory;
+            naviCust.Compression = _initialSave.Compression;
+            naviCust.NcpGrid = _initialSave.NCPGrid;
+            naviCust.GridPos = _initialSave.GridPosData;
+            naviCust.Effects = _initialSave.CustEffects;
+            naviCust.Bugs = _initialSave.CustBugs;
+            naviCust.ModCode = _initialSave.ModCode;
+            naviCust.MegaLimit = _initialSave.MegaLimit;
+            naviCust.GigaLimit = _initialSave.GigaLimit;
+            naviCust.IsBugged = _initialSave.isCustBugged;
 
-            foreach (KeyValuePair<string, int> effect in effects)
+            labelStyleName.Text = _style.Name.ToString() + " Style";
+            
+            switch (_style.Name)
             {
-                if (effect.Value > 0)
-                    dgvEffects.Rows.Add($"{effect.Key}+{effect.Value}");
+                case Style.Value.HeatGuts:
+                case Style.Value.AquaGuts:
+                case Style.Value.ElecGuts:
+                case Style.Value.WoodGuts:
+                    naviCust.IsGuts = true;
+                    break;
+                case Style.Value.HeatCust:
+                case Style.Value.AquaCust:
+                case Style.Value.ElecCust:
+                case Style.Value.WoodCust:
+                    naviCust.IsCust = true;
+                    break;
+                case Style.Value.HeatTeam:
+                case Style.Value.AquaTeam:
+                case Style.Value.ElecTeam:
+                case Style.Value.WoodTeam:
+                    naviCust.IsTeam = true;
+                    break;
+                default:
+                    break;
             }
-
-            List<string> parts = new List<string>();
-            List<string> excludes = new List<string> { "HP+100", "HP+200", "HP+300", "HP+500", "Reg+5", "Atk+1", "Speed+1", "Charge+1", "WeapLvl+1", "Custom1", "Custom2", "MegFldr1", "MegFldr2", "GigFldr1" };
-            for (int i = 1; i < naviCust.GridIndex.Count; i++)
+            switch (_style.Name)
             {
-                if (!parts.Any(x => x == naviCust.GridIndex[i]) && !excludes.Any(x => x == naviCust.GridIndex[i]))
-                {
-                    parts.Add(naviCust.GridIndex[i]);
-                    dgvEffects.Rows.Add(naviCust.GridIndex[i]);
-                }
+                case Style.Value.HeatGuts:
+                case Style.Value.AquaGuts:
+                case Style.Value.ElecGuts:
+                case Style.Value.WoodGuts:
+                case Style.Value.HeatShadow:
+                case Style.Value.AquaShadow:
+                case Style.Value.ElecShadow:
+                case Style.Value.WoodShadow:
+                    naviCust.ColorsList.Add("Red");
+                    break;
+                case Style.Value.HeatShield:
+                case Style.Value.AquaShield:
+                case Style.Value.ElecShield:
+                case Style.Value.WoodShield:
+                case Style.Value.HeatCust:
+                case Style.Value.AquaCust:
+                case Style.Value.ElecCust:
+                case Style.Value.WoodCust:
+                    naviCust.ColorsList.Add("Blue");
+                    break;
+                case Style.Value.HeatTeam:
+                case Style.Value.AquaTeam:
+                case Style.Value.ElecTeam:
+                case Style.Value.WoodTeam:
+                case Style.Value.HeatGround:
+                case Style.Value.AquaGround:
+                case Style.Value.ElecGround:
+                case Style.Value.WoodGround:
+                    naviCust.ColorsList.Add("Green");
+                    break;
+                case Style.Value.HeatBug:
+                case Style.Value.AquaBug:
+                case Style.Value.ElecBug:
+                case Style.Value.WoodBug:
+                    naviCust.ColorsList.Add("Dark");
+                    break;
+                default:
+                    break;
             }
-            if (naviCust.ModCode < 0x42 && naviCust.ModCode > 0)
+            switch (_initialSave.GameName)
             {
-                dgvEffects.Rows.Add($"ModTools: " + naviCust.ModCodeDict[naviCust.ModCode]);
-            }
+                case GameTitle.Title.MegaManBattleNetwork3White:
+                case GameTitle.Title.MegaManBattleNetwork3Blue:
+                    naviCust.NcpMapList = new NaviCustParts().BN3NCPMap();
+                    break;
+                default:
+                    break;
+            }    
         }
         public void InitializeColorBox()
         {
@@ -279,111 +188,6 @@ namespace NaviDoctor
                 naviCust.ColorBox[i].BorderStyle = BorderStyle.FixedSingle;
                 naviCust.ColorBox[i].Visible = true;
             }
-        }
-        public void PopulateGrid()
-        {
-            int index = 0;
-            for (int i = 0; i < 5; i++)
-            {
-                for (int j = 0; j < 5; j++)
-                {
-                    switch (naviCustGrid[i, j].BlockType)
-                    {
-                        case 1:
-                            switch (naviCustGrid[i, j].Color)
-                            {
-                                case "White":
-                                    naviCust.PictureBoxList[index].Image = Properties.Resources.NCPblockWhite;
-                                    break;
-                                case "Red":
-                                    naviCust.PictureBoxList[index].Image = Properties.Resources.NCPblockRed;
-                                    break;
-                                case "Pink":
-                                    naviCust.PictureBoxList[index].Image = Properties.Resources.NCPblockPink;
-                                    break;
-                                case "Orange":
-                                    naviCust.PictureBoxList[index].Image = Properties.Resources.NCPblockOrange;
-                                    break;
-                                case "Yellow":
-                                    naviCust.PictureBoxList[index].Image = Properties.Resources.NCPblockYellow;
-                                    break;
-                                case "Green":
-                                    naviCust.PictureBoxList[index].Image = Properties.Resources.NCPblockGreen;
-                                    break;
-                                case "Blue":
-                                    naviCust.PictureBoxList[index].Image = Properties.Resources.NCPblockBlue;
-                                    break;
-                                case "Purple":
-                                    naviCust.PictureBoxList[index].Image = Properties.Resources.NCPblockPurple;
-                                    break;
-                                case "Dark":
-                                    naviCust.PictureBoxList[index].Image = Properties.Resources.NCPblockDark;
-                                    break;
-                                default:
-                                    break;
-                            }
-                            break;
-                        case 2:
-                            switch (naviCustGrid[i, j].Color)
-                            {
-                                case "White":
-                                    naviCust.PictureBoxList[index].Image = Properties.Resources.NCPplusblockWhite;
-                                    break;
-                                case "Red":
-                                    naviCust.PictureBoxList[index].Image = Properties.Resources.NCPplusblockRed;
-                                    break;
-                                case "Pink":
-                                    naviCust.PictureBoxList[index].Image = Properties.Resources.NCPplusblockPink;
-                                    break;
-                                case "Yellow":
-                                    naviCust.PictureBoxList[index].Image = Properties.Resources.NCPplusblockYellow;
-                                    break;
-                                case "Green":
-                                    naviCust.PictureBoxList[index].Image = Properties.Resources.NCPplusblockGreen;
-                                    break;
-                                case "Blue":
-                                    naviCust.PictureBoxList[index].Image = Properties.Resources.NCPplusblockBlue;
-                                    break;
-                                default:
-                                    break;
-                            }
-                            break;
-                        default:
-                            break;
-                    }
-                    naviCust.PictureBoxList[index].Tag = naviCustGrid[i, j].PartName;
-                    index++;
-                }
-            }
-        }
-        public void ReadGrid()
-        {
-            for (int i = 0; i < 5; i++)
-            {
-                for (int j = 0; j < 5; j++)
-                {
-                    naviCustGrid[i, j].Index = naviCust.GridPos[i, j];
-                    if (naviCustGrid[i, j].Index == 0) continue; // If the space is 0, there's no data to gather here.
-                    List<int> ColorID = ParseIDandColor(naviCust.NcpGrid[naviCustGrid[i, j].Index - 1][0]); // ColorID[0] is color, ColorID[1] is ID
-                    naviCustGrid[i, j].PartName = naviCust.NcpMapList[ColorID[1]].ncpName;
-                    naviCustGrid[i, j].Color = naviCust.NcpMapList[ColorID[1]].ncpColors[ColorID[0]];
-                    naviCustGrid[i, j].BlockType = naviCust.NcpMapList[ColorID[1]].isProg ? 1 : 2;
-                    naviCustGrid[i, j].PivotX = naviCust.NcpGrid[naviCustGrid[i, j].Index - 1][1];
-                    naviCustGrid[i, j].PivotY = naviCust.NcpGrid[naviCustGrid[i, j].Index - 1][2];
-                    naviCustGrid[i, j].Rotation = naviCust.NcpGrid[naviCustGrid[i, j].Index - 1][3];
-                    if (!naviCust.GridIndex.ContainsKey(naviCustGrid[i, j].Index))
-                    {
-                        naviCust.GridIndex.Add(naviCustGrid[i, j].Index, naviCustGrid[i, j].PartName);
-                    }
-                }
-            }
-        }
-        public List<int> ParseIDandColor(int ncp)
-        {
-            byte[] bytes = BitConverter.GetBytes(ncp);
-            int color = bytes[0] & 3;
-            int id = bytes[0] >> 2;
-            return new List<int>() { color, id };
         }
         public void InitializeModCode()
         {
@@ -553,20 +357,47 @@ namespace NaviDoctor
                     break;
             }
         }
-        public void ReadStats()
+        public void ReadInventory()
         {
-            int gutsMod = naviCust.IsGuts ? 2 : 1;
-            int custMod = naviCust.IsCust ? 1 : 0;
-            int teamMod = naviCust.IsTeam ? 1 : 0;
-            labelHPTotal.Text = (naviCust.BaseHP + naviCust.BonusHP + naviCust.ModHP).ToString();
-            labelAttack.Text = (Math.Min(naviCust.AtkBonus, 5) * gutsMod).ToString();
-            labelSpeed.Text = (Math.Min(naviCust.SpdBonus, 5) + 1).ToString();
-            labelCharge.Text = (Math.Min(naviCust.ChrgBonus, 5) + 1).ToString();
-            labelCShot.Text = Math.Min(naviCust.CShotBonus, 3).ToString();
-            labelRegMem.Text = (naviCust.RegMem + naviCust.BonusRegMem).ToString();
-            labelMegaLimit.Text = (naviCust.MegaLimit + teamMod + naviCust.ModMega).ToString();
-            labelGigaLimit.Text = (naviCust.GigaLimit + naviCust.ModGiga).ToString();
-            labelCustHandSize.Text = (naviCust.CustomSize + custMod + naviCust.ModCustom).ToString();
+            int index = 0;
+            foreach (NCPListing part in naviCust.NcpMapList)
+            {
+                if (part.ncpName == "None")
+                    continue;
+                int colorIndex = 0;
+                foreach (string color in part.ncpColors)
+                {
+                    if (color == "None")
+                    {
+                        colorIndex++;
+                        continue;
+                    }
+                    switch (colorIndex)
+                    {
+                        case 0:
+                            part.QuantityCol1 = naviCust.NcpInv[index];
+                            break;
+                        case 1:
+                            part.QuantityCol2 = naviCust.NcpInv[index];
+                            break;
+                        case 2:
+                            part.QuantityCol3 = naviCust.NcpInv[index];
+                            break;
+                        default:
+                            part.QuantityCol4 = naviCust.NcpInv[index];
+                            break;
+                    }
+                    colorIndex++;
+                }
+                index++;
+            }
+        }
+        public void ReadCompression()
+        {
+            for (int i = 0; i < naviCust.NcpMapList.Count; i++)
+            {
+                naviCust.NcpMapList[i].isCompressed = naviCust.Compression[i] == 1;
+            }
         }
         public void InitializeGrid()
         {
@@ -711,147 +542,682 @@ namespace NaviDoctor
                     break;
             }
         }
-        public void ReadCompression()
+        public void ReadGrid()
         {
-            for (int i = 0; i < naviCust.NcpMapList.Count; i++)
+            for (int i = 0; i < 5; i++)
             {
-                naviCust.NcpMapList[i].isCompressed = naviCust.Compression[i] == 1;
+                for (int j = 0; j < 5; j++)
+                {
+                    naviCustGrid[i, j].Index = naviCust.GridPos[i, j];
+                    if (naviCustGrid[i, j].Index == 0) continue; // If the space is 0, there's no data to gather here.
+                    List<int> ColorID = ParseIDandColor(naviCust.NcpGrid[naviCustGrid[i, j].Index - 1][0]); // ColorID[0] is color, ColorID[1] is ID
+                    naviCustGrid[i, j].PartName = naviCust.NcpMapList[ColorID[1]].ncpName;
+                    naviCustGrid[i, j].Color = naviCust.NcpMapList[ColorID[1]].ncpColors[ColorID[0]];
+                    naviCustGrid[i, j].BlockType = naviCust.NcpMapList[ColorID[1]].isProg ? 1 : 2;
+                    naviCustGrid[i, j].PivotX = naviCust.NcpGrid[naviCustGrid[i, j].Index - 1][1];
+                    naviCustGrid[i, j].PivotY = naviCust.NcpGrid[naviCustGrid[i, j].Index - 1][2];
+                    naviCustGrid[i, j].Rotation = naviCust.NcpGrid[naviCustGrid[i, j].Index - 1][3];
+                    if (!naviCust.GridIndex.ContainsKey(naviCustGrid[i, j].Index))
+                    {
+                        naviCust.GridIndex.Add(naviCustGrid[i, j].Index, naviCustGrid[i, j].PartName);
+                    }
+                }
             }
         }
-        public void ReadInventory()
+        public void ReadStats()
+        {
+            int gutsMod = naviCust.IsGuts ? 2 : 1;
+            int custMod = naviCust.IsCust ? 1 : 0;
+            int teamMod = naviCust.IsTeam ? 1 : 0;
+            labelHPTotal.Text = (naviCust.BaseHP + naviCust.BonusHP + naviCust.ModHP).ToString();
+            labelAttack.Text = (Math.Min(naviCust.AtkBonus, 5) * gutsMod).ToString();
+            labelSpeed.Text = (Math.Min(naviCust.SpdBonus, 5) + 1).ToString();
+            labelCharge.Text = (Math.Min(naviCust.ChrgBonus, 5) + 1).ToString();
+            labelCShot.Text = Math.Min(naviCust.CShotBonus, 3).ToString();
+            labelRegMem.Text = (naviCust.RegMem + naviCust.BonusRegMem).ToString();
+            labelMegaLimit.Text = (naviCust.MegaLimit + teamMod + naviCust.ModMega).ToString();
+            labelGigaLimit.Text = (naviCust.GigaLimit + naviCust.ModGiga).ToString();
+            labelCustHandSize.Text = (naviCust.CustomSize + custMod + naviCust.ModCustom).ToString();
+        }
+        public void PopulateGrid()
         {
             int index = 0;
-            foreach (NCPListing part in naviCust.NcpMapList)
+            for (int i = 0; i < 5; i++)
             {
-                if (part.ncpName == "None")
-                    continue;
-                int colorIndex = 0;
-                foreach (string color in part.ncpColors)
+                for (int j = 0; j < 5; j++)
                 {
-                    if (color == "None")
+                    switch (naviCustGrid[i, j].BlockType)
                     {
-                        colorIndex++;
-                        continue;
-                    }
-                    switch (colorIndex)
-                    {
-                        case 0:
-                            part.QuantityCol1 = naviCust.NcpInv[index];
-                            break;
                         case 1:
-                            part.QuantityCol2 = naviCust.NcpInv[index];
+                            switch (naviCustGrid[i, j].Color)
+                            {
+                                case "White":
+                                    naviCust.PictureBoxList[index].Image = Properties.Resources.NCPblockWhite;
+                                    break;
+                                case "Red":
+                                    naviCust.PictureBoxList[index].Image = Properties.Resources.NCPblockRed;
+                                    break;
+                                case "Pink":
+                                    naviCust.PictureBoxList[index].Image = Properties.Resources.NCPblockPink;
+                                    break;
+                                case "Orange":
+                                    naviCust.PictureBoxList[index].Image = Properties.Resources.NCPblockOrange;
+                                    break;
+                                case "Yellow":
+                                    naviCust.PictureBoxList[index].Image = Properties.Resources.NCPblockYellow;
+                                    break;
+                                case "Green":
+                                    naviCust.PictureBoxList[index].Image = Properties.Resources.NCPblockGreen;
+                                    break;
+                                case "Blue":
+                                    naviCust.PictureBoxList[index].Image = Properties.Resources.NCPblockBlue;
+                                    break;
+                                case "Purple":
+                                    naviCust.PictureBoxList[index].Image = Properties.Resources.NCPblockPurple;
+                                    break;
+                                case "Dark":
+                                    naviCust.PictureBoxList[index].Image = Properties.Resources.NCPblockDark;
+                                    break;
+                                default:
+                                    break;
+                            }
                             break;
                         case 2:
-                            part.QuantityCol3 = naviCust.NcpInv[index];
+                            switch (naviCustGrid[i, j].Color)
+                            {
+                                case "White":
+                                    naviCust.PictureBoxList[index].Image = Properties.Resources.NCPplusblockWhite;
+                                    break;
+                                case "Red":
+                                    naviCust.PictureBoxList[index].Image = Properties.Resources.NCPplusblockRed;
+                                    break;
+                                case "Pink":
+                                    naviCust.PictureBoxList[index].Image = Properties.Resources.NCPplusblockPink;
+                                    break;
+                                case "Yellow":
+                                    naviCust.PictureBoxList[index].Image = Properties.Resources.NCPplusblockYellow;
+                                    break;
+                                case "Green":
+                                    naviCust.PictureBoxList[index].Image = Properties.Resources.NCPplusblockGreen;
+                                    break;
+                                case "Blue":
+                                    naviCust.PictureBoxList[index].Image = Properties.Resources.NCPplusblockBlue;
+                                    break;
+                                default:
+                                    break;
+                            }
                             break;
                         default:
-                            part.QuantityCol4 = naviCust.NcpInv[index];
                             break;
                     }
-                    colorIndex++;
+                    naviCust.PictureBoxList[index].Tag = naviCustGrid[i, j].PartName;
+                    index++;
                 }
-                index++;
             }
         }
-        public void InitializeStats()
+        public void ReadEffects()
         {
-            naviCust.HpUp = _initialSave.HPUp;
-            naviCust.BaseHP = (naviCust.HpUp * 20) + 100;
-            naviCust.BonusHP = _initialSave.BonusHP;
-            naviCust.RegMem = _initialSave.RegMem;
-            naviCust.CustSize = _initialSave.CustSize;
-            naviCust.AtkBonus = _initialSave.AttackPower;
-            naviCust.SpdBonus = _initialSave.RapidPower;
-            naviCust.ChrgBonus = _initialSave.ChargePower;
-            naviCust.BonusRegMem = _initialSave.CustEffects[17];
-            naviCust.CustomSize = _initialSave.CustEffects[18];
-            naviCust.CShotBonus = _initialSave.CShotPower;
-            naviCust.NcpInv = _initialSave.NCPInventory;
-            naviCust.Compression = _initialSave.Compression;
-            naviCust.NcpGrid = _initialSave.NCPGrid;
-            naviCust.GridPos = _initialSave.GridPosData;
-            naviCust.Effects = _initialSave.CustEffects;
-            naviCust.Bugs = _initialSave.CustBugs;
-            naviCust.ModCode = _initialSave.ModCode;
-            naviCust.MegaLimit = _initialSave.MegaLimit;
-            naviCust.GigaLimit = _initialSave.GigaLimit;
-            naviCust.IsBugged = _initialSave.isCustBugged;
+            Dictionary<string, int> effects = new Dictionary<string, int>
+            {
+                { "HP", naviCust.BonusHP },
+                { "Attack", (naviCust.AtkBonus / (naviCust.IsGuts ? 2 : 1)) - 1 },
+                { "Speed", naviCust.SpdBonus },
+                { "Charge", naviCust.ChrgBonus },
+                { "WeapLvl", naviCust.CShotBonus - 1 },
+                { "RegMem", naviCust.BonusRegMem },
+                { "MegaChip", naviCust.ModMega },
+                { "GigaChip", naviCust.ModGiga },
+                { "Custom", naviCust.CustomSize - 5 }
+            };
 
-            labelStyleName.Text = _style.Name.ToString() + " Style";
-            
-            switch (_style.Name)
+            foreach (KeyValuePair<string, int> effect in effects)
             {
-                case Style.Value.HeatGuts:
-                case Style.Value.AquaGuts:
-                case Style.Value.ElecGuts:
-                case Style.Value.WoodGuts:
-                    naviCust.IsGuts = true;
+                if (effect.Value > 0)
+                    dgvEffects.Rows.Add($"{effect.Key}+{effect.Value}");
+            }
+
+            List<string> parts = new List<string>();
+            List<string> excludes = new List<string> { "HP+100", "HP+200", "HP+300", "HP+500", "Reg+5", "Atk+1", "Speed+1", "Charge+1", "WeapLvl+1", "Custom1", "Custom2", "MegFldr1", "MegFldr2", "GigFldr1" };
+            for (int i = 1; i < naviCust.GridIndex.Count; i++)
+            {
+                if (!parts.Any(x => x == naviCust.GridIndex[i]) && !excludes.Any(x => x == naviCust.GridIndex[i]))
+                {
+                    parts.Add(naviCust.GridIndex[i]);
+                    dgvEffects.Rows.Add(naviCust.GridIndex[i]);
+                }
+            }
+            if (naviCust.ModCode < 0x42 && naviCust.ModCode > 0)
+            {
+                dgvEffects.Rows.Add($"ModTools: " + naviCust.ModCodeDict[naviCust.ModCode]);
+            }
+        }
+        public void ReadBugs()
+        {
+            string bugEffect;
+            int bugLevel;
+            for (int i = 0; i < naviCust.Bugs.Count; i++)
+            {
+                switch (i)
+                {
+                    case 0:
+                        bugEffect = "Player Movement: ";
+                        switch (naviCust.Effects[15])
+                        {
+                            case 4:
+                                bugEffect = bugEffect + "Up";
+                                break;
+                            case 8:
+                                bugEffect = bugEffect + "Down";
+                                break;
+                            case 12:
+                                bugEffect = bugEffect + "Confused";
+                                break;
+                            default:
+                                bugEffect = "Error";
+                                break;
+                        }
+                        break;
+                    case 1:
+                        bugEffect = "Battle HP Drain";
+                        break;
+                    case 2:
+                        bugEffect = "Custom HP Drain";
+                        break;
+                    case 3:
+                        bugEffect = "Battle Panel: ";
+                        bugEffect = naviCust.Bugs[3] == 13 ? bugEffect + "Cracked" : naviCust.Bugs[3] == 14 ? bugEffect + "Swamp" : "Error";
+                        break;
+                    case 4:
+                        bugEffect = "SlowGauge";
+                        break;
+                    case 5:
+                        bugEffect = "Increased Encounters";
+                        break;
+                    case 6:
+                        bugEffect = "Buster Misfire";
+                        break;
+                    case 7:
+                        bugEffect = "Support Disabled";
+                        break;
+                    case 8:
+                        bugEffect = "Modified C. Shot: ";
+                        switch (naviCust.Effects[11])
+                        {
+                            case 1:
+                                bugEffect = bugEffect + "Rock Cube";
+                                break;
+                            case 2:
+                                bugEffect = bugEffect + "Water Gun";
+                                break;
+                            case 3:
+                                bugEffect = bugEffect + "Flower";
+                                break;
+                            default:
+                                bugEffect = "Error";
+                                break;
+                        }
+                        break;
+                    case 9:
+                        bugEffect = "Battle Result: Zenny";
+                        break;
+                    case 10:
+                        bugEffect = "AutoBug: BustrMAX";
+                        break;
+                    case 11:
+                        bugEffect = "AutoBug: GigFldr1";
+                        break;
+                    case 12:
+                        bugEffect = "AutoBug: HubBatch";
+                        break;
+                    case 13:
+                        bugEffect = "AutoBug: DarkLcns";
+                        break;
+                    case 14:
+                        bugEffect = "ModTools: ";
+                        switch (naviCust.ModCode)
+                        {
+                            case 0x24:
+                            case 0x25:
+                            case 0x26:
+                            case 0x27:
+                            case 0x2D:
+                            case 0x34:
+                            case 0x35:
+                                bugEffect = bugEffect + "Custom -1";
+                                break;
+                            case 0x28:
+                            case 0x29:
+                            case 0x2A:
+                            case 0x2C:
+                            case 0x38:
+                                bugEffect = bugEffect + "Custom -2";
+                                break;
+                            case 0x3E:
+                            case 0x3F:
+                            case 0x40:
+                            case 0x41:
+                                bugEffect = bugEffect + "Swamp Step";
+                                break;
+                            default:
+                                bugEffect = "Error";
+                                break;
+                        }
+                        break;
+                    default:
+                        bugEffect = "Error";
+                        break;
+                }
+                bugLevel = naviCust.Bugs[i];
+                if (bugLevel > 0)
+                {
+                    dgvBugs.Rows.Add(bugEffect, bugLevel);
+                }
+            }
+        }
+        public void PopulateNCPList()
+        {
+            int qty;
+            foreach (NCPListing part in naviCust.NcpMapList)
+            {
+                if (part.ncpName == "None") continue;
+                foreach (string color in part.ncpColors)
+                {
+                    if (color == "None") continue;
+                    else
+                    {
+                        switch (part.ncpColors.IndexOf(color))
+                            {
+                            case 0:
+                                qty = part.QuantityCol1;
+                                break;
+                            case 1:
+                                qty = part.QuantityCol2;
+                                break;
+                            case 2:
+                                qty = part.QuantityCol3;
+                                break;
+                            case 3:
+                                qty = part.QuantityCol4;
+                                break;
+                            default:
+                                qty = 69420;
+                                break;
+                        }
+                        dgvNCPInv.Rows.Add(part.ncpName, part.isCompressed, color, qty);
+                    }
+                }
+            }
+        }
+        public List<int> ParseIDandColor(int ncp)
+        {
+            byte[] bytes = BitConverter.GetBytes(ncp);
+            int color = bytes[0] & 3;
+            int id = bytes[0] >> 2;
+            return new List<int>() { color, id };
+        }
+        public void setupPreview()
+        {
+            DataGridViewRow dgv = dgvNCPInv.CurrentRow;
+            dgv.Selected = true;
+            DataGridViewCellCollection currentCells = dgv.Cells;
+            string partName = (string)currentCells[0].Value;
+            string color = (string)currentCells[2].Value;
+            bool isProg = naviCust.NcpMapList.FirstOrDefault(x => x.ncpName == partName).isProg;
+            Image partPic = picSetup(color, isProg);
+            int[,] shape = shapeSetup(partName, currentCells[1].Value.ToString());
+            for (int i = 0; i < rotator; i++)
+            {
+                shape = rotateShape(shape);
+            }
+            displayPreview(partPic, shape);
+        }
+        public void displayPreview(Image pic, int[,] shape)
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                for (int j = 0; j < 5; j++)
+                {
+                    preview[i * 5 + j].Image = shape[i, j] == 1 ? pic : Properties.Resources.NCPGrid;
+                }
+            }
+            Cleanup();
+        }
+        public int[,] shapeSetup(string partName, string isCom)
+        {
+            List<NCPListing> map = naviCust.NcpMapList;
+            bool isCompressed = isCom == "True" ? true : false;
+            int partId = map.IndexOf(map.FirstOrDefault(e => e.ncpName == partName));
+            int[,] shape = (int[,]) map[partId].ncpData.FirstOrDefault(e => e.Key == isCompressed).Value.Clone(); // Clone so we don't transform the original data
+            return shape;
+        }
+        public Image picSetup(string color, bool isProg) 
+        {
+            Image partPic = Properties.Resources.NCPGrid;
+            switch (color)
+            {
+                case "White":
+                    partPic = isProg ? Properties.Resources.NCPblockWhite : Properties.Resources.NCPplusblockWhite;
                     break;
-                case Style.Value.HeatCust:
-                case Style.Value.AquaCust:
-                case Style.Value.ElecCust:
-                case Style.Value.WoodCust:
-                    naviCust.IsCust = true;
+                case "Red":
+                    partPic = isProg ? Properties.Resources.NCPblockRed : Properties.Resources.NCPplusblockRed;
                     break;
-                case Style.Value.HeatTeam:
-                case Style.Value.AquaTeam:
-                case Style.Value.ElecTeam:
-                case Style.Value.WoodTeam:
-                    naviCust.IsTeam = true;
+                case "Pink":
+                    partPic = isProg ? Properties.Resources.NCPblockPink : Properties.Resources.NCPplusblockPink;
+                    break;
+                case "Orange":
+                    partPic = Properties.Resources.NCPblockOrange;
+                    break;
+                case "Yellow":
+                    partPic = isProg ? Properties.Resources.NCPblockYellow : Properties.Resources.NCPplusblockYellow;
+                    break;
+                case "Green":
+                    partPic = isProg ? Properties.Resources.NCPblockGreen : Properties.Resources.NCPplusblockGreen;
+                    break;
+                case "Blue":
+                    partPic = isProg ? Properties.Resources.NCPblockBlue : Properties.Resources.NCPplusblockBlue;
+                    break;
+                case "Purple":
+                    partPic = Properties.Resources.NCPblockPurple;
+                    break;
+                case "Dark":
+                    partPic = Properties.Resources.NCPblockDark;
                     break;
                 default:
                     break;
             }
-            switch (_style.Name)
+            return partPic;
+        }
+        static int[,] rotateShape(int[,] shape)
+        {
+            for (int i = 0; i < 5 / 2; i++)
             {
-                case Style.Value.HeatGuts:
-                case Style.Value.AquaGuts:
-                case Style.Value.ElecGuts:
-                case Style.Value.WoodGuts:
-                case Style.Value.HeatShadow:
-                case Style.Value.AquaShadow:
-                case Style.Value.ElecShadow:
-                case Style.Value.WoodShadow:
-                    naviCust.ColorsList.Add("Red");
-                    break;
-                case Style.Value.HeatShield:
-                case Style.Value.AquaShield:
-                case Style.Value.ElecShield:
-                case Style.Value.WoodShield:
-                case Style.Value.HeatCust:
-                case Style.Value.AquaCust:
-                case Style.Value.ElecCust:
-                case Style.Value.WoodCust:
-                    naviCust.ColorsList.Add("Blue");
-                    break;
-                case Style.Value.HeatTeam:
-                case Style.Value.AquaTeam:
-                case Style.Value.ElecTeam:
-                case Style.Value.WoodTeam:
-                case Style.Value.HeatGround:
-                case Style.Value.AquaGround:
-                case Style.Value.ElecGround:
-                case Style.Value.WoodGround:
-                    naviCust.ColorsList.Add("Green");
-                    break;
-                case Style.Value.HeatBug:
-                case Style.Value.AquaBug:
-                case Style.Value.ElecBug:
-                case Style.Value.WoodBug:
-                    naviCust.ColorsList.Add("Dark");
-                    break;
-                default:
-                    break;
+                for (int j = i; j < 5 - i - 1; j++)
+                {
+                    // Swap elements of each cycle
+                    // in clockwise direction
+                    int temp = shape[i, j];
+                    shape[i, j] = shape[4 - j, i];
+                    shape[4 - j, i] = shape[4 - i, 4 - j];
+                    shape[4 - i, 4 - j] = shape[j, 4 - i];
+                    shape[j, 4 - i] = temp;
+                }
             }
-            switch (_initialSave.GameName)
+            return shape;
+        }
+        private void emptyHands() // Drops any piece that was selected on the board
+        {
+            lblSelected.Enabled = false;
+            lblSelected.Text = "";
+            lblSelectedHeader.Enabled = false;
+            btnMove.Enabled = false;
+            btnRemove.Enabled = false;
+            lblMessage.Visible = false;
+        }
+        private void redrawBorders() // redraws all borders
+        {
+            naviCust.PictureBoxList.ForEach(p => ControlPaint.DrawBorder(p.CreateGraphics(), p.ClientRectangle, Color.FromArgb(0, 0, 0), ButtonBorderStyle.Solid));
+        }
+        private void jumpToNCP (NaviCustGrid selection)
+        {
+            rotator = selection.Rotation;
+            foreach (DataGridViewRow row in dgvNCPInv.Rows)
             {
-                case GameTitle.Title.MegaManBattleNetwork3White:
-                case GameTitle.Title.MegaManBattleNetwork3Blue:
-                    naviCust.NcpMapList = new NaviCustParts().BN3NCPMap();
+                if (row.Cells[0].Value.ToString() == selection.PartName && row.Cells[2].Value.ToString() == selection.Color)
+                {
+                    dgvNCPInv.CurrentCell = row.Cells[0];
                     break;
-                default:
-                    break;
-            }    
+                }
+            }
+            setupPreview();
+        }
+        private void selectPart(PictureBox box)
+        {
+            int r = 50;
+            int g = 220;
+            int b = 255;
+            int index = naviCust.PictureBoxList.IndexOf(box);
+            int indX = naviCustGrid.GetLength(0);
+            int indY = naviCustGrid.GetLength(1);
+            List<int> indexList = new List<int>();
+            NaviCustGrid selection = naviCustGrid[index / indX, index % indY];
+            int[] coordinates = new int[2];
+            coordinates[0] = index / indX;
+            coordinates[1] = index % indY;
+            selectedPart = coordinates;
+            emptyHands();
+            redrawBorders();
+            if (selection.Index != 0)
+            {
+                jumpToNCP(selection);
+                lblSelected.Enabled = true;
+                lblSelected.Text = selection.PartName;
+                lblSelectedHeader.Enabled = true;
+                btnMove.Enabled = true;
+                btnRemove.Enabled = true;
+                lblMessage.Visible = true;
+                for (int i = 0; i < indX; i++)
+                {
+                    for (int j = 0; j < indY; j++)
+                    {
+                        if (naviCustGrid[i, j].Index == selection.Index)
+                        {
+                            indexList.Add(i * indX + j);
+                        }
+                    }
+                }
+                for (int i = 0; i <= 255; i += 10)
+                {
+                    indexList.ForEach(p => ControlPaint.DrawBorder(naviCust.PictureBoxList[p].CreateGraphics(), naviCust.PictureBoxList[p].ClientRectangle, Color.FromArgb(Math.Min(i, r), Math.Min(i, g), Math.Min(i, b)), ButtonBorderStyle.Dashed));
+                } // Don't .Dispose() here! Let cleanup() take care of it.
+            }
+        }
+        private void showPlacement(PictureBox box)
+        {
+            int r = 255;
+            int g = 0;
+            int b = 0;
+            redrawBorders();
+            int index = naviCust.PictureBoxList.IndexOf(box);
+            int[] coordinates = new int[2];
+            List<int> indexList = new List<int>();
+            coordinates[0] = index / naviCustGrid.GetLength(0);
+            coordinates[1] = index % naviCustGrid.GetLength(1); // coordinates is where we're currently hovering over, so it's our Pivot anchor
+            DataGridViewCellCollection part = dgvNCPInv.CurrentRow.Cells;
+            int[,] shape = shapeSetup(part[0].Value.ToString(), part[1].Value.ToString());
+            for (int i = 0; i < rotator; i++)
+            {
+                shape = rotateShape(shape);
+            }
+            int[,] shiftedShape = shiftShape(shape, coordinates[0], coordinates[1]);
+            for (int i = 0; i < naviCustGrid.GetLength(0); i++)
+            {
+                for (int j = 0; j < naviCustGrid.GetLength(1); j++)
+                {
+                    if (shiftedShape[i, j] == 1)
+                    {
+                        indexList.Add(i * naviCustGrid.GetLength(0) + j);
+                    }
+                }
+            }
+            indexList.ForEach(p => ControlPaint.DrawBorder(naviCust.PictureBoxList[p].CreateGraphics(), naviCust.PictureBoxList[p].ClientRectangle, Color.FromArgb(r, g, b), ButtonBorderStyle.Dashed));
+            // highlight border based on shape
+        }
+        private int[,] shiftShape(int[,] shape, int posX, int posY)
+        {
+            int[,] shapePlace = new int[naviCustGrid.GetLength(0), naviCustGrid.GetLength(1)]; // Needs to be the precise size of the naviCustGrid
+            for (int i = 0; i < shapePlace.GetLength(0); i++)
+            {
+                for (int j = 0; j < shapePlace.GetLength(1); j++)
+                {
+                    try
+                    {
+                        if (shape[i, j] == 1 && posX - 2 + i >= 0 && posY - 2 + j >= 0 && posX - 2 + i < shapePlace.GetLength(0) && posY - 2 + j < shapePlace.GetLength(1))
+                        { // Make sure everything is in bounds
+                            shapePlace[posX - 2 + i, posY - 2 + j] = 1;
+                        }
+                    }
+                    catch
+                    { // This means that something's off the grid, just ignore it for now
+                        continue;
+                    }
+                }
+            }
+            return shapePlace;
+        }
+        private void placePart(PictureBox box) // This should be the actual act of placing the part.
+        {
+            int index = naviCust.PictureBoxList.IndexOf(box);
+            int posX = index / naviCustGrid.GetLength(0);
+            int posY = index % naviCustGrid.GetLength(1);
+            NaviCustGrid part = new NaviCustGrid();
+            DataGridViewCellCollection partInfo = dgvNCPInv.CurrentRow.Cells;
+            part.PartName = partInfo[0].Value.ToString();
+            part.Color = partInfo[2].Value.ToString();
+            part.PivotX = posX;
+            part.PivotY = posY;
+            part.BlockType = naviCust.NcpMapList.FirstOrDefault(x => x.ncpName == part.PartName).isProg ? 1 : 2;
+            part.Rotation = rotator;
+            part.Index = 1; // The minimum amount of index a part can be
+            foreach (NaviCustGrid entry in naviCustGrid)
+            {
+                if (entry.Index >= part.Index) // Make sure the newest index is the absolute highest on the list
+                {
+                    part.Index = entry.Index + 1;
+                }
+            }
+            bool emergencyExit = false;
+            if (_placement_mode)
+            { // Regardless of how the part was obtained, the currently selected part should always be the one highlighted in inventory
+                int[,] shape = shapeSetup(part.PartName, dgvNCPInv.CurrentRow.Cells[1].Value.ToString());
+                Image pic = picSetup(part.Color, part.BlockType == 1 ? true : false);
+                for (int i = 0; i < rotator; i++)
+                {
+                    shape = rotateShape(shape);
+                }
+                int[,] shapePlace = shiftShape(shape, posX, posY); // Move the shape relative to where we want it
+                for (int i = 0; i < shapePlace.GetLength(0); i++)
+                {
+                    for (int j = 0; j < shapePlace.GetLength(1); j++)
+                    {
+                        try
+                        {
+                            if (shape[i,j] == 1 && posX-2+i >= 0 && posY-2+j >=0 && posX-2+i < shapePlace.GetLength(0) && posY-2+j < shapePlace.GetLength(1))
+                            { // Make sure everything is in bounds
+                                shapePlace[posX - 2 + i, posY - 2 + j] = 1;
+                            }
+                            else if (shape[i,j] == 1 && (posX-2+i < 0 || posY-2+j < 0 || posX-2+i >= shapePlace.GetLength(0) || posY-2+j >= shapePlace.GetLength(1)))
+                            {
+                                throw new Exception();
+                            }
+                        }
+                        catch
+                        { // This means that something's off the grid, can't place it here
+                            emergencyExit = true;
+                            break;
+                        }
+                    }
+                }
+                for (int i = 0; i < shapePlace.GetLength(0) && !emergencyExit; i++)
+                {
+                    for (int j = 0; j < shapePlace.GetLength(1) && !emergencyExit; j++)
+                    {
+                        if (shapePlace[i, j] != 1) // Make sure all values are populated
+                        {
+                            shapePlace[i, j] = 0; // Do me a favor and check if this part is even necessary later
+                        }
+                    }
+                }
+                for (int i = 0; i < naviCustGrid.GetLength(0) && !emergencyExit; i++)
+                {
+                    for (int j = 0; j < naviCustGrid.GetLength(1) && !emergencyExit; j++)
+                    {
+                        try
+                        {
+                            if (naviCustGrid[i, j].Index == 0 && shapePlace[i, j] == 1)
+                            {
+                                naviCust.PictureBoxList[i * naviCustGrid.GetLength(0) + j].Image = pic;
+                                naviCust.PictureBoxList[i * naviCustGrid.GetLength(0) + j].Refresh();
+                                naviCust.PictureBoxList[i * naviCustGrid.GetLength(0) + j].Tag = part.PartName;
+                                naviCustGrid[i, j].PartName = part.PartName;
+                                naviCustGrid[i, j].PivotX = part.PivotX;
+                                naviCustGrid[i, j].PivotY = part.PivotY;
+                                naviCustGrid[i, j].BlockType = part.BlockType;
+                                naviCustGrid[i, j].Color = part.Color;
+                                naviCustGrid[i, j].Rotation = rotator;
+                                naviCustGrid[i, j].Index = part.Index;
+                                selectedPart[0] = i;
+                                selectedPart[1] = j;
+                            }
+                            else if (naviCustGrid[i, j].Index != 0 && shapePlace[i, j] == 1)
+                            {   // If the index isn't 0 but the shape to place is 1, it's either another piece or in the void
+                                throw new Exception();
+                            }
+                        }
+                        catch
+                        {
+                            emergencyExit = true;
+                            break;
+                        }
+                    }
+                }
+            }
+            if (emergencyExit) abortPlacement();
+            else placementMode(); // If we got here without triggering emergencyExit, then we're done here, disengage placementMode
+        }
+        private void abortPlacement()
+        {
+            removePart();
+            MessageBox.Show("Error: Unable to place part in this location. \nReason: Illegal Placement.");
+        }
+        private void removePart()
+        {
+            NaviCustGrid selection = naviCustGrid[selectedPart[0], selectedPart[1]];
+            lblSelected.Enabled = false;
+            lblSelected.Text = "";
+            lblSelectedHeader.Enabled = false;
+            btnMove.Enabled = false;
+            btnRemove.Enabled = false;
+            lblMessage.Visible = false;
+            int indX = naviCustGrid.GetLength(0);
+            int indY = naviCustGrid.GetLength(1);
+            for (int i = 0; i < indX; i++)
+            {
+                for (int j = 0; j < indY; j++)
+                {
+                    if (naviCustGrid[i, j].Index == selection.Index)
+                    {
+                        naviCustGrid[i, j] = new NaviCustGrid(); // Reset to default
+                        naviCust.PictureBoxList[i * indX + j].Image = Properties.Resources.NCPGrid;
+                        naviCust.PictureBoxList[i * indX + j].Refresh();
+                        naviCust.PictureBoxList[i * indX + j].Tag = null; // Reset the risidual data, it persists for some reason
+                    }
+                }
+            }
+            selectedPart = new int[2]; // Nothing is selected anymore, reset the value here.
+            reindexGridParts(selection.Index);
+            // Redirect to method that recalculates NaviCust stats/bugs here
+        }
+        public void reindexGridParts(int index) // As a side note, reindexing should only occur when removing a part from the grid
+        {
+            foreach (NaviCustGrid part in naviCustGrid)
+            {
+                part.Index = part.Index > index ? part.Index-- : part.Index;
+            }
+        }
+        private void placementMode() // Engage or disengage placement mode
+        {
+            _placement_mode = !_placement_mode;
+            if (_placement_mode) Cursor.Current = Cursors.Hand;
+            else Cursor.Current = Cursors.Default;
+        }
+        private void infoText(PictureBox image)
+        {
+            if ((string)image.Tag != null && (string)image.Tag != "" && image.Visible == true)
+            {
+                ToolTip toolTip = new ToolTip();
+                toolTip.SetToolTip(image, (string)image.Tag);
+                toolTip.Active = true;
+            }
         }
         public void ColorTest()
         {
@@ -905,19 +1271,72 @@ namespace NaviDoctor
         private void imgCustGrid_MouseHover(object sender, EventArgs e)
         {
             PictureBox image = (PictureBox)sender;
-            if ((string)image.Tag != null && (string)image.Tag != "" && image.Visible == true)
-            {
-                ToolTip toolTip = new ToolTip();
-                toolTip.SetToolTip(image, (string)image.Tag);
-                toolTip.Active = true;
-            }
+            if (!_placement_mode) infoText(image);
         }
         private void imgCustGrid_MouseLeave(object sender, EventArgs e)
         {
-            PictureBox image = (PictureBox)sender;
-            ToolTip toolTip = new ToolTip();
-            toolTip.SetToolTip(image, "");
-            toolTip.Active = false;
+            if (!_placement_mode)
+            {
+                PictureBox image = (PictureBox)sender;
+                ToolTip toolTip = new ToolTip();
+                toolTip.SetToolTip(image, "");
+                toolTip.Active = false;
+            }
+            if (_placement_mode) redrawBorders();
+        }
+        private void dgvNCPInv_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            rotator = 0;
+            setupPreview();
+        }
+        private void btnRotCW_Click(object sender, EventArgs e)
+        {
+            rotator++;
+            if (rotator > 3) rotator = 0;
+            setupPreview();
+        }
+        private void btnRotCCW_Click(object sender, EventArgs e)
+        {
+            rotator--;
+            if (rotator < 0) rotator = 3;
+            setupPreview();
+        }
+        private void btnCompress_Click(object sender, EventArgs e)
+        {
+            DataGridViewCellCollection cell = dgvNCPInv.CurrentRow.Cells;
+            NCPListing part = naviCust.NcpMapList.FirstOrDefault(x => x.ncpName == (string)cell[0].Value);
+            bool setCompress = (bool)cell[1].Value;
+            if (part.ncpData.ContainsKey(true)) // if it can't compress, you must acquit
+            {
+                foreach (DataGridViewRow row in dgvNCPInv.Rows) // Some parts have multiple colors, this will change the value for all with the same name
+                {
+                    if (row.Cells[0].Value == cell[0].Value)
+                    {
+                        row.Cells[1].Value = !setCompress; // Flip the value to the reverse.
+                    }
+                }
+                setupPreview();
+             }
+        }
+        private void custGrid_Click(object sender, EventArgs e)
+        {
+            PictureBox box = (PictureBox)sender;
+            if (!_placement_mode)
+            {
+                selectPart(box);
+            }
+            if (_placement_mode)
+            {
+                placePart(box);
+            }
+        }
+        private void btnRemove_Click(object sender, EventArgs e)
+        {
+            removePart();
+        }
+        private void btnPlacePart_Click(object sender, EventArgs e)
+        {
+            placementMode();
         }
         private class NaviCustGrid
         {
@@ -930,188 +1349,13 @@ namespace NaviDoctor
             public int Index { get; set; } = 0; // This is for GridPosData. Keep track of the order of placement.
         }
 
-        private void dgvNCPInv_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void imgCustGrid_MouseEnter(object sender, EventArgs e)
         {
-            rotator = 0;
-            setupPreview();
-        }
-        private void setupPreview()
-        {
-            DataGridViewRow dgv = dgvNCPInv.CurrentRow;
-            dgv.Selected = true;
-            DataGridViewCellCollection currentCells = dgv.Cells;
-            string partName = (string)currentCells[0].Value;
-            string color = (string)currentCells[2].Value;
-            bool isProg = naviCust.NcpMapList.FirstOrDefault(x => x.ncpName == partName).isProg;
-            Image partPic = picSetup(color, isProg);
-            int[,] shape = shapeSetup(partName, currentCells[1].Value.ToString());
-            for (int i = 0; i < rotator; i++)
+            PictureBox image = (PictureBox)sender;
+            if (_placement_mode)
             {
-                shape = rotateShape(shape);
-            }
-            displayPreview(partPic, shape);
-        }
-        private void displayPreview(Image pic, int[,] shape)
-        {
-            for (int i = 0; i < 5; i++)
-            {
-                for (int j = 0; j < 5; j++)
-                {
-                    preview[i * 5 + j].Image = shape[i, j] == 1 ? pic : Properties.Resources.NCPGrid;
-                }
-            }
-            Cleanup();
-        }
-        private int[,] shapeSetup(string partName, string isCom)
-        {
-            List<NCPListing> map = naviCust.NcpMapList;
-            bool isCompressed = isCom == "True" ? true : false;
-            int partId = map.IndexOf(map.FirstOrDefault(e => e.ncpName == partName));
-            int[,] shape = (int[,]) map[partId].ncpData.FirstOrDefault(e => e.Key == isCompressed).Value.Clone(); // Clone so we don't transform the original data
-            return shape;
-        }
-        static int[,] rotateShape(int[,] shape)
-        {
-            for (int i = 0; i < 5 / 2; i++)
-            {
-                for (int j = i; j < 5 - i - 1; j++)
-                {
-                    // Swap elements of each cycle
-                    // in clockwise direction
-                    int temp = shape[i, j];
-                    shape[i, j] = shape[4 - j, i];
-                    shape[4 - j, i] = shape[4 - i, 4 - j];
-                    shape[4 - i, 4 - j] = shape[j, 4 - i];
-                    shape[j, 4 - i] = temp;
-                }
-            }
-            return shape;
-        }
-        private Image picSetup(string color, bool isProg) 
-        {
-            Image partPic = Properties.Resources.NCPGrid;
-            switch (color)
-            {
-                case "White":
-                    partPic = isProg ? Properties.Resources.NCPblockWhite : Properties.Resources.NCPplusblockWhite;
-                    break;
-                case "Red":
-                    partPic = isProg ? Properties.Resources.NCPblockRed : Properties.Resources.NCPplusblockRed;
-                    break;
-                case "Pink":
-                    partPic = isProg ? Properties.Resources.NCPblockPink : Properties.Resources.NCPplusblockPink;
-                    break;
-                case "Orange":
-                    partPic = Properties.Resources.NCPblockOrange;
-                    break;
-                case "Yellow":
-                    partPic = isProg ? Properties.Resources.NCPblockYellow : Properties.Resources.NCPplusblockYellow;
-                    break;
-                case "Green":
-                    partPic = isProg ? Properties.Resources.NCPblockGreen : Properties.Resources.NCPplusblockGreen;
-                    break;
-                case "Blue":
-                    partPic = isProg ? Properties.Resources.NCPblockBlue : Properties.Resources.NCPplusblockBlue;
-                    break;
-                case "Purple":
-                    partPic = Properties.Resources.NCPblockPurple;
-                    break;
-                case "Dark":
-                    partPic = Properties.Resources.NCPblockDark;
-                    break;
-                default:
-                    break;
-            }
-            return partPic;
-        }
-        private void btnRotCW_Click(object sender, EventArgs e)
-        {
-            rotator++;
-            if (rotator > 3) rotator = 0;
-            setupPreview();
-        }
-
-        private void btnRotCCW_Click(object sender, EventArgs e)
-        {
-            rotator--;
-            if (rotator < 0) rotator = 3;
-            setupPreview();
-        }
-
-        private void btnCompress_Click(object sender, EventArgs e)
-        {
-            DataGridViewCellCollection cell = dgvNCPInv.CurrentRow.Cells;
-            NCPListing part = naviCust.NcpMapList.FirstOrDefault(x => x.ncpName == (string)cell[0].Value);
-            if (part.ncpData.ContainsKey(true)) // if it can't compress, you must acquit
-            {
-                foreach (DataGridViewRow row in dgvNCPInv.Rows) // Some parts have multiple colors, this will change the value for all with the same name
-                {
-                    if (row.Cells[0].Value == cell[0].Value)
-                    {
-                        row.Cells[1].Value = !(bool)cell[1].Value; // Flip the value to the reverse.
-                    }
-                }
-                setupPreview();
-             }
-        }
-        private void jumpToNCP (NaviCustGrid selection)
-        {
-            rotator = selection.Rotation;
-            foreach (DataGridViewRow row in dgvNCPInv.Rows)
-            {
-                if (row.Cells[0].Value.ToString() == selection.PartName && row.Cells[2].Value.ToString() == selection.Color)
-                {
-                    dgvNCPInv.CurrentCell = row.Cells[0];
-                    break;
-                }
-            }
-            setupPreview();
-        }
-        private void resetGridBorder()
-        {
-            lblSelected.Enabled = false;
-            lblSelected.Text = "";
-            lblSelectedHeader.Enabled = false;
-            btnMove.Enabled = false;
-            btnRemove.Enabled = false;
-            lblMessage.Visible = false;
-            naviCust.PictureBoxList.ForEach(p => ControlPaint.DrawBorder(p.CreateGraphics(), p.ClientRectangle, Color.FromArgb(0, 0, 0), ButtonBorderStyle.Solid));
-        }
-        private void custGrid_Click(object sender, EventArgs e)
-        {
-            int r = 50;
-            int g = 220;
-            int b = 255;
-            PictureBox box = (PictureBox)sender;
-            int index = naviCust.PictureBoxList.IndexOf(box);
-            int indX = naviCustGrid.GetLength(0);
-            int indY = naviCustGrid.GetLength(1);
-            List<int> indexList = new List<int>();
-            NaviCustGrid selection = naviCustGrid[index / indX, index % indY];
-            resetGridBorder();
-            if (selection.Index != 0)
-            {
-                jumpToNCP(selection);
-                lblSelected.Enabled = true;
-                lblSelected.Text = selection.PartName;
-                lblSelectedHeader.Enabled = true;
-                btnMove.Enabled = true;
-                btnRemove.Enabled = true;
-                lblMessage.Visible = true;
-                for (int i = 0; i < indX; i++)
-                {
-                    for (int j = 0; j < indY; j++)
-                    {
-                        if (naviCustGrid[i, j].Index == selection.Index)
-                        {
-                            indexList.Add(i * indX + j);
-                        }
-                    }
-                }
-                for (int i = 0; i <= 255; i+=10)
-                {
-                    indexList.ForEach(p => ControlPaint.DrawBorder(naviCust.PictureBoxList[p].CreateGraphics(), naviCust.PictureBoxList[p].ClientRectangle, Color.FromArgb(Math.Min(i, r), Math.Min(i, g), Math.Min(i, b)), ButtonBorderStyle.Dashed));
-                } // Don't .Dispose() here! Let cleanup() take care of it.
+                redrawBorders();
+                showPlacement(image);
             }
         }
     }
