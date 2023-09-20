@@ -568,13 +568,13 @@ namespace NaviDoctor
                     switch (tabsFolders.SelectedIndex)
                     {
                         case 0:
-                            currentRegChipIndex = chipData.IndexOf(BattleChipData.GetChipNameByID(chipNameMap, saveData.RegChip1));
+                            currentRegChipIndex = saveData.RegChip1;
                             break;
                         case 1:
-                            currentRegChipIndex = chipData.IndexOf(BattleChipData.GetChipNameByID(chipNameMap, saveData.RegChip2));
+                            currentRegChipIndex = saveData.RegChip2;
                             break;
                         case 2:
-                            currentRegChipIndex = chipData.IndexOf(BattleChipData.GetChipNameByID(chipNameMap, saveData.RegChip3));
+                            currentRegChipIndex = saveData.RegChip3;
                             break;
                         default:
                             break;
@@ -585,13 +585,13 @@ namespace NaviDoctor
                     switch (tabsFolders.SelectedIndex)
                     {
                         case 0:
-                            currentRegChipIndex = chipData.IndexOf(BattleChipData.GetChipNameByID(chipNameMap, saveData.RegChip1));
+                            currentRegChipIndex = saveData.RegChip1;
                             break;
                         case 1:
-                            currentRegChipIndex = chipData.IndexOf(BattleChipData.GetChipNameByID(chipNameMap, saveData.RegChip3));
+                            currentRegChipIndex = saveData.RegChip3;
                             break;
                         case 2:
-                            currentRegChipIndex = chipData.IndexOf(BattleChipData.GetChipNameByID(chipNameMap, saveData.RegChip2));
+                            currentRegChipIndex = saveData.RegChip2;
                             break;
                         default:
                             break;
@@ -3698,6 +3698,7 @@ namespace NaviDoctor
         private void btnSetRegChip_Click(object sender, EventArgs e)
         {
             var regChip = (int)cbxRegChip.SelectedValue;
+            var regChipIndex = cbxRegChip.SelectedIndex;
             List<BattleChipData> chipNameMap;
 
             switch (saveData.GameName)
@@ -3733,13 +3734,13 @@ namespace NaviDoctor
                     switch (tabsFolders.SelectedIndex)
                     {
                         case 0:
-                            saveData.RegChip1 = regChip;
+                            saveData.RegChip1 = regChipIndex;
                             break;
                         case 1:
-                            saveData.RegChip2 = regChip;
+                            saveData.RegChip2 = regChipIndex;
                             break;
                         case 2:
-                            saveData.RegChip3 = regChip;
+                            saveData.RegChip3 = regChipIndex;
                             break;
                         default:
                             break;
@@ -3750,13 +3751,13 @@ namespace NaviDoctor
                     switch (tabsFolders.SelectedIndex)
                     {
                         case 0:
-                            saveData.RegChip1 = regChip;
+                            saveData.RegChip1 = regChipIndex;
                             break;
                         case 1:
-                            saveData.RegChip3 = regChip;
+                            saveData.RegChip3 = regChipIndex;
                             break;
                         case 2:
-                            saveData.RegChip2 = regChip;
+                            saveData.RegChip2 = regChipIndex;
                             break;
                         default:
                             break;
