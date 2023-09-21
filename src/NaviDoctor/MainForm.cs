@@ -482,15 +482,13 @@ namespace NaviDoctor
 
         private void PopulateRegChipCombobox()
         {
+            panelRegChip.Enabled = true;
             var chipData = new List<BattleChipData>();
             List<Tuple<int, int>> folderSaveData = null;
             List<BattleChipData> chipNameMap;
 
             switch (saveData.GameName)
             {
-                case GameTitle.Title.MegaManBattleNetwork:
-                    chipNameMap = BattleChipData.BN1ChipNameMap;
-                    break;
                 case GameTitle.Title.MegaManBattleNetwork2:
                     chipNameMap = BattleChipData.BN2ChipNameMap;
                     break;
@@ -505,7 +503,6 @@ namespace NaviDoctor
             //This is because of the way Extra Folder is saved into Folder2Data
             switch (saveData.GameName)
             {
-                case GameTitle.Title.MegaManBattleNetwork:
                 case GameTitle.Title.MegaManBattleNetwork2:
                     switch (tabsFolders.SelectedIndex)
                     {
@@ -533,8 +530,9 @@ namespace NaviDoctor
                             folderSaveData = saveData.Folder3Data;
                             break;
                         case 2:
-                            folderSaveData = saveData.Folder2Data;
-                            break;
+                            cbxRegChip.DataSource = null;
+                            panelRegChip.Enabled = false;
+                            return; //no reg chip for extra folder
                         default:
                             break;
                     }
@@ -563,7 +561,6 @@ namespace NaviDoctor
 
             switch (saveData.GameName)
             {
-                case GameTitle.Title.MegaManBattleNetwork:
                 case GameTitle.Title.MegaManBattleNetwork2:
                     switch (tabsFolders.SelectedIndex)
                     {
@@ -588,10 +585,9 @@ namespace NaviDoctor
                             currentRegChipIndex = saveData.RegChip1;
                             break;
                         case 1:
-                            currentRegChipIndex = saveData.RegChip3;
+                            currentRegChipIndex = saveData.RegChip2;
                             break;
                         case 2:
-                            currentRegChipIndex = saveData.RegChip2;
                             break;
                         default:
                             break;
@@ -3754,11 +3750,10 @@ namespace NaviDoctor
                             saveData.RegChip1 = regChipIndex;
                             break;
                         case 1:
-                            saveData.RegChip3 = regChipIndex;
-                            break;
-                        case 2:
                             saveData.RegChip2 = regChipIndex;
                             break;
+                        case 2:
+                            return;
                         default:
                             break;
                     }
