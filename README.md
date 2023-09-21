@@ -7,6 +7,11 @@ Mega Man Battle Network Legacy Collection save editor
 ![Github Release](https://img.shields.io/github/v/release/functionFox/NaviDoctorLC?style=plastic&logo=github)
 ![GitHub release (latest by date)](https://img.shields.io/github/downloads/functionFox/NaviDoctorLC/latest/total?style=plastic&logo=github)
 
+
+Join our [Discord!](https://discord.gg/RqpCAUfMDP) 
+
+![Discord](https://img.shields.io/discord/1154191454126739476?style=plastic&logo=discord&label=Discord&logoColor=white)
+
 ### Current Support
 ![BN1 Supported](https://img.shields.io/badge/Battle_Network_1-✓-green?style=plastic&logo=steam)
 ![BN2 Supported](https://img.shields.io/badge/Battle_Network_2-✓-green?style=plastic&logo=steam)
