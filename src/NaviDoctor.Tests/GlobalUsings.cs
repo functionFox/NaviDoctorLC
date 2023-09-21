@@ -1,2 +1,3 @@
 global using NUnit.Framework;
-global using NaviDoctor;
+global using NaviDoctor.helpers;
+global using NaviDoctor.models;

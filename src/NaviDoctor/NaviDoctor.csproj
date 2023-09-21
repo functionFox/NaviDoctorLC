@@ -96,6 +96,7 @@
     <Compile Include="extensions\BooleanExtensions.cs" />
     <Compile Include="extensions\GetEnumString.cs" />
     <Compile Include="extensions\StringValueAttribute.cs" />
+    <Compile Include="helpers\StyleHelper.cs" />
     <Compile Include="NaviCustEdit.cs">
       <SubType>Form</SubType>
     </Compile>
