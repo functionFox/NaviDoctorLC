@@ -1,15 +1,9 @@
-﻿using System;
+﻿using NaviDoctor.models;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Threading;
-using NaviDoctor.models;
-using System.Reflection;
 
 namespace NaviDoctor
 {
@@ -1064,8 +1058,9 @@ namespace NaviDoctor
             }
             return shapePlace;
         }
-        private void placePart(PictureBox box) // This should be the actual act of placing the part.
+        private void placePart(PictureBox box) // To Do: edge cases and bug corrections
         {
+            bool placedPart = false;
             int index = naviCust.PictureBoxList.IndexOf(box);
             int posX = index / naviCustGrid.GetLength(0);
             int posY = index % naviCustGrid.GetLength(1);
@@ -1147,6 +1142,7 @@ namespace NaviDoctor
                                 naviCustGrid[i, j].Index = part.Index;
                                 selectedPart[0] = i;
                                 selectedPart[1] = j;
+                                placedPart = true;
                             }
                             else if (naviCustGrid[i, j].Index != 0 && shapePlace[i, j] == 1)
                             {   // If the index isn't 0 but the shape to place is 1, it's either another piece or in the void
@@ -1161,15 +1157,15 @@ namespace NaviDoctor
                     }
                 }
             }
-            if (emergencyExit) abortPlacement();
+            if (emergencyExit) abortPlacement(placedPart);
             else placementMode(); // If we got here without triggering emergencyExit, then we're done here, disengage placementMode
         }
-        private void abortPlacement()
+        private void abortPlacement(bool placed = false)
         {
-            removePart();
+            if (placed) removePart();
             MessageBox.Show("Error: Unable to place part in this location. \nReason: Illegal Placement.");
         }
-        private void removePart()
+        private void removePart(bool suppressReIndex = false)
         {
             NaviCustGrid selection = naviCustGrid[selectedPart[0], selectedPart[1]];
             lblSelected.Enabled = false;
@@ -1194,7 +1190,7 @@ namespace NaviDoctor
                 }
             }
             selectedPart = new int[2]; // Nothing is selected anymore, reset the value here.
-            reindexGridParts(selection.Index);
+            if (!suppressReIndex) reindexGridParts(selection.Index);
             // Redirect to method that recalculates NaviCust stats/bugs here
         }
         public void reindexGridParts(int index) // As a side note, reindexing should only occur when removing a part from the grid
@@ -1264,9 +1260,14 @@ namespace NaviDoctor
                 box.Image.Dispose();
             }
         }
-        private void NaviCustEdit_FormClosed(object sender, FormClosedEventArgs e)
+        private void imgCustGrid_MouseEnter(object sender, EventArgs e)
         {
-            Cleanup();
+            PictureBox image = (PictureBox)sender;
+            if (_placement_mode)
+            {
+                redrawBorders();
+                showPlacement(image);
+            }
         }
         private void imgCustGrid_MouseHover(object sender, EventArgs e)
         {
@@ -1338,6 +1339,22 @@ namespace NaviDoctor
         {
             placementMode();
         }
+        private void NaviCustEdit_KeyDown(object sender, KeyEventArgs e) // KeyValue 27 : KeyData Escape
+        {
+            int keyValue = e.KeyValue;
+            if (keyValue == 27 && _placement_mode) // These are not mutually exclusive. Really doesn't matter, anyway. 
+            {
+                placementMode();
+            }
+            if (keyValue == 27 && lblMessage.Visible) // Drop the part you have selected and remove the message.
+            {
+                emptyHands();
+            }
+        }
+        private void NaviCustEdit_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Cleanup();
+        }
         private class NaviCustGrid
         {
             public int BlockType { get; set; } // Empty Grid space, Program part, or Plus part. -1 is void.
@@ -1347,16 +1364,6 @@ namespace NaviDoctor
             public int PivotY { get; set; } = 0;
             public int Rotation { get; set; } = 0; // 0 = No rotation. Each increase is one clockwise rotation
             public int Index { get; set; } = 0; // This is for GridPosData. Keep track of the order of placement.
-        }
-
-        private void imgCustGrid_MouseEnter(object sender, EventArgs e)
-        {
-            PictureBox image = (PictureBox)sender;
-            if (_placement_mode)
-            {
-                redrawBorders();
-                showPlacement(image);
-            }
         }
     }
 }
