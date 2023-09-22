@@ -30,15 +30,14 @@ namespace NaviDoctor.Tests
         [TestCase(BN3)]
         public void StyleLoad(string savePath)
         {
-            var saveParse = new SaveParse(Path.Combine(TestContext.CurrentContext.TestDirectory, savePath));
-            var extractedSaveParse = saveParse.ExtractSaveData();
+            var saveParse = new SaveParse(Path.Combine(TestContext.CurrentContext.TestDirectory, savePath)).ExtractSaveData();
             var _styles = new List<Style>();
 
             switch (savePath)
             {
                 case BN1: //BN1 save has Heat equipped and Aqua, Wood, and Heat added
                     {
-                        extractedSaveParse.LoadStyles(ref _styles);
+                        saveParse.LoadStyles(ref _styles);
                         Assert.Multiple(() =>
                         {
                             Assert.IsTrue(_styles.FirstOrDefault(x => x.Name == Style.Value.Heat).Equip.Value == true);
@@ -50,7 +49,7 @@ namespace NaviDoctor.Tests
                     }
                 case BN2: //BN2 save has WoodGuts equipped and WoodGuts lvl 2, and AquaShield lvl 1 added
                     {
-                        extractedSaveParse.LoadStyles(ref _styles);
+                        saveParse.LoadStyles(ref _styles);
                         Assert.Multiple(() =>
                         {
                             Assert.IsTrue(_styles.FirstOrDefault(x => x.Name == Style.Value.WoodGuts).Equip.Value == true);
@@ -61,7 +60,7 @@ namespace NaviDoctor.Tests
                     }
                 case BN3: //BN3 save has ElecShield lvl 3 equipped and added
                     {
-                        extractedSaveParse.LoadStyles(ref _styles);
+                        saveParse.LoadStyles(ref _styles);
                         Assert.Multiple(() =>
                         {
                             Assert.IsTrue(_styles.FirstOrDefault(x => x.Name == Style.Value.ElecShield).Equip.Value == true);
@@ -79,24 +78,31 @@ namespace NaviDoctor.Tests
         }
 
         [Test]
-        [TestCase(BN1)]
         [TestCase(BN2)]
         [TestCase(BN3)]
         public void RegChipLoad(string savePath)
         {
-            var saveParse = new SaveParse(Path.Combine(TestContext.CurrentContext.TestDirectory, savePath));
+            var saveParse = new SaveParse(Path.Combine(TestContext.CurrentContext.TestDirectory, savePath)).ExtractSaveData();
+            
             switch (savePath)
             {
-                case BN1:
-                    {
-                        break;
-                    }
                 case BN2:
                     {
+                        Assert.Multiple(() =>
+                        {
+                            Assert.IsTrue(saveParse.RegChip1 == 26);
+                            Assert.IsTrue(saveParse.RegChip2 == 4);
+                            Assert.IsTrue(saveParse.RegChip3 == 255);
+                        });
                         break;
                     }
                 case BN3:
                     {
+                        Assert.Multiple(() =>
+                        {
+                            Assert.IsTrue(saveParse.RegChip1 == 21);
+                            Assert.IsTrue(saveParse.RegChip2 == 7);
+                        });
                         break;
                     }
                 default:
@@ -111,50 +117,62 @@ namespace NaviDoctor.Tests
         [TestCase(BN1)]
         [TestCase(BN2)]
         [TestCase(BN3)]
-        public void StyleChangeAndSave(string savePath)
+        public void StyleChange(string savePath)
         {
-            var saveParse = new SaveParse(Path.Combine(TestContext.CurrentContext.TestDirectory, savePath));
-            switch (savePath)
-            {
-                case BN1:
-                    {
-                        break;
-                    }
-                case BN2:
-                    {
-                        break;
-                    }
-                case BN3:
-                    {
-                        break;
-                    }
-                default:
-                    {
-                        Assert.IsTrue(false);
-                        break;
-                    }
-            }
-        }
+            var saveParse = new SaveParse(Path.Combine(TestContext.CurrentContext.TestDirectory, savePath)).ExtractSaveData();
 
-        [Test]
-        [TestCase(BN1)]
-        [TestCase(BN2)]
-        [TestCase(BN3)]
-        public void RegChipChangeAndSave(string savePath)
-        {
-            var saveParse = new SaveParse(Path.Combine(TestContext.CurrentContext.TestDirectory, savePath));
+            var _styles = new List<Style>();
+
             switch (savePath)
             {
-                case BN1:
+                case BN1: //BN1 save has Heat equipped and Aqua, Wood, and Heat added
                     {
+                        saveParse.LoadStyles(ref _styles);
+                        _styles.FirstOrDefault(x => x.Name == Style.Value.Aqua).Equip = true;
+                        _styles.FirstOrDefault(x => x.Name == Style.Value.Heat).Equip = false;
+                        _styles.FirstOrDefault(x => x.Name == Style.Value.Wood).Add = false;
+                        saveParse.UpdateStyles(ref _styles);
+                        Assert.Multiple(() =>
+                        {
+                            Assert.IsTrue(_styles.FirstOrDefault(x => x.Name == Style.Value.Heat).Equip.Value == false);
+                            Assert.IsTrue(_styles.FirstOrDefault(x => x.Name == Style.Value.Aqua).Equip.Value == true);
+                            Assert.IsTrue(_styles.FirstOrDefault(x => x.Name == Style.Value.Heat).Add.Value == true);
+                            Assert.IsTrue(_styles.FirstOrDefault(x => x.Name == Style.Value.Aqua).Add.Value == true);
+                            Assert.IsTrue(_styles.FirstOrDefault(x => x.Name == Style.Value.Wood).Add.Value == false);
+                        });
                         break;
                     }
-                case BN2:
+                case BN2: //BN2 save has WoodGuts equipped and WoodGuts lvl 2, and AquaShield lvl 1 added
                     {
+                        saveParse.LoadStyles(ref _styles);
+                        _styles.FirstOrDefault(x => x.Name == Style.Value.AquaShield).Equip = true;
+                        _styles.FirstOrDefault(x => x.Name == Style.Value.AquaShield).Version = 3;
+                        _styles.FirstOrDefault(x => x.Name == Style.Value.WoodGuts).Equip = false;
+                        saveParse.UpdateStyles(ref _styles);
+                        Assert.Multiple(() =>
+                        {
+                            Assert.IsTrue(_styles.FirstOrDefault(x => x.Name == Style.Value.AquaShield).Equip.Value == true);
+                            Assert.IsTrue(_styles.FirstOrDefault(x => x.Name == Style.Value.AquaShield).Version.Value == 3);
+                            Assert.IsTrue(_styles.FirstOrDefault(x => x.Name == Style.Value.WoodGuts).Equip.Value == false);
+                        });
                         break;
                     }
-                case BN3:
+                case BN3: //BN3 save has ElecShield lvl 3 equipped and added
                     {
+                        saveParse.LoadStyles(ref _styles);
+                        _styles.FirstOrDefault(x => x.Name == Style.Value.ElecShield).Equip = false;
+                        _styles.FirstOrDefault(x => x.Name == Style.Value.ElecShield).Add = false;
+                        _styles.FirstOrDefault(x => x.Name == Style.Value.AquaShield).Equip = true;
+                        _styles.FirstOrDefault(x => x.Name == Style.Value.AquaShield).Version = 3;
+                        saveParse.UpdateStyles(ref _styles);
+                        saveParse.UpdateStyles(ref _styles);
+                        Assert.Multiple(() =>
+                        {
+                            Assert.IsTrue(_styles.FirstOrDefault(x => x.Name == Style.Value.AquaShield).Equip.Value == true);
+                            Assert.IsTrue(_styles.FirstOrDefault(x => x.Name == Style.Value.ElecShield).Equip.Value == false);
+                            Assert.IsTrue(_styles.FirstOrDefault(x => x.Name == Style.Value.ElecShield).Add.Value == false);
+                            Assert.IsTrue(_styles.FirstOrDefault(x => x.Name == Style.Value.AquaShield).Version.Value == 3);
+                        });
                         break;
                     }
                 default:
