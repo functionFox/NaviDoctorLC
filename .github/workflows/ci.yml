@@ -22,4 +22,4 @@ jobs:
     - name: Build app for release
       run: msbuild .\src\NaviDoctor\NaviDoctor.csproj -t:rebuild -verbosity:diag -property:Configuration=Release
     - name: Run UnitTests
-      run: .\NUnit.ConsoleRunner.3.13.0\tools\nunit3-console.exe  .\src\NaviDoctor.Tests\bin\Debug\net6.0\NaviDoctor.Tests.dll
+      run: .\NUnit.ConsoleRunner.4.50.0\tools\nunit3-console.exe  .\src\NaviDoctor.Tests\bin\Debug\net6.0\NaviDoctor.Tests.dll
