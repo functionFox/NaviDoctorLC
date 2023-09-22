@@ -19,7 +19,10 @@ jobs:
       uses: microsoft/setup-msbuild@v1.1
     - name: Install NUnit.ConsoleRunner
       run: nuget install NUnit.ConsoleRunner -Version 3.16.3 -DirectDownload -OutputDirectory . 
-    - name: Build app for release
-      run: msbuild .\src\NaviDoctor\NaviDoctor.csproj -t:rebuild -verbosity:diag -property:Configuration=Release
+    - name: Build tests
+      run: msbuild .\src\NaviDoctor\NaviDoctor.Tests.csproj -t:rebuild -verbosity:diag -property:Configuration=Release
     - name: Run UnitTests
       run: .\NUnit.ConsoleRunner.3.16.3\tools\nunit3-console.exe  .\src\NaviDoctor.Tests\bin\Debug\net6.0\NaviDoctor.Tests.dll
+    - name: Build app for release
+      run: msbuild .\src\NaviDoctor\NaviDoctor.csproj -t:rebuild -verbosity:diag -property:Configuration=Release
+    
