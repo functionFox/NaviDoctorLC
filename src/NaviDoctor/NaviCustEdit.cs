@@ -17,6 +17,7 @@ namespace NaviDoctor
         private int[] selectedPart;
         private int rotator = 0;
         private bool _placement_mode = false;
+        private NaviCustGrid heldPart = new NaviCustGrid();
 
         public NaviCustEdit()
         {
@@ -1075,9 +1076,14 @@ namespace NaviDoctor
             part.Index = 1; // The minimum amount of index a part can be
             foreach (NaviCustGrid entry in naviCustGrid)
             {
-                if (entry.Index >= part.Index) // Make sure the newest index is the absolute highest on the list
+                if (entry.Index >= part.Index && heldPart.Index == 0) // Make sure the newest index is the absolute highest on the list
                 {
                     part.Index = entry.Index + 1;
+                }
+                else if (heldPart.Index != 0)
+                {
+                    part.Index = heldPart.Index;
+                    break;
                 }
             }
             bool emergencyExit = false;
@@ -1158,22 +1164,34 @@ namespace NaviDoctor
                 }
             }
             if (emergencyExit) abortPlacement(placedPart);
-            else placementMode(); // If we got here without triggering emergencyExit, then we're done here, disengage placementMode
+            else
+            {
+                placementMode();
+                heldPart = new NaviCustGrid();
+                clearMsg();
+            } // If we got here without triggering emergencyExit, then we're done here, disengage placementMode and ditch any held pieces
         }
         private void abortPlacement(bool placed = false)
         {
             if (placed) removePart();
             MessageBox.Show("Error: Unable to place part in this location. \nReason: Illegal Placement.");
         }
-        private void removePart(bool suppressReIndex = false)
+        private void clearMsg()
         {
-            NaviCustGrid selection = naviCustGrid[selectedPart[0], selectedPart[1]];
             lblSelected.Enabled = false;
             lblSelected.Text = "";
             lblSelectedHeader.Enabled = false;
             btnMove.Enabled = false;
             btnRemove.Enabled = false;
             lblMessage.Visible = false;
+        }
+        private void removePart(bool suppressReIndex = false)
+        {
+            NaviCustGrid selection = naviCustGrid[selectedPart[0], selectedPart[1]];
+            if (heldPart.Index == 0)
+            {
+                clearMsg();
+            }
             int indX = naviCustGrid.GetLength(0);
             int indY = naviCustGrid.GetLength(1);
             for (int i = 0; i < indX; i++)
@@ -1192,6 +1210,22 @@ namespace NaviDoctor
             selectedPart = new int[2]; // Nothing is selected anymore, reset the value here.
             if (!suppressReIndex) reindexGridParts(selection.Index);
             // Redirect to method that recalculates NaviCust stats/bugs here
+        }
+        private void movePart()
+        {
+            NaviCustGrid selection = naviCustGrid[selectedPart[0], selectedPart[1]];
+            _placement_mode = true;
+            heldPart = selection; // We need to specifically remember this one.
+            removePart(true); // Don't reindex, just temporarily remove it from the board.
+        }
+        private void returnPart()
+        {
+            int posX = heldPart.PivotX;
+            int posY = heldPart.PivotY;
+            int indexer = posY * naviCustGrid.GetLength(0) + posX;
+            MessageBox.Show($"{indexer}, {naviCust.PictureBoxList[indexer].Name}");
+            PictureBox box = naviCust.PictureBoxList[posX * naviCustGrid.GetLength(0) + posY];
+            placePart(box);
         }
         public void reindexGridParts(int index) // As a side note, reindexing should only occur when removing a part from the grid
         {
@@ -1339,16 +1373,21 @@ namespace NaviDoctor
         {
             placementMode();
         }
+        private void btnMove_Click(object sender, EventArgs e)
+        {
+            movePart();
+        }
         private void NaviCustEdit_KeyDown(object sender, KeyEventArgs e) // KeyValue 27 : KeyData Escape
         {
             int keyValue = e.KeyValue;
+            if (keyValue == 27 && lblMessage.Visible) // Drop the part you have selected and remove the message.
+            {
+                if (heldPart.Index != 0) returnPart(); // If we were moving a part, put it back
+                emptyHands();
+            }
             if (keyValue == 27 && _placement_mode) // These are not mutually exclusive. Really doesn't matter, anyway. 
             {
                 placementMode();
-            }
-            if (keyValue == 27 && lblMessage.Visible) // Drop the part you have selected and remove the message.
-            {
-                emptyHands();
             }
         }
         private void NaviCustEdit_FormClosed(object sender, FormClosedEventArgs e)

@@ -621,10 +621,11 @@ namespace NaviDoctor
                     break;
 
                 case GameTitle.Title.MegaManBattleNetwork2:
-                    if (saveFilePath.Contains("exe2j_hard_0.bin") && saveData[0xF8] != 0)
+                    /* if (saveFilePath.Contains("exe2j_hard_0.bin") && saveData[0xF8] != 0)
                     { // Fix for BN2 Hard Mode files that got nuked in the 11463040 build update
+                      // Apparently Capcom fixed this? Going to leave this here for posteriority. If it ever comes up again, just uncomment this block.
                         Buffer.BlockCopy(new byte[] { 0, 0, 0, 0 }, 0, saveData, 0xF8, 4);
-                    }
+                    } */
                     Buffer.BlockCopy(BitConverter.GetBytes(saveDataObject.CurrHP), 0, saveData, HPRedundancy1, 2);
                     Buffer.BlockCopy(BitConverter.GetBytes(saveDataObject.MaxHP), 0, saveData, HPRedundancy2, 2);
 
