@@ -1006,6 +1006,13 @@ namespace NaviDoctor
                 } // Don't .Dispose() here! Let cleanup() take care of it.
             }
         }
+        private void deselectPart()
+        {
+            emptyHands();
+            redrawBorders();
+            naviCust.PictureBoxList.ForEach(p => ControlPaint.DrawBorder(naviCust.PictureBoxList[naviCust.PictureBoxList.IndexOf(p)].CreateGraphics(), naviCust.PictureBoxList[naviCust.PictureBoxList.IndexOf(p)].ClientRectangle, Color.FromArgb(0, 0, 0), ButtonBorderStyle.Solid));
+            // Don't .Dispose() here! Let cleanup() take care of it.
+        }
         private void showPlacement(PictureBox box)
         {
             int r = 255;
@@ -1222,8 +1229,8 @@ namespace NaviDoctor
         {
             int posX = heldPart.PivotX;
             int posY = heldPart.PivotY;
-            int indexer = posY * naviCustGrid.GetLength(0) + posX;
-            MessageBox.Show($"{indexer}, {naviCust.PictureBoxList[indexer].Name}");
+            // int indexer = posY * naviCustGrid.GetLength(0) + posX;
+            // MessageBox.Show($"{indexer}, {naviCust.PictureBoxList[indexer].Name}");
             PictureBox box = naviCust.PictureBoxList[posX * naviCustGrid.GetLength(0) + posY];
             placePart(box);
         }
@@ -1384,12 +1391,26 @@ namespace NaviDoctor
             {
                 if (heldPart.Index != 0) returnPart(); // If we were moving a part, put it back
                 emptyHands();
+                deselectPart();
             }
             if (keyValue == 27 && _placement_mode) // These are not mutually exclusive. Really doesn't matter, anyway. 
             {
                 placementMode();
+                deselectPart();
             }
         }
+
+        // To Do: Escape key while a part is selected needs to also deselect the border (it currently does not)
+        // To Do: Need to calculate effects/bugs after every removal/placement and refresh the tables and internal NaviCust values
+        
+        // If ModTools is not installed, will having a ModTool code set break things?
+        // To Do: ModTools needs to detect and automatically set in order to attempt retaining a RUN OK status. In this state, disable changing ModTool codes
+        // To Do: If Error is cleared, allow ModTool Codes again and set to default "None"
+        // To Do: If multiple ModTool codes would be required or too many colors set, disable RUN OK
+
+        // To Do: On RUN OK pressed, need to update the NaviCust region of saveData and exit
+        // To Do: On Cancel pressed, need to close without updating NaviCust region of saveData and exit
+
         private void NaviCustEdit_FormClosed(object sender, FormClosedEventArgs e)
         {
             Cleanup();
