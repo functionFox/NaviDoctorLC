@@ -548,8 +548,8 @@ namespace NaviDoctor
                 saveData[SubUntrapOffset] = (byte)saveDataObject.SubUntrap;
                 saveData[SubMaxOffset] = (byte)saveDataObject.SubChipMax;
                 saveData[RegMemOffset] = (byte)saveDataObject.RegMem;
-                saveData[RegChip1Offset] = 0xFF; // Turn off the regular chips.
-                saveData[RegChip2Offset] = 0xFF; // We'll do these up proper when we have the functionality
+                saveData[RegChip1Offset] = (byte)saveDataObject.RegChip1;
+                saveData[RegChip2Offset] = (byte)saveDataObject.RegChip2;
                 for (int i = FolderOffsetStart; i <= Folder3OffsetEnd; i += 4)
                 {
                     if (i >= FolderOffsetStart && i <= FolderOffsetEnd)
@@ -663,7 +663,7 @@ namespace NaviDoctor
                         }
                     }
 
-                    saveData[RegChip3Offset] = 0xFF; // Turn off the third RegChip
+                    saveData[RegChip3Offset] = (byte)saveDataObject.RegChip3;
 
                     index = 0;
                     for (int i = SecretOffsetStart; i < SecretOffsetEnd; i += 0x12)

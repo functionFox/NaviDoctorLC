@@ -14,6 +14,8 @@ namespace NaviDoctor.models
         public int Size { get; set; }
         public int Quantity { get; set; }
         public int Type { get; set; } // 0 = Standard, 1 = Mega, 2 = Giga, 3 = White Exclusive (BN3), 4 = Blue Exclusive (BN3) -- this is for BN3+ only
+        public string AlphabeticalCode { get; set; } //Used only for RegChipDisplayMember
+        public string RegChipDisplayMember { get => $"{Name} - [{AlphabeticalCode}] ({Size} MB)"; }
 
         public BattleChipData()
         {

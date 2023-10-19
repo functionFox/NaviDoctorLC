@@ -101,6 +101,10 @@ namespace NaviDoctor
             this.panel_MegamanStats = new System.Windows.Forms.Panel();
             this.pnl_MegamanHealth = new System.Windows.Forms.Panel();
             this.pnl_MainFill = new System.Windows.Forms.Panel();
+            this.panelRegChip = new System.Windows.Forms.Panel();
+            this.cbxRegChip = new System.Windows.Forms.ComboBox();
+            this.btnSetRegChip = new System.Windows.Forms.Button();
+            this.label18 = new System.Windows.Forms.Label();
             this.pnl_PackQuantity = new System.Windows.Forms.Panel();
             this.pbx_Loading = new System.Windows.Forms.PictureBox();
             this.pnl_MainFooter = new System.Windows.Forms.Panel();
@@ -138,6 +142,7 @@ namespace NaviDoctor
             this.panel_MegamanStats.SuspendLayout();
             this.pnl_MegamanHealth.SuspendLayout();
             this.pnl_MainFill.SuspendLayout();
+            this.panelRegChip.SuspendLayout();
             this.pnl_PackQuantity.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbx_Loading)).BeginInit();
             this.pnl_MainFooter.SuspendLayout();
@@ -927,7 +932,7 @@ namespace NaviDoctor
             this.cbx_EditSteamID.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbx_EditSteamID.Location = new System.Drawing.Point(8, 74);
             this.cbx_EditSteamID.Name = "cbx_EditSteamID";
-            this.cbx_EditSteamID.Size = new System.Drawing.Size(194, 29);
+            this.cbx_EditSteamID.Size = new System.Drawing.Size(131, 20);
             this.cbx_EditSteamID.TabIndex = 16;
             this.cbx_EditSteamID.Text = "Change Steam ID";
             this.cbx_EditSteamID.UseVisualStyleBackColor = true;
@@ -981,6 +986,7 @@ namespace NaviDoctor
             // 
             // pnl_MainFill
             // 
+            this.pnl_MainFill.Controls.Add(this.panelRegChip);
             this.pnl_MainFill.Controls.Add(this.pnl_PackQuantity);
             this.pnl_MainFill.Controls.Add(this.tabsFolders);
             this.pnl_MainFill.Controls.Add(this.dgvPack);
@@ -993,6 +999,46 @@ namespace NaviDoctor
             this.pnl_MainFill.Name = "pnl_MainFill";
             this.pnl_MainFill.Size = new System.Drawing.Size(870, 527);
             this.pnl_MainFill.TabIndex = 24;
+            // 
+            // panelRegChip
+            // 
+            this.panelRegChip.Controls.Add(this.cbxRegChip);
+            this.panelRegChip.Controls.Add(this.btnSetRegChip);
+            this.panelRegChip.Controls.Add(this.label18);
+            this.panelRegChip.Location = new System.Drawing.Point(6, 494);
+            this.panelRegChip.Name = "panelRegChip";
+            this.panelRegChip.Size = new System.Drawing.Size(406, 39);
+            this.panelRegChip.TabIndex = 24;
+            // 
+            // cbxRegChip
+            // 
+            this.cbxRegChip.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.cbxRegChip.FormattingEnabled = true;
+            this.cbxRegChip.Location = new System.Drawing.Point(75, 4);
+            this.cbxRegChip.Name = "cbxRegChip";
+            this.cbxRegChip.Size = new System.Drawing.Size(236, 24);
+            this.cbxRegChip.TabIndex = 2;
+            // 
+            // btnSetRegChip
+            // 
+            this.btnSetRegChip.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.btnSetRegChip.Location = new System.Drawing.Point(317, 4);
+            this.btnSetRegChip.Name = "btnSetRegChip";
+            this.btnSetRegChip.Size = new System.Drawing.Size(67, 25);
+            this.btnSetRegChip.TabIndex = 1;
+            this.btnSetRegChip.Text = "Set";
+            this.btnSetRegChip.UseVisualStyleBackColor = true;
+            this.btnSetRegChip.Click += new System.EventHandler(this.btnSetRegChip_Click);
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label18.Location = new System.Drawing.Point(3, 4);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(66, 17);
+            this.label18.TabIndex = 0;
+            this.label18.Text = "RegChip:";
             // 
             // pnl_PackQuantity
             // 
@@ -1098,6 +1144,8 @@ namespace NaviDoctor
             this.pnl_MegamanHealth.PerformLayout();
             this.pnl_MainFill.ResumeLayout(false);
             this.pnl_MainFill.PerformLayout();
+            this.panelRegChip.ResumeLayout(false);
+            this.panelRegChip.PerformLayout();
             this.pnl_PackQuantity.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbx_Loading)).EndInit();
             this.pnl_MainFooter.ResumeLayout(false);
@@ -1179,6 +1227,10 @@ namespace NaviDoctor
         private System.Windows.Forms.Label lbl_Loading;
         private System.Windows.Forms.ToolStripMenuItem naviCustToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem customizeToolStripMenuItem;
+        private System.Windows.Forms.Panel panelRegChip;
+        private System.Windows.Forms.Button btnSetRegChip;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.ComboBox cbxRegChip;
     }
 }
 

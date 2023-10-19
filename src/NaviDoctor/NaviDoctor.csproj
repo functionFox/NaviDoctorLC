@@ -98,6 +98,7 @@
     <Compile Include="extensions\GetEnumString.cs" />
     <Compile Include="extensions\StringValueAttribute.cs" />
     <Compile Include="models\NaviCust.cs" />
+    <Compile Include="helpers\StyleHelper.cs" />
     <Compile Include="NaviCustEdit.cs">
       <SubType>Form</SubType>
     </Compile>
