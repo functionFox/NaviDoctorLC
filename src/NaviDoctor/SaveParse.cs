@@ -406,7 +406,7 @@ namespace NaviDoctor
                         { 0x1DF, 2 }, { 0x1E1, 2 }, { 0x213, 2 }, { 0x232, 2 }, { 0x23E, 2 },
                         { 0x242, 2 }, { 0x246, 2 }, { 0x24A, 2 }, { 0x24E, 2 }, { 0x252, 2 },
                         { 0x256, 2 }, { 0x25A, 2 }, { 0x25E, 2 },
-                        { 0x1BC, 3 }, { 0x1D7, 3 }, { 0x1FC, 3 }, { 0x221, 3 }, { 0x239, 3 },
+                        { 0x1BC, 3 }, { 0x1D7, 3 }, { 0x1FB, 4 }, { 0x221, 3 }, { 0x239, 3 }, // Whoops, FlotShoe was wrong.
                         { 0x265, 3 }, { 0x26D, 3 }, { 0x275, 3 },
                         { 0x1B7, 4 }, { 0x1BF, 4 }, { 0x1C3, 4 }, { 0x1C7, 4 }, { 0x1CF, 4 },
                         { 0x1D3, 4 }, { 0x1DB, 4 }, { 0x1E3, 4 }, { 0x1E7, 4 }, { 0x1EB, 4 },
@@ -621,10 +621,11 @@ namespace NaviDoctor
                     break;
 
                 case GameTitle.Title.MegaManBattleNetwork2:
-                    if (saveFilePath.Contains("exe2j_hard_0.bin") && saveData[0xF8] != 0)
+                    /* if (saveFilePath.Contains("exe2j_hard_0.bin") && saveData[0xF8] != 0)
                     { // Fix for BN2 Hard Mode files that got nuked in the 11463040 build update
+                      // Apparently Capcom fixed this? Going to leave this here for posteriority. If it ever comes up again, just uncomment this block.
                         Buffer.BlockCopy(new byte[] { 0, 0, 0, 0 }, 0, saveData, 0xF8, 4);
-                    }
+                    } */
                     Buffer.BlockCopy(BitConverter.GetBytes(saveDataObject.CurrHP), 0, saveData, HPRedundancy1, 2);
                     Buffer.BlockCopy(BitConverter.GetBytes(saveDataObject.MaxHP), 0, saveData, HPRedundancy2, 2);
 
@@ -729,7 +730,7 @@ namespace NaviDoctor
                         { 0x1DF, 2 }, { 0x1E1, 2 }, { 0x213, 2 }, { 0x232, 2 }, { 0x23E, 2 },
                         { 0x242, 2 }, { 0x246, 2 }, { 0x24A, 2 }, { 0x24E, 2 }, { 0x252, 2 },
                         { 0x256, 2 }, { 0x25A, 2 }, { 0x25E, 2 },
-                        { 0x1BC, 3 }, { 0x1D7, 3 }, { 0x1FC, 3 }, { 0x221, 3 }, { 0x239, 3 },
+                        { 0x1BC, 3 }, { 0x1D7, 3 }, { 0x1FB, 4 }, { 0x221, 3 }, { 0x239, 3 }, // I'm so sorry, FlotShoe.
                         { 0x265, 3 }, { 0x26D, 3 }, { 0x275, 3 },
                         { 0x1B7, 4 }, { 0x1BF, 4 }, { 0x1C3, 4 }, { 0x1C7, 4 }, { 0x1CF, 4 },
                         { 0x1D3, 4 }, { 0x1DB, 4 }, { 0x1E3, 4 }, { 0x1E7, 4 }, { 0x1EB, 4 },

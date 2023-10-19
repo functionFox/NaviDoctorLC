@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>NaviDoctor</RootNamespace>
     <AssemblyName>NaviDoctor</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
@@ -32,6 +32,7 @@
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -96,6 +97,7 @@
     <Compile Include="extensions\BooleanExtensions.cs" />
     <Compile Include="extensions\GetEnumString.cs" />
     <Compile Include="extensions\StringValueAttribute.cs" />
+    <Compile Include="models\NaviCust.cs" />
     <Compile Include="helpers\StyleHelper.cs" />
     <Compile Include="NaviCustEdit.cs">
       <SubType>Form</SubType>
@@ -149,7 +151,6 @@
     <EmbeddedResource Include="StyleLoader.resx">
       <DependentUpon>StyleLoader.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="Properties\DataSources\BN1SaveParse.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -175,7 +176,9 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Properties\DataSources\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="images\checkmark.png" />
     <Content Include="images\icon.ico" />
@@ -198,6 +201,8 @@
     <Content Include="images\NCPplusblockWhite.png" />
     <Content Include="images\NCPplusblockYellow.png" />
     <Content Include="images\progspeen.gif" />
+    <None Include="images\rotateCCW30.png" />
+    <None Include="images\rotateCW30.png" />
     <None Include="Resources\icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

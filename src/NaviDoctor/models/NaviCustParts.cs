@@ -9,15 +9,7 @@ namespace NaviDoctor.models
     class NaviCustParts
     {
         public List<NCPListing> ncpList = new List<NCPListing>();
-        public List<string> modCodes = new List<string>()
-        {
-            "HP+100", "HP+150", "HP+200", "HP+250", "HP+300", "HP+350", "HP+400", "HP+450", "HP+500", "HP+550", "HP+600", "HP+650", "HP+700", 
-            "Equip Super Armor", "Equip Break Buster", "Equip Break Charge", "Equip Shadow Shoes", "Equip Float Shoes", "Equip Air Shoes", 
-            "Equip Undershirt", "Equip Left+B Block", "Equip Left+B Shield", "Equip Left+B Reflect", "Equip Left+B Anti-Damage", "MegaChip+1",
-            "MegaChip+2", "Activate FastGauge", "Activate SneakRun", "Activate Humor", "HP+800", "HP+900", "HP+1000", "MegaChip+3", 
-            "MegaChip+4", "MegaChip+5", "GigaChip+1"
-        };
-
+        
         public List<NCPListing> BN3NCPMap()
             // bool canCompress = ncpList[1].ncpData.ContainsKey(true); // example of querying if the NCP can be compressed.
             // int[,] ncpShape = ncpList[1].ncpData.FirstOrDefault(e => e.Key == true).Value;  
@@ -904,8 +896,6 @@ namespace NaviDoctor.models
             });
         }
     }
-
-
     public class NCPListing
     {
         public string ncpName { get; set; }
